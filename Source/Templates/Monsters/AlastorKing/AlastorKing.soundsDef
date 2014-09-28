@@ -1,0 +1,159 @@
+o.s_SubClass.SoundsDefinitions = {
+	krok2 = {
+		samples = {'alastor_krok2',},
+		dist1 = 60,
+		dist2 = 190,
+		joint = 's_l_srodstopie',
+	},
+	krok1 = {
+		samples = {'alastor_krok1',},
+		dist1 = 60,
+		dist2 = 190,
+		joint = 's_p_srodstopie',
+	},
+	zieje = {
+		samples = {'alastor_zieje02',},
+		dist1 = 120,
+		joint = "k_szczeka",
+		dist2 = 300,
+	},
+	atak2 = {
+		samples = {'alastor_attack2-attack',},
+		dist1 = 120,
+		joint = "k_szczeka",
+		dist2 = 300,
+	},
+	swish = {
+		samples = {'alastor-swish',},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	prepare = {
+		samples = {'alastor_attack1-prepare',},
+		dist1 = 120,
+		joint = "k_szczeka",
+		dist2 = 300,
+	},
+	naskok = {
+		samples = {'alastor_attacks-naskok',},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	groundhit = {
+		samples = {'alastor_attack3-groundhit',},
+		dist1 = 120,
+		joint = "k_szczeka",
+		dist2 = 300,
+	},
+
+	fireballsEnd = {
+		samples = {'alastor_fireballs-end'},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	hurt = {
+		samples = {"alastor_hit","alastor_hit1","alastor_hit2",},
+		dist1 = 120,
+		dist2 = 300,
+		joint = "k_szczeka",
+	},
+	death = {
+		samples = {"alastor_death",},
+		dist1 = 120,
+		dist2 = 300,
+		joint = "k_szczeka",
+	},
+    charge = {
+        samples = {'alastor_charge-voice',},
+        disablePitch = true,
+        joint = "k_szczeka",
+   		dist1 = 120,
+		dist2 = 300,
+    },
+    idle1 = {
+        samples = {'alastor_idle1_1',},
+        playChance = 0.2,
+        dist1 = 120,
+        dist2 = 300,
+    },
+    idle2 = {
+        samples = {'alastor_idle2_1',},
+        dist1 = 120,
+        dist2 = 300,
+    },
+    rv = {
+        samples = {'alastor-rotate-voice2','alastor-rotate-voice3'},
+        dist1 = 120,
+        dist2 = 300,
+        joint = "k_szczeka",
+    },
+    voice1 = {
+        samples = {'alastor-rotate-voice1',},
+        joint = "k_szczeka",
+        dist1 = 120,
+        dist2 = 300,
+    },
+    av = {
+        samples = {'alastor_attack1-attackvoice',},
+        dist1 = 120,
+        dist2 = 300,
+        joint = "k_szczeka",
+    },
+    av2 = {
+        samples = {'alastor-rotate-voice2',},
+        dist1 = 120,
+        dist2 = 300,
+        joint = "k_szczeka",
+    },
+    naskok = {
+        samples = {'alastor_attacks-naskok',},
+        dist1 = 120,
+        dist2 = 300,
+    },
+	wingsshow = {
+		samples = {'alastor_idle2_wings-show',},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	wingidle = {
+		samples = {'alastor_idle2_wings-hide',},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	sphere = {
+		samples = {'alastor_sphere',},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	breakfloor1 = {
+		samples = {'alastor_breakfloor-beginvoice'},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	breakfloor2 = {
+		samples = {'alastor_breakfloor-middle'},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	breakfloor3 = {
+		samples = {'alastor_breakfloor-end'},
+		dist1 = 120,
+		dist2 = 300,
+	},
+	laugh = {
+		samples = {"alastor_laugh2","alastor_laugh"},
+		dist1 = 120,
+		dist2 = 300,
+        disablePitch = true,
+		joint = "k_szczeka",
+	},
+	stunned = {
+		samples = {'alastor_stunned'},
+		dist1 = 120,
+		dist2 = 300,
+        disablePitch = true,
+	},
+	Spawn = {
+		samples = {'k_alastor-respawn'},
+	}
+}

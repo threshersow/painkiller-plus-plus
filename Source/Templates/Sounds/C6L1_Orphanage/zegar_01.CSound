@@ -1,0 +1,9 @@
+zegar_01.Volume = 50
+zegar_01.Interval = 3
+zegar_01.RandomShift = 1
+zegar_01.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+zegar_01.Sound ="C6L1_Orphanage/zegar_01a;C6L1_Orphanage/zegar_01b;C6L1_Orphanage/zegar_01c;C6L1_Orphanage/zegar_01d"

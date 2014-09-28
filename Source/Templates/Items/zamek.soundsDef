@@ -1,0 +1,9 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "doors/",
+	SoundImpact = {
+		samples = {"deliveryvan-door-creak3"},
+	},
+	DestroySound = {
+		samples = {"deliveryvan-door-creak3","door-metal-heavy"},
+	},
+}

@@ -1,0 +1,11 @@
+o.Model = "LoonyPark_RotGrate"
+o.Scale = 1
+
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint2_getmass",
+	minVel = 1.0,
+	angular = true,
+	minDelayBetweenSounds = 1.0,
+}
+

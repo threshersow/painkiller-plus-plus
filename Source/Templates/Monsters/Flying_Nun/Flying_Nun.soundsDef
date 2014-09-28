@@ -1,0 +1,35 @@
+o.s_SubClass.SoundsDefinitions = {
+	disap = {
+		samples = {"f_nun_dissappear"},
+		dist1 = 10,
+		dist2 = 40,
+	},
+    OnSpawn = {
+		samples = {"f_nun_appear"},
+		dist1 = 10,
+		dist2 = 40,
+	},
+    atak = {
+        samples = {"f_nun_atak1","f_nun_atak2"},
+        dist1 = 15,
+        dist2 = 60,
+    },
+
+    fly = {
+        samples = {"f_nun_onfly-loop"},
+        dist1 = 8,
+        dist2 = 30,
+    },
+    scream = {
+        samples = {"f_nun_idle1","f_nun_idle2","f_nun_idle3","f_nun_idle4"},
+        dist1 = 15,
+        dist2 = 60,
+    },
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+    atak   = {
+		{0.0,'StopLastSound'},
+		{0.01,'PlaySound',"atak"},
+	},
+}

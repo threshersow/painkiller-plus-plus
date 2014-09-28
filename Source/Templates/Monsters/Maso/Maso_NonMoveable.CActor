@@ -1,0 +1,10 @@
+o.BaseObj = "Maso.CActor"
+o.NeverMove = true
+
+o.AiParams.throwAngle = 20
+o.AiParams.aiGoals = {"idle","attack", "hear","throw",}
+o.AiParams.minDelayBetweenThrow = 0.1
+o.AiParams.alwaysSee = true
+
+--o.AiParams.throwRangeMin = 10
+--o.AiParams.throwRangeMax = 136

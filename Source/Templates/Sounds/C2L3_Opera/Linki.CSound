@@ -1,0 +1,10 @@
+Linki.Volume = 80
+Linki.Interval = 8
+Linki.RandomShift = 5
+Linki.Falloff =
+{
+  Start = 4,
+  End = 30
+}
+Linki.Sound ="C2L3_Opera/linki_01;C2L3_Opera/linki_02;C2L3_Opera/linki_03"
+

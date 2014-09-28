@@ -1,0 +1,9 @@
+whip.Volume = 80
+whip.Interval = 10
+whip.RandomShift = 3
+whip.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+whip.Sound ="C6L6_Colloseum/whip_01;C6L6_Colloseum/whip_02;C6L6_Colloseum/whip_03;C6L6_Colloseum/whip_04;C6L6_Colloseum/whip_05"

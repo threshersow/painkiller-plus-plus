@@ -1,0 +1,622 @@
+11 PEOPLE CAN FLY
+31 (in alphabetical order)
+
+
+
+21 Kamil Bilczynski
+32 Level Designer/Modeller
+32 Textures
+32 Havok physical objects setup and modelling
+32 Conceptual Artworks
+
+43 For my mom, brother and my girlfriend. Greets
+43 to everyone at PCF who help me with my work.
+43 Cheers to all my friends.
+
+
+21 Adrian Chmielarz
+32 Project Leader
+32 Lead Game Designer
+32 Business
+
+43 "That which does not kill us makes us stronger".
+43 And many thanks to DreamCatcher for giving us enough time
+43 and creative freedom to make the game as we imagined it.
+
+
+21 Krzysztof Falinski
+32 Senior Texture Artist
+32 Character Animation
+32 2D Artworks
+
+43 Thanks to my Muszka for everything, Sebastian for approval
+43 and understanding of my lifestyle, mom and dad, my cats.
+43 Thanks to everyone who teached me what I know. Cheers to
+43 my teammates for the neverending entertainment :)
+
+
+21 Marek Galach
+32 AI Programmer
+32 Game Programming
+32 Game Logic
+
+
+21 Krystian Galaj
+32 Physics Engine/Havok Integration
+32 Audio Engine/Miles Integration
+32 Low-level Netcode
+32 Pathfinding & Occlusion
+
+43 Thanks to my family and all my friends who had to
+43 cope with my constant nagging and hear about my
+43 problems while I was working on this game ;)
+
+
+21 Michal Kosieradzki
+32 Character Designer
+32 Lead Character Animator/Modeller
+32 Particle Effects
+32 Additonal Game Design
+
+
+21 Wojciech Madry
+32 Senior Level Designer/Modeller
+32 Havok physical objects setup and modelling
+32 AI waypoints and visibility structures
+32 Environmental Lighting
+
+43 Thanks to Agnieszka and my Mom for the support and understanding
+43 - also, thanks to all my friends who were there when I needed them most.
+
+
+21 Michal Nowak
+32 Havok Objects Modeller
+32 Texturing
+32 Additional Gameplay
+32 Additional Graphics
+
+
+21 Wojciech Pazdur
+32 Texture Artist
+32 Additional Modeling
+32 Environmental Lighting
+32 Havok Objects
+
+43 Thanks to everyone who used to be my painkillers during this years:
+43 Kasia & Oliwka, Anna, Natalia & Yrek, Tunia, whole 3D Magazine crew,
+43 Wayne, Boras, Wodniaki, GigaMike, Remov and rest of my friends.
+
+
+21 Andrzej Poznanski
+32 Lead Level Artist
+32 Additional Game Design
+32 Lighting
+
+43 Thanks to my wife Alicja for support and understanding :)
+
+
+21 Pawel Ruszkiewicz
+32 Senior Texture Artist
+32 Weapon Design
+32 Character Animation
+32 Special FX 
+
+43 Thanks to: Martha, my Mom and Dad, Jorgoos, Loki, Lachu
+43 and rest of my family and friends for their support.
+43 Arabella Pizza for best pizza on this planet. Radio Maryja
+43 & Father Rydzyk, Slip Knot, Incubus, Machine Head, Marylin
+43 Manson and other nice bands for inspiration. To all
+43 cigarettes, sodas and energy drinks producers for total
+43 destruction of my health (you know who you are).
+
+
+21 Michal Sadowski
+32 Gameplay
+32 Additonal Game Design
+
+
+21 Bartlomiej Sokolowski
+32 Lead Programmer
+32 Game & FX Editor
+32 Scripting & Logic System
+32 HL Multiplayer, Weapons & Partial Gameplay
+
+43 Thanks to my family and friends from Lubartow, Wroclaw & Warsaw.
+
+
+21 Tomasz Strzalkowski
+32 Level Designer/Modeller
+32 Texture Artist
+32 Environment Lighting
+
+43 Thanks to my wife Madzia for being with me and for her patience.
+
+
+21 Michal Trepka
+32 User Interface
+32 Input System
+32 Gameplay Programmer
+
+43 Thanks to my wife Alexandra and my daughter Helena
+43  for their love, support and patience.
+
+
+21 Robert Wilinski
+32 Senior Texture Artist
+32 HUD and GUI Artist
+32 Environmental Lighting
+
+43 Thanks to my mom and grandma for sacrifying their invaluable time and
+43 taking care of me during the whole project so I could focus on nothing
+43 but the work. Cheers to all the others who gave me their support.
+
+
+21 Sebastian Woldanski
+32 Senior Maya Technical Director
+32 Maya MEL and API Programmer
+32 Lighting & Rendering TD
+32 Maya Environment Modelling/Texturing
+
+43 Thanks to my love Weronika, Mom, Dad, Ula, Franek, Zuzia, Kamilek
+43 and friends. Greets to Polish Wing Tsun (HWTO) family, to Mrs. 
+43 "Yadja" and her "Country Bar" for mountains of food.
+
+
+21 Klaudiusz Zych
+32 Technology Programmer
+32 Direct3D Renderer
+32 Special Effects
+32 Animation System
+
+43 Very special thanks to Aska, my mom and dad. Greetings to Jacek, Irus,
+43 Jarus, Arturo, Piotrus, Adam, Ilonka, Maciek, Ania, Michal, Marek, Kuba
+43 and Janek and my whole family. Thanks to H.H. Gryza of "Country Bar"
+43 for chaotic (but good) food support.
+
+
+
+
+
+
+21 SOUND
+
+
+21 Adam Skorupa
+32 Lead Sound Design
+32 Acoustics Sets
+32 Testing
+
+43 Many thanks to: Sylwia Blaszczak for always beeing around.
+43 Peter Hajba for sample support. VGM members for knowledge support.
+43 Aural Planet for good mood. Pawel Blaszczak for friendly help.
+
+
+
+
+
+21 AMBIENT SOUND/MUSIC
+
+
+21 Marcin Czartynski
+32 Lead Ambient Sound Design
+32 Ambient Music
+32 Ambient SoundFX
+32 Sound Engineering
+
+21 Pawel Blaszczak
+32 Secret Ending Music
+
+21 Cezary Gapik 
+32 Additional Music
+
+21 Patryk Gegniewicz
+32 Additional Music
+
+21 Adam Skorupa
+32 Additional Music
+
+
+
+33 "Prelude and Fugue No.6 in D minor" by J.S.Bach
+
+
+
+
+
+21 MUSIC
+
+
+32 Produced by Mediastudio Piotr "Dziki" Chancewicz
+32 Recorded at Mediastudio Piotr "Dziki" Chancewicz,
+32 Studio na wsi Artur Affek
+32 Mixed at Mediastudio Piotr "Dziki" Chancewicz
+
+
+31 Music performed by:
+
+32 Mech Maciej Januszko (voc)
+32 Piotr "Dziki" Chancewicz (guitar)
+32 Krzysztof Najman (bass)
+32 Piotr "Posejdon" Pawlowski (drums)
+32 Janusz Lakomiec (guitar)
+32 Artur Affek (guitar, bass, programming)
+
+
+
+
+
+
+11 DREAMCATCHER
+
+32 DreamCatcher, President and CEO
+21 Richard Wah Kan
+
+32 DreamCatcher Europe, Managing Director
+21 Olivier Pierre
+
+32 Executive and Line Producer
+21 Robert Stevenson
+
+32 VP Marketing
+21 Marshall Zwicker
+
+32 Lead Product Marketing Manager
+21 Brian Gladman
+
+32 Marketing Director (Europe)
+21 Matthieu Saint-Denis
+
+32 Marketing Brand Manager (Europe)
+21 Simon Vivien
+
+32 Product Manager France
+21 Julien Levy
+
+32 Product Manager Germany
+21 Sabine Berekoven (Borgmeier AG)
+
+32 Product Manager UK
+21 Estelle Vareilles (Mindscape Ltd)
+
+32 Product Manager Spain
+21 Jose-Maria Hernandez (VirginPlay SA)
+
+32 Product Manager Italy
+21 Manuel Fontanella (Atari)
+
+32 Marketing Creative Director
+21 Desmond Oku
+
+32 Illustrations
+21 Greg Banning
+21 Russell Challenger
+
+32 Graphics Management
+21 Jim Meecham
+21 Odile Mousseau (Europe)
+
+32 Director of International Communications
+21 Nick Malaperiman
+
+32 PR Coordinator
+21 Tara Reed
+
+32 PR Manager (France)
+21 Nicolas Swiatek
+
+32 PR Assistant (Europe)
+21 Maryline Perrier
+
+32 PR (Kohnke Communications)
+21 Kit Ellis
+21 Eddiemae Jukes
+21 Erica Kohnke
+21 Katie McQuade
+21 Erica Rogers
+21 Rannie Yoo
+
+32 Story
+21 Jeremy Bell
+21 Russell Challenger
+21 Adrian Chmielarz
+21 Brian Gladman
+
+32 Script
+21 Jeremy Bell
+
+32 Manual
+21 David Ellis
+
+32 Manual Layout
+21 Jim Meecham
+21 Trang To
+
+32 Additional Production
+21 Mike Adams, Majdi Kraiem
+
+32 Localization Production
+21 Yann Tisseyre
+
+32 Voice Casting and Directing
+21 Ginny McSwain
+
+32 Additional Directing
+21 Robert Stevenson
+21 Simon Vivien (France)
+
+32 Voice Talent
+21 Cameron Clarke (Daniel)
+21 Jim Cummings (Alastor)
+21 John Cygan (Sammael)
+21 Lex Lang (Lucifer)
+21 Vanessa Marshall (Catherine and Eve)
+21 Jim Ward (Asmodeus)
+
+32 Soundelux DMG Producer
+21 Amanda Wyatt
+
+32 Engineer and Dialogue Editorial
+21 Elliot Anders
+
+32 Assistant Engineer
+21 Tim Farrell
+
+32 Voice Over Asset Manager
+21 Sara Huddleston
+
+32 QA Manager
+21 Mike Adams
+
+32 QA Leads
+21 Adrian Miller (Single Player)
+21 Mike Mitres (Multiplayer)
+
+32 Testers (Functional)
+21 Dan Dawang
+21 Matthew Dickson
+21 Chris Elliot
+21 Aldo Fazzari
+21 Anthony Finelli
+21 Ryan Gavel
+21 Vasso Kontoulis
+21 Kory Lauzon
+21 Yohany Lee
+21 Chris Nesbitt
+21 Shing Pang
+21 Daniel Torreblanca
+
+32 Testers (Enzyme Compatibility)
+21 Guy Demers
+21 Darren Keenan
+21 Kayven Meager
+21 Fred Plante
+
+32 Additional Testing
+21 Joel Dreschler
+21 Chantal Mauro
+21 Krystal Moon
+21 Jeremy Norel
+	
+32 Website
+21 Jeremy Bell
+21 Barry Lachapelle
+
+32 DreamCatcher Europe, Vice President and CFO
+21 Roch Roustan
+
+32 Legal Affairs
+21 François Breuillier (Europe)
+21 Leslie Rosenthal
+
+
+
+
+
+11 DIGITAL AMIGOS
+31 (cut-scenes)
+
+
+32 Project Leader/Additional Art
+21 Krzysztof Rudz
+
+32 Lead Artist
+21 Adam Torczynski
+
+32 Lead Character Animator
+21 Andrzej Zawada
+
+32 Lead 3d Modeler/Environment Artist
+21 Bartek Opatowiecki
+
+32 Rigger/Character Animator
+21 Grzegorz Kukus
+
+32 Character Animators
+21 Lukasz Muszynski, Arek Zawada, Tomek Zawada
+
+32 Character Artist/Concept Artist
+21 Szymon Kaszuba
+
+32 Texture Art
+21 Arkadiusz Jurcyn, Jarek "Kvas" Kwasniak, Andrzej Rudz
+
+32 Modeling
+21 Arkadiusz Jurcyn
+
+32 Matte Painting
+21 Jarek "Kvas" Kwasniak
+
+32 Supplementary Modeling
+21 Sebastian Nowak
+
+32 Storyboards
+21 Rafal "Maslo" Maslyk, Karolina Poryzala
+
+32 Sound and Music Composition
+21 Marcin Czartynski
+
+32 Post Production/VFX
+21 Adam Torczynski
+
+32 Title Animation
+21 Janusz Budzyn
+
+
+
+
+
+11 SPECIAL THANKS and OTHER
+
+
+
+11 PEOPLE CAN FLY thanks:
+31 (in alphabetical order)
+
+21 Irek Konior
+32 2D Artworks
+
+21 Jaroslaw Krawczyk
+32 Texture Artist
+
+21 Artur Miros
+32 Texture Artist
+32 Static Lighting
+
+21 Marek Pluta
+32 Programmer
+
+21 Olaf Przybyszewski
+32 Texture Artist
+
+21 Arkadiusz Rekita
+32 Texture Artist
+32 Static Lighting
+
+21 William Roberson
+32 Voosh mode creator
+
+21 Bartlomiej Sekura
+32 Core Painkiller Engine Programmer
+
+
+
+32 DreamCatcher Special Thanks:
+
+33 Bobbi Jo Anderson, Fred Barkoff, Zehra Bayramli, Sabine Berekoven,
+33 Brian Benincasa, Paul Brack, Hervé Daigmorte, Keith Galocy,
+33 Stefan Konopatzki, Serge Lemonde, Bill Mooney, Helen Myers,
+33 Thomas Neveu, Teresa Nunez, Jay Powell, Elias Slater, Mark Ward
+
+
+
+32 People Can Fly Special Thanks
+
+33 Zehra Bayramli (nVidia), Clint Brewer (nVidia), Vernon Chiang (ATI),
+33 Sim Dietrich (nVidia), Doug Rogers (nVidia), Cyril Zeller (nVidia)
+33 Barlomiej "HighLander" Rychtarski, Pawel "RXR" Frackowiak, dp/jimmy
+
+
+
+32 Digital Amigos Special Thanks
+
+33 Zdzislaw Beksinski (for inspiration), Hubert J. Daniel, Ewa Gaj,
+33 Andrzej Gora, Michal Grabiec, Jon Hughes, Tomek Michalak,Leokadia
+33 Opatowiecka, Wojciech Opatowiecki, Darek Poryzala, Grazyna Poryzala,
+33 Robert Poryzala, Bozena "Slonex" Torczynska, Krystyna Tym, Bartek
+33 Zaboklicki, and Henio "the dog"
+
+
+
+32 Testing Internal (Beta)
+
+31 Alex Bethke, Alex Bevilacqua, Bernard Estrada, Danny Di Carlo,
+31 Michael Duncan, Julian Duta, Mark Hansen, Sean Homer, Michael
+31 Kndus, Jeff Royle, Bernard Shim, Brad Sutton, Mark Jesus, Juan
+31 Velasquez, Frank Vicich, Robert Weiland, Bradley Yee, Tim Yenkana
+
+
+
+32 Testing External (Multiplayer)
+
+33 Shahzad Akhtar, Chris Alexander, Joshua Anderson, Tony Bailey,
+33 Sean Baptiste, Dan Barletta, Nick Bates, Matthew Beck, Henry
+33 Bennett, Brett Bierman, Michael Bilodeau, Robert Blanch, Justin
+33 Bolling, John Bonner, Nick Borrelli, Andrew Boyd, Jared Brasslow,
+33 Colby Brown, Brett Buckus, Mark Bush, Lou Calabrese, Adrian
+33 Capistran, Christopher Carnelian, John Carr, Ramon Castillo,
+33 Michael Causey, Joe Cekosh, Carl Chaney, Rick Chiffelle, Bobby
+33 Chizen, Nick Cochran, Brad Cornutt, Scott Couto, Joshua Cummings,
+33 Albert Curley, Michael Dahl, John Daniel, Mark Davis, Luke Decker,
+33 Karl Dembeck, Kurt Dimos, Jim Divittorio, Jason Dobson, Sifu Doja,
+33 Eric Dresser, Jesse Dringoli, Christopher Drum, Dylan Drynan,
+33 Ronald Duffy, Matthew Dye, Sam Easterling, Wesley Edwards, Damon
+33 Evans, Ryan Faber, Ross Farley, Ruben Ferrer, Devon Forgea, Jason
+33 Fultz, Ed Gallagher, Josh Gallion, John Gamble, Juan Garcia,
+33 Marvin Gautier, Matt Gawarecki, Chase Gee, Stefan Gefter, Jed
+33 Goudy, Ed Govednik, Michael Granger, Sabrina Green, Zach Greene,
+33 Sterl Grimsley, Jason Griswold, Hunter Gurney, Jason Haas, James
+33 Hagan, Tim Hansen, Ralph Harris, Ian Harrison, MinD Hawkins,
+33 Keith Heavner, Aaron Heydorn, Brian Hicks, Trevor Hodge, Chris
+33 Hornak, Charles Hornbeck, Mark Howell, David Hudak, Shawn Janssen,
+33 Andrew Janz, Christopher Jones, James Keenum, Mike Kenny, Robn
+33 Kester, Reid Kimball, Phil King, Jeremy Knasel, Kurt Knudsen, Sean
+33 Kornmann, Norma Kuderna, Benoit Lacasse-Champagne, Jeremy Lamb,
+33 Daniel Lammers, Philippe Lamoureux, Lane LaRue, Matthew Latimer,
+33 Andrew Leaf, Rod Lemasson, Chris Lilly, Austin Mackert, Mike
+33 Maddox, Patrick Madison, Bad Magumbo, David Mann, Rich Martin,
+33 Sean Martin, Shane Martin, John McBroome, Christopher McCaig,
+33 William McClure, Jason McElroy, Christopher McGee, Justin McKee,
+33 Josh McPherson, Andy McPherson, Miguel Mendoza, Mark Mendoza, Scott
+33 Meyer, Matthew Minarik, Tim Minnick, Steven Moazami, Eric Moore,
+33 Michel Mooser, Perry Mulay, Andreus Narain, Graham Nardone, Chris
+33 Newfang, David Nguyen, Jeremy Nilsson, Richard Nuzzi, Casey
+33 O'Malley, Patrick O'Neil, Burak Onal, Eric Oskanian, Ash Patterson,
+33 Matt Pierson, Anthony Pirraglia, Laurie Plant, Kevin Powers, Micah
+33 Purdy, Eric Pyrskalla, Stephen Randle, Mark Raposa, Kenneth
+33 Reiersen, Chad Reker, Dustin Rockers, Stephen Roebuck, Kevin
+33 Rosebrook, Mike Rowe, Mike Saettel, Carl Sage, Jason Santiago,
+33 Dan Santonocito, Alex Scatchell, Matt Schemers, Melanie Schneider,
+33 Dustin Sellers, Julia Sexton, Adam Sikorski, David Simmons, Chris
+33 Singh, Anthony Smith, Bradley Smith, Eric Soriano, Billy Spears,
+33 Troy Stuckey, Steven Sturm, Greg Swenson, Clay Tabor, Darin
+33 Takaki, James Talkington, Brent Teal, Erik Thomas, Mike Thomas,
+33 Jericho Thorp, Greg Tobolewski, Michael Tosino, Jay Tostanoski,
+33 Hugo Trepanier, Lloyd Tyson, Larry Vargas, Marcia Velarde, Eric
+33 Ventura, Ryan Vibert, Julio Villagomez, Reed Waller, Jamie Walsh,
+33 Richard Walter, Justin Walters, Lyndon Wang, Louis Warren, Chris
+33 Warrington, Todd Watson, Kassandra Watson, Dave Webster, Inyoung
+33 Whang, Mike Wheeler, Cris Williams, Allen Wright, Brian Zoebisch,
+33 Michael Zuzack
+
+
+
+
+11 COPYRIGHTS
+
+
+32 Havok.com(tm) © Copyright 1999-2001 Telekinesis Research Limited.
+
+32 © 1997-2004 Bink and Miles Sound System by RAD Game Tools, Inc. 
+
+32 The Lua language is designed and implemented at Tecgraf,
+32 PUC-Rio in Brazil by the team: Roberto Ierusalimschy,
+32 Waldemar Celes, Luiz Henrique de Figueiredo
+
+32 ZLib: Jean-loup Gailly, Mark Adler
+
+32 Voice Over Recording, Directing and Editorial provided by
+32 Soundelux Design Music Group.
+
+32 FreeType: Portions of this software are copyright © 1996-2002
+32 The FreeType Project (www.freetype.org).  All rights reserved.
+
+
+
+
+
+
+
+
+
+33 Some demons were actually harmed during
+33 the production of Painkiller.

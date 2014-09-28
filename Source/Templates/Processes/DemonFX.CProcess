@@ -1,0 +1,177 @@
+--============================================================================
+-- Demon FX Task
+--============================================================================
+DemonFX.EffectTime = 20
+DemonFX.FadeOutTime = 0.2
+DemonFX.FadeInTime = 1
+DemonFX.Color = Color:New(255,255,255)
+DemonFX.FOVMin = 115
+DemonFX.FOVMax = 125
+DemonFX.FOVPeriod = 3
+DemonFX.TickCount = 0
+DemonFX._monstersBurningFX = "demonflame"
+DemonFX._DrawWeapon = false
+o.BaseName = "DemonFX.CProcess"
+--============================================================================
+function DemonFX:PostRender(delta)
+    if self.Color.A > 0 then
+        local w,h = R3D.ScreenSize()
+        HUD.DrawQuadRGBA(0,0,0,w,h,self.Color.R,self.Color.G,self.Color.B,self.Color.A)
+    end
+end
+--============================================================================
+function DemonFX:OnToKill()
+    Game.IsDemon = false
+    Game._DemonProc = nil
+
+    if self.prevSlot then
+        RawCallMethod(CPlayer.WeaponChangeConfirmation,Player._Entity,self.prevSlot) 
+        self.prevSlot = nil
+        if Player then Player.EnabledWeapons[10] = nil end
+    end
+
+    if Cfg.ViewWeaponModel then
+        ENTITY.EnableDraw(Player:GetCurWeapon()._Entity, true)
+    end
+    
+    if Game.KilledInDemonMode > Game.MaxKilledInDemonMode then
+		Game.MaxKilledInDemonMode = Game.KilledInDemonMode
+    end
+
+    self:EnableFX(false)
+--    Game.KilledInDemonMode = 0    
+end
+--============================================================================
+function DemonFX:EnableFX(enable)
+    
+    WORLD.EnableDemonFX(enable)            
+    if Game.GMode ~= GModes.SingleGame then 
+        for i,o in Game.PlayerStats do  
+			if MPGameRules[MPCfg.GameMode].Teams and Cfg.Team == o.Team then
+				ENTITY.EnableDemonic(o._Entity,false,true)
+			else
+				ENTITY.EnableDemonic(o._Entity,enable,true)
+			end
+        end
+        return
+    end
+    
+    if enable then
+        self._enabled = true
+        if self._monstersBurningFX then
+            for i,v in Actors do
+                if not v._stateuProc then
+                    if not v._disableDemonic then
+                        ENTITY.EnableDemonic(v._Entity,true,true)
+                    end
+                    if v.Health > 0 then
+                        if not v.NotCountable and not v._demonBurning and v.s_SubClass then
+                            local tdj = v.s_SubClass.DeathJoints
+                            if tdj and v._SphereSize then
+                                v._demonBurning = {}
+                                for i=1,table.getn(tdj) do
+                                     local e = v:BindFX(self._monstersBurningFX, v._SphereSize * 0.4, tdj[i])
+                                     v._demonBurning[i] = ENTITY.GetIndex(e)
+                                end
+                            end
+                        end
+                    else
+                        if v._demonBurning then
+                            for j,w in v._demonBurning do
+                                local e = ENTITY.GetPtrByIndex(w)
+                                if e then
+                                    ENTITY.Release(e)
+                                end
+                            end
+                            v._demonBurning = nil
+                        end
+                    end
+                end
+            end
+        end
+    else
+        if not self._enabled then return end
+        R3D.SetCameraFOV(Cfg.FOV)
+        if self._monstersBurningFX then
+            for i,v in Actors do
+                if not v._disableDemonic and not Lucifer_001 then
+                    ENTITY.EnableDemonic(v._Entity,false,true)
+                end
+                if v._demonBurning then
+                    for j,w in v._demonBurning do
+                        local e = ENTITY.GetPtrByIndex(w)
+                        if e then
+                            ENTITY.Release(e)
+                        end
+                    end
+                    v._demonBurning = nil
+                end
+            end
+        end
+        self._enabled = false
+    end
+end
+--============================================================================
+function DemonFX:Tick(delta)
+    if Lucifer_001 then
+		self.TickCount = self.TickCount + delta
+    else
+		self.TickCount = self.TickCount + delta / INP.GetTimeMultiplier()
+    end
+    local IsDemon
+    if Cfg.ViewWeaponModel then
+        ENTITY.EnableDraw(Player:GetCurWeapon()._Entity, self._DrawWeapon)
+    end
+    
+    if self.TickCount < self.FadeOutTime + self.FadeInTime then
+    
+        if self.TickCount < self.FadeOutTime then
+            self.Color.A = 255 * self.TickCount / self.FadeOutTime
+            IsDemon = false
+        else
+            self.Color.A = 255 * (self.FadeOutTime + self.FadeInTime - self.TickCount) / self.FadeInTime
+            IsDemon = true
+        end
+        
+    elseif self.TickCount > self.EffectTime-self.FadeOutTime-self.FadeInTime then
+        local minusTick = self.EffectTime-self.TickCount
+    
+        if minusTick < self.FadeInTime then
+            self.Color.A = 255 * minusTick / self.FadeInTime
+            if self.prevSlot then
+                RawCallMethod(CPlayer.WeaponChangeConfirmation,Player._Entity,self.prevSlot) 
+                self.prevSlot = nil
+            end
+            if Cfg.ViewWeaponModel then
+                ENTITY.EnableDraw(Player:GetCurWeapon()._Entity, true)            
+            end
+            IsDemon = false
+        else
+            self.Color.A = 255 * (self.FadeOutTime + self.FadeInTime - minusTick) / self.FadeOutTime
+            IsDemon = true
+        end
+    else
+        self.Color.A = 0
+        IsDemon = true
+    end
+    
+    if Game.GMode ~= GModes.SingleGame then 
+        self:EnableFX(IsDemon)
+    else    
+        if IsDemon then
+            local t = math.sin(self.FOVPeriod*self.TickCount)*0.5+0.5
+            local _velocityx,_velocityy,_velocityz,_velocity = ENTITY.GetVelocity(Player._Entity) 
+            local tmax = math.max(0.1,math.min(1,_velocity/50))
+            t = tmax * t
+            R3D.SetCameraFOV(self.FOVMin*(1-t)+self.FOVMax*t)
+            self:EnableFX(true)
+        else
+            self:EnableFX(false)
+        end
+    end
+
+    if self.TickCount > self.EffectTime then 
+        GObjects:ToKill(self)
+    end
+end    
+--============================================================================

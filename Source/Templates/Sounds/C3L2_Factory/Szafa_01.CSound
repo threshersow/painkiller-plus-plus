@@ -1,0 +1,10 @@
+Szafa_01.Volume = 70
+Szafa_01.Interval = 0
+Szafa_01.RandomShift = 0
+Szafa_01.Falloff =
+{
+  Start = 2,
+  End = 15
+}
+Szafa_01.Sound ="C3L2_Factory/Szafa_01"
+

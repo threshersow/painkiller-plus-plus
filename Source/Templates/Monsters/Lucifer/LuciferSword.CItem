@@ -1,0 +1,237 @@
+--o.Mesh = "polySurfaceShape89990"
+--o.Pack = "kamien.dat"
+--o.Scale = 0.35
+
+o.Model = "lucy_sword"
+--o.Mesh = "kosa_polySurfaceShape1"
+o.Pack = nil
+o.Scale = 20.0
+
+o.Mass = 40
+o.Health = 9000
+
+o.Pos = Vector:New(0,0,-4)
+o.Restitution = 0.2
+o.speed = 80
+o._fx = 'nun_spell'
+o.TimeToLive = 9999
+o.earthqRange = 40
+o.earthqTime = 25
+o.earthqStren = 0.4
+o.soundBindPosY = 20
+o.NotCountable = true
+
+o.AfterHitSpeed = 100
+
+o.Damage = 101	-- tyle rani lucyfera
+
+--============================================================================
+function o:OnCollision(x,y,z,nx,ny,nz,e,h_me,h_other,vx,vy,vz,vl)
+	--Game:Print("sword col")
+	local ondamage = false
+	if e then
+		local obj = EntityToObject[e]
+		if obj then
+			if obj.OnDamage then
+				--Game:Print("  SWORD: "..self._Name.." col obj "..obj._Name)
+				if obj ~= Lucifer_001 or (obj == Lucifer_001 and self._hit) then
+					Game:Print("  SWORD: demon attack DMAGE")
+					ENTITY.PO_EnableGravity(self._Entity,true)
+					ENTITY.PO_SetPinned(self._Entity, true)
+					if debugMarek then
+						self.Damage = 1111
+					end
+					obj:OnDamage(self.Damage--[[*FRand(1.01,1.1)--]], self, AttackTypes.Stone)
+					if obj == Lucifer_001 then
+						--
+						--
+						Game:Print("  SWORD: demon attack DMAGE: LUCUFER")
+						
+						ENTITY.EnableCollisions(self._Entity, false)
+						ENTITY.PO_Enable(self._Entity,false)
+						MDL.EnableRagdoll(self._Entity,true,RagdollNonColliding)
+						MDL.SetRagdollCollisionGroup(self._Entity, ECollisionGroups.RagdollSpecial)
+						
+						--MDL.SetRagdollCollisionGroup(self._Entity, ECollisionGroups.Noncolliding)
+						--ENTITY.EnableDraw(self._Entity,false)
+						--ENTITY.UnregisterAllChildren(self._Entity, ETypes.ParticleFX)
+				
+						
+						local brain = obj._AIBrain
+						local j = MDL.GetJointFromHavokBody(e, h_other)
+						if j < 0 then
+							j = MDL.GetJointIndex(e, "k_zebra")
+						end
+						brain._JointH = MDL.GetJointIndex(self._Entity, "joint85")
+						MDL.SetPinnedJoint(self._Entity, brain._JointH, true)
+						
+						Game:Print(obj._Name.." BINDOWANIE miecza "..j.." "..brain._JointH)
+						obj._objStone = self
+						
+						if obj._procStoneThrow then
+							Game:Print(self._Name.." obj._procStoneThrow already exists")
+							GObjects:ToKill(obj._procStoneThrow)
+						end
+						
+						obj._procStoneThrow = Templates["PBindJointToJoint.CProcess"]:New(e, obj, j, brain._JointH, self._Entity)
+						obj._procStoneThrow.CopyWholeMatrix = true
+						obj._procStoneThrow:Tick(0, true)
+						GObjects:Add(TempObjName(),obj._procStoneThrow)
+
+					end
+					ondamage = true
+				end
+			end
+		else
+			Game:Print("sword col no e")
+			--if y < 10 then
+				--local name = self.CollisionSound[math.random(1,table.getn(self.CollisionSound))]
+				--PlaySound3D("impacts/"..name, x,y,z, 30, 100)
+			--	PlaySound3D("weapons/machinegun/rocket_hit", x,y,z, 30, 120)
+			--	Game._EarthQuakeProc:Add(x,y,z, self.earthqTime, self.earthqRange, self.earthqStren,  self.earthqStren, 1.0)
+			--end
+		end
+	end
+	--
+	--
+	if not ondamage then
+		ENTITY.PO_EnableGravity(self._Entity,true)
+		ENTITY.PO_SetPinned(self._Entity,true)
+		ENTITY.EnableCollisions(self._Entity, false)
+		MDL.SetRagdollCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+		ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+		PlaySound3D("actor/giant/kolec-wysuwa_sie",x,y,z,50,150)
+		--Game:Print("sword pinned")
+	end
+	--ENTITY.PO_EnableGravity(self._Entity,true)
+	
+	WORLD.Explosion2(x,y,z, 1000,20, nil, AttackTypes.Rocket, FRand(50,100))
+	Game._EarthQuakeProc:Add(x,y,z, self.earthqTime, self.earthqRange, self.earthqStren, self.earthqStren, 1.0)
+	AddPFX('but',1.5,Vector:New(x,y,z))
+	ENTITY.PO_SetLinearDamping(self._Entity,0.6) 
+	ENTITY.PO_SetAngularDamping(self._Entity,0.6)
+
+	--WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,nil,AttackTypes.Rocket,self.Explosion.Damage)
+	--SOUND.Play3D(self.explSound,x,y,z,30,160)
+end
+--============================================================================
+
+function o:OnCreateEntity()
+	--self:PO_Create(BodyTypes.FromMesh)
+	self:PO_Create(BodyTypes.SphereSweep,0.3,ECollisionGroups.Noncolliding)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+	self.timer = 12
+	self.mode = 0
+	for i=1,9 do
+		pfx = AddPFX("lucifer_sword", 1.0)
+		ENTITY.RegisterChild(self._Entity,pfx)
+		PARTICLE.SetParentOffset(pfx,0,0,0,"emiter_miecz_"..i)
+	end
+	ENTITY.EnableDemonic(self._Entity,true,true)
+	--ENTITY.AddToIntersectionSolver(self._Entity)
+	MDL.SetAnim(self._Entity, "idle" ,true)
+	--MDL.EnableRagdoll(self._Entity,true,RagdollNonColliding)
+end
+--============================================================================
+
+function o:OnUpdate()
+	if self.mode == 0 then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.mode = 1
+			--ENTITY.SetVelocity(self._Entity, self._desiredVel.X,self._desiredVel.Y,self._desiredVel.Z)
+			if self._enableGrav then
+				--Game:Print("ENABLE GRAV")
+				ENTITY.PO_EnableGravity(self._Entity,true)
+			end
+		end
+	end
+	
+	--if Lucifer_001 and Lucifer_001._died then
+	--	ENTITY.UnregisterAllChildren(self._Entity, ETypes.ParticleFX)
+	--end
+	
+	if self.mode == 1 then
+		ENTITY.EnableCollisions(self._Entity, true, 1.5, 10)
+		ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+		self.mode = 2
+		Game:Print("sword enable col")
+		--self:BindFX(self._fx, 0.6, -1)
+
+						--[[local angle = ENTITY.GetOrientation(self._Entity)
+						Game:Print("rotate sword!!! "..angle)
+						angle = angle + math.pi
+						ENTITY.SetOrientation(self._Entity, angle) 
+
+
+						ENTITY.EnableCollisions(self._Entity, false)
+						ENTITY.PO_Enable(self._Entity,false)
+						MDL.EnableRagdoll(self._Entity,true,RagdollNonColliding)
+						MDL.SetRagdollCollisionGroup(self._Entity, ECollisionGroups.RagdollSpecial)
+						
+						--MDL.SetRagdollCollisionGroup(self._Entity, ECollisionGroups.Noncolliding)
+						--ENTITY.EnableDraw(self._Entity,false)
+						--ENTITY.UnregisterAllChildren(self._Entity, ETypes.ParticleFX)
+				
+						local obj = Lucifer_001
+						local e = obj._Entity
+						local brain = obj._AIBrain
+						local j = MDL.GetJointFromHavokBody(e, h_other)
+						if j < 0 then
+							j = MDL.GetJointIndex(e, "k_zebra")
+						end
+						brain._JointH = MDL.GetJointIndex(self._Entity, "joint85")
+						MDL.SetPinnedJoint(self._Entity, brain._JointH, true)
+						
+						Game:Print(obj._Name.." BINDOWANIE miecza "..j.." "..brain._JointH)
+						obj._objStone = self
+						
+						if obj._procStoneThrow then
+							Game:Print(self._Name.." obj._procStoneThrow already exists")
+							GObjects:ToKill(obj._procStoneThrow)
+						end
+						ENTITY.UnregisterAllChildren(self._Entity, ETypes.ParticleFX)
+						
+						obj._procStoneThrow = PBindJointToJoint:New(e, obj, j, brain._JointH, self._Entity)
+						--obj._procStoneThrow.rotationDisabled = true
+						obj._procStoneThrow.CopyWholeMatrix = true
+						obj._procStoneThrow:Tick(0, true)
+						GObjects:Add(TempObjName(),obj._procStoneThrow)
+						obj:OnDamage(1111)--]]
+
+
+	end
+	--[[if self.mode == 2 then
+		if not ENTITY.PO_IsPinned(self._Entity) then
+			if self.Pos.Y < -20 then
+				ENTITY.PO_SetPinned(self._Entity,true)
+			end
+		end
+	end--]]
+end
+
+
+function o:CustomOnDamage(damage, owner, attacktype)
+	--Game:Print("  SWORD damage : leci na demona??")
+	if attacktype == AttackTypes.Demon then
+		--Game:Print("  SWORD damage : leci na demona?")
+		if not self._hit and Lucifer_001 and Lucifer_001.Health > 0 and not ENTITY.PO_IsPinned(self._Entity) then
+			local v = Vector:New(self.Pos.X - Lucifer_001._groundx,self.Pos.Y - (Lucifer_001._groundy + FRand(18,24)), self.Pos.Z - Lucifer_001._groundz)
+			v:Normalize()
+			Game:Print("  SWORD: leci na demona")
+			ENTITY.PO_EnableGravity(self._Entity,false)
+			local speed = -self.AfterHitSpeed
+			self._hit = true
+			--ENTITY.PO_SetPinned(self._Entity,true)
+			ENTITY.SetVelocity(self._Entity,  v.X * speed, v.Y * speed, v.Z * speed)
+			local angle = ENTITY.GetOrientation(self._Entity)
+			angle = angle + math.pi
+			ENTITY.SetOrientation(self._Entity, angle) 
+
+			return true
+		end
+	end
+	return false
+end
+
+

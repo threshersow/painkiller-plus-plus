@@ -1,0 +1,34 @@
+o.BaseObj = "HellAngel.CActor"
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,10}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.stopAfterWalking = 0.2
+o.AiParams.stopAfterWalkingTime = {30,80}
+o.AiParams.guardRange = -1
+o.AiParams.aiGoals = {"idle","FarAttack", "hear"}
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = true
+o.AiParams.WalkAreaWhenAttack = true
+o.AiParams.FinishMovementBeforeAttack = false
+
+o.AiParams.delayBetweenAttacks = 240
+
+o.AiParams.changePosAfterFire = 1.0
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+
+o.AiParams.weapon = {
+		name = "Molotow",
+		bulletsPerShot = 1,
+		maxDist = 90,
+		minDist = 6.0,
+		spreadAngle = 0,
+		damagePerBullet = 0,
+		PO_HitForce = 0,
+	}
+o.AiParams.weaponAmmo = 99999

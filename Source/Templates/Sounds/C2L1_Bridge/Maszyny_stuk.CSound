@@ -1,0 +1,10 @@
+Maszyny_stuk.Volume = 80
+Maszyny_stuk.Interval = 18
+Maszyny_stuk.RandomShift = 8
+Maszyny_stuk.Falloff =
+{
+  Start = 50,
+  End = 200
+}
+Maszyny_stuk.Sound ="C2L1_Bridge/Maszyny_stuk_01;C2L1_Bridge/Maszyny_stuk_02;C2L1_Bridge/Maszyny_stuk_03"
+

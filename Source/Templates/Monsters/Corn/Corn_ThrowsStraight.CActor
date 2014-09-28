@@ -1,0 +1,23 @@
+o.BaseObj = "Corn.CActor"
+
+o.s_SubClass.Animations.atak1    = {1.0, false,{
+           		{0.6,'TakeToThrow'},
+                        {1.1,'ThrowTaken',nil,true},
+                        {1.11,'ThrowImmid',nil,true,nil,4},
+                        {1.14,'ThrowImmid',nil,true,nil,8},
+                        {1.16,'ThrowImmid',nil,true,nil,-3},
+                        {1.18,'ThrowImmid',nil,true,nil,-7},
+                    }}
+
+o.AiParams.throwAngle = nil
+o.AiParams.throwVelocity = 40
+
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 40,
+		minDist = 2.8,
+		spreadAngle = 0,
+		damagePerBullet = 0,
+		maxPitch = 60,
+		maxYaw = 60,
+	}

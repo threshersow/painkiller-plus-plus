@@ -1,0 +1,70 @@
+o.Mesh = "bottle_a"
+o.Pack = "gas_bottle.dat"
+
+o.Scale = 0.15
+o.TimeToLive = 30 * 5
+o.Particle = 'molotowt'
+o.gasElements = 11
+o.destroyPFX = "molotowexplo"
+o.directHitDamage = 20
+
+function o:OnPrecache()
+    --Cache:PrecacheParticleFX(self.Particle)
+    --Cache:PrecacheParticleFX(self.destroyPFX)    
+    --Cache:PrecacheItem("Gas.CItem")
+end
+
+function o:OnCreateEntity()
+	self.timer = 4
+    local pfx = AddPFX(self.Particle,0.3)
+    ENTITY.RegisterChild(self._Entity,pfx)    
+	self:PO_Create(BodyTypes.SphereSweep,0.2,ECollisionGroups.Noncolliding)
+end
+
+
+function o:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			--Game:Print("MOLOTOW enable col")
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+			self.timer = nil
+		end
+	end
+end
+
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+	-- tu tworzy "gas" w roznych kierunkach
+	PlaySound3D("impacts/molotov-explode",x,y,z,20,50,self)
+	AddPFX(self.destroyPFX,0.3, Vector:New(x,y,z))
+	--self.ObjOwner.debugHIT = {}
+        
+    local obj = EntityToObject[e]
+    if obj and obj._Class == "CPlayer" then
+        obj:OnDamage(self.directHitDamage, self.ObjOwner)
+    end
+
+	local amount = self.gasElements
+	for i=1,amount do
+		local obj = GObjects:Add(TempObjName(),CloneTemplate("Gas.CItem"))
+		obj.ObjOwner = self.ObjOwner
+		obj.Pos.X = x + nx * 0.5 + FRand(-0.7, 0.7)
+		obj.Pos.Y = y + ny * 0.5 + i*0.05
+		obj.Pos.Z = z + nz * 0.5 + FRand(-0.7, 0.7)
+
+		--table.insert(self.ObjOwner.debugHIT, {obj.Pos.X, obj.Pos.Y, obj.Pos.Z})
+		
+		if i == amount then
+			obj.TimeToLive = obj.TimeToLive * 1.2
+			obj.sound = "impacts/barrel-wood-fire-loop"
+		else
+			obj.sound = nil
+			obj.TimeToLive = FRand(obj.TimeToLive * 0.8, obj.TimeToLive * 1.2)			
+		end
+		obj:Apply()
+		obj:Synchronize()
+	end
+
+	GObjects:ToKill(self)
+end

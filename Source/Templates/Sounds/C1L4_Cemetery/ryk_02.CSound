@@ -1,0 +1,10 @@
+ryk_02.Volume = 70
+ryk_02.Interval = 10
+ryk_02.RandomShift = 5
+ryk_02.Falloff =
+{
+  Start = 3,
+  End = 7
+}
+ryk_02.Sound ="C1L4_Cemetery/ryk_02;C1L4_Cemetery/ryk_03"
+

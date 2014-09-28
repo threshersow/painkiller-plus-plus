@@ -1,0 +1,94 @@
+Shuriken["Mesh"] = [[polySurfaceShape10]]
+Shuriken["Pack"] = [[shuriken.dat]]
+Shuriken["Scale"] = 0.007
+Shuriken.Mass = 20
+Shuriken.Restitution = 0.1
+Shuriken.Damage = 15
+--Shuriken.RotateSpeed = 30
+Shuriken.ThrowSpeed = 35
+Shuriken.LifeTime = 120			-- after 1st collision
+Shuriken.TimeToLive = 6 * 60
+--============================================================================
+function Shuriken:OnCollision(x,y,z,nx,ny,nz,e_other,h_me,h_other,vx,vy,vz,vl)
+	if self._sndLoop then
+		ENTITY.Release(self._sndLoop)
+		self._sndLoop = nil
+	end
+	
+    local bind = false
+	if e_other then
+		local obj = EntityToObject[e_other]
+		if obj then
+			if obj ~= self.ObjOwner then
+				local e = ENTITY.GetPtrByIndex(self._entityIndex)
+				if e then
+					GObjects:ToKill(self)
+
+					if obj.OnDamage then
+						if obj == Player then 
+							PlaySound2D("actor/ninja/ninja_shuricane_hit")
+						end
+						obj:OnDamage(self.Damage, self.ObjOwner)
+					end
+				else
+					GObjects:ToKill(self, true)
+				end
+				
+				if self.ObjOwner and self.ObjOwner._AIBrain then
+					if obj == Player then
+						self.ObjOwner._AIBrain._lastHitTime = self.ObjOwner._AIBrain._currentTime
+					else
+						self.ObjOwner._AIBrain._lastMissedTime = self.ObjOwner._AIBrain._currentTime
+					end
+				end
+					
+			end
+		else
+            bind = true
+		end
+	else
+        bind = true
+    end
+    if bind then
+        if not self.deathTimer then
+			if debugMarek then Game:Print("shuriken col with geometry") end
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+
+			ENTITY.PO_Enable(self._Entity, false)
+			--ENTITY.PO_SetEntitySteered(self._Entity, true)
+			ENTITY.SetVelocity(0,0,0,0,0,0)
+			local joint = MDL.GetJointFromHavokBody(e_other,h_other)
+			ENTITY.ComputeChildMatrix(self._Entity,e_other,joint)
+			ENTITY.RegisterChild(e_other,self._Entity,true,joint,true)
+			
+			PlaySound3D("impacts/axe-stone",x,y,z,18,36,nil)
+		end
+	end
+end
+
+--============================================================================
+function Shuriken:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+	self.timer = 2
+    ENTITY.PO_EnableGravity(self._Entity,false)
+	self._sndLoop = self:BindSound("actor/ninja/ninja_shuricane_onfly-loop",3,10,true)
+	self._entityIndex = ENTITY.GetIndex(self._Entity)
+	local e = ENTITY.Create(ETypes.Trail,"trail_kolek","trailName")
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+
+end
+
+function Shuriken:OnUpdate()
+	if not self._enabled then return end
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			--Game:Print("shuriken enable")
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+		end
+	end
+end
+

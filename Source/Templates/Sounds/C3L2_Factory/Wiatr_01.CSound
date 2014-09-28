@@ -1,0 +1,10 @@
+Wiatr_01.Volume = 60
+Wiatr_01.Interval = 0
+Wiatr_01.RandomShift = 0
+Wiatr_01.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+Wiatr_01.Sound ="factory/Wiatr_01"
+

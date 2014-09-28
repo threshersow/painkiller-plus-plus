@@ -1,0 +1,95 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'offic-krok1'},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'offic-krok2'},
+		dist1 = 3,
+		dist2 = 20,
+	},
+
+	hit = {
+		samples = {'offic-hit1','offic-hit2','offic-hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	atak1 = {
+		samples = {'offic-at1','offic-at2'},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},	
+	atak2 = {
+		samples = {'offic-at3','offic-at4'},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},	
+	onAttackOnce = {
+		samples = {"offic-halt1", "offic-halt2", "offic-halt3"},
+		dist1 = 20,
+		dist2 = 50,
+	},
+
+	raca = {
+		samples = {"offic-raca-voice"},
+		dist1 = 20,
+		dist2 = 50,
+	},
+
+
+	bodyfalls = {
+		samples = {"offic_bodyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"offic-weapon-lost",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	death = {
+		samples = {"offic-death1","offic-death2","offic-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	onAttack = {
+		samples = {"offic_attackscream1","offic_attackscream2","offic_attackscream3","offic_attackscream4",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	damage = {
+		samples = {"$/actor/hellbiker/hellb-attack-head-hit"},
+	},
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+			{0.0,'PlaySound',"step1"},
+			{0.7,'PlaySound',"step2"},
+		},
+		run   = {
+			{0.0,'PlaySound',"step1"},
+			{0.7,'PlaySound',"step2"},
+		},
+		atak1   = {	-- strzal
+					{0.0,'PlaySoundHit',"atak1"},
+				},
+		atak2   = {	-- z piachy
+					{0.0,'PlaySoundHit',"atak2"},
+				},
+		hit1   = {
+					{0.0,'PlaySoundHit',"hit"},
+				},
+		hit2   = {
+					{0.0,'PlaySoundHit',"hit"},
+				},
+		raca   = {
+					{0.0,'PlaySoundHit',"raca"},
+				},
+}

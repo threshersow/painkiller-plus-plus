@@ -1,0 +1,10 @@
+Ryk_01.Volume = 80
+Ryk_01.Interval =6
+Ryk_01.RandomShift = 2
+Ryk_01.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+Ryk_01.Sound ="C1L3_Catacombs/ryk_01"
+

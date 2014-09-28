@@ -1,0 +1,30 @@
+o.s_SubClass.ParticlesDefinitions = {
+	step = {
+		pfx = 'or_t_black',
+		scale = 0.6,
+	},
+	flame = {
+		pfx = 'alastorkingflamethr',
+		scale = 2.3,
+	},
+    wings = {
+        pfx = "alastorkingwing",
+        scale = 1.2,
+    },
+    spawn = {   
+		pfx = "AlastorkingSpawnFX",
+		scale = 5.5,
+		joint = "root",
+	},
+
+    attackGolem = {   
+		pfx = "Alastorkingfiresphere",
+		scale = 1.3,
+		joints = {"wing_l_z1_1","wing_l_z1_2","wing_p_z1_1","wing_p_z1_2"}
+	},
+    createFireballs = {   
+		pfx = "Alastorkingcrfirebal",
+		scale = 2.5,
+	},
+
+}

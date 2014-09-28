@@ -1,0 +1,23 @@
+o.BaseObj = "GenericLeperThrowable.CItem"
+o.Mesh = "weapon5"
+o.Pack = "LeperTorch.dat"
+o.CollisionSound = {"actor/evilmonkv3/evilv3-weapon-lost1","actor/evilmonkv3/evilv3-weapon-lost2","actor/evilmonkv3/evilv3-weapon-lost3"}
+o.bindfx = {
+	name = "pochodnia_flame4",
+	scale = 0.3,
+	offset = Vector:New(-0.0,-0.5,-0.0),
+}
+o.LoopSound = "actor/leper/throw-loop"
+o.ThrowSound = "actor/leper/throw-torch"
+
+function o:Tick()
+	if self._bindedLight then
+		local l = self._bindedLightT
+		local rnd = FRand(0.67, 1.0)
+		local i = l.Intensity
+		LIGHT.SetIntensity(self._bindedLight._Entity, i * rnd)
+		local f = l.StartFalloff * rnd
+		local radius = l.Range * rnd
+		LIGHT.SetFalloff(self._bindedLight._Entity,f,radius)
+	end
+end

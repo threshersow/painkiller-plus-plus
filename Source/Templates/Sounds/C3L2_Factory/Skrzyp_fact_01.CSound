@@ -1,0 +1,10 @@
+Skrzyp_fact_01.Volume = 70
+Skrzyp_fact_01.Interval = 9
+Skrzyp_fact_01.RandomShift = 4
+Skrzyp_fact_01.Falloff =
+{
+  Start = 10,
+  End = 40
+}
+Skrzyp_fact_01.Sound ="C3L2_Factory/skrzyp_01"
+

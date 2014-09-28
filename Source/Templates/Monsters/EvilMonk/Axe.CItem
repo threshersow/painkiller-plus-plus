@@ -1,0 +1,105 @@
+o.Mesh = "polySurfaceShape905"
+o.Pack = "toporek.dat"
+o.Scale = 0.08
+o.Mass = 40
+o.Restitution = 0.1
+o.Damage = 15
+o.RotateSpeed = 30
+o.ThrowSpeed = 20
+o.LifeTime = 120			-- after 1st collision
+o.TimeToLive = 30 * 60	-- after create
+o.AngularDamping = 0.2	-- sprawdzic ### 
+
+--============================================================================
+function Axe:OnCollision(x,y,z,nx,ny,nz,e)
+	--if debugMarek then Game:Print("AXE col") end
+	if e then
+		local obj = EntityToObject[e]
+		if obj then
+			if obj ~= self.ObjOwner then
+				if obj.OnDamage and not self._damageDisable then
+					if self.ObjOwner and self.ObjOwner.s_SubClass.Sounds and self.ObjOwner.s_SubClass.Sounds.damage then
+						local name = self.ObjOwner.s_SubClass.Sounds.damage[math.random(1, table.getn(self.ObjOwner.s_SubClass.Sounds.damage))]
+						PlaySound2D(self.ObjOwner._SoundDirectory..name)
+					end
+					obj:OnDamage(self.Damage, self.ObjOwner, AttackTypes.AIClose,x,y,z,nx,ny,nz)
+				end
+				GObjects:ToKill(self)
+			else
+				if debugMarek then Game:Print(self._Name.." col wtih me AXE <-") end
+			end
+		else
+            self._damageDisable = true
+			if not self.deathTimer then
+				if self._sndLoop then
+					ENTITY.Release(self._sndLoop)
+					self._sndLoop = nil
+				end
+
+				self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+				ENTITY.PO_EnableGravity(self._Entity,true)
+				PlaySound3D("impacts/axe-stone",x,y,z,18,36,nil)
+			end
+		end
+	else
+		if not self.deathTimer then
+			if self._sndLoop then
+				ENTITY.Release(self._sndLoop)
+				self._sndLoop = nil
+			end
+
+			--if debugMarek then Game:Print("col with geometry") end
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+			ENTITY.PO_EnableGravity(self._Entity,true)
+			PlaySound3D("impacts/axe-stone",x,y,z,18,36,nil)
+		end
+	end
+end
+--============================================================================
+function Axe:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+    self._timer = 6
+
+	local dx = self.PosDest.X - self.Pos.X
+	local dy = self.PosDest.Y - self.Pos.Y
+	local dz = self.PosDest.Z - self.Pos.Z
+	local v = Vector:New(dx, dy, dz)
+	v:Normalize()
+
+    local speed = self.RotateSpeed * FRand(0.8, 1.2)
+    --local a = ENTITY.GetOrientation(self.ObjOwner._Entity)
+    local a = self._RotAngle
+    local vx = math.cos(a)
+    local vz = -math.sin(a)
+
+	ENTITY.SetAngularVelocity(self._Entity, vx*speed, 0, vz*speed)
+	local force = self.ThrowSpeed * FRand(0.8, 1.3)
+
+	self._velx = v.X*force
+	self._vely = v.Y*force
+	self._velz = v.Z*force
+	self._sndLoop = self:BindSound("actor/evilmonk/evil_throwaxe-loop",3,18,true)
+	ENTITY.SetVelocity(self._Entity, self._velx, self._vely, self._velz)
+end
+--============================================================================
+function Axe:OnUpdate()
+	if self._timer then
+		self._timer = self._timer - 1
+		if self._timer < 0 then
+			self._timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			ENTITY.EnableCollisions(self._Entity, true)
+		end
+	end
+
+	if self.deathTimer then
+		self.deathTimer = self.deathTimer - 1
+		if self.deathTimer < 0 then
+			GObjects:ToKill(self)
+			AddPFX("BodyExplosion",0.3,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+		end
+	end
+
+end
+

@@ -1,0 +1,74 @@
+FX_ItemRespawn.Model = "spawn_obj"
+FX_ItemRespawn.Scale = 2.5
+FX_ItemRespawn.Immortal = true
+FX_ItemRespawn.s_SubClass = 
+{
+    Animations = {  
+        idle        = {2.5},
+    },
+}
+function FX_ItemRespawn:OnPrecache()
+	Cache:PrecacheTrail("trail_spawn")
+	Cache:PrecacheParticleFX("spawnobj1")
+	Cache:PrecacheParticleFX("spawnobj")
+	Cache:PrecacheParticleFX("spawn_smoke")    
+    Cache:PrecacheSounds({"specials/respawns/respawn_objects"})    
+    
+end
+--============================================================================
+function FX_ItemRespawn:OnCreateEntity()
+        
+    self:BindTrail("trail_spawn","e1")
+    --self:BindTrail("trail_spawn","e2")
+    self:BindTrail("trail_spawn","e3")
+    --self:BindTrail("trail_spawn","e4")
+    self:BindTrail("trail_spawn","e5")
+    --self:BindTrail("trail_spawn","e6")
+    self:BindTrail("trail_spawn","e7")
+    --self:BindTrail("trail_spawn","e8")
+    self:BindTrail("trail_spawn","e9")
+    --self:BindTrail("trail_spawn","e10")
+    self:BindTrail("trail_spawn","e11")
+    --self:BindTrail("trail_spawn","e12")
+    self:BindTrail("trail_spawn","e13")
+    --self:BindTrail("trail_spawn","e14")
+    self:BindTrail("trail_spawn","e15")
+    --self:BindTrail("trail_spawn","e16")
+    self:BindTrail("trail_spawn","e17")
+    --self:BindTrail("trail_spawn","e18")
+    self:BindTrail("trail_spawn","e19")
+    --self:BindTrail("trail_spawn","e20")
+
+    self:BindFX("spawnobj1",0.4,"root")
+    
+    --self:BindFX("spawnobj",0.1,"e1")
+    self:BindFX("spawnobj",0.1,"e2")
+    --self:BindFX("spawnobj",0.1,"e3")
+    self:BindFX("spawnobj",0.1,"e4")
+    --self:BindFX("spawnobj",0.1,"e5")
+    self:BindFX("spawnobj",0.1,"e6")
+    --self:BindFX("spawnobj",0.1,"e7")
+    self:BindFX("spawnobj",0.1,"e8")
+    --self:BindFX("spawnobj",0.1,"e9")
+    self:BindFX("spawnobj",0.1,"e10")
+    --self:BindFX("spawnobj",0.1,"e11")
+    self:BindFX("spawnobj",0.1,"e12")
+    --self:BindFX("spawnobj",0.1,"e13")
+    self:BindFX("spawnobj",0.1,"e14")
+    --self:BindFX("spawnobj",0.1,"e15")
+    self:BindFX("spawnobj",0.1,"e16")
+    --self:BindFX("spawnobj",0.1,"e17")
+    self:BindFX("spawnobj",0.1,"e18")
+    --self:BindFX("spawnobj",0.1,"e19")
+    self:BindFX("spawnobj",0.1,"e20")
+    
+    local x,y,z = ENTITY.GetPosition(self._Entity)
+    SOUND.Play3D("specials/respawns/respawn_objects",x,y,z,6,15)    
+end
+--============================================================================
+function FX_ItemRespawn:OnFinishAnim(name)
+    local x,y,z = ENTITY.GetPosition(self._Entity)
+    AddPFX("spawn_smoke",1,Vector:New(x,y,z))
+    GObjects:ToKill(self)    
+end
+--============================================================================

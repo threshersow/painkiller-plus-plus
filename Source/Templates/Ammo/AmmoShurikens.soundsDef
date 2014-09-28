@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/DriverElectro",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"pickup_ammo_drivershuricane"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

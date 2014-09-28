@@ -1,0 +1,51 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path = "weapons/assault-rifle",
+    dist1   = 15,
+    dist2   = 50,
+    disablePitch = true,
+    rifle_shot = 
+    {
+        samples = {"weapon_rifle_shoot1-1","weapon_rifle_shoot1-2","weapon_rifle_shoot1-3"},
+    },
+    rifle_shell = 
+    {
+        samples = {"weapon_rifle_shell1","weapon_rifle_shell2","weapon_rifle_shell3","weapon_rifle_shell4"},
+    },
+    rifle_reload = 
+    {
+        samples = {"weapon_rifle_reload"},
+    },
+    flame_start = 
+    {
+        samples = {"flametrower-start"},
+    },
+    flame_startburning = 
+    {
+        samples = {"flametrower_blowfire-start"},
+    },
+    flame_stop = 
+    { 
+        samples = {"flametrower-stop"},
+    },
+    flame_loop = 
+    {
+        samples = {"flametrower-loop"},
+    },
+    out_of_ammo = 
+    {
+        samples = {"weapon_rifle_empty"},
+    },
+    bullet_hit_wall = 
+    {
+        path = "impacts",
+        samples = {"bullet-stone","bullet-stone2","bullet-stone3","bullet-stone4",
+                    "ricochet1","ricochet2","ricochet3","ricochet4"},
+    },
+     bullet_hit_water = 
+    {
+        path = "impacts",
+        samples = {"bullet-water1","bullet-water2","bullet-water3","bullet-water4",
+                    "bullet-water5"},
+    }
+}

@@ -1,0 +1,21 @@
+o.Mesh = "polySurfaceShape58412"
+o.Pack = "smietnik_caly.dat"
+o.DestroyPack = "smietnik_zlom.dat"
+o.Friction = 1.1
+o.Mass = 300
+o.Health = 10
+o.Scale = 1.3
+o.TestDeathZone = true
+
+o.Destroy.Strength = 100
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.4
+o.Destroy.LifetimeAfterExplosion = 5
+o.Destroy.ThrowItem = {"gazeta_kawalek1.CItem","gazeta_kawalek2.CItem","gazeta_kawalek3.CItem","gazeta_kawalek4.CItem"}
+o.Destroy.ThrowItemCount = 20
+
+o.Destroy.Treasures = 
+{
+    Coins  = {7, 's'},
+}

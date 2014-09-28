@@ -1,0 +1,9 @@
+Clown.Volume = 80
+Clown.Interval = 5
+Clown.RandomShift = 2
+Clown.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+Clown.Sound ="C6L2_LoonyPark/clown_trumpet_01;C6L2_LoonyPark/clown_trumpet_02;C6L2_LoonyPark/clown_trumpet_03"

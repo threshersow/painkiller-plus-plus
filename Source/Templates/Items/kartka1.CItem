@@ -1,0 +1,12 @@
+o.TimeToLive = 12 * 30
+o.Mesh = "polySurfaceShape17014"
+o.Pack = "kartka1.dat"
+o.Scale = 0.5
+o.Mass = 5
+o.forceOut = 100			-- sila explozji na boki
+o.forceUp =	320			-- sila explozji do gory
+o.rotate = {10,32,10}
+o.angularDamping = 0.4
+o.linearDamping = 5
+o.Friction = 0.5
+o.DetailMap.DefaultDetailTex = false

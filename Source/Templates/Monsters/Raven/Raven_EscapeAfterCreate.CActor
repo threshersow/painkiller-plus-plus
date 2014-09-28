@@ -1,0 +1,6 @@
+-- kruki, ktore sie tworza po smieci postaci (maja okreslony czas zycia)
+
+o.BaseObj = "Raven.CActor"
+o.AiParams.escapeAfterCreate = true		-- for "madonna" style FX
+o.TimeToLive = 30 * 30				-- czas zycia
+

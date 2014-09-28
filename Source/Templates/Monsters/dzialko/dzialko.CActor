@@ -1,0 +1,82 @@
+dzialko.Model = "dzialko"
+dzialko.Scale = 1.0
+dzialko.Health = 80
+dzialko.CreatePO = true
+dzialko.WalkSpeed = 1.0
+dzialko.RunSpeed = 1.0
+dzialko.RotateSpeed = 15
+dzialko.throwHeart = false
+--dzialko.NotCountable = true
+dzialko.DontTestRootLink = true
+
+o.notBleeding = true        -- TODO
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    Mass     = 200,
+}
+
+o.DeathTimer = 120
+
+dzialko.s_SubClass = {
+    rotateHead = 3.1415 * 0.3,
+    rotateHeadBone = "joint2",
+    rotateHeadMaxSpeed = 0.1,
+    rotateHeadLeft = Vector:New(-1, 0, -1),
+    rotateHeadRight = Vector:New(-1, 0, -1),
+    rotateHeadCoords = Vector:New(3, 1, 2),			-- rotations by coord: 2 == x, 3 == y, 1 == do not use
+
+    Animations = {  
+		idle        = {1.0, false},
+		atak        = {1.0, false, {
+						{0.1,'WeaponFire'},
+						{0.1,'PlaySound',"shot"},
+						{0.3,'WeaponFire'},
+						{0.3,'PlaySound',"shot"},
+						{0.5,'WeaponFire'},
+						{0.5,'PlaySound',"shot"},
+						{0.7,'WeaponFire'},
+						{0.7,'PlaySound',"shot"},
+						{0.9,'WeaponFire'},
+						{0.9,'PlaySound',"shot"},
+						{1.1,'WeaponFire'},
+						{1.1,'PlaySound',"shot"},
+						{1.3,'WeaponFire'},
+						{1.3,'PlaySound',"shot"},
+						{1.5,'WeaponFire'},
+						{1.5,'PlaySound',"shot"},
+					}},
+    },
+    DeathJoints = {"joint3"},
+    BreakableJoints = {
+	}
+
+}
+
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"fire"}
+o.s_SubClass.Sounds = {
+		start = 'gg-rotate-start',
+		stop = 'gg-rotate-stop',
+		loop = 'gg-rotate-loop',
+	}
+o.AiParams.updateSpeed = 0.1
+
+o.AiParams.weapon = {
+		name = "dzialko",
+		bulletsPerShot = 1,
+		maxDist = 40,
+		minDist = 0.0,
+		spreadAngle = 0.8,
+		damagePerBullet = 10,
+		PO_HitForce = 300,
+		fireParticle = "shot",	
+		fireParticleSize = 0.3,
+	}
+
+o.AiParams.weaponBindPos = "joint2"
+o.AiParams.weaponBindPosShift = Vector:New(0,0,-0.5)
+o.AiParams.viewDistance = 40		-- najlepiej taki sam jak maxDist broni
+o.AiParams.viewDistance360 = 0
+o.AiParams.viewAngle = 360 * 0.3	-- najlepiej taki sam jak rotateHead

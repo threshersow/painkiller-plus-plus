@@ -1,0 +1,10 @@
+ogien_trzask.Volume = 70
+ogien_trzask.Interval = 0 
+ogien_trzask.RandomShift = 0
+ogien_trzask.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+ogien_trzask.Sound ="C2L5_Town/ogien_trzask"
+

@@ -1,0 +1,70 @@
+PainKiller.Model      = "PKW"
+PainKiller.Scale      = 0.5
+PainKiller.Pos        = Vector:New(0.2, -0.2 ,-0.2)
+PainKiller.Ang        = Vector:New(0  , -3.1,  0)
+PainKiller.FireTime   = 0
+PainKiller.s_SubClass = {
+    
+    -- GLOWICA
+    PainHeadRange        = 60, -- max. zasieg
+    PainHeadSpeed        = 30,
+    PainHeadBackSpeed    = 60,
+    PainHeadDamage       = 99,   
+    PainHeadSpinningSpeed  = 10,
+    PainHeadSpinningDamage = 150, -- combo with knife
+    PainHeadBackImpulse  = -1200, -- impuls przyciagania przedmiotow
+    PainHeadMonstersBackVelocity  = -10, -- predkosc przyciagania monsterow
+    -- KOSIARA
+    PainKnifeDamage   = 10,    -- obrazenia zadawane sa 30 * na sec    
+    PainKnifeImpulse  = 700,  -- sila odpychania od smigla
+    PainKnifeRange    = 1.8,  -- odleglosc od gracza w jakiej zadaje obrazenia
+    -- PROMIEN
+    PainRayDamage     = 10,    -- obrazenia przy wejsciu w promien (zadawane 30*sec)
+    PainRayTolerance  = 2.5,    -- tolerancja dla polaczenia
+    
+    Animations = 
+    {   
+        idle        = {1.0},
+        walk        = {1.0},
+        cofniecie   = {1.0},
+        obrot       = {1.0,0},
+        pchniecie   = {3.0},
+        rozkrecenie = {2.0},
+        zwolnienie  = {1.0},
+        shot        = {0.3,0},
+        back        = {1,0},
+    }    
+}
+
+PainKiller.s_MPSubClass = {
+    
+    -- GLOWICA
+    PainHeadRange        = 60, -- max. zasieg
+    PainHeadSpeed        = 30,
+    PainHeadBackSpeed    = 60,
+    PainHeadDamage       = 50,   
+    PainHeadSpinningSpeed  = 15,
+    PainHeadSpinningDamage = 300, -- combo with knife
+    PainHeadBackImpulse  = -1200, -- impuls przyciagania przedmiotow
+    PainHeadMonstersBackVelocity  = -10, -- predkosc przyciagania monsterow
+    -- KOSIARA
+    PainKnifeDamage   = 5,    -- obrazenia zadawane sa 30 * na sec    
+    PainKnifeImpulse  = 700,  -- sila odpychania od smigla
+    PainKnifeRange    = 1.8,  -- odleglosc od gracza w jakiej zadaje obrazenia
+    -- PROMIEN
+    PainRayDamage     = 20,    -- obrazenia przy wejsciu w promien (zadawane 30*sec)
+    PainRayTolerance  = 2,    -- tolerancja dla polaczenia
+    
+    Animations = 
+    {   
+        idle        = {1.0},
+        walk        = {1.0},
+        cofniecie   = {1.0},
+        obrot       = {1.0,0},
+        pchniecie   = {3.0},
+        rozkrecenie = {1.0},
+        zwolnienie  = {1.0},
+        shot        = {0.3,0},
+        back        = {1,0},
+    }    
+}

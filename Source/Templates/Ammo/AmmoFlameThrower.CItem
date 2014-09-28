@@ -1,0 +1,42 @@
+o.Mesh = "polySurfaceShape58552"
+o.Pack = "ammo_flamer.dat"
+o.Scale = 0.6
+o.DisabledInVoosh = true
+o.RespawnTime = 15
+o.AmmoAdd = 12
+o.s_SubClass ={}
+o.takeDistance = 1.8
+--============================================================================
+function o:OnInitTemplate()
+    self.CubeMap = nil
+    self.DetailMap = nil
+    self.NormalMap = nil
+    self.Destroy = nil
+    self.Impulse = nil
+    self:ReplaceFunction("_Synchronize","Synchronize")
+    self:ReplaceFunction("Synchronize","nil")
+end
+--============================================================================
+function AmmoFlameThrower:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity)
+end
+--============================================================================
+function AmmoFlameThrower:OnTake(player)
+    if player.Ammo.FlameThrower >= CPlayer.s_SubClass.MaxAmmo.FlameThrower then return true end
+    self.TakeFX(player._Entity, self.AmmoAdd)
+	Game.PlayerAmmoFound =  Game.PlayerAmmoFound + 1
+end
+--============================================================================
+function AmmoFlameThrower:TakeFX(pe,add)
+    local player = EntityToObject[pe]
+    
+    if player then
+        player.Ammo.FlameThrower = player.Ammo.FlameThrower + add * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player:CheckMaxAmmo()
+        if player == Player then player:PickupFX() end
+    end
+
+    Templates["AmmoFlameThrower.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("AmmoFlameThrower.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eu")
+--============================================================================

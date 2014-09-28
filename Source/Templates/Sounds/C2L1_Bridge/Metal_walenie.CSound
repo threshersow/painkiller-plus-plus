@@ -1,0 +1,10 @@
+Metal_walenie.Volume = 70
+Metal_walenie.Interval = 17
+Metal_walenie.RandomShift = 8
+Metal_walenie.Falloff =
+{
+  Start = 50,
+  End = 200
+}
+Metal_walenie.Sound ="C2L1_Bridge/Metal_walenie_01;C2L1_Bridge/Metal_walenie_02"
+

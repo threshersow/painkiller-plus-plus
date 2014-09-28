@@ -1,0 +1,160 @@
+AiStates.spiderJump = {
+	name = "spiderJump",
+    _lastTimeJump = 0,
+    lastTimeDamage = -100,
+}
+
+function AiStates.spiderJump:OnInit(brain)
+	local actor = brain._Objactor
+	self.active = true
+	self.state = 0
+
+	if debugMarek then Game:Print(actor._Name.." jump") end
+	self.lastTimeDamage = -100
+	if brain.r_closestEnemy then
+		actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+	end
+	self._oldDontCheckFloors = actor._DontCheckFloors
+end
+
+function AiStates.spiderJump:OnUpdate(brain)
+    local actor = brain._Objactor
+    local aiParams = actor.AiParams
+    if self.state == 0 then
+		if not actor._isRotating then
+			actor:Stop()
+			if aiParams.prepareJumpAnim then
+				actor:SetAnim(aiParams.prepareJumpAnim, false)
+			end
+			self.state = 1
+		end
+    end
+    if self.state == 1 then
+		if not actor._isAnimating or not aiParams.prepareJumpAnim then
+			if brain.r_closestEnemy then
+				self.state = 2
+				
+				local distToE = Dist3D(actor._groundx,actor._groundy,actor._groundz, brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+				if distToE > aiParams.attackRange then
+					actor:SetAnim(aiParams.jumpAnim, false)
+					actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+					actor._DontCheckFloors = true
+					ENTITY.PO_SetFlying(actor._Entity, true)
+					local force = aiParams.jumpVel
+					actor._vdest = Vector:New(brain.r_closestEnemy._groundx - actor._groundx, 0, brain.r_closestEnemy._groundz - actor._groundz)
+					actor._vdest:Normalize()
+					
+					actor._vdest.X = actor._vdest.X * force
+					actor._vdest.Y = aiParams.jumpVelY
+					actor._vdest.Z = actor._vdest.Z * force
+                        if debugMarek then Game:Print("jump="..actor._vdest.X.." "..actor._vdest.Y.." "..actor._vdest.Z) end
+
+				else
+					self.active = false
+				end
+			else
+				self.active = false
+			end
+		else
+			if actor.Animation ~= aiParams.prepareJumpAnim then
+				if debugMarek then Game:Print("prepare jump canceled "..actor.Animation) end
+				self.active = false
+			else
+				if brain.r_closestEnemy then
+					local distToE = Dist3D(actor._groundx,actor._groundy,actor._groundz, brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+					if distToE <= aiParams.attackRange then
+						if debugMarek then Game:Print("prepare jump canceled dtoe: "..distToE) end
+						self.active = false
+					end
+				end
+			end
+		end
+    end
+    if self.state == 2 then
+		if actor.Animation == aiParams.jumpAnim and brain.r_closestEnemy then
+			if self.lastTimeDamage + 1.0 < brain._currentTime then
+				local dist = Dist3D(actor._groundx,actor._groundy,actor._groundz, brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+				if dist < aiParams.jumpDamageRange then
+					self.lastTimeDamage = brain._currentTime
+					brain.r_closestEnemy:OnDamage(actor.CollisionDamage, actor)
+					actor:PlaySound({"tick_spoons-hit","tick_spoons-hit2"})
+					ENTITY.PO_SetFlying(actor._Entity, false)
+					--actor:SetIdle()
+				end
+			end
+		end
+
+		if not actor._isAnimating then
+			ENTITY.PO_SetFlying(actor._Entity, false)
+			
+			if aiParams.afterJumpAnim then
+				if debugMarek then Game:Print(actor._Name.." afterJumpAnim") end
+				 --actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+                 brain._enemyLastSeenShootTarget = Vector:New(0,brain._enemyLastSeenPoint.Y + 1.8,0)
+				self._animName = aiParams.afterJumpAnim[math.random(1,table.getn(aiParams.afterJumpAnim))]
+				actor:SetAnim(self._animName, false)
+				self.state = 3
+			else
+				self.active = false
+				if debugMarek then Game:Print("jump_atak fin ok") end
+			end
+
+			if debugMarek then Game:Print("jump_atak fin ok") end
+		else
+			if actor.Animation ~= aiParams.jumpAnim then
+				if debugMarek then Game:Print("!!!!! anim ~= jump_atak" ..actor.Animation) end
+				ENTITY.PO_SetFlying(actor._Entity, false)
+       			if aiParams.afterJumpAnim then
+                    if debugMarek then Game:Print(actor._Name.." afterJumpAnim") end
+                     --actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+                     brain._enemyLastSeenShootTarget = Vector:New(0,brain._enemyLastSeenPoint.Y + 1.8,0)
+                    self._animName = aiParams.afterJumpAnim[math.random(1,table.getn(aiParams.afterJumpAnim))]
+                    actor:SetAnim(self._animName, false)
+                    self.state = 3
+                else
+                    self.active = false
+                    if debugMarek then Game:Print("jump_atak fin ok") end
+                end
+
+			else
+				if math.random(100) < 15 and brain.r_closestEnemy and not aiParams.doNotRotateWhileJumping then
+					actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+				end
+			end
+		end
+	end
+
+    if self.state == 3 then
+		if not actor._isAnimating or actor.Animation ~= self._animName then
+			if debugMarek then Game:Print(actor._Name.."koniec afterJump" ..actor.Animation) end
+			self.active = false
+		end
+	end
+
+	self._lastTimeJump = brain._currentTime
+end
+
+function AiStates.spiderJump:OnRelease(brain)
+	local actor = brain._Objactor
+	actor._doNotLoopWalkAnim = nil
+	self.active = false
+	actor._DontCheckFloors = self._oldDontCheckFloors
+	ENTITY.PO_SetFlying(actor._Entity, false)
+end
+
+function AiStates.spiderJump:Evaluate(brain)
+	if self.active then
+		return 0.55
+	end
+	if brain.r_closestEnemy then
+		local actor = brain._Objactor
+		local aiParams = actor.AiParams
+
+		if self._lastTimeJump + aiParams.minDelayBetweenJumps < brain._currentTime and not brain.escape then
+			if brain._distToNearestEnemy > aiParams.jumpRangeMin and brain._distToNearestEnemy < aiParams.jumpRangeMax --[[and math.random(100) < (24 - brain._distToNearestEnemy)*0.5--]] then
+				return 0.55
+			end
+		end
+	end
+	return 0.0
+end

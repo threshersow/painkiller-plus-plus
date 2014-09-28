@@ -1,0 +1,9 @@
+niemowle.Volume = 60
+niemowle.Interval = 15
+niemowle.RandomShift = 5
+niemowle.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+niemowle.Sound ="C6L1_Orphanage/niemowle_01;C6L1_Orphanage/niemowle_02;C6L1_Orphanage/niemowle_03"

@@ -1,0 +1,10 @@
+crash.Volume = 50
+crash.Interval = 16
+crash.RandomShift = 4
+crash.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+crash.Sound ="C6L3_Lab/crash_01;C6L3_Lab/crash_02;C6L3_Lab/crash_03"
+

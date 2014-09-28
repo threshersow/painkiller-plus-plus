@@ -1,0 +1,27 @@
+o.Mesh = "polySurfaceShape57850"
+o.Pack = "kielich2.dat"
+
+o.Scale = 0.4
+--o.TimeToLive = 20 * 30
+
+o.Value = 100
+o.takeDistance = 1.0
+
+o.isHolyItem = true
+
+o.s_SubClass.bindFX = {
+        {"flarka_kielich", 0.4, nil, {0.2, 0.5, 0}, {0.4, 0.4, 0.4}},
+        {"FLARA_HOSTIE", 3, nil, {0, 0, 0}, {0.9, 0.9, 0.9}},
+}
+
+--============================================================================
+function Cup2:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh, nil, ECollisionGroups.InsideItems)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity) 
+end
+--============================================================================
+function Cup2:OnTake(player)	
+    self.Client_OnTake(player.ClientID,player._Entity,self._Entity,"Cup2")
+end
+--============================================================================

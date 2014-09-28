@@ -1,0 +1,10 @@
+Ciezarowka_01.Volume = 50
+Ciezarowka_01.Interval = 0
+Ciezarowka_01.RandomShift = 0
+Ciezarowka_01.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+Ciezarowka_01.Sound ="C5L2_Docks/ciezarowka_01"
+

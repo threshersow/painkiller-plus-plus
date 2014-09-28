@@ -1,0 +1,10 @@
+Deszcz_parapet.Volume = 80
+Deszcz_parapet.Interval = 0
+Deszcz_parapet.RandomShift = 0
+Deszcz_parapet.Falloff =
+{
+  Start = 2,
+  End = 10
+}
+Deszcz_parapet.Sound ="C2L4_Asylum/deszcz_parapet"
+

@@ -1,0 +1,98 @@
+o.s_SubClass.SoundsDefinitions = {
+	idlez = {
+		samples = {'psycho_idle_zwiazany1_1','psycho_idle_zwiazany1_2','psycho_idle_zwiazany1_3'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	explode = {
+		samples = {'psycho_prepare_to_explode-voice1','psycho_prepare_to_explode-voice2','psycho_prepare_to_explode-voice3'},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},
+	at1 = {
+		samples = {'psycho_attack1','psycho_attack2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	swish = {
+		samples = {'psycho_swish'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	at3 = {
+		samples = {'psycho_attack3','psycho_attack4'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	swish2 = {
+		samples = {'psycho_swish2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step1 = {
+		samples = {'psycho_krok1'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'psycho_krok2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step1zw = {
+		samples = {'psycho_elektro-krok1'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2zw = {
+		samples = {'psycho_elektro-krok2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	onAttackOnce = {
+		samples = {"psycho_halt1", "psycho_halt2", "psycho_halt3",},
+		dist1 = 30,
+		dist2 = 70,
+		playChance = 0.33,
+	},
+	bodyfalls = {
+		samples = {"psycho_bodyfalls"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	rozw = {
+		samples = {"psycho_rozwiazanie"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	expl = {
+		samples = {"psycho_explode", "psycho_explode2"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	death = {
+		samples = {"psycho_death1","psycho_death2", "psycho_death3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    damage = {
+		samples = {"psycho_hand-hit"},
+    },
+
+
+    hurt = {
+		samples = {"psycho_hit1","psycho_hit2","psycho_hit3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    ambients = {
+		samples = {"psycho_idle_zwiazany1", "psycho_idle_zwiazany2","psycho_idle_zwiazany3","psycho_idle_zwiazany4"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+}

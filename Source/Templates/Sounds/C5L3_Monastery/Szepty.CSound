@@ -1,0 +1,10 @@
+Szepty.Volume = 100
+Szepty.Interval = 20
+Szepty.RandomShift = 4
+Szepty.Falloff =
+{
+  Start = 2,
+  End = 10
+}
+Szepty.Sound ="C5L3_Monastery/Szepty_01;C5L3_Monastery/Szepty_02"
+

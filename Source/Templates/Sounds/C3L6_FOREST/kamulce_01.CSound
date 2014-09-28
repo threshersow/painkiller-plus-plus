@@ -1,0 +1,6 @@
+o.BaseObj = "CSound"
+o.Falloff.End = 50
+o.Interval = 4
+o.RandomShift = 2
+o.Sound = "c4l1_oriental_castle\\kamyk_01;c4l1_oriental_castle\\kamyk_02;c4l1_oriental_castle\\kamyk_03;c4l1_oriental_castle\\kamyki_04"
+o.Pos = Vector:New(70.05156,2.692627,-78.79907)

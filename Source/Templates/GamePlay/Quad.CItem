@@ -1,0 +1,216 @@
+o.Model = "quad"
+o.PowerUp = true
+o.Scale = 1.5
+o.LightB = false
+o.DisabledInVoosh = false
+o.LightBearerOnly = false
+o.RespawnTime = 120
+o.WorkTime = 30
+o.s_SubClass = {
+    Animations = {
+        idle = {1.5}
+    }
+}
+
+o.quadFX = {"quadhead",0.2,"k_head"}
+
+--============================================================================
+function Quad:OnPrecache()
+	Cache:PrecacheParticleFX("quadhead")
+end
+--============================================================================
+function Quad:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,true)
+    ENTITY.SetSynchroString(self._Entity,"Quad.CItem")
+    self:Client_OnCreateEntity(self._Entity)
+end
+--============================================================================
+function Quad:Client_OnCreateEntity(entity)
+	BindFX(entity,"quad1",0.1,"e1")
+    -- jezeli jest wziety to musze schowac particle
+    if not ENTITY.IsDrawEnabled(entity) then
+        ENTITY.EnableDraw(entity,false,true)
+    end
+end
+--============================================================================
+function Quad:UnbindItem()
+    if self._blockedBy then
+        local owner = self._blockedBy
+        self._blockedBy = nil
+        
+        Log("Quad:OnOwnerDeath 1\n")
+        
+        self.OnFinishFX(owner._Entity) 
+        
+        Log("Quad:OnOwnerDeath 2\n")
+                        
+        if MPCfg.GameState ~= GameStates.Finished then
+            Log("Quad:OnOwnerDeath 2.1\n")
+            if MPCfg.GameMode == "The Light Bearer" or Cfg.PowerupDrop then
+                
+                Log("Quad:OnOwnerDeath 2.2\n")
+                if owner._died then
+                    Log("Quad:OnOwnerDeath 2.3\n")
+                    local x,y,z = ENTITY.GetPosition(owner._Entity)
+                    self._Rst = -1
+                    local rp = Clone(self._RespawnPos)
+                    self._RespawnPos:Set(x,y+1,z)
+                    self:TryToRespawn()
+                    self._RespawnPos = rp
+                    Log("Quad:OnOwnerDeath 2.4\n")
+                end
+                
+                if MPCfg.GameMode == "The Light Bearer" then                
+                    self._ReturnTime = 15
+                else
+                    self._ReturnTime = self._WorkCounter
+                end
+            end
+        end
+        
+        self._WorkCounter   = nil        
+        
+        Log("Quad:OnOwnerDeath 3\n")
+        if Game.GMode == GModes.SingleGame then
+            GObjects:ToKill(self)
+        end
+        Log("Quad:OnOwnerDeath 4\n")
+    end
+end
+--============================================================================
+function Quad:Tick(delta)    
+    if self._WorkCounter then
+        --Game:Print("WorkCounter: "..self._WorkCounter)
+        self._WorkCounter = self._WorkCounter - delta
+        if self._WorkCounter <=0 then 
+            self:UnbindItem()
+        end
+    end    
+    if self._ReturnTime then    
+        --Game:Print("ReturnTime: "..self._ReturnTime)
+        self._ReturnTime = self._ReturnTime - delta
+        if self._ReturnTime <= 0 then
+            self.Pos = Clone(self._RespawnPos)
+            ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+            self._ReturnTime = nil            
+            if MPCfg.GameMode == "The Light Bearer" then
+                self.OnReturnFX()
+            elseif Cfg.PowerupDrop then
+                -- wraca na miejsce ale niewidoczny czeka na respawn
+                CItem.Show(self._Entity,0)
+                self.Place = 1             
+                self._Rst = self.RespawnTime * 30 
+                if Cfg.ItemRespawnFix then self._Rst = INP.GetTime() + self.RespawnTime end
+            end
+        end
+    end
+end
+--============================================================================
+function Quad:OnTake(player)
+    if player.HasQuad then return true end
+    self.TakeFX(player._Entity,1)
+    self._blockedBy = player
+    if MPCfg.GameMode ~= "The Light Bearer" then
+        self._WorkCounter = self.WorkTime
+        if self._ReturnTime then 
+            self._WorkCounter = self._ReturnTime 
+        end
+    end
+    self._ReturnTime = nil
+end
+--============================================================================
+function Quad:TakeFX(pe,sound)
+    local player = EntityToObject[pe]    
+    local t = Templates["Quad.CItem"]
+    local bindlight = true
+    if player then
+        if player == Player then                             
+            bindlight = false
+            local obj = GObjects:Add(TempObjName(),CloneTemplate("DemonFX.CProcess"))
+            obj.EffectTime = 9999 -- t.WorkTime (sam wylacze efekt - aby sie dobrze zsynchronizowal)
+            obj._DrawWeapon = true
+            obj.FOVMin = Cfg.FOV-5
+            obj.FOVMax = Cfg.FOV+5
+            player._procDemonFX = obj
+            player:PickupFX() 
+            PlaySound2D("items/item-quad-take",100,true,true)
+         end
+        player.HasQuad = true
+    end
+    if sound == 1 and (not player or player ~= Player) then
+        local x,y,z = ENTITY.GetPosition(pe)    
+        PlaySound3D("items/item-quad-take-mono",x,y,z,25,60,true)
+    end
+    BindSoundToEntity(pe,"items/item-quad-loop-mono",15,30,true,-1,nil,nil,nil,nil,0)
+    if bindlight then
+	local obj = AddPFX(Templates["Quad.CItem"].quadFX[1],Templates["Quad.CItem"].quadFX[2])
+        ENTITY.RegisterChild(pe,obj)
+        PARTICLE.SetParentOffset(obj,0,0,0,Templates["Quad.CItem"].quadFX[3]) 
+        --local obj = CloneTemplate("Quad_Light.CLight")
+        --obj.Pos:Set(0,2,0)
+        --obj:Apply()    
+        --ENTITY.RegisterChild(pe,obj._Entity,true)
+    end
+    
+    
+    if MPCfg.GameMode == "The Light Bearer" then
+        local ps = Game:FindPlayerStatsByEntity(pe)
+        if ps then 
+            local txt = string.gsub(Languages.Texts[702],"$PLAYER",ps.Name)
+            CONSOLE_AddMessage(txt)
+        end
+    end    
+
+end
+Network:RegisterMethod("Quad.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eb")
+--============================================================================
+-- [NET - SERVER & ALL CLIENTS]
+function Quad:OnFinishFX(pe)
+    Log("Quad:OnFinishFX - 1\n")
+    ENTITY.KillAllChildrenByName(pe,"items/item-quad-loop-mono")
+    Log("Quad:OnFinishFX - 2\n")
+    ENTITY.KillAllChildrenByName(pe,Templates["Quad.CItem"].quadFX[1])
+    Log("Quad:OnFinishFX - 3\n")
+    --ENTITY.KillAllChildrenByName(pe,"Quad_Light")
+
+    local x,y,z = ENTITY.GetPosition(pe)    
+    local player = EntityToObject[pe]
+    if Player == player then
+        PlaySound2D("items/item-quad-timeout",100,true,true)
+    else
+        PlaySound3D("items/item-quad-timeout-mono",x,y,z,15,50,true)
+    end
+    Log("Quad:OnFinishFX - 4\n")
+    if player then
+        player.HasQuad = false    
+        if player._procDemonFX then 
+            player._procDemonFX.TickCount = 9999 - player._procDemonFX.FadeInTime - player._procDemonFX.FadeOutTime
+            player._procDemonFX = nil
+        end
+    end
+    Log("Quad:OnFinishFX - 5\n")
+    
+    if MPCfg.GameState ~= GameStates.Finished then
+        if MPCfg.GameMode == "The Light Bearer" then
+            local ps = Game:FindPlayerStatsByEntity(pe)
+            if ps then 
+                local txt = string.gsub(Languages.Texts[703],"$PLAYER",ps.Name)
+                CONSOLE_AddMessage(txt)
+            end
+        end
+    end
+    Log("Quad:OnFinishFX - 6\n")
+end
+Network:RegisterMethod("Quad.OnFinishFX", NCallOn.ServerAndAllClients, NMode.Reliable, "e") 
+--============================================================================
+-- [NET - SERVER & ALL CLIENTS]
+function Quad:OnReturnFX()
+    CONSOLE_AddMessage(Languages.Texts[704])
+end            
+Network:RegisterMethod("Quad.OnReturnFX", NCallOn.ServerAndAllClients, NMode.Reliable, "") 
+--============================================================================
+function Quad:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+--============================================================================

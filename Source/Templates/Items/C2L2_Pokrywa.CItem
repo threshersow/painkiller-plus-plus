@@ -1,0 +1,9 @@
+o.BaseObj = "CItem"
+o.Mesh = "wieko5_phys_pinned_autodelete_2sided_actgrp27_Shape"
+o.Pack = "C2L2_Pokrywa.dat" 
+o.Scale = 3
+o.Health = 60
+o.Pinned = true
+--o.Mass = 200
+
+o.Destroy.MinSpeedOnCollision = 14

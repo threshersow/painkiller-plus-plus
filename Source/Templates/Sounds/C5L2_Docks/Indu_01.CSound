@@ -1,0 +1,10 @@
+Indu_01.Volume = 80
+Indu_01.Interval = 5
+Indu_01.RandomShift = 3
+Indu_01.Falloff =
+{
+  Start = 3,
+  End = 50
+}
+Indu_01.Sound ="C5L2_Docks/indu_01;C5L2_Docks/indu_03"
+

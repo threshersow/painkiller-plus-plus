@@ -1,0 +1,10 @@
+Peron_04.Volume = 40
+Peron_04.Interval = 0
+Peron_04.RandomShift = 0
+Peron_04.Falloff =
+{
+  Start = 10,
+  End = 80
+}
+Peron_04.Sound ="C3L1_Train_Station/Peron_04"
+

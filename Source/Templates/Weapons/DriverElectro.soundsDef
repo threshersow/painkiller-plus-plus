@@ -1,0 +1,60 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path = "weapons/DriverElectro",
+    dist1   = 15,
+    dist2   = 50,
+    disablePitch = true,
+    shuriken_shot = 
+    {
+        samples = {"driver-shoot"},
+    },
+    shuriken_explosion = 
+    {
+        samples = {"shuricane-explosion"},
+        dist1   = 15,
+        dist2   = 50,
+    },
+    electrodisk_explosion = 
+    {
+        path = "weapons/grenadelauncher",
+        samples = {"weapon_grenade_explosion"},
+        dist1   = 15,
+        dist2   = 50,
+    },
+    electrodisk_shot = 
+    {
+        samples = {"electrodisk-shoot"},
+    },
+    electro_start = 
+    {
+        samples = {"electro-shoot-start"},
+    },
+    electro_stop = 
+    { 
+        samples = {"electro-shoot-stop"},
+    },
+    electro_loop = 
+    {
+        samples = {"electro-shoot-loop"},
+    },
+    electro_lock = 
+    {
+        samples = {"electro-lock-loop"},
+    },
+    electro_monsters_fry =
+    {
+        samples = {"electro-fry-loop"},
+    },
+    electro_geometry_fry =
+    {
+        samples = {"electro-geofry-loop"},
+    },
+    electro_spark = 
+    {
+        samples = {"electro-shoot-spark1","electro-shoot-spark2","electro-shoot-spark3"},
+    },
+    out_of_ammo = 
+    {
+        samples = {"driver-empty"},
+    },
+}

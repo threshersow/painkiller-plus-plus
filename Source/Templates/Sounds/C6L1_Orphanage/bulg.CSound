@@ -1,0 +1,9 @@
+bulg.Volume = 80
+bulg.Interval = 3
+bulg.RandomShift = 1
+bulg.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+bulg.Sound ="C6L1_Orphanage/bulg_01;C6L1_Orphanage/bulg_02;C6L1_Orphanage/bulg_03;C6L1_Orphanage/bulg_04;C6L1_Orphanage/bulg_05"

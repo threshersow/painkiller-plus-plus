@@ -1,0 +1,10 @@
+Sowa.Volume = 80
+Sowa.Interval = 10
+Sowa.RandomShift = 4
+Sowa.Falloff =
+{
+  Start = 3,
+  End = 13
+}
+Sowa.Sound ="C4L2_Babel/Sowa_01;C4L2_Babel/sowa_02"
+

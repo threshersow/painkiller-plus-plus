@@ -1,0 +1,54 @@
+o.BaseObj = "Krusty.CActor"
+o.s_SubClass.Ambients = {"idle_fly"}
+o.s_SubClass.Animations.idle = nil
+
+o.s_Physics = {
+    BodyType = BodyTypes.Sphere,
+    Mass     = 100,
+}
+
+
+o.RotateSpeed = 2
+o.FlySpeed = 6.5
+o.s_SubClass.flyWalk = "fly"
+
+o.Animation = "idle_fly"
+
+o.AiParams.aiGoals = {"KrustyFlyingIdle"}
+
+
+o.AiParams.flyUp = 0.5
+o.AiParams.flyDown = 0.65
+
+o.AiParams.guardRange = 40				-- wyszukuje punkty do ladowania w tym obszarze i generalnie stara sie latac tym w okregu 
+o.AiParams.walkArea = "Raven00"			-- punkty do ladowania
+ o.AiParams.flyFactor = 0.0				-- im wiekszy, tym mniej chectnie bedzie ladowal
+--o.AiParams.minDistToPoint = 15			-- min. dyst. do punktu branego pod uwage przy ladowaniu
+o.AiParams.traceSpeed1 = 4				-- co ile 1/30 ma traceowac, gdy lata, przeszkody i miejsca do ladowania
+o.AiParams.traceSpeed2 = 1				-- co ile 1/30 ma traceowac, czy stoi na ziemi
+ o.AiParams.ambientAnimationFreq = 0.012	-- szansa, gdy stoi, na odpalenie animacji 
+--o.AiParams.distWhenAlwaysEscape = 3.0	-- odleglosc od gracza, przy ktorej zawsze od niego ucieka
+--o.AiParams.distIgnoreSteps = 15			-- nie ucieka po uslyszeniu krokow z odleglosci wiekszej niz ta (tylko sie obraca w tamta strone)
+o.AiParams.guardRange = -1
+o.AiParams.guardRangeCalcFloor = false	-- true, to gdy zostanie przekroczony zakres guard, to nowy liczy trace-ujac w dol, przydatne, gdy np. w miedzyczasie cos sie zapadnie nizej
+
+o.AiParams.ThrowableItem = "KrustyFireball.CItem"
+o.AiParams.throwItemBindTo = "szczeka"
+o.AiParams.throwItemBindToOffset = Vector:New(0.0, 0.0, 0.0)
+o.AiParams.throwDeltaY = 1.7
+o.AiParams.throwVelocity = 40
+o.AiParams.homingMissile = true
+o.AiParams.homingMissileAngleChangeSpeed = 10
+o.AiParams.throwRangeMin = 4
+o.AiParams.throwRangeMax = 30
+
+o.AiParams.throwMaxAnglePitchDiff = 60
+o.AiParams.throwMaxAngleYawDiff = 60
+o.AiParams.minDelayBetweenThrow = 1.5
+
+o.AiParams.alwaysSee = true
+o.smoothFly = 2.8
+
+o.TimeToLive = nil
+
+o.s_SubClass.Hits = nil

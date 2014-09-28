@@ -1,0 +1,10 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "items/",
+
+	SoundTake = {
+		samples = {"item-treasures"},
+		dist1 = 5,
+		dist2 = 8,
+		disablePitch = true,
+	},
+}

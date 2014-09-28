@@ -1,0 +1,10 @@
+Wiatr_01.Volume = 50
+Wiatr_01.Interval = 0
+Wiatr_01.RandomShift = 0
+Wiatr_01.Falloff =
+{
+  Start = 10,
+  End = 30
+}
+Wiatr_01.Sound ="C4L2_Babel/Wiatr_01"
+

@@ -1,0 +1,84 @@
+o.s_SubClass.SoundsDefinitions = {
+	atak2 = {
+		samples = {'hellbv3-attack2_1','hellbv3-attack2_2','hellbv3-attack2_3'},
+		dist1 = 20,
+		dist2 = 40,
+		joint = nil,
+		disablePitch = true,
+		playChance = nil,
+		-- TODO:
+		-- bind
+		-- 2d
+		-- is special:
+		-- stop, gdy gra inny
+		-- ignore, gdy gra inny
+	},
+	onAttackOnce = {
+		samples = {'hellbv3-halt3', 'hellbv3-halt4', 'hellbv3-halt1', 'hellbv3-halt2',},
+		playChance = 0.6,
+		dist1 = 20,
+		dist2 = 70,
+	},
+	run = {
+		samples = {'hellb-run1_1','hellb-run2_2','hellb-run1_2','hellb-run2_1'},
+		dist1 = 6,
+		dist2 = 32,
+	},
+	hit = {
+		samples = {'hellbv3-hit1','hellbv3-hit2','hellbv3-hit3','hellbv3-hit4'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	atak1 = {
+		samples = {'hellbv3-attack1_1','hellbv3-attack1_2'},
+		dist1 = 10,
+		dist2 = 40,
+		disablePitch = true,
+	},
+	bodyfalls = {
+		samples = {'hellbv3-boddyfalls1','hellbv3-boddyfalls2'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	stepl = {
+		samples = {'$/actor/hellbiker/hellb-krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	stepr = {
+		samples = {'$/actor/hellbiker/hellb-krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	breakbottle = {
+		samples = {'hellbv3-break_bottle1','hellbv3-break_bottle2'},
+		dist1 = 10,
+		dist2 = 40,
+		disablePitch = true,
+	},
+	drinkstart = {
+		samples = {'hellbv3-drink-start1','hellbv3-drink-start2',},
+		dist1 = 10,
+		dist2 = 40,
+		disablePitch = true,
+	},
+	drinkend = {
+		samples = {'hellbv3-drink-end1','hellbv3-drink-end2','hellbv3-drink-end3',},
+		dist1 = 10,
+		dist2 = 40,
+		disablePitch = true,
+	},
+
+	weaponlost = {
+		samples = {"hellbv3-weapon-lost1","hellbv3-weapon-lost2"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    death = {
+		samples = {"hellbv3-death1","hellbv3-death2","hellbv3-death3"},
+		dist1 = 16,
+		dist2 = 60,
+    },
+}
+

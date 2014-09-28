@@ -1,0 +1,10 @@
+Sala.Volume = 80
+Sala.Interval = 3
+Sala.RandomShift = 1
+Sala.Falloff =
+{
+  Start = 3,
+  End = 40
+}
+Sala.Sound ="C1L1_Cathedrals/mnich_01"
+

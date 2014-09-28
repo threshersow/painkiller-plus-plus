@@ -1,0 +1,22 @@
+o.Mesh = "polySurfaceShape39598"
+o.Pack = "beczka2_cala.dat"
+
+o.DestroyPack = "beczka2_zlom.dat"
+o.Health = 32
+o.Scale = 0.3
+o.TestDeathZone = true
+o.Destroy.ExplosionStrength = 3200
+o.Destroy.ExplosionDamage = 150
+o.Destroy.ExplosionRadius = 6
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 600
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.EffectScale = 0.4
+o.Destroy.LifetimeAfterExplosion = 3
+o.SoundHitByBulletMiniGunOnly = true

@@ -1,0 +1,13 @@
+o.BaseObj = "CItem"
+o.Model = "C1L4_TrupB"
+o.Scale = 1.5
+o.Mass = 80
+o.InertiaTensorMultiplier = 3
+
+
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "k_zebra",
+	minVel = 2.0,
+	minDelayBetweenSounds = 2.0,
+}

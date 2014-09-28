@@ -1,0 +1,9 @@
+karnisz.Volume = 80
+karnisz.Interval = 11
+karnisz.RandomShift = 2
+karnisz.Falloff =
+{
+  Start = 2,
+  End = 20
+}
+karnisz.Sound ="C6L1_Orphanage/karnisz_01;C6L1_Orphanage/karnisz_02;C6L1_Orphanage/karnisz_03"

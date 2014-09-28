@@ -1,0 +1,63 @@
+o.Mesh = "kulkaaShape"
+o.Pack = "kulka.dat"
+
+o.Scale = 0.35
+o.Restitution = 0.0 	-- sprezystosc
+o.AngularDamping = 0.96
+o.TimeToLive = 5 * 30
+
+o.s_Poison = {
+	Range = 2.0,
+	TimeOut = 45,	-- jak dlugo dziala
+	Freq = 20,		-- jak czesto trucizna zadaje rany
+	DamageHp = 5,
+}
+
+o.Mass = 1
+o.Damage = 10
+
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+	self.timer = 2
+	self.mode = 0
+	--self._fx = self:BindFX("flying")
+end
+
+function o:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			--Game:Print("MOLOTOW enable col")
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+			self.timer = nil
+		end
+	end
+	
+end
+
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+    local obj = EntityToObject[e]
+    if obj and not self.deathTimer then
+        if obj.OnDamage then
+            if obj == Player then
+                PlaySound2D("actor/corn/corn-damage")
+            end
+            obj:OnDamage(self.Damage, self.ObjOwner)
+        end
+        GObjects:ToKill(self)
+    else
+        if not self.deathTimer then
+            self.deathTimer = true
+            PlaySound3D("impacts/bullet-stone4",x,y,z,18,36)
+        end
+    end
+    
+    ENTITY.EnableCollisions(self._Entity, false)
+
+    if self._fx then
+		PARTICLE.Die(self._fx)
+	end
+	-- dodac random timer, zeby nie w tej samej chwili wszystkie particle?
+    --self:BindFX("whenHitGround")
+end

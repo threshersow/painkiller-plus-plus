@@ -1,0 +1,55 @@
+o.s_SubClass.SoundsDefinitions = {
+	shield = {
+		samples = {"$/actor/zombie/zombie_shieldhit"},
+		dist1 = 8,
+		dist2 = 30,
+	},
+	step1 = {
+		samples = {'$/actor/zombie_soldier/zombs_krok1',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'$/actor/zombie_soldier/zombs_krok2',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	bodyfalls = {
+		samples = {"$/actor/zombie_soldier/zombs_bodyfalls1","$/actor/zombie_soldier/zombs_bodyfalls2",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	shoot = {
+		samples = {'Templar_shoot',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	atak = {
+		samples = {'Templar-at1','Templar-at2'},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+		playChance = 0.25,
+	},	
+	onAttackOnce = {
+		samples = {"templ-halt1", "templ-halt2", "templ-halt3"},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	hit = {
+		samples = {'templ-hit1','templ-hit2','templ-hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	weaponlost = {
+		samples = {"templ-weapon-lost1","templ-weapon-lost2","templ-weapon-lost3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	death = {
+		samples= {"templ-death1","templ-death2","templ-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+}

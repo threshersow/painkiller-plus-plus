@@ -1,0 +1,5 @@
+o.BaseObj = "CItem"
+o.Model = "C3L4_katapulta"
+o.Scale = 4
+
+

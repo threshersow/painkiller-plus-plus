@@ -1,0 +1,10 @@
+o.BaseObj = "StoneB.CItem"
+
+o.Mesh = "polySurfaceShape26106"
+o.Pack = "kamien_zielony.dat"
+o.BonusItemValue = 15
+
+o.s_SubClass.bindFX = {
+       {"flarka_kielich", 0.2, nil, {0.06, -0.08, 0.1}, {0.4, 0.4, 0.4}},
+       {"FLARA_HOSTIE", 1, nil, {0, 0, 0}, {0.9, 0.9, 0.9}},
+}

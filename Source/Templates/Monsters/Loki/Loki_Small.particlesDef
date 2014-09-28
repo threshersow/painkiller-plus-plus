@@ -1,0 +1,8 @@
+o.s_SubClass.ParticlesDefinitions = {
+	explode = {
+		pfx = "gibExplosion",
+		scale = 0.4,
+		joint = "root",
+		offset = Vector:New(0,0,0),
+	},
+}

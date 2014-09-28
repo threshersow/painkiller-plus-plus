@@ -1,0 +1,35 @@
+o.BaseObj = "Sado_1gun.CActor"
+
+--o.NeverWalk = true
+--o.AiParams.alwaysSee = true
+--o.AiParams.huntPlayer = true
+o.AiParams.viewDistance = 60
+o.AiParams.viewAngle = 178
+o.AiParams.viewDistance360 = 10
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,10}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}-- (min, max) dlugosc pauzy pomiedzy obrotami
+o.AiParams.guardRange = -1				-- max. zasieg patrolu
+o.AiParams.useOnlyWaypointsWhenGuard = true	-- wykorzystuje tylko WayPointy przy chodzeniu w trybie guard
+o.AiParams.stopAfterWalking = 0.8			-- szansa zatrzymania po przejsciu do kolejnego punktu
+o.AiParams.stopAfterWalkingTime = {30,90}	-- (min, max) czas zatrzymania
+
+
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee"}
+
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 20.0,
+		minDist = 1.0,
+		spreadAngle = 0.5,
+		damagePerBullet = 10,
+		PO_HitForce = 200,
+		maxYaw = 45,				-- maksymalna odchylka broni lewo/prawo w stos. do kata patrzenia
+		maxPitch = 45,				-- maksymalna odchylka broni gora/dol
+		fireParticle = "shot",	
+		fireParticleSize = 0.25,
+   		bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+	}

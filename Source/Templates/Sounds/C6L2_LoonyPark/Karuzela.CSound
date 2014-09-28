@@ -1,0 +1,9 @@
+Karuzela.Volume = 60
+Karuzela.Interval = 10
+Karuzela.RandomShift = 5
+Karuzela.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Karuzela.Sound ="C6L2_LoonyPark/karuzela_01;C6L2_LoonyPark/karuzela_02;C6L2_LoonyPark/karuzela_03"

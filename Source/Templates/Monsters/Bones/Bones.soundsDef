@@ -1,0 +1,63 @@
+o.s_SubClass.SoundsDefinitions = {
+	explode = {
+		samples = {'bones_explode'},
+		dist1 = 30,
+		dist2 = 50,
+	},
+	onAttackOnce = {
+		samples = {"bones_halt1", "bones_halt2",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	stepwalk = {
+		samples = {'bones_krok1','bones_krok2','bones_krok3',},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},
+	steprun = {
+		samples = {'bones_run1','bones_run2',},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},
+	born = {
+		samples = {'bones_born','bones_born2','bones_born3',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	bonesfall = {
+		samples = {'bones_onebone1','bones_onebone2'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	explode = {
+		samples = {'bones_explode'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	hit = {
+		samples = {"bones_hit","bones_hit2","bones_hit3",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	swish = {
+		samples = {'bones-throwhead-swish'},
+		dist1 = 6,
+		dist2 = 32,
+	},
+	attack = {
+		samples = {'bones_atack2-1','bones_atack2-2'},
+		dist1 = 6,
+		dist2 = 32,
+	},
+	attackAmbient = {
+		samples = {'bones_attackscream1','bones_attackscream2','bones_attackscream3','bones_attackscream4'},
+		dist1 = 12,
+		dist2 = 50,
+	},
+
+	death = {
+		samples = {'bones_death1','bones_death2','bones_death3'},
+	},
+}

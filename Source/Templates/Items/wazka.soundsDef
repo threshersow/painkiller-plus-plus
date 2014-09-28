@@ -1,0 +1,10 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "impacts/",
+	SoundImpact = {
+		samples = {"figure-stone-impact1","figure-stone-impact2"},
+	},
+	DestroySound = {
+		samples = {"stone-crash"},
+	},
+}
+

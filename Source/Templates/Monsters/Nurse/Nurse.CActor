@@ -1,0 +1,142 @@
+o.Model = "nurse"
+o.Scale = 1.3
+o.Health = 129
+o.CreatePO = true
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 20		-- degrees per 1/30 sec
+--o.enableGibWhenHPBelow = -69
+
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 150,
+}
+
+o.s_SubClass = {
+    rotateHead = 0.7,
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.2,
+
+    Animations = {
+        idle           = {1.2, false},
+        walk           = {1.1, true,{		-- 1.0
+							{0.65,'PlaySound',"step1"},
+                            {0.65,'FootFX','s_p_srodstopie'},
+							{0.07,'PlaySound',"step2"},
+                            {0.07,'FootFX','s_l_srodstopie'},
+							}},
+        run            = {1.9, true,{
+	  						{0.65,'PlaySound',"step1"},
+                            {0.65,'FootFX','s_p_srodstopie'},
+							{0.07,'PlaySound',"step2"},
+                            {0.07,'FootFX','s_l_srodstopie'},
+							}},
+
+        atak          = {1.7, false,{
+                            {0.0,'PlaySound',"atak"},
+                            {0.6,'PlaySound',"swish"},
+                            {0.7,'damage',},
+						}},
+        hit1              = {1.3, false,{
+                            {0.0,'PlaySoundHit',"hit"},
+						}},
+        hit2              = {1.3, false,{
+                            {0.0,'PlaySoundHit',"hit"},
+						}},
+
+    },
+    
+    RagdollCollisions = {
+        MinStren = 6.0,
+        MinTime = 0.6,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+                {"gun", "weaponlost", true},
+			}
+    },
+
+    ragdollJoint = "k_ogo",
+    Hits = {"hit1","hit2"},
+    NearAttacks = {"atak",},
+
+	notBleedingJoints = {
+        gun = true,
+    },
+    DeathJoints = {
+        's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+        'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+        'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+        'k_ogo','k_zebra','k_ramiona',
+    },
+
+    GibExplosionStrength = 5000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"k_ogo","FX_gib_blood",-1},
+				{"k_ramiona","FX_gib_blood",1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"k_szyja","FX_gib_blood",-1},
+				{"root","FX_gib_blood",1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"k_ogo", "gibSplash", true},
+				{"k_ramiona", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"gun", "weaponlost", false},
+			},
+	    },
+
+}
+
+o.DeathTimer = 240
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear", }
+    
+o.AiParams.viewDistance = 20
+o.AiParams.viewDistance360 = 5
+o.AiParams.viewAngle = 170
+
+o.AiParams.weaponDamage = 15
+o.AiParams.attackRange = 2.2
+o.AiParams.attackRangeAngle = 80
+o.AiParams.delayBetweenAttacks = 15
+
+o.AiParams.perception = 1.0
+o.AiParams.walkStep = 7.0
+o.AiParams.hearing = 1.0
+
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = 30
+o.AiParams.stopAfterWalking = 1
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+    
+o.AiParams.chanceOfEscapeAfterFire = 0.04
+o.AiParams.escapeTime = 70
+o.AiParams.moveDisplacement = 2.0
+o.AiParams.updateSpeed = 0.25				-- brain (visibility) update speed, 1.0 - update every frame !!!!
+
+o.AiParams.walkAreaRandom = false
+
+o.AiParams.soundAmbientDelay = 5.5
+o.shadow = 128

@@ -1,0 +1,40 @@
+o.BaseObj = "PlayerLight.CLight"
+o.StartFalloff = 0
+o.Range = 7
+o.Intensity = 1.1
+--o.Color = Color:New(250,250,0,0)
+--o.Color = Color:New(191,123,16,0)
+o.Color = Color:New(224,186,131,0)
+--o.Color = Color:New(255,167,104,0)
+
+o.Offset = Vector:New(0.3,1.6,0) 
+o.Type = 2
+o._Int1 = 0.9
+o._Int2 = 1
+--o._Rng1 = 15
+--o._Rng2 = 10
+o._Rng1 = 14
+o._Rng2 = 9
+
+function PlayerPointLight:Tick2(delta)
+	if self._off then
+		return
+	end
+ 
+    local x,y,z = Player:BindPoint(self.Offset.X,self.Offset.Y,self.Offset.Z)
+    ENTITY.SetPosition(self._Entity,x,y,z)
+   
+    self._time  = self._time - delta
+    
+    if self._time < self._offTime then
+        if self._time < 0 then
+            self._time = FRand(0.01,0.05)
+	    local a = FRand(0,1)
+		self.Range     = a*self._Rng1 + (1-a)*self._Rng2
+		self.Intensity = a*self._Int1 + (1-a)*self._Int2
+        end        
+    end    
+    
+    LIGHT.SetFalloff(self._Entity,self.StartFalloff,self.Range,self.ConeAngle)        
+    LIGHT.Setup(self._Entity,self.Type,self.Color:Compose(),0,0,0,self.Intensity)  
+end

@@ -1,0 +1,17 @@
+o.s_SubClass.ParticlesDefinitions = {
+	fire = {
+        pfx = "flamethr",
+        scale = 0.2,
+        offset = Vector:New(0,0,0),
+        joint = "k_glowa",
+		rotateWithJoint = true,
+		rotateWithJointOffset = Vector:New(0,math.pi/2,0),
+    },
+	burningHand = {
+        pfx = "pochodnia",
+        scale = 0.1,
+        offset = Vector:New(0,0,0),
+        joint = "d_l_srodek",
+    },
+}
+

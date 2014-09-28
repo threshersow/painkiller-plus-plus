@@ -1,0 +1,169 @@
+o.Model = "Lucyfer"
+o.Scale = 20.0
+o.CreatePO = true
+o.Health = 200
+o.WalkSpeed = 1.0
+o.RotateSpeed = 4.0
+o.RotateSpeedGround = 20.0
+o.throwHeart = false
+o.disableFreeze = true
+o.IsBoss = true
+
+o.s_SubClass = {
+	rotateHead = 3.1415 * 0.25,
+	rotateHeadBone = "k_head",
+	rotateHeadMaxSpeed = 0.2,
+	SoundDir = "alastor",
+	rotateHeadRight = Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadLeft =  Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadCoords = Vector:New(2, 3, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+
+    Animations = {
+        idle   = {0.9,false, {
+				},0.5},
+        rot_l90   = {0.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.2,'PlaySoundHitBinded',"rv"},
+						{1.7,'PlaySound',"krok2"},
+						--{1.7,'Stomp','n_p_palcel'},
+					}, 0.1, true},
+        rot_p90   = {0.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.3,'PlaySoundHitBinded',"rv1"},
+						{1.2,'PlaySound',"krok1"},
+						--{1.2,'Stomp','n_p_palcep'},
+					}, 0.1, true},
+        rot_p45   = {0.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.2,'PlaySound',"krok2"},
+						--{1.2,'Stomp','n_p_palcep'},
+					}, 0.1, true},
+        rot_l45   = {0.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.8,'PlaySound',"krok2"},
+						--{0.8,'Stomp','n_l_palcep'},
+					}, 0.1, true},
+        walk	  = {1.0,true,{
+					{0.0,'PlaySound',"krok1"},
+					{0.9,'Stomp','n_p_palcep'},
+					{0.9,'PlaySound',"krok2"},
+					{0.0,'Stomp','n_l_palcep'},
+				},0.5},
+        atak_throw = {0.7,true, {			-- 2 faza, rzuca mieczem (5.76sec)
+					{0.0,'PlaySound','prepare',},
+					{0.7,'BindSound', "swish"},
+					{1.2,'BindSound', "swish"},
+					{2.1,'BindSound', "swish"},
+					{2.0,'PlaySound','atak1',},
+					{2.2, 'ThrowImmid',nil,true},
+					{5.6, 'EndSword'},
+				},0.5, false},
+        atak_sword = {0.7,true, {			-- gracz blisko ciach
+			        {0.7,'BindSound', "swish"},
+			        {0.8,'PlaySound','ground',},
+			        {0.0,'PlaySound','prepare',},
+			        {0.8, 'Stomp','emiter_miecz_5',nil,true},
+				},0.5, false},
+        atak_meteory  = {0.8,true, {
+					{1.8,'BindSound', "swish"},
+					{2.2,'BindSound', "swish"},
+					{0.0,'PlaySound','charge'},
+					{2.4, 'CreateStones'},
+				},0.5, false},
+        atak_wbija_miecz   = {0.9,true, {
+					{3.9, 'CreateStonesGround'},
+					{3.75, 'PlaySound','sword'},
+					{5.1, 'PlaySound','swordout'},
+					{3.3,'PlaySound','atak2',},
+					{0.5,'BindSound', "swish"},
+					{1.2,'PlaySound','prepare2',},
+					{4.0, 'Stomp','emiter_miecz_5',nil,true},
+				},0.5, false},
+
+    },
+	CollidableRagdoll = true,
+
+
+    Ambients = {"idle",},
+   	rotate45L = "rot_l45",
+	rotate45R = "rot_p45",
+	rotate90L = "rot_l90",
+	rotate90R = "rot_p90",
+    
+    RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 1.2,
+		Bones = {
+					{"k_head", "bodyfalls", false},		-- joint, {sounds}, blood
+					{"n_p_kolano", "bodyfalls", false},
+					{"n_l_kolano", "bodyfalls", false},
+					{"r_l_bark", "bodyfalls", false},
+					{"r_p_bark", "bodyfalls", false},
+				}
+	},
+
+}
+
+o.DeathTimer = 10000
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 1000000,
+}
+
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idleLucifer","attackLucifer","walkLucifer","closeAttackLucifer"}
+
+o.AiParams.actions = {
+    {"attack", 0.5,},
+    {"walk", 0.2,},
+}
+
+o.AiParams.updateSpeed = 0.0
+o.AiParams.forceRotateHead = true
+o.disbleRotWhenStartWalk = true
+
+o.disableNoAnimDetection = false
+o.AiParams.alwaysSee = true
+o.doNotUseWP = true
+o._DontCheckFloors = true
+
+o.StompTimeOut = 16				-- earthq params
+o.StompRange = 120
+o.CameraRot = 0.52
+o.CameraMov = 0.5
+
+o.AiParams.walkDamage = 50
+o.AiParams.walkDamageRange = 12.0
+
+o.chargeFX = {
+	name = "AlastorchargeFX",
+	size = 1.0,
+	joints = {"root","wing_l_z1_1"},
+}
+o.AiParams.swordDamageRange = 6.0
+o.AiParams.swordDamage = 66.6
+------------------------------
+o.AiParams.stonesUp = {
+	distMin = 30,				-- zasieg wokol gracza, gdzie sie pojawiaja erupcje
+	distMax = 70,
+	count = 10,
+	angle = 85,
+	velocityMin = 1.0,
+	velocityMax = 1.5,
+	randomizeAngle = 20,
+}
+
+o.AiParams.stonesDown = {		-- meteory
+	distMin = 30,				-- zasieg wokol gracza, gdzie nad nim tworzony jest punkt, z ktorego wylatuja meteory
+	distMax = 100,
+	count = 10,
+}
+
+
+o.AiParams.ThrowableItem = "LuciferSword.CItem"
+o.AiParams.throwItemBindTo = "joint85"
+o.AiParams.throwVelocity = 140
+
+o.swordTrail = "trail_loki"
+o.AiParams.hideMesh = "kosa_polySurfaceShape1"
+o.demonFXTimeAfterDeath = 10.0
+--o.velocityUpOnDeath = 28.0
+
+--o.bulletTimeAfterDeath = 0.33

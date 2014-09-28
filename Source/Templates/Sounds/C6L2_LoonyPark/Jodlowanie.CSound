@@ -1,0 +1,9 @@
+Jodlowanie.Volume = 60
+Jodlowanie.Interval = 10
+Jodlowanie.RandomShift = 5
+Jodlowanie.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Jodlowanie.Sound ="C6L2_LoonyPark/jodla_01;C6L2_LoonyPark/jodla_02"

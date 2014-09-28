@@ -1,0 +1,9 @@
+Dziewcze.Volume = 100
+Dziewcze.Interval = 8
+Dziewcze.RandomShift = 3
+Dziewcze.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Dziewcze.Sound ="C6L2_LoonyPark/dziewcze_01;C6L2_LoonyPark/dziewcze_02;C6L2_LoonyPark/dziewcze_03"

@@ -1,0 +1,69 @@
+--============================================================================
+-- Earthquake
+--============================================================================
+TEarthquake.cameraRotateAmount = 0.3
+TEarthquake.cameraMoveAmount = 0.0
+TEarthquake.hitForce = 222
+TEarthquake.eqDistance = 50
+o.BaseName = "TEarthquake.CProcess"
+--============================================================================
+function TEarthquake:Init(x,y,z, actor, stones)
+    self.ObjOwner = actor
+    self.stonesPoints = stones
+    self.OwnerPosX = x
+    self.OwnerPosY = y
+    self.OwnerPosZ = z
+    self.TimeOut = 300
+    --self.stonesList = {}
+end
+--============================================================================
+function TEarthquake:Update()
+	if self.stonesPoints then
+		--if math.random(100) < 45 then
+			local rnd = math.random(1, table.getn(self.stonesPoints.Points))
+			local distToPoint = Dist3D(self.ObjOwner.Pos.X,0,self.ObjOwner.Pos.Z, 
+				self.stonesPoints.Points[rnd].X, 0, self.stonesPoints.Points[rnd].Z)
+			if distToPoint < self.eqDistance then
+				--if debugMarek then Game:Print("createstones") end
+				local x = self.stonesPoints.Points[rnd].X + FRand(-2,2)
+				local y = self.stonesPoints.Points[rnd].Y + FRand(0,1)
+				local z = self.stonesPoints.Points[rnd].Z + FRand(-2,2)
+				
+				--local col = false
+				--for i,v in self.stonesList do
+				--	local dist = Dist3D(x,y,z, obj.Pos.X, obj.Pos.Y, obj.Pos.Z)
+				--	if dist < v[4] then
+				--		col = true
+				--		Game:Print("col "..dist.." "..v[4])
+				--		break
+				--	end
+				--end
+				--if not col then
+					local obj = GObjects:Add(TempObjName(),CloneTemplate("VampStone.CItem"))
+					obj.Scale = FRand(0.1, 0.3)
+					obj.ObjOwner = self.ObjOwner
+					obj.eq = true
+					obj.Pos.X = x
+					obj.Pos.Y = y
+					obj.Pos.Z = z
+
+					obj.Rot:FromEuler(FRand(-3.14,3.14), FRand(-3.14,3.14), FRand(-3.14,3.14))
+
+					obj:Apply()
+					--table.insert(self.stonesList, {obj, ENTITY.GetBRadius(obj._Entity)})
+					
+					ENTITY.EnableCollisions(obj._Entity, true, 5, 0.3)
+
+					local force = self.hitForce
+					ENTITY.PO_Hit(obj._Entity, obj.Pos.X, obj.Pos.Y, obj.Pos.Z, FRand(-1,1)*force, 0, FRand(-1,1)*force)
+				--end
+			end
+		--end		
+	end
+    self.TimeOut = self.TimeOut - 1
+    if self.TimeOut <= 0 then
+        self._ToKill = true
+        --self.stonesList = {}
+    end
+end
+--============================================================================

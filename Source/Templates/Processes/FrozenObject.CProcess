@@ -1,0 +1,114 @@
+FrozenObject.FreezeTime = 5
+FrozenObject.FadeInTime = 0.5
+FrozenObject.FadeOutTime = 0.5
+FrozenObject.Obj = nil
+FrozenObject._fx = {"frost", 0.3, {"k_szyja","root"}}
+
+o.BaseName = "FrozenObject.CProcess"
+o.s_SubClass = {}
+o.s_SubClass.SoundsDefinitions = 
+{
+    path     = "weapons/shotgun",
+    freeze = 
+    {
+        samples = {"freezer-freeze","freezer-freeze2","freezer-freeze3"},
+        dist1   = 20,
+        dist2   = 40,
+        disablePitch = true
+    },
+    unfreeze = 
+    {
+        samples = {"freezer-unfreeze"},
+        dist1   = 20,
+        dist2   = 40,
+        disablePitch = true
+    },
+}
+--============================================================================
+function FrozenObject:New(obj,tm,tin,tout,shader,nosmoke)
+    local o = Clone(self)
+    o._timer = 0    
+    o.Obj = obj
+
+    o.FreezeTime = tm
+    o.FadeInTime = tin
+    o.FadeOutTime = tout
+    o.AnimSpeed = MDL.GetAnimTimeScale(obj._Entity, obj._CurAnimIndex)
+    if not shader then shader = "palskinned_freeze" end
+    MDL.SetMaterial(obj._Entity, shader)
+    self:SndEnt("freeze",obj._Entity)
+    obj.AIenabled = false
+    obj._frozen = true
+    
+--    obj:FullStop()  
+    
+    if self._fx and not nosmoke then
+		obj._pfxWhenFrozen = {}
+        local j = -1
+        for i,v in self._fx[3] do
+            j = MDL.GetJointIndex(obj._Entity, v)
+            if j >= 0 then
+	            table.insert(obj._pfxWhenFrozen, obj:BindFX(self._fx[1],self._fx[2], j))
+	        end
+        end
+    end
+    return o 
+end
+--============================================================================
+function FrozenObject:Tick(delta)
+    if not self.Obj then
+        Game:Print(">> ERROR: FrozenObject: no self.Obj!")
+        GObjects:ToKill(self)
+        return
+    end
+    if self.Obj.ToKill then GObjects:ToKill(self) end    
+
+    self._timer = self._timer + delta    
+
+    local a = 0
+    local fio = false
+
+    -- fade in
+    if self._timer >= 0 and self._timer <= self.FadeInTime then
+        a = 1 - self._timer / self.FadeInTime
+        fio = true
+    end    
+
+    -- fade out
+    if self._timer >= self.FreezeTime - self.FadeOutTime and self._timer < self.FreezeTime then
+        a = 1 - (self.FreezeTime - self._timer) / self.FadeOutTime
+        fio = true
+        if not self._unfreeze then
+            self:SndEnt("unfreeze",self.Obj._Entity)
+            self._unfreeze = true
+        end
+    end    
+
+    -- frozen
+    if not fio then 
+        ENTITY.PO_SetPinned(self.Obj._Entity,true)
+        self.Obj:FullStop()  
+    end
+
+    -- unfreeze
+    if self._timer >= self.FreezeTime then
+        local x,y,z = ENTITY.GetPosition(self.Obj._Entity)
+        MDL.SetMaterial(self.Obj._Entity, "")
+        ENTITY.PO_SetPinned(self.Obj._Entity,false)
+        self.Obj.AIenabled = true
+        self.Obj._frozen = false
+        if self.Obj._pfxWhenFrozen then
+			for i,v in self.Obj._pfxWhenFrozen do
+				PARTICLE.Die(v)
+			end
+			self.Obj._pfxWhenFrozen = nil
+        end
+        GObjects:ToKill(self)
+        a = 1
+    end
+
+    --Game:Print(a)
+    MDL.SetBlendAlpha(self.Obj._Entity, 1-a)
+    MDL.SetAnimTimeScale(self.Obj._Entity, self.Obj._CurAnimIndex, self.AnimSpeed * a)
+end    
+--============================================================================

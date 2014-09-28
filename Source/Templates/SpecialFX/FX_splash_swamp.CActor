@@ -1,0 +1,49 @@
+FX_splash_swamp.Model = "splash"
+FX_splash_swamp.Scale = 5
+FX_splash_swamp.NotCountable = true
+o.CreatePO = false
+
+FX_splash_swamp.s_SubClass = 
+{
+    Animations = {  
+        idle        = {1.2},
+    },
+}
+
+function FX_splash_swamp:OnCreateEntity()
+    self:BindFX("FX_splash_swamp",0.1,"e1")
+    self:BindFX("FX_splash_swamp",0.1,"e2")
+    self:BindFX("FX_splash_swamp",0.1,"e3")
+    self:BindFX("FX_splash_swamp",0.1,"e4")
+    self:BindFX("FX_splash_swamp",0.1,"e5")
+    self:BindFX("FX_splash_swamp",0.1,"e6")
+    self:BindFX("FX_splash_swamp",0.1,"e7")
+    self:BindFX("FX_splash_swamp",0.1,"e8")
+    self:BindFX("FX_splash_swamp",0.1,"e9")
+    self:BindFX("FX_splash_swamp",0.1,"e10")
+    self:BindFX("FX_splash_swamp",0.1,"e11")
+    self:BindFX("FX_splash_swamp",0.1,"e12")
+    self:BindFX("FX_splash_swamp",0.1,"e13")
+    self:BindFX("FX_splash_swamp",0.1,"e14")
+    self:BindFX("FX_splash_swamp",0.1,"e15")
+    self:BindFX("FX_splash_swamp",0.1,"e16")
+    self:BindFX("FX_splash1_swamp",0.1,"e17")
+    self:BindFX("FX_splash1_swamp",0.1,"e18")
+    self:BindFX("FX_splash1_swamp",0.1,"e19")
+    self:BindFX("FX_splash1_swamp",0.1,"e20")
+end
+
+function FX_splash_swamp:OnFinishAnim(name)
+    ENTITY.UnregisterAllChildren(self._Entity)
+    GObjects:ToKill(self)
+end
+
+
+function FX_splash_swamp:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+o.Immortal = true

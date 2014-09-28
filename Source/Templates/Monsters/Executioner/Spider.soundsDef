@@ -1,0 +1,47 @@
+o.s_SubClass.SoundsDefinitions = {
+    step1 = {
+        samples = {'tick_krok1',},
+        dist1 = 4,
+        dist2 = 30,
+    },
+    step2 = {
+        samples = {'tick_krok2',},
+        dist1 = 4,
+        dist2 = 30,
+    },
+    step3 = {
+        samples = {'tick_krok3',},
+        dist1 = 4,
+        dist2 = 30,
+    },
+    step4 = {
+        samples = {'tick_krok4',},
+        dist1 = 4,
+        dist2 = 30,
+    },
+    swish = {
+        samples = {'tick_jump_swish',},
+        dist1 = 4,
+        dist2 = 30,
+    },
+    death = {
+		samples = {"tick-death1","tick-death2","tick-death3"},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	hurt = {
+		samples = {"tick_hit1","tick_hit2","tick_hit3"},
+		dist1 = 4,
+		dist2 = 30,
+	},
+    atak = {
+        samples = {'tick-atack1','tick-atack2','tick-atack3','tick-atack4'},4,30, 
+		dist1 = 4,
+		dist2 = 30,
+	},
+    jumpend = {
+        samples = {'tick_jump-end',},
+		dist1 = 4,
+		dist2 = 30,
+	},
+}

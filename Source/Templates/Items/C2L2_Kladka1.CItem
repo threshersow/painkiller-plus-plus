@@ -1,0 +1,5 @@
+o.BaseObj = "CItem"
+o.Model = "C2L2_Kladka1"
+o.Scale = 2
+
+o.SoundHitByBulletMiniGunOnly = true

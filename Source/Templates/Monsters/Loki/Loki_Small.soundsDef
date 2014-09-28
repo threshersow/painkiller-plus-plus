@@ -1,0 +1,60 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'tick_krok1',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'tick_krok2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step3 = {
+		samples = {'tick_krok3',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step4 = {
+		samples = {'tick_krok4',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	bodyfalls = {
+		samples = {"tick_bodyfalls"},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	swish = {
+		samples = {'tick_jump_swish',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak1 = {
+		samples = {'tick-atack1','tick-atack2','tick-atack3','tick-atack4'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	jumpend = {
+		samples = {'tick_jump-end',},
+		dist1 = 10,
+		dist2 = 30, 
+	},
+	born = {
+		samples = {"tick_born","tick_born1","tick_born2","tick_born3"},
+		playChance = 0.5,
+		dist1 = 10,
+		dist2 = 30, 
+	},
+
+	death = {
+		samples = {"tick-death1","tick-death2","tick-death3"},
+		dist1 = 12,
+		dist2 = 40, 
+	},
+    hurt = {
+		samples = {"tick_hit1","tick_hit2","tick_hit3"},
+		dist1 = 10,
+		dist2 = 30, 
+	},
+
+}

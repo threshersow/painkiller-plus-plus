@@ -1,0 +1,159 @@
+o.Model = "evilmonk"
+o.CreatePO = true
+o.Scale = 1
+o.Health = 64
+o.WalkSpeed = 1.2
+o.RunSpeed = 1.2
+o.RotateSpeed = 6
+o.NeverRun = false
+o.throwHeart = true
+o.enableGibWhenHPBelow = -69
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 120,
+}
+
+o.s_SubClass = {
+    rotateHead = 3.1415 * 0.3,
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.2,
+
+    Animations = {
+		idle   = {0.7,false},			-- speed, movingcurve, events
+		walk   = {0.9,true, {
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.07,'PlaySound',"step2"},
+				{0.07,'FootFX','s_l_srodstopie'},
+				}},
+
+        run    = {1.92,true, {
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.07,'PlaySound',"step2"},
+				{0.07,'FootFX','s_l_srodstopie'},
+				}},
+        atak1  = {1.0,true, {
+				{0.0,'BindTrailSword','trail_sword','trail_kosa1','trail_kosa2'},
+				{0.75,'damage',},			-- "damage", PO_Hit back, PO_Hit_up
+				{0.0,'PlaySound',"atak"},
+				{0.6,'PlaySound',"swish"},
+                {0.83,'IfMissedPlaySound',},
+                {1.4,'EndTrailSword'},
+				}},
+        atak2  = {1.0,true, {
+				{0.0,'PlaySound',"prepare"},
+				{0.6,'PlaySound',"throw"},
+				{0.8,'Throw'},
+				}},
+        hit1 = {1.0, false, {
+				{0.0,'PlaySoundHit',"hit"},
+				}},
+        hit2 = {1.0, false, {
+				{0.0,'PlaySoundHit',"hit"},
+				}},
+    },
+
+    NearAttacks = {"atak1",},
+    ragdollJoint = "root",
+    Ambients = {"idle"},
+    Hits = {"hit1", "hit2"},
+
+    RagdollCollisions = {
+        MinStren = 2.0,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				{"joint21", "weaponlost", false},
+			},
+    },
+
+    notBleedingJoints = {
+		joint21 = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+
+    DeathJoints = {
+        's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+        'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+        'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+        'k_ogo','k_zebra','k_ramiona','k_glowa',
+    },
+    BreakableJoints = {},
+    CollidableRagdoll = false,
+	hitGroundJoint = "joint21",
+		GibExplosionStrength = 5000,
+	GibExplosionRange = 5.0,
+	GibExplosionDeltaY = -1.5,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"k_ogo","FX_gib_blood",-1},
+				{"k_ramiona","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"k_szyja","FX_gib_blood",-1},
+				{"root","FX_gib_blood",1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"k_ogo", "gibSplash", true},
+				{"k_ramiona", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"joint21", "weaponlost", false},
+			},
+	    },
+}
+
+
+o.DeathTimer = 110                   -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee"}
+o.AiParams.viewDistance = 35
+o.AiParams.viewDistance360 = 5
+o.AiParams.viewAngle = 150
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 2.5
+o.AiParams.attackRangeAngle = 100
+    
+o.AiParams.hearing = 1.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {45,90}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1				-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,60}
+
+o.AiParams.walkStep = 5.0
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 15
+o.AiParams.moveDisplacement = 3.5
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+
+o.AiParams.updateSpeed = 0.33				-- brain (visibility) update speed, 1.0 - update every frame !!!!
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+o.AiParams.specialAttackHP = 0.3
+o.AiParams.ThrowableItem = "Axe.CItem"
+o.AiParams.ThrowAnim = "atak2"
+
+o.shadow = 128

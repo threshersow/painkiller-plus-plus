@@ -1,0 +1,11 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+
+o.Scale = 0.1
+o.Restitution = 0.8 	-- sprezystosc
+o.LinearDamping = 0.0  -- tlumienie liniowe
+o.TimeToLive = 30 * 12
+
+o.fx = 'nun_spell'
+o.damage = 30
+

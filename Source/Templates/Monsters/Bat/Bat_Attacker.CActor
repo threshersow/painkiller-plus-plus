@@ -1,0 +1,10 @@
+Bat_Attacker.BaseObj = "Bat.CActor"
+Bat_Attacker.CreatePO = true
+Bat_Attacker.Health = 15
+
+Bat_Attacker.AiParams.aiGoals = {"Batidle", "Batattack","BatEscape"}
+Bat_Attacker.AiParams.hearing = 1.6
+Bat_Attacker.AiParams.attackRange = 1.0
+Bat_Attacker.AiParams.attackRangeAngle = 180
+Bat_Attacker.AiParams.weaponDamage = 3
+

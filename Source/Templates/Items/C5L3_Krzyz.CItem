@@ -1,0 +1,21 @@
+o.BaseObj = "CItem"
+o.Model = "C5L3_Krzyz"
+o.Scale = 3
+o.Actions.OnBreak = {}
+o.Glow = false
+o.s_Editor["Actions.OnBreak.[new]"]   = { "TextEdit" }
+
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint2_getmass",
+	minVel = 1.0,
+	minDelayBetweenSounds = 1.0,
+}
+
+o.CollisionDetect = {
+	MinTime = 1.2,
+	MinStren = 5.0,
+	joint = "joint3_getmass",
+
+}
+

@@ -1,0 +1,67 @@
+o.s_SubClass.SoundsDefinitions = {
+	hit = {
+		samples = {'lepperm-hit1','lepperm-hit2','lepperm-hit3','lepperm-hit4'},
+		dist1 = 8,
+		dist2 = 40,
+	},
+	magic = {
+		samples = {'lepperm-barriermagic1','lepperm-barriermagic2','lepperm-barriermagic3'},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	swish = {
+		samples = {'lepperm-throw-swish',},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	voice = {
+		samples = {'lepperm-stick-throw-prepare-voice',},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	throw = {
+		samples = {'lepperm-stick-throw-voice'},
+		dist1 = 12,
+		dist2 = 40,
+		disablePitch = true,
+	},
+	corpse = {
+		samples = {'lepperm-corpsemagic1','lepperm-corpsemagic2','lepperm-corpsemagic3'},
+		dist1 = 12,
+		dist2 = 40,
+		disablePitch = true,
+	},
+	step1 = {
+		samples = {'lepperm-krokl',},
+		dist1 = 5,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'lepperm-krokp',},
+		dist1 = 5,
+		dist2 = 20,
+	},
+	bodyfalls = {
+		samples = {"$/actor/devilmonk/devil_bodyfalls"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"$/impacts/stake-ground1"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	onAttackOnce = {
+		samples = {"lepperm-halt1", "lepperm-halt2", "lepperm-halt3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	damage = {
+		samples = {"lepper-odrzut"},
+    },
+    death = {
+		samples = {"lepperm-death1","lepperm-death2","lepperm-death3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+}

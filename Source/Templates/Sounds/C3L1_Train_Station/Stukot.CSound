@@ -1,0 +1,10 @@
+Stukot.Volume = 50
+Stukot.Interval = 10
+Stukot.RandomShift = 6
+Stukot.Falloff =
+{
+  Start = 4,
+  End = 50
+}
+Stukot.Sound ="C3L1_Train_Station/Stukot_01;C3L1_Train_Station/Stukot_02"
+

@@ -1,0 +1,9 @@
+NunSpell.Mesh = "pSphereShape1"
+NunSpell.Pack = "kamyk.dat"
+
+NunSpell.Scale = 0.4
+NunSpell.Restitution = 0.8 	-- sprezystosc
+NunSpell.LinearDamping = 0.0  -- tlumienie liniowe
+NunSpell.TimeToLive = 30 * 15
+
+o.fx = 'nun_spell'

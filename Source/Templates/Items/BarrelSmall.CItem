@@ -1,0 +1,23 @@
+BarrelSmall.Mesh = "BECZKA_MALAShape"
+BarrelSmall.Pack = "cale_przedmioty.dat"
+
+BarrelSmall.DestroyPack = "beczka_mala_zlom.dat"
+BarrelSmall.Health = 40
+BarrelSmall.Mass = 220
+BarrelSmall.Scale = 0.5
+
+BarrelSmall.Destroy.Strength = 120
+BarrelSmall.Destroy.ExplosionStrength = 10
+BarrelSmall.Destroy.ExplosionRadius = 6
+BarrelSmall.Destroy.ExplosionStrength = 1600
+BarrelSmall.Destroy.ExplosionDamage = 220
+BarrelSmall.Destroy.AverageDelay = 32
+BarrelSmall.Destroy.AverageVariation = 16
+BarrelSmall.Destroy.Effect = "explo_beczka"
+BarrelSmall.Destroy.EffectScale = 0.2
+o.Destroy.Treasures = 
+{
+    Coins  = {1, 'g'},
+}
+BarrelSmall.Destroy.Light = true    
+BarrelSmall.Destroy.MinSpeedOnCollision = 16

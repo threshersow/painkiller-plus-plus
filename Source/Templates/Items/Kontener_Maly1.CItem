@@ -1,0 +1,23 @@
+o.Mesh = "polySurfaceShape14250"
+o.Pack = "kontener_Maly1_caly.dat"
+o.DestroyPack = "kontener_Maly1_zlom.dat"
+o.Scale = 0.2
+o.Health = 100
+o.Friction = 1
+
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 20
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.3
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+o.SoundHitByBulletMiniGunOnly = true
+
+

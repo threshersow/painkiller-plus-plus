@@ -1,0 +1,8 @@
+o.s_SubClass.SoundsDefinitions = {
+	wings = {
+		samples = {'monster_raven_wings_flap'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+
+}

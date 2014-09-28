@@ -1,0 +1,12 @@
+o.TimeToLive = 12 * 30
+o.Mesh = "polySurface17143_transShape"
+o.Pack = "gazeta_kawalek1.dat"
+o.Scale = 1
+o.Mass = 5
+o.forceOut = 250			-- sila explozji na boki
+o.forceUp =	330			-- sila explozji do gory
+o.rotate = {10,22,10}
+o.angularDamping = 0.4
+o.linearDamping = 9
+o.Friction = 0.5
+o.DetailMap.DefaultDetailTex = false

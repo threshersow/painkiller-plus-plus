@@ -1,0 +1,19 @@
+KamykWybuch.Mesh = "pSphereShape1"
+KamykWybuch.Pack = "Kamyk.dat"
+KamykWybuch.Scale = 0.2
+KamykWybuch.Restitution = 0.8 -- sprezystosc
+KamykWybuch.LinearDamping = 0.8  -- tlumienie liniowe
+
+function KamykWybuch:OnPrecache()
+    Cache:PrecacheParticleFX("KamykwybuchFX")
+end
+
+function KamykWybuch:OnCreateEntity()
+    
+    self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Particles)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+
+    local pfx = AddPFX('KamykwybuchFX',0.6)
+    ENTITY.RegisterChild(self._Entity,pfx)    
+end

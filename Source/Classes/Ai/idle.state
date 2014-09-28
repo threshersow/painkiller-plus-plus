@@ -1,0 +1,240 @@
+AiStates.idle = {
+	name = "idle",
+	lastTimeAmbientSound = 0,
+	lastAmbient = -100,
+}
+
+function AiStates.idle:OnInit(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	if not actor._isWalking then
+		actor:SetIdle()
+	end
+	self.delay = nil
+	self.GuardStill = aiParams.GuardStill
+	self.timeChangeStillToFalse = nil
+	self.OLDonlyWPmove = actor.onlyWPmove
+	self.OLDdoNotUseWP = actor.doNotUseWP
+	if not brain._walkArea then
+		actor.onlyWPmove = aiParams.useOnlyWaypointsWhenGuard
+	else
+		--if debugMarek then Game:Print(actor._Name.." not using WP on idle") end
+		--actor.doNotUseWP = false -- trzeba najpierw poprawic wenecje
+	end
+	self.walked = false
+	self.newDestinationX = nil
+end
+
+function AiStates.idle:OnUpdate(brain)
+	local actor = brain._Objactor
+
+	if not actor._isWalking and actor._state == "ANIMATING" then
+		if self.timeChangeStillToFalse then
+			self.timeChangeStillToFalse = nil
+			self.GuardStill = false
+		end
+		return
+	end
+	
+	if self.lastTimeAmbientSound + 5 < brain._currentTime then	
+		if actor.s_SubClass.SoundsDefinitions.ambients and math.random(1000) < 4 then
+			self.lastTimeAmbientSound = brain._currentTime
+			actor:PlaySoundHit("ambients",10,25)
+		end 
+	end
+
+	local aiParams = actor.AiParams
+
+	if self.timeChangeStillToFalse then
+		self.timeChangeStillToFalse =  self.timeChangeStillToFalse - 1
+		if self.timeChangeStillToFalse < 0 then
+			self.timeChangeStillToFalse = nil
+			self.GuardStill = false
+			--Game:Print("self.GuardStill END")
+		end
+	end
+	if aiParams.alwaysSee and self.GuardStill and not actor._isWalking then
+		if math.random(100) < 20 then
+			actor:RotateToVector(Player._groundx, Player._groundy, Player._groundz)
+		end
+		return
+	end
+
+    if not self.GuardStill then
+		if not actor._isWalking then
+			--if not actor._isRotating then
+				if not brain._walkArea then
+					if brain._currentTime < actor._lastCantMoveTime + 2/30  then
+						--Game:Print("obstacle detected by idle goal")
+						local ang = math.random(45,60)
+						brain._walkStepLocal = brain._walkStepLocal * 0.65
+						if brain._walkStepLocal < aiParams.walkStep*0.4 then
+							brain._walkStepLocal = aiParams.walkStep*0.4
+						end
+						if math.random(100) < 50 then
+							ang = -ang
+						end
+						if ENTITY.PO_Exist(actor._Entity) then
+							local b = actor:Trace(actor._SphereSize * FRand(1.0, 1.3), ang)
+							if b then
+								actor:Rotate(-ang)
+							else
+								--if debugMarek then Game:Print("idle.state -> normal rot") end
+								actor:Rotate(ang)
+							end
+						end
+					else
+						if aiParams.guardRange > 0 and not self.newDestinationX then
+							if Dist3D(actor._groundx, actor._groundy, actor._groundz, brain._GuardPos.X, actor._groundy, brain._GuardPos.Z) > aiParams.guardRange then
+								--Game:Print("GUARD OVER")
+								local rndx = FRand(-aiParams.guardRange, aiParams.guardRange) * 0.5
+								local rndz = FRand(-aiParams.guardRange, aiParams.guardRange) * 0.5
+								self.newDestinationX = brain._GuardPos.X + rndx
+								self.newDestinationY = actor._groundy
+								self.newDestinationZ = brain._GuardPos.Z + rndz
+								if aiParams.stopAfterWalkingTime and aiParams.stopAfterWalkingTime[1] and self.walked then
+									--Game:Print("STOP")
+									self.timeChangeStillToFalse = math.random(aiParams.stopAfterWalkingTime[1],aiParams.stopAfterWalkingTime[2])
+									self.GuardStill = true
+									self.walked = false
+									return
+								end
+							end
+						end
+
+						if aiParams.stopAfterWalking and FRand(0.0, 1.0) <= aiParams.stopAfterWalking and self.walked then
+							self.timeChangeStillToFalse = math.random(aiParams.stopAfterWalkingTime[1],aiParams.stopAfterWalkingTime[2])
+							self.GuardStill = true
+							self.walked = false
+							return
+						else
+							brain._walkStepLocal = brain._walkStepLocal * 1.1
+							if brain._walkStepLocal > aiParams.walkStep then
+								brain._walkStepLocal = aiParams.walkStep
+							end
+
+							if self.newDestinationX then
+								--Game:Print("GUARD -> walk to near")
+								actor:WalkTo(self.newDestinationX, self.newDestinationY, self.newDestinationZ)
+								self.newDestinationX = nil
+							else
+								local maxDist
+								if aiParams.guardRange > 0 then
+									maxDist = aiParams.guardRange * 2.0
+								end
+								Patrol(actor, brain, false, true, maxDist)
+							end
+							self.walked = true
+						end
+					end
+				else
+					if aiParams.stopAfterWalking and FRand(0.0, 1.0) <= aiParams.stopAfterWalking and self.walked then
+						self.timeChangeStillToFalse = math.random(aiParams.stopAfterWalkingTime[1],aiParams.stopAfterWalkingTime[2])
+						self.GuardStill = true
+						self.walked = false
+						return
+					else
+						if aiParams.walkAreaRandom then
+							local size = table.getn(brain._walkArea.Points)
+							local rnd = math.random(1, size)
+							if size > 1 and rnd == brain._walkAreaNo then	-- zeby nie szedl do tego samego punktu
+								if rnd < size then
+									rnd = rnd + 1
+								else
+									rnd = rnd - 1
+								end
+							end
+
+							brain._walkAreaNo = rnd
+							actor:WalkTo(brain._walkArea.Points[rnd].X, brain._walkArea.Points[rnd].Y, brain._walkArea.Points[rnd].Z, false)
+						else
+							actor:WalkTo(brain._walkArea.Points[brain._walkAreaNo].X, brain._walkArea.Points[brain._walkAreaNo].Y, brain._walkArea.Points[brain._walkAreaNo].Z, false)
+							brain._walkAreaNo = brain._walkAreaNo + 1
+							if brain._walkAreaNo > table.getn(brain._walkArea.Points) then
+								brain._walkAreaNo = 1
+							end
+						end
+						self.walked = true
+					end
+				end
+			--end
+		end
+	else
+		if not actor._isRotating and not actor._isWalking then
+			if self.lastAmbient + 1 < brain._currentTime then
+				local ambientsFreq = actor.AmbientsFreq
+				if not ambientsFreq then
+					ambientsFreq = 0.25
+				end
+				--Game:Print("losowansko "..ambientsFreq)
+				self.lastAmbient = brain._currentTime
+				if FRand(0,1) < ambientsFreq then
+					if actor.s_SubClass.Ambients then
+						local animName = actor.s_SubClass.Ambients[math.random(1,table.getn(actor.s_SubClass.Ambients))]
+						--Game:Print("set ambient "..animName)
+						if actor.Animation ~= animName then
+							if actor:SetAnim(animName, false) then
+								actor._state = "ANIMATING"
+							end
+						end
+						return
+					end
+				end
+			end
+			if brain._rotate180AfterEndWalking then
+				brain._rotate180AfterEndWalking = nil
+				--Game:Print("rotate after")
+				actor:Rotate(math.random(150, 210))
+			end
+			if self.delay then
+				self.delay = self.delay - 1
+				if self.delay <= 0 then
+					self.delay = nil
+				end
+			else
+				if aiParams.guardAngleRandom then
+                    actor:Rotate(math.random(-60,60))
+                    if aiParams.guardChangePosition and aiParams.guardChangePosition[1] then
+                        self.delay = math.random(aiParams.guardChangePosition[1], aiParams.guardChangePosition[2])
+                    else
+                        self.delay = math.random(0,40)
+                    end
+				else
+                    if aiParams.guardAngle and aiParams.guardAngle[1] then
+                        local sign = 1
+                        if math.random(100) < 50 then
+                            sign = -1
+                        end
+                        
+                        local newAngle = sign * math.random(aiParams.guardAngle[1], aiParams.guardAngle[2])
+                        actor:Rotate(newAngle)
+                        local ad = AngDist(actor._angleDest, brain._GuardAng)
+                        if (ad > aiParams.guardAngle[2] * 3.1415/180) or (ad < -aiParams.guardAngle[2] * 3.1415/180) then
+                            actor:RotateTo(brain._GuardAng * 180/3.1415 + math.random(-aiParams.guardAngle[2], aiParams.guardAngle[2]) * 0.2)
+                        end
+                        
+                        if aiParams.guardChangePosition and aiParams.guardChangePosition[1] then
+                            self.delay = math.random(aiParams.guardChangePosition[1], aiParams.guardChangePosition[2])
+                        else
+                            self.delay = math.random(0,40)
+                        end
+                    end
+                end
+			end
+		end
+	end
+end
+
+function AiStates.idle:OnRelease(brain)
+	local actor = brain._Objactor
+	--if actor._state == "ANIMATING" then
+	--	actor:SetIdle()
+	--end
+	brain._rotate180AfterEndWalking = nil
+	actor.onlyWPmove = self.OLDonlyWPmove
+	actor.doNotUseWP = self.OLDdoNotUseWP
+end
+
+function AiStates.idle:Evaluate(brain)
+	return 0.01
+end

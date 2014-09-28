@@ -1,0 +1,68 @@
+Gladiator4_Stone.Mesh = "polySurfaceShape89990"
+Gladiator4_Stone.Pack = "kamien.dat"
+
+Gladiator4_Stone.Scale = 0.15
+Gladiator4_Stone.Pos = Vector:New(0,0,-4)
+Gladiator4_Stone.Restitution = 0.2
+Gladiator4_Stone.Damage = 45
+
+Gladiator4_Stone.LifeTime = 180				-- after 1st col
+Gladiator4_Stone.TimeToLive = 30 * 60
+Gladiator4_Stone.CollisionSound = {"impacts/stonebig-impact1","impacts/stonebig-impact2","impacts/stonebig-impact3","impacts/stonebig-impact4","impacts/stonebig-impact5"}
+
+--============================================================================
+function Gladiator4_Stone:OnCollision(x,y,z,nx,ny,nz,e)
+	local ecol = true
+	if e then
+		local obj = EntityToObject[e]
+		if obj and obj._Class ~= "CItem" then
+			if obj ~= self.ObjOwner then
+				if obj.OnDamage then
+					local v = Vector:New(ENTITY.GetVelocity(self._Entity))
+					local x,y,z,mag = ENTITY.GetVelocity(self._Entity)
+					if mag > 8 then
+						PlaySound3D("actor/giant/giant_hand-hit",obj.Pos.X,obj.Pos.Y,obj.Pos.Z,3,5)
+						obj:OnDamage(self.Damage, self)
+					end
+					ecol = false
+				end
+				--GObjects:ToKill(self)
+			else
+				Game:Print("coL WITH Sekfl")
+			end
+		else
+            if not SOUND3D.IsPlaying(self._snd) then
+                self._snd = PlaySound3D("impacts/stonebig-impact"..math.random(1,3),x,y,z, 10, 60)
+            end
+		end
+	end
+	if not self.timer then
+        ENTITY.PO_EnableGravity(self._Entity,true)
+		self.timer = math.random(self.LifeTime*0.8,self.LifeTime*1.2)
+	end
+end
+--============================================================================
+function Gladiator4_Stone:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+    ENTITY.PO_EnableGravity(self._Entity,false)
+    self.timerInit = 8
+end
+--============================================================================
+function Gladiator4_Stone:OnUpdate()
+	if self.timerInit then
+		self.timerInit = self.timerInit - 1
+		if self.timerInit < 0 then
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+   			ENTITY.EnableCollisions(self._Entity, true, 0.8, 4.0)
+   			self.timerInit = nil
+   		end
+   	else
+		if self.timer then
+			self.timer = self.timer - 1
+			if self.timer < 0 then
+				GObjects:ToKill(self)
+				AddPFX("BodyExplosion",0.5,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+			end
+		end
+	end
+end

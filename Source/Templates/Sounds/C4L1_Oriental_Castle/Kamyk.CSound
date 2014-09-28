@@ -1,0 +1,10 @@
+Kamyk.Volume = 50
+Kamyk.Interval = 10
+Kamyk.RandomShift = 4
+Kamyk.Falloff =
+{
+  Start = 7,
+  End = 40
+}
+Kamyk.Sound ="C4L1_Oriental_Castle/Kamyk_01;C4L1_Oriental_Castle/Kamyk_02;C4L1_Oriental_Castle/Kamyk_03"
+

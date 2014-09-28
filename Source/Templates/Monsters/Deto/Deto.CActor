@@ -1,0 +1,173 @@
+o.Model = "deto"
+o.Scale = 1.4
+o.CreatePO = true
+o.Health = 250
+o.WalkSpeed = 1.6
+o.RunSpeed = 2.6
+o.RotateSpeed = 8
+o.Animation = "idle"
+o.enableGibWhenHPBelow = -5
+
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,	-- pozniej sphere
+    Mass     = 400,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.45,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+
+	Animations = {
+        idle   = {1.0,false},
+		walk   = {1.0,true,{
+			}},
+		run   = {0.9,true,{
+			}},
+		run_drop   = {0.9,true,{
+				{0.5,'Drop'},
+				{1.7,'EndDrop'},
+			}},
+		atak   = {1.0,true,{
+			}},
+
+
+		hit1   = {1.0,false,{
+					--{0.0,'PlaySoundHit',"hit"},
+				}},
+		hit2   = {1.0,false,{
+					--{0.0,'PlaySoundHit',"hit"},
+				}},
+		detonacja   = {1.0,false,{
+					--{0.0,'PlaySound',"deto"},
+					{0.0,"SStop"},
+					{1.0,"Detonate"},
+				}},
+
+    },
+
+	RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				--{"kusza","weaponlost",false},
+				--{"shield","weaponlost",false},
+			},
+    },
+
+
+    Hits = {"hit1", "hit2"},
+    Ambients = {"idle",},
+    
+    DeathJoints = {
+        'n_p_kolano','n_l_kolano','k_ogo','r_l_lokiec','r_p_lokiec',
+        'k_szyja','r_p_bark','r_l_bark',
+    },
+   	notBleedingJoints = {
+		deton = {},
+		--shield = {},
+		--sword = {},
+    },
+
+	GibExplosionStrength = 20000,
+	GibExplosionRange = 3.0,
+	GibExplosionDeltaY = -1.5,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"k_ramiona","FX_gib_blood",1},
+				{"root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_ramiona","gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+			},
+    },
+
+	DeathExplosionStrength = 5000,
+	DeathExplosionRange = 10,
+	DeathExplDamage = 50,
+}
+
+
+o.DeathTimer = 140                  -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt", "hear","runToPlayer"}
+
+o.AiParams.viewDistance = 90
+
+o.AiParams.viewDistance360 = 16
+o.AiParams.runRadius = 15
+
+o.AiParams.viewAngle = 360
+
+o.AiParams.updateSpeed = 0.2
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {-120,120}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1			-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 1.0
+o.AiParams.stopAfterWalkingTime = {90,120}
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.walkStep = 7.0
+o.AiParams.moveDisplacement = 3
+o.AiParams.hearing = 1.2
+o.AiParams.perception = 1.0
+o.AiParams.attackRange = 2
+
+--[[o.AiParams.weaponDamage = 20
+
+o.AiParams.attackRangeAngle = 100
+o.AiParams.changePosAfterFire = 0.95
+    
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 100
+
+o.AiParams.maxExplosives = 11
+o.AiParams.dropExplChance = 0.02
+o.AiParams.detonateChance = 0.2
+o.AiParams.soundAmbientDelay = 5.0
+
+o.AiParams.pushStren = 12
+o.AiParams.pushDamage = 10
+
+
+o.AiParams.detonateAtRange = 4.0
+o.AiParams.ABtimeOut = 4.0
+o.AiParams.ABHp = 0.3
+--]]
+
+o.shadow = 128
+
+o.AiParams.collisionAnim = "detonacja"
+o.AiParams.actionDistance = 4.0
+o.NeverWalk = true
+
+
+o.AiParams.soundAmbientDelay = 2.0

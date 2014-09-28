@@ -1,0 +1,5 @@
+o.Scale = 1
+o.Pack = "snop.dat"
+o.Mesh = "snop_2sided_transShape"
+o.DontTranslateToZero = true
+o.DontLighting = true

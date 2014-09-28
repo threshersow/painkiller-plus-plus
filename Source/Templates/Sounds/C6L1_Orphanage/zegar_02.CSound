@@ -1,0 +1,9 @@
+zegar_02.Volume = 50
+zegar_02.Interval = 3
+zegar_02.RandomShift = 1
+zegar_02.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+zegar_02.Sound ="C6L1_Orphanage/zegar_02a;C6L1_Orphanage/zegar_02b;C6L1_Orphanage/zegar_02c;C6L1_Orphanage/zegar_02d"

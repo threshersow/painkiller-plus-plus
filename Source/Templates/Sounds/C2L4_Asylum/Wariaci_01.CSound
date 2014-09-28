@@ -1,0 +1,10 @@
+Wariaci_01.Volume = 60
+Wariaci_01.Interval = 15
+Wariaci_01.RandomShift = 7
+Wariaci_01.Falloff =
+{
+  Start = 2,
+  End = 30
+}
+Wariaci_01.Sound ="C2L4_Asylum/Wariaci_01"
+

@@ -1,0 +1,13 @@
+o.BaseObj = "Psycho_elektro.CActor"
+
+o.AiParams.aiGoals = {"idle", "runToPlayer",}
+o.s_SubClass.walk = {"walk_zwiazany_elektro",}
+o.s_SubClass.Ambients = {"idle_zwiazany","idle_zwiazany1"}
+o.AiParams.collisionAnim = "atak_explohead"
+o.AiParams.actionDistance = 3
+
+o.AiParams.Explosion = {
+	ExplosionStrength = 500, 
+	ExplosionRange = 6,
+	Damage = 80,
+}

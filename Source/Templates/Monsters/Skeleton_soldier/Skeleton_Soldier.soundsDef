@@ -1,0 +1,79 @@
+o.s_SubClass.SoundsDefinitions = {
+	hit = {
+		samples = {'skeleton_hit1','skeleton_hit2','skeleton_hit3'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	step = {
+		samples = {'skeleton_krok1','skeleton_krok2',},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	shoot = {
+		samples = {"skeleton_rifle-shoot1","skeleton_rifle-shoot2",},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	shootvoice = {
+		samples = {"skeleton_rifle-shoot-voice1","skeleton_rifle-shoot-voice2",},
+		playChance = 0.33,
+		dist1 = 12,
+		dist2 = 48,
+	},
+	zawleczka = {
+		samples = {'skeleton_smoke-zawleczka',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	swish = {
+		samples = {'skeleton_smoke-throw-swish',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	tvoice = {
+		samples = {'skeleton_smoke-throw-voice',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	bswish = {
+		samples = {"skeleton_bayonet-atack-swish",},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	atakvoice = {
+		samples = {"skeleton_bayonet-atack-voice1","skeleton_bayonet-atack-voice2"},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	onAttackOnce = {
+		samples = {"skeleton_halt1","skeleton_halt2","skeleton_halt3","skeleton_halt4",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"skeleton_bodyfalls"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"skeleton_weapon-lost"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	
+	death = {
+		samples = {"skeleton_death1","skeleton_death2","skeleton_death3","skeleton_death4", },
+        dist1 = 16,
+		dist2 = 60,
+	},
+    
+	onAttack = {
+		samples = {"skeleton_attackscream1","skeleton_attackscream2","skeleton_attackscream3","skeleton_attackscream4","skeleton_attackscream5",},
+        dist1 = 16,
+		dist2 = 60,
+	},
+    
+    damage = {
+		samples = {"skeleton_bayonet-hit"},
+	},
+}

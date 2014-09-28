@@ -1,0 +1,23 @@
+Kamyk.Mesh = "pSphereShape1"
+Kamyk.Pack = "kamyk.dat"
+Kamyk.Scale = 0.2
+Kamyk.Restitution = 0.8 -- sprezystosc
+Kamyk.LinearDamping = 0.8  -- tlumienie liniowe
+
+function Kamyk:OnPrecache()
+    Cache:PrecacheParticleFX("KamykFX")
+end
+
+function Kamyk:OnCreateEntity()
+    self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Particles)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+
+    local pfx = AddPFX('KamykFX',0.6)
+    ENTITY.RegisterChild(self._Entity,pfx)    
+end
+
+function Kamyk:OnInitTemplate()
+    self:ReplaceFunction("Update", nil)
+end
+

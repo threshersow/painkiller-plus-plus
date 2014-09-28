@@ -1,0 +1,10 @@
+TV_pisk.Volume = 50
+TV_pisk.Interval = 0
+TV_pisk.RandomShift = 0
+TV_pisk.Falloff =
+{
+  Start = 1,
+  End = 20
+}
+TV_pisk.Sound ="C3L3_Military_Base/TV_pisk"
+

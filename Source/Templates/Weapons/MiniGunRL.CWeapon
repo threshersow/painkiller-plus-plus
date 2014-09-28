@@ -1,0 +1,67 @@
+o.Model = "CRL"
+o.Scale = 1.0                      -- skala broni
+o.Pos = Vector:New(0.3, -0.36 ,-0.60) -- pozycja wzgledem kamery
+o.Ang = Vector:New(0.1,0.1,0)           -- kat wzgledem kamery
+o.s_SubClass = {
+     -- trzesienie kamera przy wystrzale:
+    ShotCamMove = 0.15,
+    ShotCamRotate = 0.10,
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout = 24, -- rakiety
+    AltFireTimeout    = 2,  -- pociski
+    MinBurst       =  3, -- minimalna seria oddanych strzalow
+    -- zasieg pociskow
+    AltFireRange    = 100, 
+    -- zadawane obrazenia:
+    AltFireDamage   = 12, -- pociski, w MULTIPLAYER powinno byc = 20
+    RocketDamage = 120, -- rakiety
+    -- odrzucanie od pociskow:
+    EnemyThrowBack = 1400,
+    EnemyThrowUp   = 0,
+    -- predkosc i sila wybuchu rakiety:
+    RocketSpeed = 40,
+    RocketExplosionStrength = 3000,
+    RocketExplosionRange    = 7,
+    -- szybkosc animacji i czas blendingu:
+    Animations = 
+    {   
+        RL          = {1.0, 0.0},
+        idle        = {1.0, 0.2},
+        walk        = {1.0, 0.2},
+        startshot   = {1.0, 0.0},
+        endshot     = {4.0, 0.0},
+        cshot       = {4.0, 0.0},
+    }
+}
+
+o.s_MPSubClass = {
+     -- trzesienie kamera przy wystrzale:
+    ShotCamMove = 0.15,
+    ShotCamRotate = 0.10,
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout = 24, -- rakiety
+    AltFireTimeout    = 2,  -- pociski
+    MinBurst       =  3, -- minimalna seria oddanych strzalow
+    -- zasieg pociskow
+    AltFireRange    = 100, 
+    -- zadawane obrazenia:
+    AltFireDamage   = 8, -- pociski, w MULTIPLAYER powinno byc = 20
+    RocketDamage = 100, -- rakiety
+    -- odrzucanie od pociskow:
+    EnemyThrowBack = 500,
+    EnemyThrowUp   = 0,
+    -- predkosc i sila wybuchu rakiety:
+    RocketSpeed = 40,
+    RocketExplosionStrength = 3400,
+    RocketExplosionRange    = 5,
+    -- szybkosc animacji i czas blendingu:
+    Animations = 
+    {   
+        RL          = {1.0, 0.0},
+        idle        = {1.0, 0.2},
+        walk        = {2.0, 0.2},
+        startshot   = {1.0, 0.0},
+        endshot     = {2.0, 0.0},
+        cshot       = {2.0, 0.0},
+    }
+}

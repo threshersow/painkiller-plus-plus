@@ -1,0 +1,9 @@
+CObject.s_Editor = {
+        ["Actions.OnPlay.[new]"]   = { "TextEdit" },
+        ["Actions.OnKill.[new]"]   = { "TextEdit" },
+        --["Actions.OnLaunch.[new]"] = { "TextEdit" },
+    }
+--============================================================================
+function CObject:Rescale(factor)
+    if self.Pos then self.Pos:MulByFloat(factor) end
+end

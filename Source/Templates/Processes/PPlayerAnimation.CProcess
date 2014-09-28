@@ -1,0 +1,524 @@
+--============================================================================
+PPlayerAnimation.Anim = ""
+o.ClientID = -1
+o.Pitch = 0
+o.State = 0
+o.tm = 0
+o._snd = 0
+o._snd1 = 0
+o._waitFX = 0
+o._RotSpeed = 1
+o._LastState = -1
+o._CurAnimIndex = -1
+o._CurAnimLength = 0
+o._LastPitch = 0
+o._LastJumpTimer = 0
+o._LastPos   = Vector:New(0,0,0)
+o._Entity = nil
+o._mdlPKHead = nil
+o._mshMuzzle = nil
+o.TipPoint = Vector:New(0,0,0)
+o._tmElectro = 0
+o._wallFryTimeOut = 0
+o.s_SubClass = 
+    {
+        Animations = 
+        {
+            idle         =  {1,    0.1},
+            run          =  {1.74, 0.05},
+            run_b        =  {1.74, 0.05},
+            run_strafe_l =  {1.9,  0.3},
+            run_strafe_p =  {1.9,  0.3},
+            
+            jump_start  =  {2,    0.05},
+            jump_fly    =  {1,    0.05},
+            jump_land   =  {1.2,  0.0},
+            jump_f_land =  {1.74, 0.0},
+            jump_b_land =  {1.74, 0.0},
+        }
+    }
+
+--Inherit(PPlayerAnimation,CProcess)
+--============================================================================
+function PPlayerAnimation:New(entity,clientid)
+    local p = Clone(self)	--PPlayerAnimation)
+    p._LastPos:Set(ENTITY.GetPosition(entity))    
+    p._Entity = entity
+    p.ClientID = clientid
+    p._test = -3.14
+    p._mdlPKHead = ENTITY.Create(ETypes.Model,"PKW_head","",0.155)
+    p._mshMuzzle = ENTITY.Create(ETypes.Mesh,"../Data/Items/muzzle.dat","muzzle_trans_2sidedShape",0.3)
+    if not p._mshMuzzle then MsgBox("dupa") end
+    return p
+end
+--============================================================================
+function PPlayerAnimation:Delete()
+    self:Reset();
+    ENTITY.Release(self._mdlPKHead)
+    ENTITY.Release(self._mshMuzzle)    
+    self._mdlPKHead = nil
+    self._mshMuzzle = nil
+end
+--============================================================================
+function PPlayerAnimation:SetAnim(anim,loop,speed,blend)
+    if self.Anim ~= anim then
+        --Game:Print(anim)            
+        --Game:Print(self._Entity)            
+        self.Anim = anim
+
+        if self.s_SubClass and self.s_SubClass.Animations and self.s_SubClass.Animations[anim] then         
+            if not speed then  speed = self.s_SubClass.Animations[anim][1]  end
+            if not blend then  blend = self.s_SubClass.Animations[anim][2]  end
+        end        
+        if not speed then speed = 1   end
+        if not blend then blend = 0.5 end
+
+        local a = MDL.SetAnim(self._Entity, anim, loop, speed, blend, nil, nil, false)        
+--      MDL.SetHeadTrackCurve(self._Entity, a, "K_ogo") 
+
+        self._CurAnimIndex = a
+        self._CurAnimLength = MDL.GetAnimLength(self._Entity, a) 
+        self._isAnimating = true
+        --Game:Print(anim)
+        
+        -- dzwieki
+        local e = self._Entity
+        --if not (Player and Player._Entity == e) then 
+            local vx,vy,vz,vl = ENTITY.GetVelocity(e)            
+            if anim == "jump_start" then 
+                if self._LastJumpTimer <= 0 then
+                    CPlayer:SndEnt("Jump",e) 
+                    self._LastJumpTimer = 0.5
+                end
+                --Game:Print('CPlayer:SndEnt("Jump",e)')
+            end
+            if (anim == "jump_land" or anim == "jump_f_land" or anim == "jump_b_land") then
+                local x,y,z = ENTITY.GetPosition(e)                
+                if vy < -11 then
+                    if vy > -25 then  CPlayer:SndEnt("Jump_End",e) end -- poniewaz bedzie slychac damage
+                    local dx,dz = vx/vl, vz/vl
+                    if not Cfg.NoSmoke then AddPFX("but", 0.15 ,Vector:New(x+dx*2,y-0.3,z+dz*2)) end
+                end
+            end
+        --end
+        
+
+    end
+end
+--============================================================================
+function PPlayerAnimation:Reset()
+    if self._Entity then 
+        self.State = -2 -- chowam bron trupa
+        self:ShowCorrectWeapon()
+    end    
+    self._Entity = nil
+    self._LastState = -1
+    self.State = 0
+    self.Anim = ""
+end
+--============================================================================
+function PPlayerAnimation:OnFinishAnim(anim)
+    
+    if anim == "jump_start" then
+        self:SetAnim("jump_fly",false)        
+    end    
+
+    if anim == "jump_land" then
+        self:SetAnim("idle",true)
+    end
+
+    if anim == "jump_f_land" then
+        self:SetAnim("run",true)
+    end
+
+    if anim == "jump_b_land" then
+        self:SetAnim("run_b",true)
+    end
+end
+GX = -1
+GY = 0
+GZ = 0
+GAX = 0
+GAY = 1.4
+GAZ = 0
+--============================================================================
+function PPlayerAnimation:ShowCorrectWeapon()
+    local e = self._Entity
+    -- painkiller
+    MDL.SetMeshVisibility(e,"PKW_korpusShape",false)
+    MDL.SetMeshVisibility(e,"PKW_HeadShape",false)
+    -- shotgun
+    MDL.SetMeshVisibility(e,"ASG_bodyShape",false)
+    -- stakegun
+    MDL.SetMeshVisibility(e,"stake",false)
+    -- minigun
+    MDL.SetMeshVisibility(e,"rl",false)
+    -- spawara
+    MDL.SetMeshVisibility(e,"pCylinderShape1",false)
+    MDL.SetMeshVisibility(e,"pCylinderShape2",false)
+    MDL.SetMeshVisibility(e,"polySurfaceShape450",false)
+    MDL.SetMeshVisibility(e,"polySurfaceShape455",false)
+	-- flameth
+    MDL.SetMeshVisibility(e,"polySurfaceShape1391",false)
+    -- boltstickheater
+	MDL.SetMeshVisibility(e,"polySurfaceShape431",false)
+
+    local j = MDL.GetJointIndex(e,"joint1")                    
+    ENTITY.RegisterChild(e,self._mdlPKHead,true,j,false) -- rodzic go nie zabija
+    ENTITY.SetPosition(self._mdlPKHead,-0.04,0.08,0.57)        
+
+    WORLD.RemoveEntity(self._mdlPKHead)            
+    WORLD.RemoveEntity(self._mshMuzzle)            
+
+    ENTITY.Release(self._snd)
+    ENTITY.Release(self._snd1)
+    ENTITY.Release(self._light)   
+    ENTITY.Release(self._fxEnd)
+       
+    self._snd = 0
+    self._snd1 = 0
+    self._fxEnd = nil
+    self._light = nil
+    
+    if self.State == 1 then
+        WORLD.AddEntity(self._mdlPKHead)
+        MDL.SetMeshVisibility(e,"PKW_korpusShape",true)
+        
+        if self._LastState == 11 then
+            MDL.SetAnim(self._mdlPKHead,"close",false,0.3,0)                    
+            --BindSoundToEntity(e,"weapons/painkiller/pain-rotor-stop",15,50,false,nil,nil,nil,nil,nil,0)
+        else
+            MDL.SetAnim(self._mdlPKHead,"close",false,100,0)
+            --MDL.SetMeshVisibility(e,"PKW_HeadShape",true)
+        end        
+    end
+    if self.State == 2 then
+        MDL.SetMeshVisibility(e,"ASG_bodyShape",true)
+    end
+    if self.State == 3 then
+        MDL.SetMeshVisibility(e,"stake",true) 
+    end
+    if self.State == 4 or self.State == 41 then 
+        MDL.SetMeshVisibility(e,"rl",true)         
+        if self.State == 41 then            
+            local tp
+            tp,self._snd = BindSoundToEntity(e,"weapons/machinegun/mgun-mp-loop",15,50,true,nil,nil,nil,nil,nil,0)
+            WORLD.AddEntity(self._mshMuzzle)
+            ENTITY.SetPosition(self._mshMuzzle,-0.11,-0.25,1.08)
+            local j = MDL.GetJointIndex(e,"joint1")
+            ENTITY.RegisterChild(e,self._mshMuzzle,true,j,false) -- rodzic go nie zabija
+        end        
+    end
+    if self.State == 5 or self.State == 51 then 
+        MDL.SetMeshVisibility(e,"pCylinderShape1",true)
+        MDL.SetMeshVisibility(e,"pCylinderShape2",true)
+        MDL.SetMeshVisibility(e,"polySurfaceShape450",true)
+        MDL.SetMeshVisibility(e,"polySurfaceShape455",true)
+    end
+    if self.State == 6 or self.State == 61 then 
+        MDL.SetMeshVisibility(e,"polySurfaceShape1391",true)
+        if self.State == 61 then 
+            local tp
+            tp,self._snd = BindSoundToEntity(e,"weapons/assault-rifle/rifle-mp-loop",15,50,true,nil,nil,nil,nil,nil,0)
+            WORLD.AddEntity(self._mshMuzzle)
+            ENTITY.SetPosition(self._mshMuzzle,0,0.1,1.2)
+            local j = MDL.GetJointIndex(e,"joint1")
+            ENTITY.RegisterChild(e,self._mshMuzzle,true,j,false) -- rodzic go nie zabija
+        end
+    end
+    if self.State == 7 then 
+        MDL.SetMeshVisibility(e,"polySurfaceShape431",true)
+    end
+
+    if self.State == 11 then
+        --BindSoundToEntity(e,"weapons/painkiller/pain-rotor-star",15,50,false,nil,nil,nil,nil,nil,0)
+        local tp
+        tp,self._snd = BindSoundToEntity(e,"weapons/painkiller/pain-rotor-loop",15,50,true,nil,nil,nil,nil,nil,0)
+        self._RotSpeed = 1
+        self.tm = 0                    
+        WORLD.AddEntity(self._mdlPKHead)                                
+        MDL.SetAnim(self._mdlPKHead,"open",false,0.5,0)                    
+        MDL.SetMeshVisibility(e,"PKW_korpusShape",true)
+    end
+    if self.State == 12 or self.State == 13 then
+        MDL.SetMeshVisibility(e,"PKW_korpusShape",true)
+    end
+    
+    if self.State == 51 then
+        local tp
+        tp,self._snd = BindSoundToEntity(e,"weapons/driverelectro/electro-mp-loop",25,50,true,nil,nil,nil,nil,nil,0)
+        local cx,cy,cz = ENTITY.PO_GetPawnHeadPos(e)             
+        local q = Quaternion:New_FromEuler(self.Pitch,ENTITY.GetOrientation(e),0)
+        local fx,fy,fz = q:InverseTransformVector(0,0,1)                                                    
+        local s = Templates["DriverElectro.CWeapon"]:GetSubClass()                  
+        local dx,dy,dz = cx + fx *s.ElectroLength, cy + fy *s.ElectroLength, cz + fz *s.ElectroLength
+        self.TipPoint = Vector:New(dx,dy,dz)
+        self._fxEnd = AddPFX("electro_end",0.5)
+        self._light = CreateLight(0,0,0,255,255,255,2,5,1)
+        tp,self._snd1 = BindSoundToEntity(self._fxEnd,"weapons/driverelectro/electro-mp-loop",25,50,true,nil,nil,nil,nil,nil,0)
+    end
+
+end
+--============================================================================
+function PPlayerAnimation:PlayerTrace(pe,range)    
+    local b,d,x,y,z,nx,ny,nz,he,e,fx,fy,fz            
+    if Player and Player._Entity == pe then -- my player
+        fx,fy,fz = Player.ForwardVector.X, Player.ForwardVector.Y, Player.ForwardVector.Z
+        b,d,x,y,z,nx,ny,nz,he,e = Player:Trace(range)
+    else -- other
+        local q = Quaternion:New_FromEuler(self.Pitch,ENTITY.GetOrientation(pe),0)
+        fx,fy,fz = q:InverseTransformVector(0,0,1)                                
+        local cx,cy,cz = ENTITY.PO_GetPawnHeadPos(pe)
+        ENTITY.RemoveFromIntersectionSolver(pe)
+        b,d,x,y,z,nx,ny,nz,he,e = WORLD.LineTrace(cx,cy,cz,cx+fx*range,cy+fy*range,cz+fz*range)
+        ENTITY.AddToIntersectionSolver(pe)                    
+    end    
+    return b,d,x,y,z,nx,ny,nz,he,e,fx,fy,fz
+end
+--============================================================================
+function PPlayerAnimation:FireFX(delta)    
+    if self.State ~= self._LastState then self._waitFX = 0 end    
+    if self._waitFX > 0 then self._waitFX = self._waitFX - delta end    
+    
+    if self._waitFX <= 0 then
+        if self.State == 41 then
+            local s = Templates["MiniGunRL.CWeapon"]:GetSubClass()
+            local b,d,x,y,z,nx,ny,nz,he,e,fx,fy,fz = self:PlayerTrace(self._Entity,s.AltFireRange)
+            if ENTITY.GetType(e) ==  ETypes.Mesh then
+                Templates["MiniGunRL.CWeapon"]:HitWallSFX(e,x,y,z,nx,ny,nz,fx,fy,fz)
+            end                
+            self._waitFX = s.AltFireTimeout / 30            
+        end
+        if self.State == 61 then
+            local s = Templates["RifleFlameThrower.CWeapon"]:GetSubClass()
+            local b,d,x,y,z,nx,ny,nz,he,e,fx,fy,fz = self:PlayerTrace(self._Entity,s.RifleRange)
+            if ENTITY.GetType(e) ==  ETypes.Mesh then
+                Templates["RifleFlameThrower.CWeapon"]:HitWallSFX(e,x,y,z,nx,ny,nz,fx,fy,fz)
+            end                
+            self._waitFX = s.FireTimeout / 30            
+        end
+    end    
+end
+--============================================================================
+function PPlayerAnimation:Tick(delta)
+    local e = self._Entity
+    if not e or e <= 0 then return end
+    
+    self.State = PLAYER.GetMPByte(e)
+    self.Pitch = PLAYER.GetPitch(e) / -(32767*0.75)
+    --/-(32767*0.75) - 0.2
+    
+    if self._LastJumpTimer > 0 then self._LastJumpTimer = self._LastJumpTimer - delta end
+    
+    --Game:Print(self.State)
+    --Game:Print(self._Name)
+       
+    if not MDL.IsRagdollActive(e) then        
+
+        if not (Player and Player._Entity == e) or Game.TPP then    
+            if self.State ~= self._LastState then
+                self:ShowCorrectWeapon()
+            end
+    
+            --if not self._pfx1 then
+                --self._pfx1 = BindTrail(e,"player_eye","k_head",0.2,0.15,0.045) 
+                --self._pfx2 = BindTrail(e,"player_eye","k_head",0.2,0.15,-0.045) 
+                --ENTITY.SetKillByParent(self._pfx1,false)
+                --ENTITY.SetKillByParent(self._pfx2,false)
+            --end
+
+            if self.State == 1 or self.State == 11 then
+                if self.State == 11 then
+                    self._RotSpeed = self._RotSpeed + delta * 60
+                    if self._RotSpeed > 50 then self._RotSpeed = 50 end
+                else
+                    self._RotSpeed = self._RotSpeed - delta * 80
+                    if self._RotSpeed < 1 then self._RotSpeed = 0 end
+                end
+                self.tm = self.tm + delta * self._RotSpeed
+                Quaternion:New_FromEuler(0,0,self.tm):ToEntity(self._mdlPKHead)
+            else
+                self._RotSpeed = 0
+            end                        
+        end
+                
+        if self._isAnimating and  MDL.GetAnimTime(e,self._CurAnimIndex) >= self._CurAnimLength then
+            self._isAnimating = nil
+            self:OnFinishAnim(self.Anim)
+        end
+        
+        self:FireFX(delta)
+        
+        local vx,vy,vz,vl = ENTITY.GetVelocity(e)
+        local x,y,z = ENTITY.GetPosition(e)
+        --Game:Print(vy)
+       
+        ENTITY.RemoveFromIntersectionSolver(self._Entity)
+        local isFloor = ( WORLD.LineTrace(x,y+0.5,z,x,y-0.65,z) or PLAYER.FloorCheckMP(e,0.65) )
+        ENTITY.AddToIntersectionSolver(self._Entity)
+        
+        --if isFloor then Game:Print("floor") else Game:Print("not floor") end
+        
+        if vy > 6.9*Tweak.MultiPlayerMove.JumpStrength then -- ****************************************** [[[ JUMP ]]] ***
+            
+            --Game:Print(vy)
+            --Game:Print("wyskok")            
+            if not self._flying then
+                self._flying = true
+                self:SetAnim("jump_start",false)        
+            end
+        
+        elseif self.Anim ~= "jump_start" and not isFloor then -- **** [[[ FLY ]]] ***
+            
+            --Game:Print("leci")
+            self._flying = true
+            self:SetAnim("jump_fly",false)
+        
+        elseif self.Anim ~= "jump_start" and isFloor then -- ************************ [[[ LAND / RUN / IDLE ]]] ***
+                               
+            local hl = Dist2D(0,0,vx,vz)
+            local ay = ENTITY.GetOrientation(e)
+            local dir = Vector:New(vx,0,vz)
+            dir:RotateZYX(0,-ay,0)                        
+            
+            if self._flying then -- ******************************** [[[ LAND ]]] ***
+            
+                --Game:Print("ladowanie")            
+                if hl > 0.5 and math.abs(dir.Z) >= math.abs(dir.X) then -- z biegiem
+                    if dir.Z >= 0 then
+                        self:SetAnim("jump_f_land",false)
+                    else
+                        self:SetAnim("jump_b_land",false)
+                    end
+                else -- w miejscu
+                    self:SetAnim("jump_land",false)
+                end
+                self._flying = false
+            
+            else  -- **************************************** [[[ RUN / IDLE ]]] ***
+                
+                if not string.find(self.Anim,"jump",1) then
+                    
+                    if hl > 0.5 then -- **************************** [[[ RUN ]]] ***
+                    
+                        self._flyTimeOut = nil
+                        if math.abs(dir.Z) >= math.abs(dir.X) then -- forward/backward
+                            if dir.Z >=0 then
+                                self:SetAnim("run",true)
+                            else
+                                self:SetAnim("run_b",true)
+                            end
+                        else -- strafe
+                            if dir.X >=0 then
+                                self:SetAnim("run_strafe_l",true)
+                            else
+                                self:SetAnim("run_strafe_p",true)
+                            end
+                        end            
+                        
+                    else -- *************************************** [[[ IDLE ]]] ***
+                        
+                        self:SetAnim("idle",true)
+                        
+                    end
+                end
+                
+            end
+        end
+               
+        -- weapon angle interpolation
+        local pitch = self._LastPitch + (self.Pitch - self._LastPitch) * 0.33 
+        self._test = self._test + delta
+        if self._test > 3.14 then self._test = -3.14 end
+        local joint = MDL.GetJointIndex(e, "K_ogo")
+        if pitch > 0 then
+            --MDL.SetHeadTrackRot(e, pitch/2, pitch, 0)
+            MDL.ApplyJointRotation(e, joint, pitch/2, pitch, 0)
+        else
+            --MDL.SetHeadTrackRot(e, -pitch/2, pitch, 0)
+            MDL.ApplyJointRotation(e, joint, -pitch/2, pitch, 0)
+        end
+        self._LastPitch = pitch
+        self._LastState = self.State
+    end    
+end
+--============================================================================
+function PPlayerAnimation:Render(delta)
+    local entity = self._Entity
+
+    if not entity or entity <= 0 then return end
+
+    if not (Player and Player._Entity == entity) or Game.TPP then    
+    
+        if self.State == 12 then -- painkiller ray
+            local pe = ENTITY.GetChildByName(entity,"PKW_blades")
+            if pe ~= 0 then
+                local x,y,z = ENTITY.GetPosition(pe)
+                local j = MDL.GetJointIndex(entity,"joint1")
+                local px,py,pz = MDL.TransformPointByJoint(entity,j,0,0,0.5)
+                local q = Quaternion:New_FromEuler(self.Pitch,ENTITY.GetOrientation(entity),0)
+                local fx,fy,fz = q:InverseTransformVector(0,0,1)                    
+                local d = R3D.DistToLine(x,y,z,px,py,pz,px+fx*900,py+fy*900,pz+fz*900)                
+                local s = Templates["PainKiller.CWeapon"]:GetSubClass()                  
+                
+                local wm = ENTITY.GetChildByName(entity,"fx_weaponmodifier")                                        
+                if wm ~= 0 or d < s.PainRayTolerance then
+                    ENTITY.RemoveFromIntersectionSolver(entity)
+                    local b,d,tx,ty,tz,nx,ny,nz,he,e = WORLD.LineTrace(px,py,pz,x-fx,y-fy,z-fz)
+                    ENTITY.AddToIntersectionSolver(entity)
+                    if not b then 
+                        R3D.DrawSprite1DOF(px,py,pz,x,y,z,0.1,R3D.RGB(255,255,255),"particles/trailpainkiller") 
+                    end
+                end
+            end
+        end
+        
+        if self.State == 51 and self._fxEnd then -- spawarka
+            local tml = Templates["DriverElectro.CWeapon"] 
+            local s = Templates["DriverElectro.CWeapon"]:GetSubClass()                  
+                            
+            local cx,cy,cz = ENTITY.PO_GetPawnHeadPos(entity)             
+            local j = MDL.GetJointIndex(entity,"joint1")
+            --local px,py,pz = MDL.GetJointPos(e,j)                
+            local px,py,pz = MDL.TransformPointByJoint(entity,j,0,0,1)
+            local q = Quaternion:New_FromEuler(self.Pitch,ENTITY.GetOrientation(entity),0)
+            local fx,fy,fz = q:InverseTransformVector(0,0,1)                                                    
+            --local dx,dy,dz = self.TipPoint:Get()
+            local dx,dy,dz = cx + fx *s.ElectroLength, cy + fy *s.ElectroLength, cz + fz *s.ElectroLength
+            
+            self._tmElectro = self._tmElectro + delta * 6
+
+            -- tip point interpolation
+            self.TipPoint:Set(dx,dy,dz)
+
+            ENTITY.RemoveFromIntersectionSolver(entity)
+            local b,d,tx,ty,tz,nx,ny,nz,he,e = WORLD.LineTrace(px,py,pz,px+fx*s.ElectroLength,py+fy*s.ElectroLength,pz+fz*s.ElectroLength)
+            ENTITY.AddToIntersectionSolver(entity)            
+            if b and e then
+                self.TipPoint:Set(tx-fx*0.1,ty-fy*0.1,tz-fz*0.1)
+                self._wallFryTimeOut = self._wallFryTimeOut - delta
+                if self._wallFryTimeOut <= 0 then                    
+                    ENTITY.SpawnDecal(e,'electro',tx,ty,tz,nx,ny,nz)                    
+                    local r = Quaternion:New_FromNormal(nx,ny,nz)
+                    AddPFX("electro_hit_wall",0.4,self.TipPoint,r)
+                    self._wallFryTimeOut = 0.03
+                end                
+                ENTITY.EnableDraw(self._fxEnd,false,true)
+            else
+                ENTITY.EnableDraw(self._fxEnd,true,true)                
+            end
+                        
+            
+            local points = 
+            {
+                Vector:New(px,py,pz),
+                self.TipPoint,
+            }
+            tml:DrawBezierLine(points,15,11,FRand(0.15,0.20),R3D.RGB(FRand(65,90),FRand(75,115),FRand(200,250)),0.12)
+            tml:DrawBezierLine(points,15,12,FRand(0.15,0.20),R3D.RGB(FRand(65,90),FRand(75,115),FRand(200,250)),0.12)            
+
+            ENTITY.SetPosition(self._fxEnd,self.TipPoint.X,self.TipPoint.Y,self.TipPoint.Z)
+            ENTITY.SetPosition(self._light,self.TipPoint.X,self.TipPoint.Y+0.5,self.TipPoint.Z)
+        end                
+    end
+end

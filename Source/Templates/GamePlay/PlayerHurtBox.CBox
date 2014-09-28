@@ -1,0 +1,35 @@
+o.Frozen = false
+o._hurtCnt = 0
+o.DamagePerSecond = 10
+
+--============================================================================
+function PlayerHurtBox:Update()
+    if not self.Frozen then         
+        if not Game:IsServer() then 
+            -- SINGLEPLAYER
+            if self._hurtCnt <= 0 then 
+                if self:IsInside(PX,PY+1,PZ) then
+                    if Player and not Player._died then Player:OnDamage(self.DamagePerSecond, nil, AttackTypes.Lava) end
+                end
+                self._hurtCnt = 15
+            else
+                self._hurtCnt = self._hurtCnt - 1
+            end
+        else -- MULTIPLAYER            
+            for i,o in Game.Players do
+                if not o._died and o._lava < 0 then
+                    local x,y,z = ENTITY.GetPosition(o._Entity)
+                    if self:IsInside(x,y+1,z) then
+                        o:OnDamage(self.DamagePerSecond, nil, AttackTypes.Lava)
+                        o._lava = 15
+                    end
+                end
+            end            
+        end
+    end
+end
+--============================================================================
+function PlayerHurtBox:OnLaunch()
+    self.Frozen = false
+end
+--============================================================================

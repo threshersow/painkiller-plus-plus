@@ -1,0 +1,207 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+
+o.Scale = 0.2
+o.Restitution = 0.8 	-- sprezystosc
+o.LinearDamping = 0.0  -- tlumienie liniowe
+o.TimeToLive = 30 * 14
+
+o.fx = 'nun_spell'
+
+o.Health = 1
+o.Explosion = {
+    stren = 9000,
+    range = 16,
+    damage = 10,
+}
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self.fx)
+    Cache:PrecacheParticleFX("barrelarabxplo")
+    Cache:PrecacheItem("Kamyktank.CItem")
+end
+
+function o:OnCreateEntity()
+    local pfx = AddPFX(self.fx,0.3)
+    ENTITY.RegisterChild(self._Entity,pfx)
+    ENTITY.EnableDraw(self._Entity,false)
+
+	self:PO_Create(BodyTypes.Simple,1.0,ECollisionGroups.Noncolliding)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+	ENTITY.AddToIntersectionSolver(self._Entity)
+
+    ENTITY.PO_SetMovedByExplosions(self._Entity,false)
+
+    self.timer = 3
+	self:BindSound("actor/samurai/samurai-Fireball",4,28,false)			
+	local ownerAI = self.ObjOwner.AiParams
+	self._vel = ownerAI.throwVelocity * FRand(0.45,0.5)
+	self._homingMissileAngleChangeSpeed = 0
+	self._rot = 0
+	--ENTITY.PO_SetLinearDamping(self._Entity,0.6) 
+end
+
+
+function o:OnUpdate()
+	if Game.freezeUpdate then return end
+
+	if not self._enabled then
+		local angle = self._rot
+		self._rot = self._rot + 0.06
+		local x = math.sin(angle) + math.cos(angle)
+		local z = math.cos(angle) - math.sin(angle)
+		x = x*8		-- + self._velInitial.X
+		z = z*8		-- + self._velInitial.Z
+		local y = self._velInitial.Y
+		ENTITY.SetVelocity(self._Entity, x,y,z)
+		
+		local v = Vector:New(x,y,z)
+		v:Normalize()
+		self._lastAngle = math.atan2(-v.X, -v.Z)
+		self._lastPitch = math.atan2(v.Y, math.sqrt(v.X*v.X+v.Z*v.Z))
+		return
+	end
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+			ENTITY.PO_SetLinearDamping(self._Entity,0.0) 
+            self:BindSound("weapons/machinegun/rl-flyingnoise-loop",8,40,true)
+		end 
+	else
+
+		if self._target and self._target.Health > 0 and self.ObjOwner.AiParams.homingMissile then
+
+			--if math.random(100) < 101 then
+				local ownerAI = self.ObjOwner.AiParams
+				local x1,y1,z1 = self._target.Pos.X, self._target.Pos.Y + 1.7, self._target.Pos.Z		-- moze jak daleko to wyzej leci?
+				local x2,y2,z2 = self.Pos.X, self.Pos.Y, self.Pos.Z
+				
+				local d = Dist3D(x1,y1,z1,x2,y2,z2)
+				if d > 30 then
+					y1 = y1 + 1.0 + FRand(0,1)
+				end
+				if d > 15 then
+					y1 = y1 + 1.0 + FRand(0,1)
+				end
+			
+				vel = Vector:New(ENTITY.GetVelocity(self._Entity))
+				vel:Normalize()
+
+				x1 = x1 + self.randomizeTargetPos * vel.X
+				z1 = z1 + self.randomizeTargetPos * vel.Z
+
+				self._rot = self._rot + 0.05
+
+				vel:MulByFloat(4)
+				
+				--local x,y,z = ENTITY.GetVelocity(self._Entity)
+				--local oldV = Vector:New(x,y,z)
+				--oldV:Normalize()
+				
+				local v = Vector:New(x2 - x1, y2 - y1, z2 - z1)
+				v:Normalize()
+				
+				local angle = math.atan2(v.X, v.Z)
+				local pitch =  math.atan2(y1 - y2, math.sqrt((x1 - x2)*(x1 - x2)+(z1 - z2)*(z1 - z2)))
+				
+				--[[
+				local b,dist,xcol,ycol,zcol,nx,ny,nz,he,e = WORLD.LineTraceFixedGeom(self.Pos.X,self.Pos.Y,self.Pos.Z, self.Pos.X + vel.X,self.Pos.Y + vel.Y,self.Pos.Z + vel.Z)
+				if b then
+					pitch = pitch + 0.3
+					if debugMarek then Game:Print("rocket col") end
+				end
+--]]
+				
+				--if self._lastAngle then
+				
+					local aa = AngDist(self._lastAngle, angle)
+					local ap = AngDist(self._lastPitch, pitch)
+
+					--Game:Print(" last a "..self._lastAngle.." "..self._lastPitch)
+					--Game:Print(" angles "..angle.." "..pitch)
+					--Game:Print(" adiffs "..aa.." "..ap)
+					-- GObjects:ToKill(self)
+
+					self._homingMissileAngleChangeSpeed = self._homingMissileAngleChangeSpeed + 0.15
+					if self._homingMissileAngleChangeSpeed > ownerAI.homingMissileAngleChangeSpeed then
+						self._homingMissileAngleChangeSpeed = ownerAI.homingMissileAngleChangeSpeed
+					end
+					local cs = self._homingMissileAngleChangeSpeed
+
+					if (aa*180/math.pi > cs) then
+						angle = self._lastAngle + cs*math.pi/180
+					elseif (aa*180/math.pi < -cs) then
+						angle = self._lastAngle - cs*math.pi/180
+					end
+
+					if (ap*180/math.pi > cs) then
+						pitch = self._lastPitch + cs*math.pi/180
+					elseif (ap*180/math.pi < -cs) then
+						pitch = self._lastPitch - cs*math.pi/180
+					end
+
+						
+					
+					v.X,v.Y,v.Z = VectorRotate(1.0,0,0, 0, 0, pitch)
+					v.X,v.Y,v.Z = VectorRotate(v.X,v.Y,v.Z, 0, -angle+math.pi/2, 0)
+					
+					self._vel = self._vel * 1.1
+					if self._vel > self._velInitial.Y then
+						self._vel = self._velInitial.Y
+					end
+					v:MulByFloat(self._vel)
+					ENTITY.SetVelocity(self._Entity, -v.X, -v.Y, -v.Z)
+				--end
+				
+				self._lastAngle = angle
+				self._lastPitch = pitch
+			--end
+		end
+	end
+end
+
+
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+	--Game:Print("FB oncol")
+    ENTITY.PO_Enable(self._Entity, false)
+    WORLD.Explosion2(x,y,z, self.Explosion.stren, self.Explosion.range, self.ObjOwner._Entity, AttackTypes.Rocket, self.Explosion.damage)
+
+	PlaySound3D("weapons/machinegun/rocket_hit",x,y,z,20,60)
+	AddPFX("barrelarabxplo",1.0,Vector:New(x,y,z)) 
+
+	if not self._onDamage then
+		AddPFX("Grenade",1.0,Vector:New(x,y,z))
+
+		AddAction({{"Light:a[1],a[2],a[3],200,200,100, 8, 10 , 1, 0.02,0.1,0.02"}},nil,nil,x,y+1.5,z)
+		if Game._EarthQuakeProc then
+			Game._EarthQuakeProc:Add(x,y,z, 5, 18, 0.18, 0.18, false)
+		end
+		local n = math.random(4,6) -- how many (min,max)
+		local scales = {0.5, 0.7}
+		for i = 1, n do
+			local scale = scales[math.random(1,2)] -- size (min,max)
+			local ke = AddItem("Kamyktank.CItem",scale,Vector:New(x,y+0.5+i/10,z), false, Quaternion:New_FromEuler(FRand(0,3.14), FRand(0,3.14), FRand(0,3.14)))
+			local vx = FRand(-21,21) -- velocity x
+			local vy = FRand(34,44)  -- velocity y
+			local vz = FRand(-21,21) -- velocity z
+			ENTITY.SetVelocity(ke,vx,vy,vz)
+			ENTITY.SetTimeToDie(ke,FRand(1,2)) -- lifetime (min,max)
+		end
+	end
+
+	GObjects:ToKill(self)
+end
+
+function o:OnDamage( damage, owner, attacktype, x, y, z, nx, ny, nz, he )
+	if not self._enabled then return end
+	if attacktype == AttackTypes.Rocket then
+		return
+	end
+    local x2,y2,z2 = self.Pos.X, self.Pos.Y, self.Pos.Z
+    self._onDamage = true
+    self:OnCollision(x2,y2,z2)
+end
+

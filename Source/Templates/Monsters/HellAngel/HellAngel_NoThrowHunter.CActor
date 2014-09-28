@@ -1,0 +1,23 @@
+o.BaseObj = "HellAngel.CActor" 
+o.Scale = 1.28
+
+o.NeverWalk = true
+
+o.AiParams.aiGoals = {"idle", "attack", "hunt", "hear","flee"}
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = 12
+o.AiParams.stopAfterWalking = 0.5
+o.AiParams.stopAfterWalkingTime = {20,40}
+
+o.AiParams.delayBetweenAttacks = 30
+o.AiParams.weaponAmmo = 0
+o.AiParams.doNotRotateWhenShooting = false
+o.AiParams.FarAttack_Priority = 0.0		-- im wieksze tym bardziej bedzie chcial zmienic na alak daleki
+o.AiParams.NearAttack_Priority = 1.0
+
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = true

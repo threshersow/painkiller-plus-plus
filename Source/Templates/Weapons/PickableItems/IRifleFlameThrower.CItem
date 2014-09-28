@@ -1,0 +1,21 @@
+o.Model = "RTF_ITEM"
+o.DisabledInVoosh = true
+o.Scale = 0.2
+o.SlotIndex = 6
+o.RespawnTime = Cfg.WeaponRespawnTime
+o.Ammo = 
+{
+    Rifle        = 30,
+    FlameThrower = 0,
+}
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/driverelectro",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"take-driverelectro"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

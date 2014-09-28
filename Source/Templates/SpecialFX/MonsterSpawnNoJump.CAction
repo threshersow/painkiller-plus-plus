@@ -1,0 +1,13 @@
+-- with jump
+o.Sequence = {
+    {"Object:'FX_Spawn.CActor',1,px,py-2,pz,p.angle"},        
+    {'AI:p,false'},
+	{"PSnd:{'specials/respawns/respawn_m1','specials/respawns/respawn_m2','specials/respawns/respawn_m3','specials/respawns/respawn_m4','specials/respawns/respawn_m5','specials/respawns/respawn_m6'},10,30"},
+
+    {'EnableDraw:p,true'},    
+
+    {"Wait:0.5"},
+    {"PlaySpawnSound:p,10,35"},
+
+    {'AI:p,true'},
+}

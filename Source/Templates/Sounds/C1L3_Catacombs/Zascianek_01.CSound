@@ -1,0 +1,10 @@
+Zascianek_01.Volume = 60
+Zascianek_01.Interval = 6
+Zascianek_01.RandomShift = 3
+Zascianek_01.Falloff =
+{
+  Start = 6,
+  End = 50
+}
+Zascianek_01.Sound ="C1L3_Catacombs/Zascianek_01"
+

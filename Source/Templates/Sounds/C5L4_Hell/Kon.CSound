@@ -1,0 +1,10 @@
+Kon.Volume = 80
+Kon.Interval = 7
+Kon.RandomShift = 3
+Kon.Falloff =
+{
+  Start = 10,
+  End = 40
+}
+Kon.Sound ="C5L4_Hell/Kon_01;C5L4_Hell/Kon_02"
+

@@ -1,0 +1,9 @@
+ludzie_01.Volume = 80
+ludzie_01.Interval = 12
+ludzie_01.RandomShift = 4
+ludzie_01.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+ludzie_01.Sound ="c6l4_city/ludzie_01;c6l4_city/ludzie_02;c6l4_city/ludzie_03"

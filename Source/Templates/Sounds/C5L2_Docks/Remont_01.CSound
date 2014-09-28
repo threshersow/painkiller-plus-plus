@@ -1,0 +1,10 @@
+Remont_01.Volume = 50
+Remont_01.Interval = 18
+Remont_01.RandomShift = 4
+Remont_01.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Remont_01.Sound ="C5L2_Docks/Remont_01"
+

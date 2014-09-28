@@ -1,0 +1,8 @@
+o.s_SubClass.SoundsDefinitions = {
+	CreakSound = {
+		samples = {"doors/whicked-scrape1","doors/whicked-scrape2","doors/whicked-scrape3","doors/whicked-scrape4"},
+		dist1 = 50,
+		dist2 = 160,
+	},
+}
+

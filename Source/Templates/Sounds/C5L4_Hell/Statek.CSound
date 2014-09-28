@@ -1,0 +1,10 @@
+Statek.Volume = 80
+Statek.Interval = 40
+Statek.RandomShift = 10 
+Statek.Falloff =
+{
+  Start = 15,
+  End = 60
+}
+Statek.Sound ="C5L4_Hell/Statek_01;C5L4_Hell/Statek_02"
+

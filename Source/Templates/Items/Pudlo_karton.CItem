@@ -1,0 +1,23 @@
+o.Mesh = "pCubeShape11"
+o.Pack = "pudlo_karton.dat"
+o.DestroyPack = "pudlo_karton_zlom.dat"
+o.Friction = 0.9
+o.Mass = 300
+o.Health = 10
+o.Scale = 0.4
+o.TestDeathZone = true
+
+o.Destroy.Strength = 0
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.6
+o.Destroy.LifetimeAfterExplosion = 5
+o.Destroy.ThrowItem = {"kartka1.CItem","kartka2.CItem","kartka3.CItem"}
+o.Destroy.ThrowItemCount = 20
+o.Destroy.ThrowItemSpread = 0.5
+o.DetailMap.DefaultDetailTex = false
+
+o.Destroy.Treasures = 
+{
+    Coins  = {4, 's'},
+}

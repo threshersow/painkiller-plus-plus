@@ -1,0 +1,31 @@
+o.BaseObj = "Samurai.CActor"
+
+o.Scale = 1.44
+
+o.AiParams.aiGoals = {"idle","hunt", "hear","flee","FarAttack"}
+
+o.AiParams.alwaysSee = true
+
+--o.NeverWalk = true
+--o.AiParams.farAttackRangeMax = 60
+--o.AiParams.farAttackRangeMin = 4
+--o.AiParams.delayBetweenSpeels = 1
+
+o.AiParams.changePosAfterFire = 0.33
+o.AiParams.delayBetweenAttacks = 30
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.doNotRotateWhenShooting = true
+
+o.AiParams.FarAttacks = {"atak2",}
+o.AiParams.weapon = {
+		bulletsPerShot = 0,
+		maxDist = 60,
+		minDist = 4,
+		spreadAngle = 0.5,
+		damagePerBullet = 10,
+		PO_HitForce = 0,
+		maxYaw = 45,
+		maxPitch = 45,
+	}
+o.AiParams.weaponBindPos = "k_glowa"
+o.AiParams.weaponBindPosShift = Vector:New(2.0, 0, 0)

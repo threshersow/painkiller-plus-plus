@@ -1,0 +1,20 @@
+Stake.Mesh = "pCylinderShape1"
+Stake.Pack = "kolek.dat"
+Stake.Scale = 0.07
+--Stake.Restitution = 0.5
+--Stake.Mass = 0.001
+Stake.TestDeathZone = true
+Stake.SoundInWater = "impacts/bulletbig-water"
+
+o.DestroyPack = "kolek_zlom.dat"
+
+o.Destroy.Strength = 50
+o.Destroy.AverageDelay = 0
+o.Destroy.AverageVariation = 0
+o.Destroy.VelocityFactor = Vector:New(0,0,0)
+--o.Destroy.Effect = "explode_dust"
+--o.Destroy.EffectScale = 0.1
+o.LifetimeAfterExplosion = 3
+
+o.TimeToLive = 6 * 30
+o.SmallWaterSplash = true

@@ -1,0 +1,23 @@
+o.Mesh = "polySurfaceShape58169"
+o.Pack = "laweczka_cala.dat"
+o.DestroyPack = "laweczka_zlom.dat"
+o.Scale = 0.38
+o.Health = 40
+o.Mass = 1000
+o.Friction = 5
+o.Friction = 1
+
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 300
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.5
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+

@@ -1,0 +1,152 @@
+o.Model = "slave"
+o.CreatePO = true
+o.Scale = 1
+o.Health = 64
+o.WalkSpeed = 1.2
+o.RunSpeed = 1.2
+o.RotateSpeed = 6
+o.NeverRun = false
+o.throwHeart = true
+--o.enableGibWhenHPBelow = -69
+o.Animation = "idle1"
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 125,
+}
+
+o.s_SubClass = {
+    rotateHead = 0.6,
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.2,
+
+    Animations = {
+		idle1   = {1.0,false},
+		walk   = {1.0,true, {
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.07,'PlaySound',"step2"},
+				{0.07,'FootFX','s_l_srodstopie'},
+				}},
+
+        run    = {1.0,true, {
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.07,'PlaySound',"step2"},
+				{0.07,'FootFX','s_l_srodstopie'},
+				}},
+        atak1  = {1.0,true, {
+				{0.0,'BindTrailSword','trail_sword','miecz','miecz1'},
+				{0.9,'damage',},
+				{0.0,'PlaySound',"atak"},
+				{0.7,'PlaySound',"swish"},
+				{0.2,'PlaySound',"swishpr"},
+                {0.95,'IfMissedPlaySound',},
+                {1.4,'EndTrailSword'},
+				}},
+        hit1 = {1.0, false, {
+				{0.0,'PlaySoundHit',"hit"},
+				}},
+        hit2 = {1.0, false, {
+				{0.0,'PlaySoundHit',"hit"},
+				}},
+    },
+
+    NearAttacks = {"atak1",},
+    ragdollJoint = "root",
+    Ambients = {"idle1"},
+    Hits = {"hit1", "hit2"},
+
+    RagdollCollisions = {
+        MinStren = 2.0,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				{"miecz", "weaponlost", false},
+			},
+    },
+
+    notBleedingJoints = {
+		miecz = true,           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+	hitGroundJoint = "miecz1",
+
+    DeathJoints = {
+        's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+        'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+        'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+        'k_ogo','k_zebra','k_ramiona','k_glowa',
+    },
+
+	GibExplosionStrength = 5000,
+	GibExplosionRange = 5.0,
+	GibExplosionDeltaY = -1.5,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"k_ogo","FX_gib_blood",-1},
+				{"k_ramiona","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"k_szyja","FX_gib_blood",-1},
+				{"root","FX_gib_blood",1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"k_ogo", "gibSplash", true},
+				{"k_ramiona", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"miecz", "weaponlost", false},
+			},
+	    },
+}
+
+
+o.DeathTimer = 110                   -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee"}
+o.AiParams.viewDistance = 35
+o.AiParams.viewDistance360 = 5
+o.AiParams.viewAngle = 150
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 2.5
+o.AiParams.attackRangeAngle = 100
+    
+o.AiParams.hearing = 1.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {45,90}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1				-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,60}
+
+o.AiParams.walkStep = 7.0
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 20
+o.AiParams.moveDisplacement = 4.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+
+o.AiParams.updateSpeed = 0.33				-- brain (visibility) update speed, 1.0 - update every frame !!!!
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+o.shadow = 128
+o.AiParams.soundAmbientDelay = 7.0

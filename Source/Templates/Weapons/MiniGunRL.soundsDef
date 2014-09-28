@@ -1,0 +1,52 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path = "weapons/machinegun",
+    dist1   = 15,
+    dist2   = 50,
+    disablePitch = true,
+    shot = 
+    {
+        samples = {"mgun_shoot1","mgun_shoot2","mgun_shoot3","mgun_shoot4"}
+    },
+    shell = 
+    {
+        path    = "weapons/assault-rifle",
+        samples = {"weapon_rifle_shell1","weapon_rifle_shell2","weapon_rifle_shell3","weapon_rifle_shell4"},
+    },
+    rotor_loop = 
+    {
+        samples = {"rotor-loop"},
+    },
+    rotor_loop2 = 
+    { 
+        samples = {"rotor-loop2"},
+    },
+    rotor_stop = 
+    {
+        samples = {"rotor-stop"},
+    },
+    mp_mixloop = -- rotor + fire + shells (for multiplayer enemies)
+    {
+        samples = {"mgun-mp-loop"},
+    },
+    rocket_launch = 
+    {
+        samples = {"rl_shoot"},
+    },
+    out_of_ammo = 
+    {
+        samples = {"mgun-empty"},
+    },
+    bullet_hit_wall = 
+    {
+        path = "impacts",
+        samples = {"bullet-stone","bullet-stone2","bullet-stone3","bullet-stone4",
+                    "ricochet1","ricochet2","ricochet3","ricochet4"},
+    },
+    bullet_hit_water = 
+    {
+        path = "impacts",
+        samples = {"bullet-water1","bullet-water2","bullet-water3","bullet-water4",
+                    "bullet-water5"},
+    }
+}

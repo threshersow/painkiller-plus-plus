@@ -1,0 +1,10 @@
+wiatr_05.Volume = 80
+wiatr_05.Interval = 0
+wiatr_05.RandomShift = 0
+wiatr_05.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+wiatr_05.Sound ="C6L3_Lab/wiatr_05"
+

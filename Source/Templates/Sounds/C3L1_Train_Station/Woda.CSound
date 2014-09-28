@@ -1,0 +1,10 @@
+Woda.Volume = 50
+Woda.Interval = 7
+Woda.RandomShift = 4
+Woda.Falloff =
+{
+  Start = 1.5,
+  End = 30
+}
+Woda.Sound ="C3L1_Train_Station/Woda_01;C3L1_Train_Station/Woda_02"
+

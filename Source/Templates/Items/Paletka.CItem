@@ -1,0 +1,22 @@
+o.Mesh = "polySurfaceShape17985"
+o.Pack = "paletka_cala.dat"
+o.DestroyPack = "paletka_zlom.dat"
+o.Scale = 0.27
+o.Health = 4
+o.Mass = 110
+o.Friction = 1
+
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 20
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.3
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+

@@ -1,0 +1,10 @@
+Panna_01.Volume = 80
+Panna_01.Interval = 16
+Panna_01.RandomShift = 6
+Panna_01.Falloff =
+{
+  Start = 1.5,
+  End = 15
+}
+Panna_01.Sound ="C2L4_Asylum/Panna_01;C2L4_Asylum/Panna_02"
+

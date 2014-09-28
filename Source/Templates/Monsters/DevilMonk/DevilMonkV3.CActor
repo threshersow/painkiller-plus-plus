@@ -1,0 +1,54 @@
+o.BaseObj = "DevilMonk.CActor"
+o.Model = "Devil_Monk_v3"
+o.s_SubClass.SoundDir = "devilmonk"
+o.FX = nil
+o.enableGibWhenHPBelow = -121
+
+o.Poison = {
+	checkSpeed = 2,
+	Range = 2.5,
+	TimeOut = 60,
+	Freq = 9999,
+	LoseControlTime = 30,
+}
+
+
+o.s_SubClass.Animations.atak1 = {1.5, true,{
+							{0.0,'BindTrailSword','trail_sword','trail_kosa1','trail_kosa2'},
+							{0.5,'PlaySound',"atak"},
+							{1.6,'PlaySound',"swish"},
+                            {1.7,'damage',},
+                            {3.25,'EndTrailSword'},
+						}}
+o.s_SubClass.Animations.atak2 = {1.5, true,{
+							{0.4,'PlaySound',"atak"},
+							{0.7,'PlaySound',"swish"},
+                            {0.9,'damage'},
+						}}
+o.s_SubClass.Animations.czar = {1.0, false, {
+							{0.0,'PlaySound',"czar"},
+							{1.3,'PlaySound',"fire"},
+							{1.0, 'lockTarget'},
+							{1.3, 'lighting'},
+                        }}
+
+o.s_SubClass.RagdollCollisions = {
+	MinStren = 4.0,
+	MinTime = 0.6,
+	Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+			}
+    }
+    
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear","throw"}
+
+o.AiParams.throwAnim = "czar"
+o.AiParams.throwRangeMin = 12
+o.AiParams.throwRangeMax = 30
+o.AiParams.minDelayBetweenThrow = 8
+o.AiParams.throwAmmo = 99999
+o.AiParams.lightingDamage = 25
+o.lightingFX = "DM3spell"
+o.AiParams.lightingDist = 50

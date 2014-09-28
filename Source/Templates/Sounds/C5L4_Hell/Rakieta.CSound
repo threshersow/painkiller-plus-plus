@@ -1,0 +1,10 @@
+Rakieta.Volume = 80
+Rakieta.Interval = 10
+Rakieta.RandomShift = 3
+Rakieta.Falloff =
+{
+  Start = 5,
+  End = 40
+}
+Rakieta.Sound ="C5L4_Hell/Rakieta_tlo_01;C5L4_Hell/Rakieta_tlo_02"
+

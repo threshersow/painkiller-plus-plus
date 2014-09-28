@@ -1,0 +1,45 @@
+o.s_SubClass.SoundsDefinitions = {
+	atak = {
+		samples = {'wdemon-atak1','wdemon-atak2'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+
+	bodyfalls = {
+		samples = {"wdemon-bodyfalls",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	death  = {
+		samples = {"wdemon-death1","wdemon-death2","wdemon-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    --onAttackOnce      -- podlaczyc
+    attackAmbient = {
+        samples = {"wdemon-attackscream1","wdemon-attackscream2","wdemon-attackscream3","wdemon-attackscream4",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    hit = {
+		samples = {"wdemon-hit1","wdemon-hit2",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	damage = {
+        samples = {"wdemon-damage"},
+    },
+    fly = {
+        samples = {"wdemon-fly-loop"},
+    },
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+    atak   = {
+			{0.0, 'PlaySoundHit', 'atak'},
+	},
+    hit   = {
+			{0.0, 'PlaySoundHit', 'hit'},
+	},
+}

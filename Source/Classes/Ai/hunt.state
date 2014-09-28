@@ -1,0 +1,197 @@
+AiStates.hunt = {
+	name = "hunt",
+	huntTime = 10,			-- po tylu sekundach zapomina, ze zgubil przeciwnika
+}
+
+
+function AiStates.hunt:OnInit(brain)
+	local actor = brain._Objactor
+	if actor.NeverMove then Game:Print("WARNING "..actor._Name.." want HUNT, but nevermove!!!!!!!!") end
+	--Game.freezeUpdate = true
+	local aiParams = actor.AiParams
+	local d = Dist3D(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z, actor._groundx, actor._groundy, actor._groundz)
+	self.walk = 1
+
+	if ENTITY.PO_Exist(actor._Entity) then
+		local b,d,e = actor:Trace(2)
+		if b and e then
+			local obj = EntityToObject[e]
+			if obj and obj._AIBrain and obj._Class == "CActor" then
+				--Game:Print("HUNT!!!!! przede mna stoi koles !!!!")
+				self.delayTimer = math.random(15,35)
+			end
+		end
+	end
+	self.walk = 2
+	
+	if not actor._isWalking then
+		actor:RotateToVector(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z)
+	end
+
+	self.active = true	
+	self.substate = 0
+	self.delayTimer = nil
+end
+
+function AiStates.hunt:OnUpdate(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	if self.walk then
+		if not actor._isRotating then
+			if self.walk == 2 then
+				local dist = Dist3D(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z, actor._groundx, actor._groundy, actor._groundz)
+				--if debugMarek then Game:Print(actor._Name.." walk to last seen, dist = "..dist) end
+				if dist > 2.2 then
+					actor:WalkTo(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z, not aiParams.dontRunWhenHunt, nil, nil, true)
+				else
+					actor:WalkForward(FRand(2.3, 3.5), false, FRand(-45,45),nil,nil,true)
+				end
+			end
+			self.walk = nil
+		end
+		return
+	end
+	
+	if self.substate == 0 then
+		if self.delayTimer then
+			self.delayTimer = self.delayTimer - 1
+			--if debugMarek then Game:Print(actor._Name.." delay timer") end
+			if self.delayTimer <= 0 then
+				self.delayTimer = nil
+				local d = Dist3D(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z, actor._groundx, actor._groundy, actor._groundz)
+				if (d > aiParams.attackRange) then
+					--if debugMarek then Game:Print(actor._Name.." still close "..d) end
+					actor:WalkTo(brain._enemyLastSeenPoint.X + FRand(-2,2), brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z + FRand(-2,2), not aiParams.dontRunWhenHunt)
+				else
+					--if debugMarek then Game:Print(actor._Name.." close "..d) end
+					actor:WalkTo(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z, not aiParams.dontRunWhenHunt)
+				end
+			end
+		else
+			if not actor._isWalking --[[and self.active--]] then
+				local d = Dist3D(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z, actor._groundx, actor._groundy, actor._groundz)
+				if d < aiParams.attackRange then
+					if not actor._isRotating then
+						if brain._enemyLastSeenVelocitySpeed < 0.1 then
+							actor:RotateTo(brain._enemyLastSeenOrientation * 180/3.14)
+						else
+							local v = Vector:New(brain._enemyLastSeenVelocity.X, brain._enemyLastSeenVelocity.Y, brain._enemyLastSeenVelocity.Z)
+							v:Normalize()
+							v.X = v.X + brain._enemyLastSeenPoint.X
+							v.Y = v.Y + brain._enemyLastSeenPoint.Y
+							v.Z = v.Z + brain._enemyLastSeenPoint.Z
+							actor:RotateToVector(v.X, v.Y, v.Z) 
+						end
+						self.substate = 1
+						self.delayTimer = math.random(60,95)
+					end
+				else
+					if not aiParams.alwaysSee and not aiParams.huntPlayer then
+						actor:RotateToVector(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z)
+					end
+					if brain._currentTime < actor._lastCantMoveTime + 3/30  then
+						self.substate = 2
+					else
+						self.active = false
+						brain._delayToHunt = math.random(5, 40)
+						self.substate = 0
+						self.walk = 2
+						--if debugMarek then Game:Print(actor._Name.." hunt nie dotarl na miejsce "..d) end
+					end
+				end
+			end
+		end
+	else
+		if self.substate == 1 and not actor._isWalking then
+			if self.delayTimer then
+				self.delayTimer = self.delayTimer - 1
+				if self.delayTimer < 0 then
+					--Game:Print(actor._Name.." koniec obracania sie w hunt")
+					--
+					self.active = false
+					self.substate = 0
+					brain._delayToHunt = math.random(5, 40)
+					self.delayTimer = nil
+					self.walk = 2
+					--
+				end
+			else
+				--Game:Print(actor._Name.." self acvite false")
+				--
+				self.active = false
+				self.substate = 0
+				self.walk = 2
+				brain._delayToHunt = math.random(5, 40)
+				--
+			end
+
+			if not actor._isRotating then
+				if math.random(100) < 5 then
+					actor:Rotate(math.random(-30, 30))
+				end
+			end
+		end
+		if self.substate == 2 then
+			if not actor._isRotating then
+				-- try again:
+				--Game:Print(actor._Name.." try again hunt")
+				--Game.freezeUpdate = true
+				actor._lastCantMoveTime = actor._lastCantMoveTime - 1.0		-- fake
+				actor:WalkTo(brain._enemyLastSeenPoint.X + FRand(-1,1), brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z + FRand(-1,1), not aiParams.dontRunWhenHunt)
+				if debugMarek then
+					actor._debugW1 = brain._enemyLastSeenPoint.X
+					actor._debugW2 = brain._enemyLastSeenPoint.Y
+					actor._debugW3 = brain._enemyLastSeenPoint.Z
+				end
+				self.delayTimer = math.random(50,100)
+				self.substate = 1
+			end
+		end
+	end
+end
+
+function AiStates.hunt:OnRelease(brain)
+	self.walk = nil
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	self.active = false
+	self.delayTimer = nil
+	brain._delayToHunt = math.random(5, 40)
+	--brain.lastHuntTime = brain._currentTime
+	if not actor._isWalking and not aiParams.alwaysSee then
+		actor:RotateToVector(brain._enemyLastSeenPoint.X, brain._enemyLastSeenPoint.Y, brain._enemyLastSeenPoint.Z)
+	end
+	--Game:Print("HUNT release"..brain._currentTime)
+end
+
+function AiStates.hunt:Evaluate(brain)
+	if not brain.r_closestEnemy then		--  and Player.Health > 0
+		local actor = brain._Objactor
+		local aiParams = actor.AiParams
+
+		if brain._delayToHunt then
+			brain._delayToHunt = brain._delayToHunt - 1
+			--Game:Print(actor._Name.." delay to hunt "..brain._delayToHunt)
+			if not actor._isWalking then
+				--Game:Print(actor._Name.." delay to hunt stopped")
+				brain._delayToHunt = -1
+			end
+			if brain._delayToHunt < 0 then
+				brain._delayToHunt = nil
+				--Game:Print(actor._Name.." end delay to hunt")
+			end
+		end
+
+
+		if not brain._delayToHunt and not aiParams.WalkAreaWhenAttack then
+			if brain._enemyLastSeenTime + self.huntTime > brain._currentTime and brain._distToNearestEnemy > aiParams.attackRange then
+				return 0.1
+			end
+			if self.active then
+				return 0.1
+			end
+		end
+	end
+	return 0
+end
+

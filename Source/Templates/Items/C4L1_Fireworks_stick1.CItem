@@ -1,0 +1,77 @@
+o.Mesh = "polySurfaceShape70794"
+o.Pack = "C4L1_laska1.dat"
+o.Scale = 1.0
+o.Health = 9
+o.forceOut = 80				-- sila explozji na boki
+o.forceUp =	550				-- sila explozji do gory
+o.timeToLive = 1.6		 	-- w sec.
+o.Friction = 0.0
+o.flySpeed = 1000
+
+o.flame_FX = "firework"
+o.flame_FXscale = 0.5
+o.explosion_FX = "firework_explo"
+o.explosion_FXscale = 0.4
+
+o.ExplosionStrength = 2000
+o.ExplosionRange = 4
+o.Damage = 50
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self.flame_FX)
+    Cache:PrecacheParticleFX(self.explosion_FX)
+end
+
+function o:OnCreateEntity()
+	local q = Clone(self.Rot)
+	local angle = math.random(0,360)
+	local y = FRand(1,2)
+	local x = math.sin(angle) + math.cos(angle)
+	local z = math.cos(angle) - math.sin(angle)
+
+    local naboki = FRand(0.9, 1.2)
+    x = x * self.forceOut * naboki
+	y = y * self.forceUp
+	z = z * self.forceOut * naboki
+
+	x,y,z = q:TransformVector(x,y,z)
+
+
+	--local angle = FRand(-0.1,0.1)
+	--q:FromEuler(angle,0,angle)
+	--q = q * self.Rot
+	--q:ToEntity(self._Entity)
+
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.HCGNormalNCWithSelf)
+	ENTITY.PO_SetAngularDamping(self._Entity, 0.3)
+	ENTITY.PO_SetLinearDamping(self._Entity, 0.1)
+
+	ENTITY.PO_SetMovedByExplosions(self._Entity, false)			-- ?
+    --ENTITY.RemoveFromIntersectionSolver(self._Entity) 
+	ENTITY.PO_Hit(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z,x,y,z)
+	self._TimeToLive = self.timeToLive * FRand(0.8, 1.2)
+	
+	self._Flame = self:BindFX(self.flame_FX,self.flame_FXscale,nil,0,-0.3,0)
+end
+
+function o:Tick(delta)
+    self._TimeToLive = self._TimeToLive - delta
+    if self._TimeToLive < 0 then
+		AddPFX(self.explosion_FX, self.explosion_FXscale, self.Pos)
+		WORLD.Explosion2(self.Pos.X,self.Pos.Y,self.Pos.Z,self.ExplosionStrength,self.ExplosionRange,nil,AttackTypes.Grenade,self.Damage)
+		PlaySound3D("impacts/fireworks-explode"..math.random(1,2),self.Pos.X,self.Pos.Y,self.Pos.Z,20,70)
+		GObjects:ToKill(self)
+        return
+    end
+    
+    local q = Quaternion:New_FromEntity(self._Entity)
+    local x,y,z = ENTITY.TransformLocalPointToWorld(self._Entity,0,0,0)
+        
+	local dir = Vector:New(0,0,0)
+    dir.X,dir.Y,dir.Z = q:TransformVector(0,1,0)
+    dir:Normalize()
+        
+    local a = self.flySpeed * delta
+    ENTITY.PO_Impulse(self._Entity,x,y,z,dir.X*a,dir.Y*a,dir.Z*a)
+end
+

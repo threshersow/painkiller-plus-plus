@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "items",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"item-shield-medium"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

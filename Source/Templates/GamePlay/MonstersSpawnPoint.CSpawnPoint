@@ -1,0 +1,15 @@
+function MonstersSpawnPoint:OnInitTemplate()
+    self.Tick = nil
+end
+
+function MonstersSpawnPoint:OnLaunch()
+    self._Launched = true
+    self:RestoreFromSave()
+end
+
+function MonstersSpawnPoint:RestoreFromSave()
+    if self._Launched then
+        self.Tick = CSpawnPoint.Tick
+        AddObjToTable(GObjects.TickListRest,self)
+    end
+end

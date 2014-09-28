@@ -1,0 +1,64 @@
+CLight.s_Editor = 
+    {
+        Type               = { "ComboBox"  , {"None|0", "Directional|1", "Point|2","Spot|3"} },
+        StartFalloff       = { "SpinEdit"  , {"%.1f", 0, 1000, 0.1} },
+        Range              = { "SpinEdit"  , {"%.1f", 0, 1000, 0.1} },
+		Intensity	      = { "SpinEdit"  , {"%.1f", 0, 10, 0.1} },
+        ConeAngle        = { "SpinEdit"  , {"%.1f", 0, 180, 1} },
+        Projector		=  { "BrowseEdit", {"*.*", "data\\textures\\", true} },
+    }    
+--============================================================================
+function CLight:EditRender(delta)
+    if not Editor.EditLights then return end
+    local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+    if sz<=1 then 
+        if (self.Type==1) then
+            R3D.DrawDirLight(self.Color:Compose(),self.Pos.X, self.Pos.Y, self.Pos.Z,self.Direction.X,self.Direction.Y,self.Direction.Z) 
+        elseif (self.Type==2) then
+            R3D.DrawSphere(self.Range,self.Color:Compose(),self.Pos.X,self.Pos.Y,self.Pos.Z)
+            R3D.DrawSphere(self.StartFalloff,self.Color:Compose(),self.Pos.X,self.Pos.Y,self.Pos.Z)
+        elseif (self.Type==3) then
+            R3D.DrawSpotLight(self.Color:Compose(),self.Pos.X, self.Pos.Y, self.Pos.Z,self.Direction.X,self.Direction.Y,self.Direction.Z,self.Range,self.StartFalloff,self.ConeAngle)
+        end
+        R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,self.Color:Compose())
+    end
+end
+--============================================================================
+function CLight:EditTick(delta)
+    if not Editor.EditLights then return end    
+
+
+    -- edit
+    if Editor.SelObj == self then        
+        if INP.Key(Keys.NumPlus) == 2 then        
+            self.Range = self.Range + 4 * delta
+        end
+        if INP.Key(Keys.NumMinus) == 2 then        
+            self.Range = self.Range - 4 * delta
+        end
+        if not self._Rot then		-- ?
+			self._Rot = Quaternion:New()
+			self._Rot:FromNormalZ(self.Direction.X,self.Direction.Y,self.Direction.Z)
+        end
+
+        self.Direction.X,self.Direction.Y,self.Direction.Z = self._Rot:TransformVector(0,0,1)
+        self:Apply(self)
+    else
+        -- picking point 
+        if MOUSE.LB() == 1 then        
+            local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+            if Dist2D(MX,MY,sx,sy) <  15  then
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+            end
+        end    
+    end
+
+end
+--============================================================================
+function CLight:Rescale(factor)
+    self.Pos:MulByFloat(factor)
+    self.StartFalloff = self.StartFalloff * factor
+    self.Range = self.Range * factor
+    self:Apply(self)
+end

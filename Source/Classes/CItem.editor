@@ -1,0 +1,66 @@
+CItem.s_Editor = {
+        Model = { "BrowseEdit", {"*.pkmdl", "data\\models\\",false} },
+        Pack  = { "BrowseEdit", {"*.dat", "data\\items\\",false} },
+        ["CubeMap.Tex"]     = { "BrowseEdit", {"*.*", "data\\textures\\",true} },
+        ["DetailMap.Tex"]   = { "BrowseEdit", {"*.*", "data\\textures\\",true} },
+        ["NormalMap.Tex"]   = { "BrowseEdit", {"*.*", "data\\textures\\",true} },
+    }
+
+--============================================================================
+function CItem:EditRender(delta)
+    --local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+    --Hud:Quad(Editor.matItem,sx,sy,1,true)
+    if debugMarek2 then
+		local sx,sy,sz = R3D.VectorToScreen(self.Pos.X,self.Pos.Y+0.5,self.Pos.Z)
+		if sz<=1 then
+			local m = ENTITY.PO_GetMass(self._Entity)
+			HUD.PrintXY(sx+3,sy, self._Name.."Mass : "..m)
+		end
+	end   
+    
+
+    if Editor.SelObj == self then 
+	    if self.Model and INP.Key(Keys.T) == 2 then
+        	MDL.DrawJointNames(self._Entity)
+	    end
+
+        if INP.Key(Keys.Q) == 2 then
+            local x = self.Pos.X + self.Impulse.Pos.X
+            local y = self.Pos.Y + self.Impulse.Pos.Y
+            local z = self.Pos.Z + self.Impulse.Pos.Z
+            local px,py,pz = VectorRotateByQuat(0,0,self.Impulse.Strength/400,self.Impulse.Rot.W,self.Impulse.Rot.X,self.Impulse.Rot.Y,self.Impulse.Rot.Z)
+            R3D.RenderLine(x,y,z,x+px,y+py,z+pz,R3D.RGB(255,255,0))
+            R3D.DrawDirLight(R3D.RGB(255,255,255),x,y,z,px,py,pz) 
+        end
+    end
+
+end
+--============================================================================
+function CItem:EditTick(delta)
+    if Editor.SelObj == self then 
+        if INP.Key(Keys.Q) == 2 then
+            if INP.Key(Keys.K1) == 1 then
+                local x,y,z  = ENTITY.GetPosition(self._Entity)        
+                local px,py,pz = x+self.Impulse.Pos.X, y+self.Impulse.Pos.Y, z+self.Impulse.Pos.Z
+                local vx,vy,vz = VectorRotateByQuat(0,0,self.Impulse.Strength,self.Impulse.Rot.W,self.Impulse.Rot.X,self.Impulse.Rot.Y,self.Impulse.Rot.Z)
+                ENTITY.PO_Activate(self._Entity,true)
+                ENTITY.PO_Impulse(self._Entity,px,py,pz,vx,vy,vz)
+                Game:Print("Impulse")
+            end
+            if INP.Key(Keys.NumPlus) == 2 then        
+                self.Impulse.Strength = self.Impulse.Strength + 400 * delta
+            end
+            if INP.Key(Keys.NumMinus) == 2 then        
+                self.Impulse.Strength = self.Impulse.Strength - 400 * delta
+            end
+        end
+   end
+end
+--============================================================================
+function CItem:Rescale(factor)
+    MDL.EnableRagdoll(self._Entity,false)
+    self.Pos.X = self.Pos.X * factor
+    self.Pos.Y = self.Pos.Y * factor
+    self.Pos.Z = self.Pos.Z * factor
+    ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+end

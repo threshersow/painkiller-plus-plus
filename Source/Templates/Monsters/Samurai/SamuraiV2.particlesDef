@@ -1,0 +1,6 @@
+o.s_SubClass.ParticlesDefinitions = {
+	seppuku = {
+		name = "FX_samurajshock.CActor",
+		scale = 1.0,
+	},
+}

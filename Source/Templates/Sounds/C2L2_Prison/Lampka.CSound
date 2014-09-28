@@ -1,0 +1,10 @@
+Lampka.Volume = 50
+Lampka.Interval = 0
+Lampka.RandomShift = 0
+Lampka.Falloff =
+{
+  Start = 1,
+  End = 7
+}
+Lampka.Sound ="C2L2_Prison/Lampka"
+

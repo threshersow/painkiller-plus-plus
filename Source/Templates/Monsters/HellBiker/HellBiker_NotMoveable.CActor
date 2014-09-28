@@ -1,0 +1,31 @@
+o.BaseObj = "HellBiker.CActor"
+o.Scale = 1.7
+o.NeverMove = true
+o.AiParams.aiGoals = {"idle","FarAttack", "hear",}
+
+o.enableGibWhenHPBelow = -150
+
+o.AiParams.changePosAfterFire = 0.0
+o.AiParams.guardAngle = {0,0}
+o.AiParams.GuardStill = true
+--o.AiParams.viewAnglePitch = 60
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.alwaysSee = false
+
+o.AiParams.weapon = {
+		name = "Tommy",
+		bulletsPerShot = 1,
+		maxDist = 80,
+		minDist = 2.0,
+		spreadAngle = 0.8,
+		damagePerBullet = 2,
+		PO_HitForce = 300,
+		maxYaw = 45,
+		maxPitch = 60,
+		fireParticle = "monstershot",	
+		fireParticleSize = 0.2,
+		bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+	}

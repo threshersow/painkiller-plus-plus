@@ -1,0 +1,153 @@
+o.Model = "pentagram"
+o.PowerUp = true
+o.Scale = 1.5
+o.RespawnTime = 60*5
+o.DisabledInVoosh = true
+o.WorkTime = 30
+o.s_SubClass = {
+    Animations = {
+        idle = {1.5}
+    }
+}
+
+--============================================================================
+function pentagram:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,true)
+    ENTITY.SetSynchroString(self._Entity,"pentagram.CItem")
+    self:Client_OnCreateEntity(self._Entity)
+end
+--============================================================================
+function pentagram:Client_OnCreateEntity(entity)
+	BindFX(entity,"pentagram1",0.1,"root")
+        BindFX(entity,"pentagram2",0.1,"e1")
+        BindFX(entity,"pentagram2",0.1,"e2")
+    -- jezeli jest wziety to musze schowac particle
+    if not ENTITY.IsDrawEnabled(entity) then
+        ENTITY.EnableDraw(entity,false,true)
+    end
+end
+--============================================================================
+function pentagram:UnbindItem()
+    if self._blockedBy then
+        local owner = self._blockedBy
+        self._blockedBy = nil        
+        
+        self.OnFinishFX(owner._Entity) 
+        
+        if MPCfg.GameState ~= GameStates.Finished then
+            if Cfg.PowerupDrop then                
+                if owner._died then
+                    local x,y,z = ENTITY.GetPosition(owner._Entity)
+                    self._Rst = -1
+                    local rp = Clone(self._RespawnPos)
+                    self._RespawnPos:Set(x,y+1,z)
+                    self:TryToRespawn()
+                    self._RespawnPos = rp
+                end                
+                self._ReturnTime = self._WorkCounter
+            end
+        end
+        
+        self._WorkCounter   = nil
+        
+        if Game.GMode == GModes.SingleGame then
+            GObjects:ToKill(self)
+        end
+    end
+end   
+--============================================================================
+function pentagram:Tick(delta)    
+    if self._WorkCounter then
+        self._WorkCounter = self._WorkCounter - delta
+        if self._WorkCounter <=0 then 
+            self:UnbindItem()
+        end
+    end
+    if self._ReturnTime then    
+        --Game:Print("ReturnTime: "..self._ReturnTime)
+        self._ReturnTime = self._ReturnTime - delta
+        if self._ReturnTime <= 0 then
+            self.Pos = Clone(self._RespawnPos)
+            ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+            self._ReturnTime = nil            
+            if Cfg.PowerupDrop then
+                -- wraca na miejsce ale niewidoczny czeka na respawn
+                CItem.Show(self._Entity,0)
+                self.Place = 1             
+                self._Rst = self.RespawnTime * 30 
+                if Cfg.ItemRespawnFix then self._Rst = INP.GetTime() + self.RespawnTime end
+            end
+        end
+    end
+end
+--============================================================================
+function pentagram:OnTake(player)
+    if player.HasPentagram then return true end
+    self.TakeFX(player._Entity,1)
+    self._blockedBy = player
+    self._WorkCounter = self.WorkTime
+    if self._ReturnTime then 
+        self._WorkCounter = self._ReturnTime 
+    end
+    self._ReturnTime = nil
+end
+--============================================================================
+function pentagram:TakeFX(pe,sound)
+    local player = EntityToObject[pe]    
+    local t = Templates["pentagram.CItem"]
+    local bindlight = true
+    if player then
+        if player == Player then                             
+            bindlight = false
+            --local obj = GObjects:Add(TempObjName(),CloneTemplate("DemonFX.CProcess"))
+            --obj.EffectTime = 9999 -- t.WorkTime (sam wylacze efekt - aby sie dobrze zsynchronizowal)
+            --obj._DrawWeapon = true
+            --obj.FOVMin = Cfg.FOV-5
+            --obj.FOVMax = Cfg.FOV+5
+            --player._procDemonFX = obj
+            player:PickupFX() 
+            PlaySound2D("items/item-pentagram-take",100,true,true)
+         end
+        player.HasPentagram = true
+    end
+    if sound == 1 and (not player or player ~= Player) then
+        local x,y,z = ENTITY.GetPosition(pe)    
+        PlaySound3D("items/item-pentagram-take-mono",x,y,z,25,60,true)
+    end
+    BindSoundToEntity(pe,"items/item-pentagram-loop-mono",15,30,true,-1,nil,nil,nil,nil,0)
+    if bindlight then
+        local obj = CloneTemplate("Pent_Light.CLight")
+        obj.Pos:Set(0,2,0)
+        obj:Apply()    
+        ENTITY.RegisterChild(pe,obj._Entity,true)
+    end
+end
+Network:RegisterMethod("pentagram.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eb")
+--============================================================================
+-- [NET - SERVER & ALL CLIENTS]
+function pentagram:OnFinishFX(pe)
+    ENTITY.KillAllChildrenByName(pe,"items/item-pentagram-loop-mono")
+    ENTITY.KillAllChildrenByName(pe,"Pent_Light")
+    local x,y,z = ENTITY.GetPosition(pe)    
+    local player = EntityToObject[pe]
+    if Player == player then
+        PlaySound2D("items/item-pentagram-timeout",100,true,true)
+    else
+        PlaySound3D("items/item-pentagram-timeout-out",x,y,z,15,50,true)
+    end
+
+    if player then
+        player.HasPentagram = false    
+        --if player._procDemonFX then 
+        --    player._procDemonFX.TickCount = 9999 - player._procDemonFX.FadeInTime - player._procDemonFX.FadeOutTime
+        --    player._procDemonFX = nil
+        --end
+    end
+end
+Network:RegisterMethod("pentagram.OnFinishFX", NCallOn.ServerAndAllClients, NMode.Reliable, "e") 
+--============================================================================
+function pentagram:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+--============================================================================

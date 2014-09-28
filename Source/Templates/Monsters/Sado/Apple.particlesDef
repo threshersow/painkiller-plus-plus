@@ -1,0 +1,6 @@
+o.s_SubClass.ParticlesDefinitions = {
+	explode = {
+		pfx = "sadoapple_expl",
+		scale = 0.2,
+	},
+}

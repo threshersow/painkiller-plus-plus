@@ -1,0 +1,19 @@
+o.s_SubClass.ParticlesDefinitions = {
+	sword = {
+		pfx = "lucifer_sword",
+		scale = 1.0,
+		offset = Vector:New(0,0,0),
+	},
+	head = {
+		pfx = "lucyferhead_fx",
+		scale = 1.0,
+		offset = Vector:New(0,0,0),
+	},
+
+--	swordspell = {
+--		pfx = "lucifer_sword_charge",
+--		scale = 1.0,
+--		offset = Vector:New(0,0,0),
+--	},
+
+}

@@ -1,0 +1,10 @@
+Elektronika_base_02.Volume = 50
+Elektronika_base_02.Interval = 0
+Elektronika_base_02.RandomShift = 0
+Elektronika_base_02.Falloff =
+{
+  Start = 1.5,
+  End = 7
+}
+Elektronika_base_02.Sound ="C3L3_Military_Base/Elektronika_base_02"
+

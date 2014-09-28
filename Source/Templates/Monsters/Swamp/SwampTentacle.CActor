@@ -1,0 +1,177 @@
+o.Model = "Swamp_macka"
+o.Scale = 30.0
+o.CreatePO = true
+o.Health = 1000
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 6
+o.Pinned = true
+o.Animation = ""
+o.NotCountable = true
+o.disableFreeze = true
+
+o.s_SubClass = {
+	SoundDir = "swamp",
+    Animations = {
+        atak1   = {1.0,false,{
+						{0.35,'FootFX','joint8'},
+						{1.6,'PlaySound',{'swamp-macka-swish',},30,120,},
+						{2.0,'PlaySound',{'swamp-macka-hit',},30,120,},
+						{4.3,'FootFX','joint8'},
+					}, 0.0},
+        atak2   = {1.0,false, {
+						{0.4,'FootFX','joint8'},
+						{3.1,'PlaySound',{'swamp-macka-swish',},30,120,},
+						{3.4,'PlaySound',{'swamp-macka-hit',},30,120,},
+						{5.4,'FootFX','joint8'},
+					}, 0.0},
+        atak3   = {1.0,false, {
+						{0.35,'FootFX','joint8'},
+   						{3.2,'PlaySound',{'swamp-macka-swish',},30,120,},
+						{3.5,'PlaySound',{'swamp-macka-hit',},30,120,},
+						{5.2,'FootFX','joint8'},
+					}, 0.0},
+        },
+
+	RefractFresnel = {
+        water_swamp = {
+            Refract=1.3,
+            Fresnel=0.2, 
+            ReflTint=Color:New(255,173,91),
+            RefrTint=Color:New(147,194,200)
+        },
+    },
+    bindFX = {
+		{"swamp_kapie", 1.0, "joint3",0,0,0},
+		{"swamp_kapie", 1.0, "joint8",0,0,0},
+	},
+    SoundsDefinitions = {},
+}
+o.DeathTimer = 2
+o.AiParams = {}
+o.AiParams.aiGoals = {"tentacleAttack"}
+o.AiParams.updateSpeed = 0.0
+o.AiParams.damage = 50
+o.AiParams.damageCheckDistance = 5
+
+o.AiParams.attacks = {"atak1", "atak2", "atak3"}
+
+--o.waterImpJoint = "joint4"
+o.waterImpAmplitude = 0.4
+o.waterImpPeriod = 1.6		-- okres - dlugosc fal
+o.waterImpRange = 12.0		-- zasieg efektu
+o.waterImpSpeed = 4.0		-- szybkosc fal
+o.splashFX = "FX_splash_swamp.CActor"
+
+
+
+------------------------------------
+function SwampTentacle:CustomOnDamage(he,x,y,z,obj,damage,type)
+	if obj ~= self then
+		return true
+	end
+end
+
+function SwampTentacle:OnInitTemplate()
+    self:SetAIBrain()
+end
+
+
+function SwampTentacle:OnCreateEntity()
+	local aiParams = self.AiParams
+	local anim = aiParams.attacks[math.random(1,3)]
+	self:ForceAnim(anim, false)
+	self._sndLoop = self:BindSound("actor/swamp/swamp_macka_loop",20,100,true)
+end       
+
+------------
+
+SwampTentacle._CustomAiStates = {}
+SwampTentacle._CustomAiStates.tentacleAttack = {
+	name = "tentacleAttack",
+	active = false,
+}
+
+function SwampTentacle._CustomAiStates.tentacleAttack:OnInit(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	self.mode = 0
+	actor:ForceAnim(actor.Animation, false)
+	self.anim = actor.Animation
+	actor:RotateToVector(Player._groundx, Player._groundy, Player._groundz)
+	self.lastDamageTime = 0
+end
+
+function SwampTentacle._CustomAiStates.tentacleAttack:OnUpdate(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	if self.mode == 0 and actor.AIenabled then
+		if (not actor._isAnimating or actor.Animation ~= self.anim) then
+			if debugMarek then Game:Print("KONIEC MACKI") end
+			if self._sndLoop then
+				SND.Stop(self._sndLoop)
+			end
+			actor:OnDamage(actor.Health + 2, actor)
+			--GObjects:ToKill(actor)
+		else
+			if math.random(100) < 30 then
+				actor:RotateToVector(Player._groundx, Player._groundy, Player._groundz)
+			end
+			if self.lastDamageTime + 1.0 < brain._currentTime then
+				local checkDist = aiParams.damageCheckDistance
+				local x,y,z = actor:GetJointPos("joint11")
+				local dist1 = Dist3D(x,y,z, Player._groundx, Player._groundy + 1, Player._groundz)
+				local doDamage = false
+				if dist1 < checkDist then
+					if debugMarek then Game:Print(">BEZPOSREDNI hit j11 "..dist1) end
+					doDamage = true
+				else
+					x,y,z = actor:GetJointPos("joint10")
+					local dist2 = Dist3D(x,y,z, Player._groundx, Player._groundy + 1, Player._groundz)
+					if dist2 < checkDist then
+						if debugMarek then Game:Print(">BEZPOSREDNI hit j10 "..dist2) end
+						doDamage = true
+					else
+						x,y,z = actor:GetJointPos("joint8")
+						local dist2 = Dist3D(x,y,z, Player._groundx, Player._groundy + 1, Player._groundz)
+						if dist2 < checkDist then
+							if debugMarek then Game:Print(">BEZPOSREDNI hit j8 "..dist2) end
+							doDamage = true
+						else
+							x,y,z = actor:GetJointPos("joint6")
+							local dist3 = Dist3D(x,y,z, Player._groundx, Player._groundy + 1, Player._groundz)
+							if dist3 < checkDist then
+								if debugMarek then Game:Print(">BEZPOSREDNI hit j6 "..dist3) end
+								doDamage = true
+							end
+						end
+					end
+				end
+				if doDamage then
+					Player:OnDamage(aiParams.damage, actor)
+					self.lastDamageTime = brain._currentTime
+					PlaySound2D("actor/swamp/swamp-macka-hit-hero")
+				end
+			end
+		end
+	end
+end
+
+function SwampTentacle._CustomAiStates.tentacleAttack:OnRelease(brain)
+end
+
+function SwampTentacle._CustomAiStates.tentacleAttack:Evaluate(brain)
+	return 0.1
+end
+
+
+function SwampTentacle:FootFX(joint,x1,y1,z1)
+	local j = MDL.GetJointIndex(self._Entity, joint)
+	local x,y,z
+	if not z1 then
+		x,y,z = MDL.TransformPointByJoint(self._Entity, j,0,0,0)
+	else
+		x,y,z = MDL.TransformPointByJoint(self._Entity, j,x1,y1,z1)
+	end
+	AddObject(self.splashFX, 1.0, Vector:New(x,y,z),nil,true)
+end

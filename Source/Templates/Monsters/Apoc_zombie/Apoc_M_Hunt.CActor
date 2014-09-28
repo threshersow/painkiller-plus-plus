@@ -1,0 +1,3 @@
+o.Pos = Vector:New(84.7282,-16.4772,-0.820279)
+o.BaseObj = "Apoc_M.CActor"
+o.AiParams.huntPlayer = true

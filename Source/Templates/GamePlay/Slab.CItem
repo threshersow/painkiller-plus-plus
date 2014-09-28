@@ -1,0 +1,418 @@
+Slab.Mesh = "pCubeShape11"
+Slab.Pack = "plyta.dat"
+Slab.Mass = 200
+Slab.Invisible = false
+Slab.NeverOpen = false
+Slab.BaseObj = "CItem"
+Slab.Closed = false
+Slab.Pinned = true
+Slab._endLevelAfterOpen = false
+Slab._showCnt = false
+Slab.SoundWhenCleared = "misc/Area_Cleared"
+Slab.IsAntiPortal = false
+Slab.Portals = {}
+Slab.AntiPortals = {}
+o.noOpenCloseSound = false
+o.Health = 0
+o.Immortal = true
+Slab.Appearance = "Slab"
+Slab.Actions.OnOpen = {}
+Slab.Actions.OnClose = {}
+Slab.s_SubClass.types = {
+    Slab = {
+        mesh = "pCubeShape11",
+        pack = "plyta.dat",
+    },
+    Fence = {
+        mesh = "polySurfaceShape205",
+        pack = "slab_paliki.dat",
+    },
+    Babel_Arab = {
+        mesh = "pCubeShape1",
+        pack = "slab_arabski_babel.dat",
+    },
+    Asylum_Monast = {
+        mesh = "pCubeShape2",
+        pack = "slab_asylum_opactwo.dat",
+    },
+    Chaos = {
+        mesh = "pCubeShape7",
+        pack = "slab_chaos.dat",
+    },
+    Docks_Base = {
+        mesh = "slabik_atestShape",
+        pack = "slab_doki_baza.dat",
+    },
+    Factory_Bridge = {
+        mesh = "polySurfaceShape17047",
+        pack = "slab_factory_most.dat",
+    },
+    Catacombs = {
+        mesh = "pCubeShape8",
+        pack = "slab_katakumby.dat",
+    },
+    Opera = {
+        mesh = "pCubeShape3",
+        pack = "slab_opera.dat",
+    },
+    Prison = {
+        mesh = "pCubeShape4",
+        pack = "slab_prison.dat",
+    },
+    TrainStation = {
+        mesh = "pCubeShape5",
+        pack = "slab_trainstation.dat",
+    },
+    CityOnWater = {
+        mesh = "pCubeShape6",
+        pack = "slab_wenecja.dat",
+    },
+    Leningrad = {
+        mesh = "pCubeShape5",
+        pack = "slabcaly.dat",
+        DestroyPack = "slabkawalki.dat",
+        ScrollPFX = "SlabOpen_Leningrad",
+        Destroy = 
+        {
+            Strength = 300,
+            Radius   = 16,
+            Effect = "barrelarabxplo",
+            EffectScale = 0.7,
+            Sound = "barrel-tnt-explode",
+            LifetimeAfterExplosion = 2,
+            PartsNoncollidableWithSelf = true,
+        }, 
+    },
+    Wood = {
+        mesh = "polySurfaceShape98767",
+        pack = "slabDrewnoCaly.dat",
+        DestroyPack = "slabDrewnoKawalki.dat",
+        Destroy = 
+        {
+            Strength = 300,
+            Radius   = 16,
+            Effect = "barrelarabxplo",
+            EffectScale = 0.7,
+            Sound = "barrel-tnt-explode",
+            LifetimeAfterExplosion = 2,
+            PartsNoncollidableWithSelf = true,
+        }, 
+    },
+    Colosseum = {
+        mesh = "kolosShape",
+        pack = "kolos_slab.dat",
+    },
+    Colosseum2 = {
+        mesh = "pCubeShape3",
+        pack = "slab_colosseum_caly.dat",
+        DestroyPack = "slab_colosseum_zlom.dat",
+        Destroy = 
+        {
+            Strength = 300,
+            Radius   = 16,
+            Effect = "barrelarabxplo",
+            EffectScale = 0.4,
+            Sound = "barrel-tnt-explode",
+            LifetimeAfterExplosion = 3,
+            PartsNoncollidableWithSelf = true,
+        }, 
+    },
+    City = {
+        mesh = "polySurfaceShape2",
+        pack = "slab_APC_zawal.dat",
+    },
+    CityTunnel = {
+        mesh = "polySurfaceShape1",
+        pack = "slab_APC_tunelcaly.dat",
+        DestroyPack = "slab_APC_tunelzlom.dat",
+        Destroy = 
+        {
+            Strength = 100,
+            Radius   = 16,
+            Effect = "barrelarabxplo",
+            EffectScale = 0.3,
+            Sound = "barrel-tnt-explode",
+            LifetimeAfterExplosion = 3,
+            PartsNoncollidableWithSelf = true,
+        }, 
+    },
+    Orphanage = {
+        mesh = "pCubeShape184",
+        pack = "slab_orphanage.dat",
+    },
+    Mine = {
+        mesh = "polySurfaceShape17",
+        pack = "slab_kopalnia_caly.dat",
+        DestroyPack = "slab_kopalnia_zlom.dat",
+        Destroy = 
+        {
+            Strength = 400,
+            Radius   = 20,
+            Effect = "or_t",
+            EffectScale = 1.0,
+            Sound = "devastation-huge",
+            LifetimeAfterExplosion = 3,
+            PartsNoncollidableWithSelf = true,
+        }, 
+    },
+    Roleta = {
+        mesh = "supermarketShape",
+        pack = "slab_roleta.dat",
+    },
+}
+
+function Slab:OnPrecache()
+    local t = self.s_SubClass.types[self.Appearance]
+    if t.ScrollPFX then
+        Cache:PrecacheParticleFX(t.ScrollPFX)
+    end
+    if t.DestroyPack then
+        -- TODO
+    end
+end
+
+function Slab:EditOnChangePosition()
+    self.StartPos = Clone(self.Pos)
+end
+
+function Slab:PreApply()
+    self.Mesh = self.s_SubClass.types[self.Appearance].mesh
+    self.Pack = self.s_SubClass.types[self.Appearance].pack
+end
+
+function Slab:OnUpdate()
+    if not self._IsOpened and self._OpenAfterDeadBodies and Game.BodyCountTotal >= self._OpenAfterDeadBodies then
+        self.cnt = self.cnt - 1
+        if self.cnt<0 then
+            self:Open()
+            if self._showCnt then
+                self._showCnt = nil
+                --Hud._slabCnt = nil
+                PlaySound2D(self.SoundWhenCleared)
+            end
+            if self._endLevelAfterOpen then
+                GObjects:Add(TempObjName(),CloneTemplate("EndLevel.CProcess"))
+            end
+        end
+	else
+        self.cnt = 45
+    end
+end
+
+function Slab:OnCreateEntity()
+    self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Fixed)
+    ENTITY.PO_SetMovedByExplosions(self._Entity,false)
+
+    if self._AntiPortalName then 
+        WORLD.DeleteAntiPortal(self._AntiPortalName) 
+        self._AntiPortalName = nil
+    end
+    
+    if self.IsAntiPortal then    
+        self._AntiPortalName = WORLD.CreateEnabledAntiPortalFromClosedConvexMesh(self._Entity)
+    end
+    self:EditOnChangePosition()
+    
+    -- autoconversion to new format
+    if self.Portal and self.Portal ~= "" then 
+        table.insert(self.Portals,self.Portal) 
+    end
+    self._RespawnPos = Clone(self.Pos)
+    self.Portal = nil
+    
+    if self.Invisible then
+        ENTITY.EnableDraw(self._Entity, false)
+    end
+end
+
+function Slab:OnRelease()
+    if self._AntiPortalName then 
+        WORLD.DeleteAntiPortal(self._AntiPortalName) 
+        self._AntiPortalName = nil
+    end
+end
+
+function Slab:EnableAntiPortal(enable)
+    for i,o in self.AntiPortals do
+        WORLD.EnableAntiPortal(o,enable)
+    end
+    if not self._AntiPortalName then return end
+    WORLD.EnableAntiPortal(self._AntiPortalName,enable)
+end
+
+function Slab:Close(cnt, showCnt, endLevel) 
+    --Game:Print("close")
+    self._OpenAfterDeadBodies =  Game.BodyCountTotal + cnt
+    self._endLevelAfterOpen = endLevel
+	self._showCnt = showCnt
+    
+    if not self._IsOpened then return end        
+    if self._proc then GObjects:ToKill(self._proc)  end
+    
+    self:LaunchAction(self.Actions.OnClose)
+
+    local w,h,d = ENTITY.GetDimensions(self._Entity)
+    self.Pos.Y = self.StartPos.Y - h
+    ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+        
+    -- scroll
+    self._proc = GObjects:Add(TempObjName(),PScroll:New(self,h,25))    
+    if self.s_SubClass.types[self.Appearance].ScrollPFX then 
+        self._proc.PFX = self.s_SubClass.types[self.Appearance].ScrollPFX
+    end            
+    self._IsOpened = nil
+end
+
+function Slab:Open(now)
+    if self.NeverOpen then return end    
+    if not now then
+        for i,o in self.Portals do
+            WORLD.EnablePortal(o,true)
+        end
+    end
+    self:EnableAntiPortal(false)
+    --Game:Print("open")
+    if self._IsOpened then return end
+    if self._proc then GObjects:ToKill(self._proc)  end
+    
+    self:LaunchAction(self.Actions.OnOpen)
+       
+    self.Pos.Y = self.StartPos.Y
+    local w,h,d = ENTITY.GetDimensions(self._Entity)
+    if now then self.Pos.Y = self.StartPos.Y - h end            
+    ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+
+    if not now then     
+        local dpack = self.s_SubClass.types[self.Appearance].DestroyPack
+        if dpack then 
+            local x,y,z = ENTITY.GetWorldPosition(self._Entity)
+            local dInfo = self.s_SubClass.types[self.Appearance].Destroy
+            ENTITY.PO_Enable(self._Entity,false)
+            ENTITY.EnableDraw(self._Entity,false)
+            ENTITY.ExplodeItem(self._Entity, "../Data/Items/"..dpack, dInfo.Strength, dInfo.Radius, dInfo.LifetimeAfterExplosion, nil, nil, dInfo.PartsNoncollidableWithSelf,self.Impulse.Pos.X, self.Impulse.Pos.Y, self.Impulse.Pos.Z)
+            if dInfo.Effect then
+				AddPFX(dInfo.Effect,dInfo.EffectScale,Vector:New(x,y,z)) 
+			end
+            PlaySound3D("impacts/"..dInfo.Sound,x,y,z,80,240)            
+            local parts = WORLD.GetLastExplodedEntities()
+            for i,o in parts do
+				--if dInfo.PartsNoncollidableWithNothing then
+				--	ENTITY.PO_SetCollisionGroup(o, ECollisionGroups.Noncolliding)
+				--end
+                if math.random(0,1) == 1 then
+                    local pfx = AddPFX('but',FRand(1,2))
+                    local ox,oy,oz = MESH.GetRandomPoint(o)
+                    PARTICLE.SetParentOffset(pfx,ox,oy,oz)
+                    ENTITY.RegisterChild(o,pfx) 
+                end
+            end
+
+            --GObjects:ToKill(self)
+        else
+            self._proc = GObjects:Add(TempObjName(),PScroll:New(self,-h,25,true))       
+            if self.s_SubClass.types[self.Appearance].ScrollPFX then 
+                self._proc.PFX = self.s_SubClass.types[self.Appearance].ScrollPFX
+            end            
+        end
+    else
+        ENTITY.EnableDraw(self._Entity, false)
+        ENTITY.PO_Enable(self._Entity, false)
+    end
+    
+    self._IsOpened = true    
+    self._OpenAfterDeadBodies = nil
+end
+
+function Slab:OnPlay(firstTime)
+    if firstTime then
+        if not self.Closed then 
+            self:Open(true) 
+        else 
+            for i,p in self.Portals do
+                WORLD.EnablePortal(p,false)
+            end
+        end
+    end
+end
+
+
+function Slab:RestoreFromSave()
+    if self.IsAntiPortal then    
+        if self._RespawnPos then self._RespawnPos:ToEntity(self._Entity) end
+        self._AntiPortalName = WORLD.CreateEnabledAntiPortalFromClosedConvexMesh(self._Entity)
+        self.Pos:ToEntity(self._Entity)
+    end
+end
+
+--============================================================================
+-- SCROLLING
+--============================================================================
+PScroll = {    
+    Obj = nil,
+    Offset = 100,
+    Speed = 0.1,
+    Hide = false,
+    PFX = "butbig",
+}
+Inherit(PScroll,CProcess)
+--============================================================================
+function PScroll:New(obj,offset,speed,hide)
+    local p = Clone(PScroll)
+    p.BaseObj = "PScroll"
+    p.Obj = obj
+    p.Offset = offset
+    if offset < 0 then speed = -speed end
+    p.Speed = speed
+    p._StartPos = obj.Pos.Y
+    p.Hide = hide
+    p:AddTimer("FX",0.15)
+    if not obj.noOpenCloseSound then
+        PlaySound3D("doors/door-stone"..math.random(1,2),obj.Pos.X,obj.Pos.Y,obj.Pos.Z,15)     
+    end
+    return p
+end
+--============================================================================
+function PScroll:Tick(delta)
+    delta = delta / INP.GetTimeMultiplier()
+    if self._ToKill then return end    
+    
+    if not self.Obj.Invisible then
+        ENTITY.EnableDraw(self.Obj._Entity, true)
+    end
+    ENTITY.PO_Enable(self.Obj._Entity, true)
+    
+    local a = 1 - math.abs(self._StartPos -  self.Obj.Pos.Y) / math.abs(self.Offset)
+    if a < 0.1 then a = 0.1 end
+    
+    self.Obj.Pos.Y = self.Obj.Pos.Y + delta * self.Speed * a
+    
+    if (self.Speed < 0 and self.Obj.Pos.Y < self._StartPos + self.Offset) or
+       (self.Speed > 0 and self.Obj.Pos.Y > self._StartPos + self.Offset) then       
+       
+        self.Obj.Pos.Y = self._StartPos + self.Offset   
+        if not self.Obj.Invisible then
+            ENTITY.EnableDraw(self.Obj._Entity, not self.Hide)
+        end
+        ENTITY.PO_Enable(self.Obj._Entity, not self.Hide)
+        if not self.Hide then
+        self.Obj:EnableAntiPortal(true)
+        for i,p in self.Obj.Portals do
+            WORLD.EnablePortal(p,false)
+        end
+       end
+       GObjects:ToKill(self)
+       Game._EarthQuakeProc:Add(self.Obj.Pos.X,self.Obj.Pos.Y,self.Obj.Pos.Z, 30, 10, 0.2, 0.2, false)
+    end
+    
+    ENTITY.SetPosition(self.Obj._Entity,self.Obj.Pos.X,self.Obj.Pos.Y,self.Obj.Pos.Z)
+    ENTITY.PO_Activate(self.Obj._Entity,true)
+end
+--============================================================================
+function PScroll:FX()
+    local v = Vector:New(self.Obj.Pos)
+    local w,h,d = ENTITY.GetDimensions(self.Obj._Entity)
+    v.Y = self._StartPos - h/2 + 0.6
+    if self.Speed>0 then v.Y = v.Y + self.Offset end
+    AddPFX(self.PFX,0.5,v)
+end
+--============================================================================

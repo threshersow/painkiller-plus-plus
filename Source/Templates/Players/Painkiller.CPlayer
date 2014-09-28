@@ -1,0 +1,76 @@
+o.Model = "mp-model-painkiller"
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "multiplayer/player",
+    dist1 = 10,
+    dist2 = 50,
+    Death = 
+    {
+        path  = "multiplayer/player-templar",    
+        dist1 = 15,
+        dist2 = 75,
+        samples = {"templarplayer_death1", "templarplayer_death2", "templarplayer_death3"},
+    },            
+    Death_Gib = 
+    {
+        dist1 = 15,
+        dist2 = 75,
+        samples = {"manplayer_telefrag2"},
+    },
+    Death_Telefrag = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_telefrag1","manplayer_telefrag2","manplayer_telefrag3"},
+    },
+    Hurt_Small =
+    {
+        path  = "multiplayer/player-templar",    
+        samples = {"templarplayer_hurt_small1","templarplayer_hurt_small2","templarplayer_hurt_small3"}
+    },
+    Hurt_Medium =             
+    {   
+        path  = "multiplayer/player-templar",    
+        samples = {"templarplayer_hurt_medium1","templarplayer_hurt_medium2",
+                   "templarplayer_hurt_medium3"}
+    },
+    Hurt_Big = 
+    {
+        path  = "multiplayer/player-templar",    
+        samples = {"templarplayer_hurt_big1","templarplayer_hurt_big2","templarplayer_hurt_big3"}
+    },                
+Hurt_Pent = {
+				samples = {"$/actor/leper_monk/lepper-odrzut"},
+			},
+    Hurt_OnHitGround = 
+    {
+        path  = "multiplayer/player-templar",    
+        samples = {"templarplayer_jump_end-hurt1","templarplayer_jump_end-hurt1"}
+    },
+    Body_Falls = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_bodyfalls"}
+    },
+    Jump = 
+    {   
+        path  = "multiplayer/player-templar",    
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"templarplayer_jump_1","templarplayer_jump_2"}
+    },
+    Jump_Double = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_double_1","manplayer_double_2"}
+    },
+    Jump_End  = 
+    {
+        path  = "multiplayer/player-templar",    
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"templarplayer-jump_end1","templarplayer-jump_end2"}
+    },
+}

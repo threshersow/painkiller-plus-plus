@@ -1,0 +1,10 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "impacts/",
+
+	DestroySound = {
+		samples = {"silos-explode"},
+		dist1 = 30,
+		dist2 = 80,
+	},
+}
+

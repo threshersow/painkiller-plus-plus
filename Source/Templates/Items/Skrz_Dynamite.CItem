@@ -1,0 +1,19 @@
+o.Mesh = "polySurfaceShape25984"
+o.Pack = "skrz_dynamite.dat"
+o.DestroyPack = "skrz_dynamite_zlom.dat"
+o.Scale = 0.3
+o.Health = 10
+o.Mass = 250
+o.Destroy.ExplosionStrength = 320
+o.Destroy.AverageDelay = 32
+o.Destroy.AverageVariation = 16
+o.Destroy.Strength = 400
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.EffectScale = 0.6
+o.Destroy.Treasures = 
+{
+    Coins  = {1, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 200
+o.Destroy.ExplosionRadius = 6

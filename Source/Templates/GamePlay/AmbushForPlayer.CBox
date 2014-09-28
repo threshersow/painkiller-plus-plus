@@ -1,0 +1,26 @@
+o.Frozen = false
+o.DeleteAfterTouch = true
+o._IsAmbushForPlayer = true
+
+function AmbushForPlayer:OnLaunch()
+    if not self.Frozen then return end    
+    self.Frozen = false
+end
+
+-- zoptymalizowac
+function AmbushForPlayer:Tick()
+    if not self.Frozen then 
+        if self:IsInside(PX,PY+1,PZ) then         
+            if not self._isinside then
+                self._isinside = true
+                --Game:Print("2:"..PX..","..PY..","..PZ)
+                self:LaunchObjects()
+                if self.DeleteAfterTouch then
+                    GObjects:ToKill(self)
+                end
+            end
+        else
+            self._isinside = nil
+        end
+    end
+end

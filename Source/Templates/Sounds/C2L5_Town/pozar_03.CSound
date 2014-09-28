@@ -1,0 +1,10 @@
+pozar_03.Volume = 70
+pozar_03.Interval = 0 
+pozar_03.RandomShift = 0
+pozar_03.Falloff =
+{
+  Start = 7,
+  End = 30
+}
+pozar_03.Sound ="C2L5_Town/pozar_03"
+

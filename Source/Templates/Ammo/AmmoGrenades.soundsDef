@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/grenadelauncher",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"pickup_ammo_grenade"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

@@ -1,0 +1,10 @@
+Kamyki.Volume = 50
+Kamyki.Interval = 10
+Kamyki.RandomShift = 4
+Kamyki.Falloff =
+{
+  Start = 7,
+  End = 40
+}
+Kamyki.Sound ="C4L1_Oriental_Castle/Kamyki_01;C4L1_Oriental_Castle/Kamyki_02;C4L1_Oriental_Castle/Kamyki_03;C4L1_Oriental_Castle/Kamyki_04"
+

@@ -1,0 +1,9 @@
+o.s_SubClass.SoundsDefinitions = {
+	CreakSound = {
+		path = "impacts/",
+		samples = {"chains-impact1","chains-impact2","chains-impact3",},
+		dist1 = 14,
+		dist2 = 42,
+		disablePitch = true,
+	},
+}

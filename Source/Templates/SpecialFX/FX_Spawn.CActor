@@ -1,0 +1,38 @@
+EDITOR.AddObjectTemplate("Particles","FX_Spawn","FX_Spawn.CActor");	
+
+FX_Spawn.Model = "spawn"
+FX_Spawn.Scale = 4
+FX_Spawn.NotCountable = true
+
+FX_Spawn.s_SubClass = 
+{
+    Animations = {  
+        idle        = {1.0},
+    },
+}
+
+function FX_Spawn:OnPrecache()
+	Cache:PrecacheParticleFX("spawn_effect")
+end
+
+function FX_Spawn:OnCreateEntity()
+
+    self:BindFX("spawn_effect",0.12,"e1")
+    self:BindFX("spawn_effect",0.12,"e2")
+    self:BindFX("spawn_effect",0.12,"e3")
+    self:BindFX("spawn_effect",0.12,"e4")
+    self:BindFX("spawn_effect",0.12,"e5")
+    self:BindFX("spawn_effect",0.12,"e6")
+    self:BindFX("spawn_effect",0.12,"e7")
+    self:BindFX("spawn_effect",0.12,"e8")
+    self:BindFX("spawn_effect",0.12,"e9")
+    self:BindFX("spawn_effect",0.12,"e10")
+end
+
+function FX_Spawn:OnFinishAnim(name)
+    ENTITY.UnregisterAllChildren(self._Entity)
+    GObjects:ToKill(self)
+end
+
+
+o.Immortal = true

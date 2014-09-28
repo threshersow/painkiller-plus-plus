@@ -1,0 +1,183 @@
+o.Model = "amputee"
+o.Scale = 1.4
+o.Health = 80
+o.CreatePO = true
+o.WalkSpeed = 1.2
+o.RotateSpeed = 14
+o.throwHeart = true
+o.NeverRun = true
+o.Animation = "idle_kolana"
+o.enableGibWhenHPBelow = -69
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 110,
+}
+
+o.s_SubClass = {
+	rotateHead = 3.1415 * 0.3,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.08,
+	rotateHeadRight = Vector:New(-0.5, 1.0, 0.5),
+	rotateHeadLeft =  Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadCoords = Vector:New(2, 3, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+
+    Animations = {
+        idle_kolana     = {1.0, false, {			-- na czworaka
+                        }, 0.6},
+        lezenie_idle    = {1.0, false, {			-- lize reke
+                            {0.3,'PlaySound',"lie"},
+                            {1.3,'PlaySound',"lie"},
+                        }, 0.4},
+        lezenie_idle1   = {1.0, false, {			-- lize ziemie
+							{0.45,'PlaySound',"lieidle"},
+						}, 0.4},
+		lezenie2idle    = {1.0, false, {			-- z lizania na czworaka
+							{0.2,'PlaySound',"lieidle2"},
+						}},
+		walk1           = {0.8, true, {				-- na czworaka
+							{0.7,'PlaySound',"step1"},
+							{0.0,'PlaySound',"step2"},
+							{0.5,'PlaySound',"walk"},
+						}},
+		walk2           = {1.0, true, {				-- na kolanach:
+							{0.6,'PlaySound',"effort"},
+						}},
+		walk3           = {1.0, true, {
+							{0.6,'PlaySound',"effort"},
+						}},
+		walk4           = {1.0, true, {
+							{0.6,'PlaySound',"effort"},
+						}},
+		walk_atak       = {1.0, true, {		-- chodzi kolana atak (2.5)
+							{1.5,'damage'},
+							{0.2,'PlaySound',"throw"},
+							{1.1,'PlaySound',"throwvoice"},
+							{1.5,'PlaySound',"throw_up"},
+							{1.4, "barf"},
+							{2.4, "barfend"},	
+						},0.4,true},
+		walk_atak1      = {1.0, true, {			-- 1.25
+							{0.8,'damage'},
+							{0.5,'PlaySound',"throw2"},
+							{0.8,'PlaySound',"guts"},
+							{0.7, "barf"},
+							{1.2, "barfend"},
+						},0.4, true},
+		jump			= {1.0, true, {			-- z kolan/czworaka skok do lezenia
+							{0.3, 'PlaySound',"jump"},
+							{0.6, 'StartMovement'},
+							{1.1, 'StopMovement'},
+							{0.95,'PlaySound',"round"},
+						}},
+		walk_obrocony   = {1.0, true, {			-- na czworaka
+							{0.7,'PlaySound',"step1"},
+							{0.0,'PlaySound',"step2"},
+							{0.5,'PlaySound',"effort"},
+						}},
+	},
+	walk = {"walk1"},
+
+	DeathJoints = {
+        's_p_kostka','s_l_kostka',
+        'dlo_lewa_root','n_p_biodro','n_p_kolano',
+        'dlo_prawa_root','n_l_biodro','n_l_kolano',
+        'k_glowa','k_zebra',
+    },
+	RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 0.6,
+		Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+			},
+	},
+
+	GibExplosionStrength = 5000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",-1},
+				{"root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_p_biodro", "gibSplash", true},
+				{"n_l_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"root", "gibSplash", true},
+			},
+	    },
+
+}
+
+o.DeathTimer = 120
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"amputeeIdle", "amputeeAttack",}
+o.AiParams.walkStep = 4.5
+
+o.AiParams.viewDistance = 24
+o.AiParams.viewDistance360 = 24
+o.AiParams.viewAngle = 360
+o.AiParams.weaponDamage = 20
+
+o.AiParams.attackRange = 3
+
+o.AiParams.attackRangeAngle = 360
+o.AiParams.perception = 0.4
+o.AiParams.hearing = 1.0
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {20,60}
+o.AiParams.updateSpeed = 0.25
+
+o.AiParams.moveDisplacement = -1
+
+o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.aggresive = false					-- jesli false, to nie atakuje nie zaczepiony
+o.AiParams.minDelayBetweenEncounterAndAttack = 3.2	-- w sec., min. czas miedzy atakami
+o.CollisionDamage = 3								-- przy skoku
+o.AiParams.idle = {											-- tabela przejsc
+		{"idle_kolana","lezenie_idle", 0.02, true, true, true},	-- z, do, chance, loop, breakable, LEZY
+		{"idle_kolana","walk1", 0.03, true, true, false},
+		{"walk1","lezenie_idle", 0.5, true, true, true},
+		{"walk1","lezenie_idle1", 1.0, true, true, true},
+		{"lezenie_idle1","lezenie_idle", 0.1, true, true, true},
+		{"lezenie_idle","lezenie2idle", 0.05, false, true, true},
+		{"lezenie2idle","lezenie_idle", 0.1, true, false, true},
+		{"lezenie2idle","idle_kolana", 1.0, true, false, false},
+	}
+
+o.AiParams.idleAfterAttack = 0.4		-- szansa ze po ataku sie zmeczy i zrezygnuje z ponownego ataku (0 - nigdy sie nie meczy, 1 - zawsze)
+
+o.AiParams.prepareJumpAnim = nil
+o.AiParams.jumpAnim = "jump"
+o.AiParams.jumpAnimLen = 1.5			-- czas pomiedzy start a stop pmove
+o.AiParams.jumpDamageRange = 1.6
+o.AiParams.jumpRangeMin = 5.0
+o.AiParams.jumpRangeMax = 10.0
+o.AiParams.jumpSpeed = 5.0
+
+o.shadow = 128

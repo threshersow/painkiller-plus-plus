@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions.onAttackOnce = {
+		samples = {"hellb-halt1", "hellb-halt2", "hellb2_halt",},
+		dist1 = 16,
+		dist2 = 60,
+	}
+
+o.s_SubClass.SoundsDefinitions.weaponlost = {
+		samples = {"hellb2-weapon-lost"},
+		dist1 = 16,
+		dist2 = 60,
+	}

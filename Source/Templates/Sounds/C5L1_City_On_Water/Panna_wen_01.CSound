@@ -1,0 +1,10 @@
+Panna_wen_01.Volume = 100
+Panna_wen_01.Interval = 12
+Panna_wen_01.RandomShift = 7
+Panna_wen_01.Falloff =
+{
+  Start = 8,
+  End = 50
+}
+Panna_wen_01.Sound ="C5L1_City_On_Water/Panna_01"
+

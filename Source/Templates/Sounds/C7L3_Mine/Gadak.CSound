@@ -1,0 +1,9 @@
+Gadak.Volume = 80
+Gadak.Interval = 7
+Gadak.RandomShift = 3
+Gadak.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+Gadak.Sound ="C7L3_Mine/Gadak_01;C7L3_Mine/Gadak_02"

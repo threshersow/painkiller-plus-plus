@@ -1,0 +1,66 @@
+StoneX.Mesh = "polySurfaceShape89990"
+StoneX.Pack = "kamien.dat"
+StoneX.Scale = 0.03
+
+StoneX._no = 0
+StoneX.speedUp = 0.1
+StoneX.speedDown = 2.0	
+StoneX.impAmplitude = 2.5	-- amplituda - wysokosc fal
+StoneX.impPeriod = 1.0		-- okres - dlugosc fal
+StoneX.impRange = 3.0		-- zasieg efektu
+StoneX.impSpeed = 10.0		-- szybkosc fal
+o.Pinned = true
+
+
+function StoneX:OnCreateEntity()
+    self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Noncolliding)
+    --ENTITY.PO_EnableGravity(self._Entity,false)
+    self._amp = self.impAmplitude		-- nil : nie ma updatu amplitudy
+	self._up = true
+	ENTITY.EnableDraw(self._Entity,false)
+	if debugMarek then
+		Game._StoneX = Game._StoneX + 1
+	end
+end
+
+function StoneX:OnRelease()
+	if debugMarek then
+		Game._StoneX = Game._StoneX - 1
+	end
+end
+
+function StoneX:OnDamage()
+	return
+end
+
+function StoneX:Tick(delta)
+	if not self._oneTime then
+		MDL.SetWaterImpact(self.ObjOwner._Entity, x,y,z, self._amp, self.impPeriod, self.impRange, self.impSpeed, self._no)
+		self._oneTime = true
+	end
+	if not self._canKillme then
+		if self.speedUp ~= 0 and self.speedDown ~= 0 then
+			if self._up then
+				self._amp = self._amp + delta * self.impAmplitude / self.speedUp
+			else
+				self._amp = self._amp - delta * self.impAmplitude / self.speedDown
+			end
+			if self._up then
+				if self._amp > self.impAmplitude then
+					self._up = false
+					self._amp = self.impAmplitude
+				end
+			else			
+				if self._amp < 0.0 then
+					--self._up = true
+					self._amp = 0
+					self._canKillme = true
+				end
+			end
+		end
+		if self.ObjOwner and not self.ObjOwner._ToKill then
+			local x,y,z = ENTITY.TransformLocalPointToWorld(self._Entity,0,0,0)
+			MDL.UpdateWaterImpact(self.ObjOwner._Entity, x,y,z, self._amp, self.impPeriod, self.impRange, self.impSpeed, self._no)
+		end
+	end
+end

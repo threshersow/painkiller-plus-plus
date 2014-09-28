@@ -1,0 +1,12 @@
+o.Model = "meat"
+o.Scale = 1.0
+o.fx = "VampBlood.CItem"
+o.TimeToLive = 30 * 4
+
+o.RagdollCollisions = {
+		MinStren = 1.5,
+		MinTime = 1.0,
+		Bones = {"root","f4","f2",}	--"f1","f3"}
+	}
+
+o.CollisionDamage = 20

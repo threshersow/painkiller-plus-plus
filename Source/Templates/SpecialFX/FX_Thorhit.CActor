@@ -1,0 +1,55 @@
+EDITOR.AddObjectTemplate("Particles","FX_Thorhit","FX_Thorhit.CActor");	
+
+FX_Thorhit.Model = "rexplode"
+FX_Thorhit.Scale = 20.0
+FX_Thorhit.NotCountable = true
+
+FX_Thorhit.s_SubClass = 
+{
+    Animations = {  
+        idle        = {0.7},
+    },
+}
+
+function o:OnPrecache()
+	Cache:PrecacheParticleFX("FX_Thorhit23")
+    Cache:PrecacheParticleFX("FX_Thorhit")
+end
+
+
+
+function FX_Thorhit:OnCreateEntity()
+    self:BindFX("FX_Thorhit23",1.7,"e0")
+    self:BindFX("FX_Thorhit",1.7,"e1")
+    self:BindFX("FX_Thorhit",1.7,"e2")
+    self:BindFX("FX_Thorhit",1.7,"e3")
+    self:BindFX("FX_Thorhit",1.7,"e4")
+    self:BindFX("FX_Thorhit",1.7,"e5")
+    self:BindFX("FX_Thorhit",1.7,"e6")
+    self:BindFX("FX_Thorhit",1.7,"e7")
+    self:BindFX("FX_Thorhit",1.7,"e8")
+    self:BindFX("FX_Thorhit",1.7,"e9")
+    self:BindFX("FX_Thorhit",1.7,"e10")
+    self:BindFX("FX_Thorhit",1.7,"e11")
+    self:BindFX("FX_Thorhit",1.7,"e12")
+    self:BindFX("FX_Thorhit",1.7,"e13")
+    self:BindFX("FX_Thorhit",1.7,"e14")
+    self:BindFX("FX_Thorhit",1.7,"e15")
+    self:BindFX("FX_Thorhit",1.7,"e16")
+
+end
+
+function FX_Thorhit:OnFinishAnim(name)
+    ENTITY.UnregisterAllChildren(self._Entity)
+    GObjects:ToKill(self)
+end
+
+
+function FX_Thorhit:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+o.Immortal = true

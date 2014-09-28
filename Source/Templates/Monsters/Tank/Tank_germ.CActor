@@ -1,0 +1,6 @@
+o.BaseObj = "Tank.CActor"
+o.Model = "tiger"
+o.s_SubClass.SoundDir = "tank"
+o.turretExplodeUp = 20
+o.DeathTimer = 222
+ 

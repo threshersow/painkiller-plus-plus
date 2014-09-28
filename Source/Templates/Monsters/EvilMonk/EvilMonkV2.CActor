@@ -1,0 +1,85 @@
+o.BaseObj = "EvilMonk.CActor"
+o.Model = "evilmonkv2"
+o.Health = 75
+
+o.s_SubClass.Animations.atak  = {1.0,true, {
+				{0.0,'BindTrailSword','trail_kolek','axeR','topor_trail_P1'},
+				{0.8,'damage',12,0},			-- "damage", PO_Hit back, PO_Hit_up
+				{0.82,'IfMissedPlaySound',},
+				{0.0,'PlaySound',"atak"},
+				{0.6,'PlaySound',"swish"},
+				{1.4,'EndTrailSword'},
+				}}
+
+
+o.s_SubClass.Animations.atak1  = {1.0,true, {
+				{0.0,'BindTrailSword','trail_kolek','axeR','topor_trail_P1'},
+				{0.6,'damage',12,0},
+				{0.0,'PlaySound',"atak"},
+				{0.6,'PlaySound',"swish"},
+				{1.05,'EndTrailSword'},
+				}}
+
+
+o.s_SubClass.Animations.atakthrow_deth  = {1.0,true, {
+				{0.0,'PlaySound',"prepare"},
+				{0.6,'PlaySound',"throw"},
+				--{0.7,'PlaySound',{'evil_throwaxe2', },10,100, },		-- narazie
+				{0.8,'Throw'},
+				}}
+
+o.s_SubClass.Animations.atakthrow  = {1.0,true, {
+				{0.0,'PlaySound',"prepare"},
+				{0.6,'PlaySound',"throw"},
+				--{0.7,'PlaySound',{'evil_throwaxe2', },10,100, },		-- narazie
+				{0.8,'ThrowLeftAxe'},
+				}}
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee","throwImmid"}
+
+o.s_SubClass.Animations.atak2 = nil
+
+o.s_SubClass.NearAttacks = {"atak","atak1",}
+
+o.AiParams.ThrowableItem = "AxeV2.CItem"
+o.AiParams.ThrowAnimImmid = "atakthrow"
+o.AiParams.ThrowAnim = "atakthrow_deth"
+o.AiParams.throwAttackRange = 30
+o.AiParams.specialAttackHP = 0.2
+
+o.s_SubClass.SoundDir = "evilmonk"
+o.s_SubClass.hitGroundJoint = "topor_trail_P1"
+
+o.s_SubClass.RagdollCollisions = {
+	MinStren = 2.0,
+	MinTime = 0.7,
+	Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				{"axeL", "weaponlost", false},
+				{"axeR", "weaponlost", false},
+			}
+}
+
+o.s_SubClass.RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"k_ogo", "gib_splash", true},
+				{"k_ramiona", "gib_splash", true},
+				{"r_l_bark", "gib_splash", true},
+				{"r_p_bark", "gib_splash", true},
+				{"k_szyja", "gib_splash", true},
+				{"root", "gib_splash", true},
+				{"axeL", "weaponlost", false},
+				{"axeR", "weaponlost", false},
+			},
+	    }
+	    
+o.s_SubClass.notBleedingJoints = {
+		axeL = {},
+        axeR = {},
+    }
+
+o.DeathTimer = 130

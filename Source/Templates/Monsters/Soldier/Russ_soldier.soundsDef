@@ -1,0 +1,101 @@
+o.s_SubClass.SoundsDefinitions = {
+	onAttackOnce = {
+		samples = {"s_russ-halt1", "s_russ-halt2", "s_russ-halt3"},
+		dist1 = 20,
+		dist2 = 70,
+	},
+	hit = {
+		samples = {'s_russ-hit1','s_russ-hit2','s_russ-hit3',},
+		dist1 = 20,
+		dist2 = 70,
+	},
+	atak1 = {
+		samples = {'s_russ-atak1a','s_russ-atak2a'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	atak2 = {
+		samples = {'s_russ-atak1b','s_russ-atak2b'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	shoot = {
+		samples = {'s_russ-pepesza-shoot-all'},
+		dist1 = 16,
+		dist2 = 60,
+	        disablePitch = true,
+	},
+	step1 = {
+		samples = {'s_russ-krok1',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'s_russ-krok2',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+
+	throw = {
+		samples = {'s_grenade-throw-swish'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	zawl = {
+		samples = {'s_grenade-zawleczka'},
+		dist1 = 10,
+		dist2 = 40,
+	},
+
+
+	bodyfalls = {
+		samples = {"s_russ_bodyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"s_russ-weapon-lost",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	onAttack = {
+		samples = {"s_russ-attackscream1","s_russ-attackscream2","s_russ-attackscream3","s_russ-attackscream4",},
+		dist1 = 20,
+		dist2 = 70,
+		playChance = 0.5,
+	},
+	death  = {
+		samples = {"s_russ-death1","s_russ-death2","s_russ-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+			{0.0,'PlaySound',"step1"},
+			{0.6,'PlaySound',"step2"},
+		},
+		run   = {
+			{0.0,'PlaySound',"step1"},
+			{0.6,'PlaySound',"step2"},
+		},
+
+		atak1   = {
+				{0.0,'PlaySound',"zawl"},
+				{0.0,'PlaySoundHit',"atak1"},
+				{0.6,'PlaySound',"throw"},
+				},
+		atak2   = {
+                {0.0,'PlaySound',"atak2"},
+				{0.3,'PlaySoundHit',"shoot"},
+				},
+		hit1   = {
+				{0.0,'PlaySoundHit',"hit"},
+				},
+		hit2   = {
+				{0.0,'PlaySoundHit',"hit"},
+				},
+}

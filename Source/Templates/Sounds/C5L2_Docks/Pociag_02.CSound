@@ -1,0 +1,10 @@
+Pociag_02.Volume = 40
+Pociag_02.Interval = 0
+Pociag_02.RandomShift = 0
+Pociag_02.Falloff =
+{
+  Start = 4,
+  End = 30
+}
+Pociag_02.Sound ="C5L2_Docks/pociag_02"
+

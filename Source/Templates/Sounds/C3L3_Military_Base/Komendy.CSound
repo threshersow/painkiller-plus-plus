@@ -1,0 +1,10 @@
+Komendy.Volume = 50
+Komendy.Interval = 10
+Komendy.RandomShift = 3
+Komendy.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Komendy.Sound ="C3L3_Military_Base/Komendy_01;C3L3_Military_Base/Komendy_02;C3L3_Military_Base/Komendy_03"
+

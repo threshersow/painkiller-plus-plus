@@ -1,0 +1,6 @@
+o.s_SubClass.ParticlesDefinitions = {
+	chainbreak = {
+		pfx = "giant_breakch",
+		scale = 5.5,
+	},
+}

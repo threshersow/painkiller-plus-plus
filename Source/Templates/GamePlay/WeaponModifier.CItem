@@ -1,0 +1,150 @@
+o.Model = "skull_dziaa"
+o.PowerUp = true
+o.Scale = 0.82
+o.DisabledInVoosh = false
+o.RespawnTime = 120
+o.WorkTime = 30
+o.s_SubClass = {
+    Animations = {
+        idle = {1.5}
+    }
+}
+function WeaponModifier:OnPrecache()
+	Cache:PrecacheParticleFX("wmodif")
+	Cache:PrecacheParticleFX("fx_weaponmodifier")
+	Cache:PrecacheSounds("items/item-wm-take")
+	Cache:PrecacheSounds("items/item-wm-take-mono")
+	Cache:PrecacheSounds("items/item-wm-timeout")
+	Cache:PrecacheSounds("items/item-wm-timeout-mono")
+end
+--============================================================================
+function WeaponModifier:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,true)
+    ENTITY.SetSynchroString(self._Entity,"WeaponModifier.CItem")
+    self:Client_OnCreateEntity(self._Entity)
+end
+--============================================================================
+function WeaponModifier:Client_OnCreateEntity(entity)
+	BindFX(entity,"wmodif",0.1)
+    -- jezeli jest wziety to musze schowac particle
+    if not ENTITY.IsDrawEnabled(entity) then
+        ENTITY.EnableDraw(entity,false,true)
+    end
+end
+--============================================================================
+function WeaponModifier:UnbindItem()
+    if self._blockedBy then
+        local owner = self._blockedBy
+        self._blockedBy = nil        
+
+        self.OnFinishFX(owner._Entity) 
+        
+        if MPCfg.GameState ~= GameStates.Finished then
+            if Cfg.PowerupDrop then                
+                if owner._died then
+                    local x,y,z = ENTITY.GetPosition(owner._Entity)
+                    self._Rst = -1
+                    local rp = Clone(self._RespawnPos)
+                    self._RespawnPos:Set(x,y+1,z)
+                    self:TryToRespawn()
+                    self._RespawnPos = rp
+                end                
+                self._ReturnTime = self._WorkCounter
+            end
+        end
+        
+        self._WorkCounter   = nil
+        
+        if Game.GMode == GModes.SingleGame then
+            GObjects:ToKill(self)
+        end
+    end
+end   
+--============================================================================
+function WeaponModifier:Tick(delta)    
+    if self._WorkCounter then
+        self._WorkCounter = self._WorkCounter - delta
+        if self._WorkCounter <=0 then 
+            self:UnbindItem()
+        end
+    end
+    if self._ReturnTime then    
+        --Game:Print("ReturnTime: "..self._ReturnTime)
+        self._ReturnTime = self._ReturnTime - delta
+        if self._ReturnTime <= 0 then
+            self.Pos = Clone(self._RespawnPos)
+            ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+            self._ReturnTime = nil            
+            if Cfg.PowerupDrop then
+                -- wraca na miejsce ale niewidoczny czeka na respawn
+                CItem.Show(self._Entity,0)
+                self.Place = 1             
+                self._Rst = self.RespawnTime * 30 
+                if Cfg.ItemRespawnFix then self._Rst = INP.GetTime() + self.RespawnTime end
+            end
+        end
+    end
+end
+--============================================================================
+function WeaponModifier:OnTake(player)
+    if player.HasWeaponModifier then return true end
+    self.TakeFX(player._Entity,1)
+    self._blockedBy = player
+    self._WorkCounter = self.WorkTime
+    if self._ReturnTime then 
+        self._WorkCounter = self._ReturnTime 
+    end
+    self._ReturnTime = nil
+end
+--============================================================================
+function WeaponModifier:TakeFX(pe,sound)
+
+    local player = EntityToObject[pe]    
+    local t = Templates["WeaponModifier.CItem"]
+    
+    if player then
+        if player == Player then              
+              player:PickupFX() 
+              PlaySound2D("items/item-wm-take",100,true,true)
+         end        
+        player.HasWeaponModifier = true
+    end
+    
+    if (not player or player ~= Player) then
+        if sound == 1 then
+            local x,y,z = ENTITY.GetPosition(pe)    
+            PlaySound3D("items/item-wm-take-mono",x,y,z,25,60)        
+        end
+        
+        local fxFire = AddPFX("fx_weaponmodifier",0.5)
+        ENTITY.RegisterChild(pe,fxFire)
+        local j = MDL.GetJointIndex(pe,"joint1")
+        PARTICLE.SetParentOffset(fxFire,0,0.07,0.75, j)
+    end
+    
+    BindSoundToEntity(pe,"items/item-wm-loop-mono",10,20,true,-1,nil,nil,nil,nil,0)
+end
+Network:RegisterMethod("WeaponModifier.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eb")
+--============================================================================
+-- [NET - SERVER & ALL CLIENTS]
+function WeaponModifier:OnFinishFX(pe)
+    ENTITY.KillAllChildrenByName(pe,"fx_weaponmodifier")
+    ENTITY.KillAllChildrenByName(pe,"items/item-wm-loop-mono")
+    local x,y,z = ENTITY.GetPosition(pe)    
+    local player = EntityToObject[pe]
+    if Player == player then
+        PlaySound2D("items/item-wm-timeout",100,true,true)
+    else
+        PlaySound3D("items/item-wm-timeout-mono",x,y,z,15,50,true)
+    end
+    if player then
+        player.HasWeaponModifier = false    
+    end
+end
+Network:RegisterMethod("WeaponModifier.OnFinishFX", NCallOn.ServerAndAllClients, NMode.Reliable, "e")
+--============================================================================
+function WeaponModifier:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+--============================================================================

@@ -1,0 +1,40 @@
+PBurningItem.r_Item = nil
+PBurningItem.PFX = "barrel_flame_FX"
+PBurningItem.Timeout = 0
+
+o.BaseName = "PBurningItem.CProcess"
+
+-- UWAGA, przywiazac jeszcze dzwiek i przesuwac razem z beczka
+--============================================================================
+function PBurningItem:New(item,timeout,pfx)
+    local p = Clone(self)
+    p.r_Item = item
+    if not timeout then 
+        p.Timeout = -5 
+    else
+        p.Timeout = timeout * 30
+    end
+    if pfx then p.PFX = pfx end
+    item._burning = true
+    return p
+end
+--============================================================================
+function PBurningItem:Init()
+    local pfx = AddPFX('barrel_flame_FX',0.25)
+    ENTITY.RegisterChild(self.r_Item._Entity,pfx)      
+end
+--============================================================================
+function PBurningItem:Update()    
+    
+    -- jezeli obiekt zostal w miedzy czasie zniszczony to kasuje proces
+    if self.r_Item._ToKill then GObjects:ToKill(self) end
+    
+    if self.Timeout == -5 then return end -- until died
+    
+    self.Timeout = self.Timeout - 1    
+    if self.Timeout < 0 then
+        self.r_Item:OnDamage(self.r_Item.Health+1, self)
+        GObjects:ToKill(self)
+    end
+end
+--============================================================================

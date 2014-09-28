@@ -1,0 +1,30 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path = "weapons/shotgun",
+    dist1   = 15,
+    dist2   = 50,
+    disablePitch = true,
+    out_of_ammo = 
+    {
+        samples = {"weapon_shotgun_empty"},
+    },
+    shot = 
+    {
+        samples = {"weapon_shotgun_shoot5"},
+    },
+    shell = 
+    {
+        samples = {"weapon_shootgun_shell1","weapon_shootgun_shell2","weapon_shootgun_shell3"},
+    },
+    freezer_shot = 
+    {
+        samples = {"freezer-shoot"},
+    },    
+    hit_water = 
+    {
+        path = "impacts",
+        samples = {"bullet-water1","bullet-water2","bullet-water3","bullet-water4","bullet-water5"},
+        dist1   = 20,
+        dist2   = 50,
+    },
+}

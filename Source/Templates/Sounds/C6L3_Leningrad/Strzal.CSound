@@ -1,0 +1,9 @@
+Strzal.Volume = 50
+Strzal.Interval = 15
+Strzal.RandomShift = 6
+Strzal.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Strzal.Sound ="C6L3_Leningrad/Strzal_01;C6L3_Leningrad/Strzal_02;C6L3_Leningrad/Strzal_03;C6L3_Leningrad/Strzal_04;C6L3_Leningrad/Strzal_05;C6L3_Leningrad/Strzal_06;C6L3_Leningrad/Strzal_07;C6L3_Leningrad/Strzal_08;C6L3_Leningrad/Strzal_09;C6L3_Leningrad/Strzal_10;C6L3_Leningrad/Strzal_11;C6L3_Leningrad/Strzal_12"

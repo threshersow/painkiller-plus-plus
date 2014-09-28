@@ -1,0 +1,5 @@
+o.BaseObj = "RingB.CItem"
+
+o.Mesh = "polySurfaceShape26110"
+o.Pack = "pierscien_czerwony.dat"
+

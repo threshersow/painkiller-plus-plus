@@ -1,0 +1,14 @@
+o.BaseObj = "CItem"
+o.Model = "C2L3_Zyrandol1"
+o.Scale = 1
+o.firstFX = 'explo_zyrandol'
+o.deathFX = 'explo_zyrandol1'
+o.sparksFX = 'explo_zyrandol2'
+o.sparksNo = 22
+o.sparksVelocity = 100
+o.sparksLifeTime = 2.5
+
+o.Sounds = {
+	Collision  = {'impacts/glass_big','impacts/glass_crack','impacts/glass_medium'},
+	Collision2 = {'impacts/glass_pause_1','impacts/glass_pause_2','impacts/glass_pause_3'},
+}

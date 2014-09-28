@@ -1,0 +1,24 @@
+o.BaseObj = "Ninja1.CActor"
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee"}
+
+o.AiParams.moveDisplacement = -1
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = 10
+o.AiParams.stopAfterWalking = 1
+o.AiParams.stopAfterWalkingTime = {15,30}
+
+o.AiParams.weapon = {
+		bulletsPerShot = 0,
+		maxDist = 14,
+		minDist = 2.2,
+		spreadAngle = 0.0,
+		damagePerBullet = 10,
+		PO_HitForce = 0,
+		maxYaw = 45,
+		maxPitch = 45,
+	}
+
+o.AiParams.hearing = 0.5

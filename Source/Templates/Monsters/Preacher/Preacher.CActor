@@ -1,0 +1,206 @@
+o.Model = "preacher"
+o.Scale = 1.4
+o.CreatePO = true
+o.Health = 600
+o.WalkSpeed = 1.0
+o.RunSpeed = 0.9
+o.RotateSpeed = 3.0
+o.disableFreeze = true
+
+o.throwHeart = "red"
+o.Animation = "idle1"
+o.enableGibWhenHPBelow = -59
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 240,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.5,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.18,
+
+	Animations = {
+		hit   = {1.0,false,{
+			}},
+		idle1   = {1.0,false},
+		idle2   = {1.0,false,{
+			}},
+		atak1 = {1.7,false,{			-- AB
+				{3.0,'ThrowImmid',nil,true},
+			}},
+		atak2 = {2.2,false,{
+				{2.0,'IfMissedPlaySound'},
+				{1.8, 'damage'},
+			}},
+		atak3 = {1.4,false,{
+				{2.1,'Take'},
+				{4.4,'Throw'},
+			}},
+		explode = {1.4,false,{
+				{2.0,'FlyAtPlayer'},
+			}},
+
+        walk = {1.0,true, {
+            }},
+		run = {1.6,true, {
+            }},
+    },
+
+	Hits = {"hit"},
+    RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"r_p_bark", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_l_bark", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"tasak", "weaponlost", false},		-- joint, {sounds}, blood
+			},
+    },
+
+	hitGroundJoint = "tasak",
+    notBleedingJoints = {
+		tasak = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+	Ambients = {"idle1","idle2"},
+    DeathJoints = {
+        'n_p_kolano','n_l_kolano','r_l_lokiec','r_p_lokiec','r_p_bark','r_l_bark','k_ogo','k_szyja',
+    },
+
+	NearAttacks = {"atak2",},
+
+    GibExplosionStrength = 8000,
+	GibExplosionRange = 3.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"root","FX_gib_blood",1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"tasak", "weaponlost", false},
+			},
+	    },
+}
+
+
+o.DeathTimer = 130
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","throwStuff","hear","hunt","closeAttack","preacherAttack"}
+
+o.AiParams.viewDistance = 60
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 120
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 4.0
+o.AiParams.attackRangeAngle = 90
+o.AiParams.hearing = 1.0
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,60}
+
+o.AiParams.walkStep = 6.0
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 15
+o.AiParams.moveDisplacement = 3.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+
+o.AiParams.updateSpeed = 0.33
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = false
+
+
+
+
+o.shadow = 128
+
+o.AiParams.holdJointSrc = "dlo_lewa_root"
+
+o.AiParams.ABHp = 0.21
+
+
+o.AiParams.hideMesh = "polySurfaceShape1287"
+
+o.AiParams.bindedRagdollFX = {
+	name = "leperfx",
+	scale = 0.4,
+}
+
+
+
+o.AiParams.throwRangeMin = 12
+o.AiParams.throwRangeMax = 60
+o.AiParams.escapeAfterThrowTime = 40		-- 0 - no escape
+
+
+o.AiParams.throwDistMinus_M = 1.8			-- <0 celuje za gracza, 0> przed gracza, modele
+o.AiParams.throwDeltaY_M = 1.0			-- wysokosc na jaka celuje wzgl. nog gracza
+
+o.AiParams.throwDistMinus =	0			-- default
+o.AiParams.throwDeltaY = 1.2
+
+o.AiParams.throwDistMinus_D = -0.6			-- <0 celuje za gracza, 0> przed gracza, daty
+o.AiParams.throwDeltaY_D = 1.7			-- wysokosc na jaka celuje wzgl. nog gracza
+
+o.AiParams.minDelayBetweenThrow = 2.0
+
+o.AiParams.throwMaxAnglePitchDiff = 180
+o.AiParams.throwMaxAngleYawDiff = 180
+o.AiParams.ThrowableItem = "PreacherAxe.CItem"
+o.AiParams.throwVelocity = 40								-- przedmioty rzucane
+o.AiParams.throwAngularVelocitySpeed = 3
+o.AiParams.thrownItemDamage = 20
+o.AiParams.stuffLiftSpeed = 3.0
+
+--------
+o.AiParams.ThrowAnim = "explode"
+o.AiParams.throwAngularVelocitySpeedAB = 25					--siekiera
+
+
+o.FlySpeed = 12.0
+o.initialLevitateSpeed = 1 -- jak leci na gracza po smierci
+
+
+o.AiParams.Explosion = {
+	ExplosionStrength = 2000,
+	ExplosionRange = 8,
+	Damage = 40,
+}
+
+o.AiParams.immortalBodiesCounter = 2
+
+--o.AiParams.walkArea = "testArea"		-- do zamykania
+o.AiParams.destJoint = "joint1_getmass"
+
+--o.AiParams.destJoint = "k_szyja"
+o.AiParams.throwItemBindTo = o.AiParams.destJoint

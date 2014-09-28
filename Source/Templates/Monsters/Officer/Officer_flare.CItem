@@ -1,0 +1,245 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+
+
+o.Scale = 0.5
+o.Health = 9
+o.forceOut = 80				-- sila explozji na boki
+o.forceUp =	550				-- sila explozji do gory
+
+o.timeToLive = 2.0		 	-- w sec. do strzalu
+o.RaidTime = 60				-- jak strzelil do gory
+
+o.Friction = 0.0
+o.flySpeed = 1000
+
+o.flame_FX = "oficerflare"
+o.flame_FXscale = 0.4
+o.flame_FXscaleShoot = 0.1
+
+o.ExplosionStrength = 2000
+o.ExplosionRange = 4
+o.Damage = 50
+
+o.hitGroundParticle = {"arrow_hitground", 0.2}
+o.SoundsImpact = {"impacts/belt-impact1","impacts/belt-impact2","impacts/belt-impact3"}
+
+o.bombsMin = 8
+o.bombsMax = 8
+o.s = {
+    height = 60,
+    distMax = 22,    -- zasieg wokol gracza, gdzie nad nim tworzony jest punkt, z ktorego wylatuja meteory
+}
+
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self.flame_FX)
+    Cache:PrecacheParticleFX(self.hitGroundParticle[1])
+
+	Cache:PrecacheItem("Officer_bomb.CItem")
+	Cache:PrecacheSounds(self.SoundsImpact[1])
+	Cache:PrecacheSounds(self.SoundsImpact[2])
+	Cache:PrecacheSounds(self.SoundsImpact[3])
+	Cache:PrecacheSounds("actor/oficer/offic-flare-up-shoot")
+	Cache:PrecacheSounds("actor/vamp_small/svamp-knife-hit")
+	Cache:PrecacheSounds("impacts/beltfire-impact")
+	Cache:PrecacheSounds("misc/aircraft-pass_by-stereo")
+end
+
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.Simple,nil,ECollisionGroups.Noncolliding)
+	ENTITY.PO_SetAngularDamping(self._Entity, 0.3)
+	ENTITY.PO_SetLinearDamping(self._Entity, 0.15)
+
+	ENTITY.EnableDraw(self._Entity, false)
+	
+	
+	ENTITY.PO_SetMovedByExplosions(self._Entity, false)			-- ?
+    --ENTITY.RemoveFromIntersectionSolver(self._Entity) 
+    
+
+	--ENTITY.PO_Hit(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z,x,y,z)
+	
+	if self._raid then
+		--self._TimeToLive = self.timeToLive * FRand(1.9, 2.1)
+		self._Flame = self:BindFX(self.flame_FX,self.flame_FXscale,nil,0,-0.3,0)
+	else
+		self._TimeToLive = self.timeToLive * FRand(0.9, 1.1)
+		ENTITY.PO_EnableGravity(self._Entity,false)
+		self._Flame = self:BindFX(self.flame_FX,self.flame_FXscaleShoot,nil,0,-0.3,0)
+	end
+    self._timer = 3
+    if self._raid then
+		self._raidTimer = self.RaidTime + math.random(0,10)
+	end
+    self._initPos = Vector:New(PX,0,PZ)
+
+    if self._raid then
+        PlaySound3D("actor/oficer/offic-flare-up-shoot",self.Pos.X, self.Pos.Y, self.Pos.Z, 12,60, false)
+    else
+        self:BindSound("actor/oficer/offic-flare-up-shoot", 12,60, false)
+    end
+    self._initPosStart = Clone(self.ObjOwner.Pos)
+end
+
+
+function o:OnCollision(x,y,z,nx,ny,nz,e_other,h_me,h_other)
+	local eg = true			-- czy bind
+	if e_other then
+		local obj = EntityToObject[e_other]
+		if obj then
+			eg = false
+			if obj ~= self.ObjOwner then
+				if obj.OnDamage then
+					if obj == Player then
+						PlaySound2D("actor/vamp_small/svamp-knife-hit")
+					end
+					obj:OnDamage(self.Damage, self.ObjOwner)
+				end
+			end
+			ENTITY.EnableCollisions(self._Entity, false)
+			GObjects:ToKill(self)
+		else
+			if ny > 0.9 or ny < -0.9 then 
+				eg = false
+				PlaySound3D("impacts/beltfire-impact",x,y,z,18,36)
+				--GObjects:ToKill(self)
+			end
+
+			local q = Quaternion:New_FromNormal(nx,ny,nz)
+			AddPFX(self.hitGroundParticle[1], self.hitGroundParticle[2], Vector:New(x,y,z), q)
+		end
+	end
+
+	if eg then
+		if not self.deathTimer then
+			if self._sndLoop then
+				ENTITY.Release(self._sndLoop)
+				self._sndLoop = nil
+			end
+
+			self.deathTimer = 0 --math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+			local name = self.SoundsImpact[math.random(1, table.getn(self.SoundsImpact))]
+			PlaySound3D(name,x,y,z,18,36,nil)
+		end
+	end
+end
+
+
+--============================================================================
+function o:OnUpdate()
+	if self._timer then
+		self._timer = self._timer - 1
+		if self._timer < 0 then
+			self._timer = nil
+
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			ENTITY.EnableCollisions(self._Entity, true)
+		end
+	end
+
+    if self._TimeToLive then
+        self._TimeToLive = self._TimeToLive - 1/30
+    end
+    if self._raidTimer then
+        if self._raid and not self._snd2D then
+            self._snd2D = PlaySound2D("misc/aircraft-pass_by-stereo")
+        end
+	    --if self._TimeToLive < 0 then
+		--	ENTITY.EnableDraw(self._Entity, false)
+		--end
+
+		self._raidTimer = self._raidTimer - 1
+		if self._raidTimer == 0 then
+			Game:Print("CREATE BOMBS")
+			if (self.Pos.Y - self._initPosStart.Y) > 40 then
+				self:CreateBombs()
+			else
+				Game:Print("za nisko flara")
+			end
+		end
+		if self._raidTimer < -50 then
+			Game:Print("FLARE END")
+			GObjects:ToKill(self)
+		end
+	else
+	    if self._TimeToLive < 0 then
+			GObjects:ToKill(self)
+		end
+	end
+end
+
+
+
+function o:CreateBombs()
+	local avgSpread = 5.5
+	local avgSpreadXZ = 3.0
+
+	local j = math.random(self.bombsMin,self.bombsMax)
+	--Game:Print("create stones "..j)
+
+
+	local angle = math.random(0,360)
+	
+	--local aDist = AngDist(angle*math.pi/180, self.ObjOwner.angle)
+	
+	--Game:Print("AAAAA angle = "..angle.."  self.ObjOwner.angle = "..self.ObjOwner.angle*180/math.pi.." aDist "..aDist*180/math.pi)
+	
+	--if aDist < 135*math.pi/180 and > 235 then
+	--	angle = angle - math.pi			-- zeby nie lecialo w strone kolesia
+
+		
+	local x = math.sin(angle) + math.cos(angle)
+	local z = math.cos(angle) - math.sin(angle)
+	local v = Vector:New(x,0,z)
+	v:Normalize()
+	
+	local back = -1
+	
+	-- spr. czy w strone oficera leci czy nie
+		local d1 = Dist2D(self.ObjOwner._groundx,self.ObjOwner._groundz, self._initPos.X,self._initPos.Z)
+		local d2 = Dist2D(self.ObjOwner._groundx,self.ObjOwner._groundz, self._initPos.X+v.X,self._initPos.Z+v.Z)
+		Game:Print("d1 = "..d1.." d2 = "..d2)
+		if d1 > d2 then
+			back = 1
+		end
+		
+	--
+	local v2 = Clone(v)
+	v:MulByFloat(avgSpread*-back)
+	v2:MulByFloat(avgSpread*3.5*back)
+	local vpos = Clone(self._initPos)
+	vpos:Add(v2)
+
+	for i=1,j do 
+	
+		-- na linii
+		--x = vpos.X + FRand(-avgSpreadXZ, avgSpreadXZ)
+		--y = vpos.Y + i*12 + s.height + FRand(-3,1)
+		--z = vpos.Z + FRand(-avgSpreadXZ, avgSpreadXZ)
+		--vpos:Add(v)
+		
+		-- random
+
+		local angle = FRand(0,6.28)
+		local x = math.sin(angle) + math.cos(angle)
+		local z = math.cos(angle) - math.sin(angle)
+		local d = FRand(0,self.s.distMax)
+		x = self._initPos.X + x * d
+		y = self._initPos.Y + self.s.height + FRand(-0.3,0.3) + i * 8 + self._initPosStart.Y
+		z = self._initPos.Z + z * d
+
+        if debugMarek then
+            Game:Print("create bomb "..y)
+        end
+		
+--		local v = Vector:New(x - Player._groundx, y - Player._groundy, z - Player._groundz)
+--		v:Normalize()
+
+--		local rnd = FRand(0.95,1.05)
+		local ke,obj = AddItem("Officer_bomb.CItem",nil,Vector:New(x,y,z),true)
+		obj._initPosStart = self._initPosStart
+--		obj._desiredVel = Vector:New((v.X + FRand(-0.005,0.005))* speed*rnd, v.Y * speed*rnd, (v.Z + FRand(-0.005,0.005)) * speed*rnd)
+	end
+end
+

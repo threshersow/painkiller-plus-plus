@@ -1,0 +1,18 @@
+o.Mesh = "polySurfaceShape70785"
+o.Pack = "skrzynia_zam_proch_cala.dat"
+o.DestroyPack = "skrzynia_zam_proch_zlom.dat"
+o.Scale = 1.1
+o.Health = 10
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 150
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.6
+o.Destroy.Treasures = 
+{
+    Coins  = {8, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0

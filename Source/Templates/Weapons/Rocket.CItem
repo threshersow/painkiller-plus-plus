@@ -1,0 +1,8 @@
+Rocket.Mesh = [[polySurfaceShape234]]
+Rocket.Pack = [[granat.dat]]
+Rocket.Scale = 0.4
+Rocket.Timeout = 2*30
+Rocket.Restitution = 1
+Rocket.Mass = 0.001
+Rocket.TestDeathZone = true
+Rocket.SoundInWater = "impacts/bulletbig-water"

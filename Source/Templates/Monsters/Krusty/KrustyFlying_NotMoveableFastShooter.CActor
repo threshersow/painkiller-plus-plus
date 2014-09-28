@@ -1,0 +1,12 @@
+o.BaseObj = "KrustyFlying.CActor"
+o.NeverMove = true
+o.RotateSpeed = 12
+
+
+o.AiParams.throwVelocity = 50
+o.AiParams.homingMissileAngleChangeSpeed = 25
+o.AiParams.throwRangeMin = 4
+o.AiParams.throwRangeMax = 100
+--o.AiParams.seeThruWalls = true
+o.AiParams.minDelayBetweenThrow = 1.0
+o.AiParams.updateSpeed = 0.5

@@ -1,0 +1,19 @@
+o.s_SubClass = 
+{
+    SoundsDefinitions = 
+    {
+        path  = "actor/ninja",
+        dist1 = 30,
+        dist2 = 80,
+        disablePitch = true,
+        shoot = 
+        {    
+            samples = {"ninja_blow-dart1","ninja_blow-dart2"},
+        },
+        trap = 
+        {    
+            path  = "misc",
+            samples = {"trap-activate"},
+        },
+    }
+}

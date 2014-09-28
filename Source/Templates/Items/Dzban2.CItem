@@ -1,0 +1,19 @@
+o.Mesh = "dzbanShape5"
+o.Pack = "dzban2_caly.dat"
+o.DestroyPack = "dzban2_zlom.dat"
+o.Scale = 0.3
+o.Health = 5
+
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 5
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.3
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 10
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0

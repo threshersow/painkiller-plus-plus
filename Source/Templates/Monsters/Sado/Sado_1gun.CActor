@@ -1,0 +1,22 @@
+o.BaseObj = "Sado.CActor"
+o.ABhp = -1
+o.Health = 80
+o.enableGibWhenHPBelow = -55
+
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee","JumpUP","throw"}
+o.AiParams.FarAttacks = {"shotrgunllost"}
+o.AiParams.afterJumpAnim = {"shotrgunllost"}
+o.AiParams.strafe = nil
+
+o.s_SubClass.xchgTextures = nil
+
+o.AiParams.throwAnim = "throw_apple"
+o.AiParams.throwAmmo = 1
+o.AiParams.throwRangeMin = 8
+o.AiParams.throwRangeMax = 20
+o.AiParams.minDelayBetweenThrow = 5
+o.AiParams.ThrowableItem = "Apple.CItem"
+o.AiParams.throwItemBindTo = 'dlo_lewa_root'
+o.AiParams.hideMesh = "sado_head1|polySurfaceShape3"
+o.AiParams.throwDistMinus = 3
+o.AiParams.throwAngle = 30

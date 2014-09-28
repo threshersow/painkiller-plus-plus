@@ -1,0 +1,42 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path = "weapons/BoltGunHeater",
+    dist1   = 15,
+    dist2   = 50,
+    disablePitch = true,
+    out_of_ammo = 
+    {
+        path = "weapons/assault-rifle",
+        samples = {"weapon_rifle_empty"},
+    },
+    bolt_shot = 
+    {
+        samples = {"weapon_bolt-shoot1","weapon_bolt-shoot2","weapon_bolt-shoot3"},
+    },
+    bolt_reload = 
+    {
+        samples = {"weapon_bolt_reload"},
+    },
+    heater_shot = 
+    {
+        samples = {"weapon_heater_fire"},
+    },
+    heater_bounce = 
+    {
+        disablePitch = false,
+        samples = {"weapon_heater-bounce1","weapon_heater-bounce2"},
+    },
+    heater_explosion = 
+    {
+        disablePitch = false,
+        samples = {"weapon_heater-explosion1","weapon_heater-explosion2","weapon_heater-explosion3"},
+    },
+    zoom_in = 
+    {
+        samples = {"zoom-in"},
+    },
+    zoom_loop = 
+    {
+        samples = {"zoom-loop"},
+    },
+}

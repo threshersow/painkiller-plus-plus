@@ -1,0 +1,26 @@
+o._IsAmbushForPlayer = true
+o.Team = 0
+o.BaseObj = "CBox"
+o.s_Editor.Team = { "ComboBox"  , {"Blue|0", "Red|1"} }
+
+function TeamBase:Tick()
+    for i,o in Game.Players do
+        if not o._died and o.Team == self.Team and o.HasFlag then
+            local px,py,pz = ENTITY.GetPosition(o._Entity)
+            if self:IsInside(px,py+1,pz) then 
+                local flags = GObjects:GetElementsWithFieldValue("BaseObj","Flag.C*")
+                for ii,f in flags do
+                    if o.Team == f.Team and f._captured then
+                        return
+                    end
+                end                
+                o.HasFlag = false
+                for ii,oo in GObjects.UpdateListItems do
+                    if oo.BaseObj == "Flag.CItem" and oo._blockedBy == o then
+                        oo:UnbindItem(true)
+                    end
+                end
+            end
+        end
+    end
+end

@@ -1,0 +1,74 @@
+BoltGunHeater.Model = "KK2"
+BoltGunHeater.Scale = 0.1
+BoltGunHeater.Pos = Vector:New(0.39, -0.49 ,-1.2)
+BoltGunHeater.Ang = Vector:New(0  , -1.57,  -0.03)
+BoltGunHeater._ShotNr = 0
+BoltGunHeater.ShotCamMove = 0.025
+BoltGunHeater.ShotCamRotate = 0.025
+BoltGunHeater.s_SubClass = {
+
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout    = 40,
+    AltFireTimeout = 30,        
+    
+    -- BoltStick
+    BoltStickSpeed           = 190,
+    BoltStickEnemyThrowBack  = 0,
+    BoltStickEnemyThrowUp    = 0,
+    BoltStickDamage          = 45,
+    
+    -- HeaterBomb
+    HeaterBombSpeed             = 30,
+    HeaterBombDamage            = 70,
+    HeaterBombExplosionStrength = 2000,
+    HeaterBombExplosionRange    = 5,
+    
+    -- Combo
+    ComboCatchDistance     = 0.7,
+    ComboExplosionDamage   = 200,
+    ComboExplosionRange    = 7,
+    ComboExplosionStrength = 4000,
+    
+    Animations = 
+    {   
+        idle         = {1.0 ,0.3},
+        walk         = {1.0 ,0.3},
+        ballshot     = {3, 0},        
+        stickshot    = {1.2, 0},        
+        stick_reload = {2, 0},                
+    }
+}
+
+BoltGunHeater.s_MPSubClass = {
+
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout    = 40,
+    AltFireTimeout = 30,        
+    
+    -- BoltStick
+    BoltStickSpeed           = 190,
+    BoltStickEnemyThrowBack  = 0,
+    BoltStickEnemyThrowUp    = 0,
+    BoltStickDamage          = 20,
+    
+    -- HeaterBomb
+    HeaterBombSpeed             = 30,
+    HeaterBombDamage            = 20,
+    HeaterBombExplosionStrength = 600,
+    HeaterBombExplosionRange    = 4,
+
+    -- Combo
+    ComboCatchDistance     = 0.7,
+    ComboExplosionDamage   = 200,
+    ComboExplosionRange    = 7,
+    ComboExplosionStrength = 4000,
+    
+    Animations = 
+    {   
+        idle         = {1.0 ,0.3},
+        walk         = {1.0 ,0.3},
+        ballshot     = {3, 0},        
+        stickshot    = {1.2, 0},        
+        stick_reload = {2, 0},                
+    }
+}

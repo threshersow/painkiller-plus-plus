@@ -1,0 +1,10 @@
+Brzeczenie_01.Volume = 60
+Brzeczenie_01.Interval = 0
+Brzeczenie_01.RandomShift = 0
+Brzeczenie_01.Falloff =
+{
+  Start = 1.5,
+  End = 20
+}
+Brzeczenie_01.Sound ="C3L3_Military_Base/Brzeczenie_01"
+

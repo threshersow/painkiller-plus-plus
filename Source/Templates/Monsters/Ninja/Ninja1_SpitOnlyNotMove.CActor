@@ -1,0 +1,16 @@
+o.BaseObj = "Ninja1.CActor"
+o.AiParams.aiGoals = {"idle","FarAttack", "hear",}
+
+o.NeverMove = true
+o.AiParams.alwaysSee = true
+
+o.AiParams.weapon = {
+		bulletsPerShot = 0,
+		maxDist = 50,
+		minDist = 2.2,
+		spreadAngle = 0.0,
+		damagePerBullet = 10,
+		PO_HitForce = 0,
+		maxYaw = 45,
+		maxPitch = 45,
+	}

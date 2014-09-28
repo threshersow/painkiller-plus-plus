@@ -1,0 +1,100 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'corn-krok1',},
+		dist1 = 7,
+		dist2 = 26,
+	},
+	step2 = {
+		samples = {'corn-krok2',},
+		dist1 = 7,
+		dist2 = 26,
+	},
+
+	death  = {
+		samples = {"corn-death1","corn-death2","corn-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	atak = {
+		samples = {'corn-atak1','corn-atak2'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+    hit = {
+		samples = {'corn-hit1','corn-hit2','corn-hit3',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    throw = {
+		samples = {'corn-throw'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    swish = {
+		samples = {'corn-swish'},
+		dist1 = 16,
+		dist2 = 50,
+	},
+
+    pullOut = {
+		samples = {'corn-pullOut'},
+		dist1 = 16,
+		dist2 = 50,
+	},
+
+	bodyfalls = {
+		samples = {"corn-bodyfalls",},
+		dist1 = 16,
+		dist2 = 50,
+	},
+
+	damage = {
+		samples = {"corn-damage",},
+	},
+
+    onAttackOnce = {
+        samples = {"corn-halt1","corn-halt2"},
+   		dist1 = 16,
+		dist2 = 60,
+    },
+
+
+    walkVoice = {
+        samples = {"corn-walkvoice1","corn-walkvoice2","corn-walkvoice3"},
+		playChance = 0.3,
+   		dist1 = 30,
+		dist2 = 70,
+    },
+
+}
+o.s_SubClass.SoundsDefinitionsBindings = {
+
+		walk   = {
+            {0.0,'PlaySoundHit',"walkVoice"},
+            {0.65,'PlaySound',"step1"},
+			{1.6,'PlaySound',"step2"},
+		},
+		run   = {
+            {0.0,'PlaySoundHit',"walkVoice"},
+            {0.65,'PlaySound',"step1"},
+			{0.07,'PlaySound',"step2"},
+		},
+        hit1 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        hit2 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+
+        atak1 = {
+            {1.0,'PlaySoundHit',"throw"},
+            {0.6,'PlaySound',"pullOut"},
+            {1.0,'PlaySound',"swish"},
+        },
+        atak2 = {
+            {0.0,'PlaySoundHit',"atak"},
+        },
+
+}

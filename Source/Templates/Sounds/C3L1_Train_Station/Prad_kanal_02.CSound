@@ -1,0 +1,10 @@
+Prad_kanal_02.Volume = 40
+Prad_kanal_02.Interval = 0
+Prad_kanal_02.RandomShift = 0
+Prad_kanal_02.Falloff =
+{
+  Start = 2,
+  End = 10
+}
+Prad_kanal_02.Sound ="C3L1_Train_Station/Prad_kanal_02"
+

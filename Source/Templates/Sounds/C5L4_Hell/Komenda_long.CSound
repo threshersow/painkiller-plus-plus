@@ -1,0 +1,10 @@
+Komenda_long.Volume = 80
+Komenda_long.Interval = 23
+Komenda_long.RandomShift = 4
+Komenda_long.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Komenda_long.Sound ="C5L4_Hell/komenda_01"
+

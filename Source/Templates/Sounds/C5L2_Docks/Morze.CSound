@@ -1,0 +1,10 @@
+Morze.Volume = 30
+Morze.Interval = 0
+Morze.RandomShift = 0
+Morze.Falloff =
+{
+  Start = 50,
+  End = 200
+}
+Morze.Sound ="C5L2_Docks/morze"
+

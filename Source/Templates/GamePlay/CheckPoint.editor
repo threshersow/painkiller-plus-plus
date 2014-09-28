@@ -1,0 +1,28 @@
+--============================================================================
+function CheckPoint:EditRender(delta)
+	R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,R3D.RGB(255,255,255))
+end
+--============================================================================
+function CheckPoint:EditTick(delta)
+    -- edit
+    if Editor.SelObj == self then        
+        if INP.Key(Keys.NumPlus) == 2 then        
+            self.Impulse.Strength = self.Impulse.Strength + 400 * delta
+        end
+        if INP.Key(Keys.NumMinus) == 2 then        
+            self.Impulse.Strength = self.Impulse.Strength - 400 * delta
+        end
+        self:Apply(self)
+    else
+        -- picking point 
+        if MOUSE.LB() == 1 then        
+            local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+            if Dist2D(MX,MY,sx,sy) <  15  then
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+            end
+        end    
+    end
+
+end
+--============================================================================

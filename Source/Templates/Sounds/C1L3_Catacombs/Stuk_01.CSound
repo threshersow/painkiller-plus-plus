@@ -1,0 +1,10 @@
+Stuk_01.Volume = 60
+Stuk_01.Interval = 3
+Stuk_01.RandomShift = 2
+Stuk_01.Falloff =
+{
+  Start = 2,
+  End = 40
+}
+Stuk_01.Sound ="C1L3_Catacombs/stuk_01;C1L3_Catacombs/stuk_03"
+

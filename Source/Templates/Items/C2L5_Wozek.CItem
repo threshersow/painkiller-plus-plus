@@ -1,0 +1,17 @@
+o.BaseObj = "CItem"
+o.Model = "C2L5_Wozek"
+o.Scale = 3
+
+o.CollisionDetect = {
+	joint = "joint4_getmass",
+	MinTime = 0.8,
+	MinStren = 1.5,
+}
+
+o.RagdollMoveSound = {
+	joint = "joint7_getmass",
+	minVel = 2.8,
+	minDelayBetweenSounds = 0.0,
+}
+
+

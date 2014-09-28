@@ -1,0 +1,42 @@
+Nail.Mesh = "pSphereShape1"
+Nail.Pack = "kamyk.dat"
+
+Nail.Scale = 0.1
+Nail.TimeToLive = 40
+Nail.damage = 6
+
+-----------
+function Nail:OnCreateEntity()
+	self:PO_Create(BodyTypes.SphereSweep,0.2,ECollisionGroups.InsideItems)
+	ENTITY.EnableCollisions(self._Entity, true)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+	self.timer = 1
+    --local pfx = AddPFX("pochodnia",0.1)
+    --ENTITY.RegisterChild(self._Entity,pfx)
+	local e = ENTITY.Create(ETypes.Trail,"trail_kolek","trailName")
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+end
+
+function Nail:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+		end
+	end
+end
+
+function Nail:OnCollision(x,y,z,nx,ny,nz,e)
+	if e then
+		local obj = EntityToObject[e]
+		if obj then
+			if obj.OnDamage then
+				obj:OnDamage(self.damage, self.ObjOwner)
+			end
+		end
+	end
+	GObjects:ToKill(self)
+end
+

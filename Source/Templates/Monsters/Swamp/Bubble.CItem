@@ -1,0 +1,166 @@
+-- babelki ktore pojawiaja sie losowo na bagnie, a taze te szesc co mozna podpalic
+
+Bubble.Model = "swamp_bubble"
+Bubble.Scale = 30.0
+Bubble.Health = 1
+Bubble.Pinned = true
+Bubble.DamageRange = 5
+o.ExplosionStrength = 3000
+o.ExplosionRange = 35
+o.Damage = 666		-- do eksplozji
+o.s_SubClass = {
+	RefractFresnel = {
+        water_buble = {
+            Refract=0.85,
+            Fresnel=0.5, 
+            ReflTint=Color:New(255,255,255),
+            RefrTint=Color:New(185,175,166)
+        },
+    },
+}
+
+--o.explodeFX = "FX_rexplode.CActor"		-- po strzale
+o.explodeFX = "explo_bUble"		-- po strzale
+o.startFX = "bublebloto"
+o.startFXstartTime = 0.0				-- w sec.
+o.insideFX = "energy_buble"
+o.selfExplodeFX = "but"					-- samoistny wybuch na koncu animacji
+
+-----------------------------------------
+function Bubble:OnCreateEntity()
+    self:PO_Create(BodyTypes.Simple, 0.2, ECollisionGroups.HCGNormalNCWithSelf)
+	self._currentTime = 0
+end
+
+function Bubble:OnRelease()
+	if self._soundSample then
+		SOUND3D.Delete(self._soundSample)
+		self._soundSample = nil
+	end
+end
+
+function Bubble:Extinguish()
+	if self._burnin then
+		PlaySound3D("actor/maso/maso_flametrower-start",self.Pos.X,self.Pos.Y,self.Pos.Z,60,300)
+		ENTITY.EnableDraw(C2L6_Swamp._flames[self._flameIndex]._Entity,false)		-- pozniej stop
+		ENTITY.EnableDraw(C2L6_Swamp._coronas[self._flameIndex]._Entity,false)
+		self:AddPFX("extinguish")
+		SOUND3D.Stop(self._soundSample)
+		
+		if self._flameIndex == 1 then
+			BubbleV2_001._moveTarget1 = nil
+		end
+		if self._flameIndex == 5 then
+			BubbleV2_001._moveTarget2 = nil
+		end
+
+		if self._flameIndex == 2 then
+			BubbleV2_002._moveTarget1 = nil
+		end
+		if self._flameIndex == 3 then
+			BubbleV2_002._moveTarget2 = nil
+		end
+
+		if self._flameIndex == 4 then
+			BubbleV2_003._moveTarget1 = nil
+		end
+		if self._flameIndex == 6 then
+			BubbleV2_003._moveTarget2 = nil
+		end
+		self._burnin = false
+	end
+end
+
+function Bubble:OnDamage(damage, owner, attacktype)
+	if attacktype == AttackTypes.Bubble then
+		return
+	end
+	if self._modeBurn then
+		if not self._burnin and not self._disabled then
+			if debugMarek then Game:Print("************ IGNITE *********") end
+			ENTITY.EnableDraw(C2L6_Swamp._flames[self._flameIndex]._Entity,true)
+			ENTITY.EnableDraw(C2L6_Swamp._coronas[self._flameIndex]._Entity,true)
+			
+			self:AddPFX("combustion")
+			
+			PlaySound3D("actor/Swamp/Swamp_bubbleIgnite",C2L6_Swamp._flames[self._flameIndex].Pos.X,C2L6_Swamp._flames[self._flameIndex].Pos.Y,C2L6_Swamp._flames[self._flameIndex].Pos.Z, 60,260)
+			local a = C2L6_Swamp._flames[self._flameIndex]
+			local x,y,z = C2L6_Swamp._flames[self._flameIndex].Pos.X, C2L6_Swamp._flames[self._flameIndex].Pos.Y, C2L6_Swamp._flames[self._flameIndex].Pos.Z
+			
+			if not self._soundSample then
+				self._soundSample = SOUND3D.Create("actor/swamp/Swamp_fire-loop")		-- ### pozniej wylaczac do gaszenia
+				SOUND3D.SetPosition(self._soundSample,x,y,z)    
+				SOUND3D.SetHearingDistance(self._soundSample,40,200)
+			end
+			SOUND3D.SetLoopCount(self._soundSample,0)  
+			SOUND3D.Play(self._soundSample)
+
+			
+			if self._flameIndex == 1 then
+				BubbleV2_001._moveTarget1 = a
+			end
+			if self._flameIndex == 5 then
+				BubbleV2_001._moveTarget2 = a
+			end
+
+			if self._flameIndex == 2 then
+				BubbleV2_002._moveTarget1 = a
+			end
+			if self._flameIndex == 3 then
+				BubbleV2_002._moveTarget2 = a
+			end
+
+			if self._flameIndex == 4 then
+				BubbleV2_003._moveTarget1 = a
+			end
+			if self._flameIndex == 6 then
+				BubbleV2_003._moveTarget2 = a
+			end
+			self._burnin = true
+			
+			ENTITY.EnableDraw(self._Entity, false)
+		end
+	else
+		PlaySound3D("actor/Swamp/Swamp_bubbleHit",self.Pos.X,self.Pos.Y,self.Pos.Z, 40,200)
+		AddPFX(self.explodeFX,0.6 * self._scale,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+		ENTITY.PO_Enable(self._Entity, false)
+		WORLD.Explosion2(self.Pos.X,self.Pos.Y + 3.0,self.Pos.Z,self.ExplosionStrength,self.ExplosionRange,nil,AttackTypes.Bubble,self.Damage)
+		GObjects:ToKill(self)
+	end
+end
+
+
+function Bubble:Tick(delta)
+	if self._CurAnimIndex and not self._modeBurn then
+		if not self._insideStartFX then
+			if self.insideFX and self._scale then
+				self:BindFX(self.insideFX, 1.0 * self._scale, "root")
+				self._insideStartFX = true
+			end
+		end
+
+		self._currentTime = self._currentTime + delta
+		if self._currentTime > self.startFXstartTime and not self._bindedStartFX then
+			if self.startFX and self._scale then
+				self._bindedStartFX = true
+				self:BindFX(self.startFX, 1.0 * self._scale, "root")
+			end
+		end
+		if not self._CurAnimLength then
+			self._CurAnimLength = MDL.GetAnimLength(self._Entity, self._CurAnimIndex)
+		end
+		self._CurAnimTime = MDL.GetAnimTime(self._Entity,self._CurAnimIndex)
+        --Game:Print(self._Name.." "..self._CurAnimTime.." "..self._CurAnimLength)
+		if self._CurAnimTime == self._CurAnimLength then
+			if self.selfExplodeFX and self._scale then
+				self:BindFX(self.selfExplodeFX, 1.0 * self._scale, "root")
+			end
+			GObjects:ToKill(self)
+		end
+	end
+end
+
+
+function Bubble:RestoreFromSave()
+	self._CurAnimLength = MDL.GetAnimLength(self._Entity, self._CurAnimIndex)
+end

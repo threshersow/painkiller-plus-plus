@@ -1,0 +1,10 @@
+Kamienie.Volume = 80
+Kamienie.Interval = 8
+Kamienie.RandomShift = 3
+Kamienie.Falloff =
+{
+  Start = 3,
+  End = 13
+}
+Kamienie.Sound ="C5L3_Monastery/Kamienie_01;C5L3_Monastery/Kamienie_02"
+

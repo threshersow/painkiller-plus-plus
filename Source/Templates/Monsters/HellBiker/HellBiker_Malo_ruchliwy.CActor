@@ -1,0 +1,3 @@
+o.BaseObj = "HellBiker.CActor"
+o.AiParams.changePosAfterFire = 0.0
+o.AiParams.chanceOfEscapeAfterFire = 0.0

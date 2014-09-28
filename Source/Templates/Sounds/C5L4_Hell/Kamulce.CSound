@@ -1,0 +1,10 @@
+Kamulce.Volume = 80
+Kamulce.Interval = 16
+Kamulce.RandomShift = 4
+Kamulce.Falloff =
+{
+  Start = 5,
+  End = 20
+}
+Kamulce.Sound ="C5L4_Hell/Kamulce_01;C5L4_Hell/Kamulce_02;C5L4_Hell/Kamulce_03"
+

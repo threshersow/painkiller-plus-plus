@@ -1,0 +1,10 @@
+wiatr_02.Volume = 100
+wiatr_02.Interval = 0
+wiatr_02.RandomShift = 0
+wiatr_02.Falloff =
+{
+  Start = 7,
+  End = 70
+}
+wiatr_02.Sound ="C6L3_Lab/wiatr_02"
+

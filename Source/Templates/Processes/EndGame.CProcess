@@ -1,0 +1,63 @@
+--============================================================================
+o.TickCount = 0
+o.FadeTime = 5
+o.Color = Color:New(0,0,0)
+
+--============================================================================
+function EndGame:Update()
+	if not self.initialized then
+        Player._died = true
+        ENTITY.PO_Enable(Player._Entity,false)
+		if Player:GetCurWeapon() and Player:GetCurWeapon().OnPlayerDeath then Player:GetCurWeapon():OnPlayerDeath() end 
+		self.initialized = true
+		self._fade = 0
+		self.time = Game.LevelTime
+		Hud.Enabled = false
+	    Player._died = true
+	end
+end
+
+
+function EndGame:Tick(delta)
+    if INP.Key(Keys.Enter) == 1 then
+--        EDITOR.PostMessage(1,0)
+--		MagicBoard_SaveStatus()
+		PMENU.SwitchToMap()
+		PMENU.MapNextLevel()
+    end        
+end
+
+function EndGame:Render(delta)
+	if self.initialized and not Lev._demonfx then
+		local font = "painBig"
+		local w,h = R3D.ScreenSize()
+
+        self._fade = self._fade + delta * 1/self.FadeTime * 255
+        if self._fade > 255 then
+			self._fade = 255
+        end
+        self.Color.A = self._fade
+        HUD.DrawQuad(0,0,0,w,h,self.Color:Compose())
+        
+        local fontColor = Color:New(255,0,0)
+		HUD.PrintXY(-1,100,"CONGRATULATIONS!", font, fontColor.R, fontColor.G, fontColor.B)
+		HUD.PrintXY(-1,140,"Your game score:", font, fontColor.R, fontColor.G, fontColor.B)
+		HUD.PrintXY(-1,200,"Total enemies killed: "..string.format("%03d",Game.BodyCountTotal).." out of "..string.format("%03d",Game.TotalActors), font, fontColor.R, fontColor.G, fontColor.B)
+		HUD.PrintXY(-1,240,"Total coins found: "..string.format("%03d",Game.PlayerCoinsFound).." out of "..string.format("%03d",Game.TotalMoney), font, fontColor.R, fontColor.G, fontColor.B)
+		HUD.PrintXY(-1,280,"Total ammo found: "..string.format("%03d",Game.PlayerAmmoFound).." out of "..string.format("%03d",Game.TotalAmmo).." boxes", font, fontColor.R, fontColor.G, fontColor.B)
+		HUD.PrintXY(-1,320,"Total objects destroyed: "..string.format("%03d",Game.PlayerDestroyedItems).." out of "..string.format("%03d",Game.TotalDestroyed), font, fontColor.R, fontColor.G, fontColor.B)
+		local min = math.abs(self.time / 60)
+		local sec = math.mod(self.time, 60)
+		if min < 60 then
+			HUD.PrintXY(-1,360,"Gameplay time: "..string.format("%02d",min)..":"..string.format("%02d",sec), font, fontColor.R, fontColor.G, fontColor.B)
+		else
+			local hour = math.mod(min, 60)
+			HUD.PrintXY(-1,360,"Gameplay time: "..string.format("%02d",hour)..":"..string.format("%02d",min)..":"..string.format("%02d",sec), font, fontColor.R, fontColor.G, fontColor.B)
+		end
+
+        HUD.PrintXY(w/2-78,h-29,"Press 'Enter' to continue.","timesbd",15,15,15,22)
+        HUD.PrintXY(w/2-79,h-30,"Press 'Enter' to continue.","timesbd",225,65,68,22)
+	end
+end
+--============================================================================
+

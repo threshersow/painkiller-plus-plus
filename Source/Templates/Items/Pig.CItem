@@ -1,0 +1,21 @@
+o.Mesh = "swinka_relax02Shape"
+o.Pack = "swinka_cala.dat"
+o.Scale = 0.2
+
+o.DestroyPack = "swinka_zlom.dat"
+o.Health = 21
+o.Mass = 160
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 0
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 10
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.3
+o.Destroy.Treasures = 
+{
+    Coins  = {15, 's'},
+}
+o.Destroy.MinSpeedOnCollision = 10
+o.SoundHitByBulletMiniGunOnly = true
+
+o.Destroy.LifetimeAfterExplosion = 1

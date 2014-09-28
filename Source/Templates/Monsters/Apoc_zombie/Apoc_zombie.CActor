@@ -1,0 +1,39 @@
+o.BaseObj = "Leper.CActor"
+o.Model = "apoc_zombie"
+o.Scale = 1.05
+o.RotateSpeed = 4
+o.Health = 90
+o.enableGibWhenHPBelow = -50
+
+o.s_SubClass.SoundDir = "leper"
+o.s_SubClass.Animations.run = {1.3,true,{
+				{0.0,'PlaySoundHit',"walk_voice1"},
+				{0.05,'PlaySound',"walk4_1"},
+				--{0.65,'FootFX','s_p_srodstopie'},
+				{0.8,'PlaySound',"walk4_2"},
+				--{1.0,'FootFX','s_l_srodstopie'},
+			}}
+
+
+
+o.AiParams.minDelayBetweenThrow = 3.5
+o.AiParams.delayBetweenAttacks = 15
+o.AiParams.throwRangeMin = 5
+o.AiParams.throwRangeMax = 40
+o.AiParams.throwAngle = 26
+o.AiParams.moveDisplacement = 3.5
+
+o.AiParams.runChance = 0.4
+o.AiParams.aiGoals = {"idle","hunt", "hear","attack","throw","flee"}
+
+
+o.s_SubClass.bodyParts = {
+		{"weapon3"},
+		{"torso1","torso2","torso3","torso4",},
+		{"head1","head2","head3","head4",},
+		{"legs1","legs2","legs3",},
+}
+
+
+
+o.s_SubClass.weapons = {"LeperHammer.CItem",}

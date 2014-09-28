@@ -1,0 +1,14 @@
+o.Mesh = "pentaklShape"
+o.Pack = "pentakl.dat"
+
+o.Scale = 0.7
+
+o.Value = 10
+o.takeDistance = 2.4
+o.force = {20,160,20}
+o.rotate = {10,80,10}
+o.angularDamping = 0.5
+o.Friction = 2.5
+o.Frozen = false
+
+--o.FX = {"moneta", 0.6, nil, {0, 0, 0}, {0.2, 0.2, 0.2}}

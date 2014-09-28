@@ -1,0 +1,8 @@
+o.s_SubClass.Light = {
+	template = "leper_Light.CLight",
+ 	joint = "axeL",
+}
+o.s_SubClass.BillBoard = {
+	template = "lepper-torch.CBillboard",
+	joint = "axeL",
+}

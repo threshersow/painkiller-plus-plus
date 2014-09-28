@@ -1,0 +1,12 @@
+o.Corona.FadeInTime = 0.1
+o.Corona.TraceMargin = 0.8
+o.Corona.OffDistance = 150
+o.Corona.FadeOutTime = 0.1
+o.Corona.MaxDistance = 8
+o.Corona.Enabled = true
+o.Texture = "flarka"
+o.Alpha = 0.8
+o.BaseObj = "CBillboard"
+o.Color = Color:New(254,126,33,0)
+o.Size = 4
+o.Pos = Vector:New(-8.03866,0.494974,-56.7281)

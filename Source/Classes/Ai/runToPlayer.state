@@ -1,0 +1,67 @@
+----------------------------------------------------------------------------------
+-- Biegnie na playera - zawsze go widzi, jesli jest w zasiegu, to odpala animacje
+----------------------------------------------------------------------------------
+AiStates.runToPlayer = {
+	name = "runToPlayer",
+    lastTimeOnAttackAmbient = 0,
+}
+
+
+function AiStates.runToPlayer:OnInit(brain)
+    local actor = brain._Objactor
+	if not self.firstTime then
+		if actor.s_SubClass.SoundsDefinitions.onAttackOnce then
+			actor:PlaySoundAndStopLast("onAttackOnce", nil, nil, true)
+		end
+        self.firstTime = true
+    end
+end
+
+function AiStates.runToPlayer:OnUpdate(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+
+	if brain.r_closestEnemy then
+		if not actor._isWalking or math.random(100) < 11 then
+			actor:WalkTo(Player._groundx, Player._groundy, Player._groundz,aiParams.runToPlayerRun)
+		end
+	end
+
+	local dist = Dist3D(actor._groundx, actor._groundy, actor._groundz, Player._groundx, Player._groundy, Player._groundz)
+	if dist < aiParams.actionDistance then
+		if aiParams.collisionAnim then
+            if aiParams.stopBeforeExpl then
+                actor:Stop()
+            end
+			actor:SetAnim(aiParams.collisionAnim, false)
+		else
+			actor:ExplodeBarrel(0.1)
+		end
+        actor.AIenabled = false
+	end
+
+    if actor.s_SubClass.SoundsDefinitions.attackAmbient then
+        if self.lastTimeOnAttackAmbient + aiParams.soundAmbientDelay < brain._currentTime and math.random(100) < 3 then
+            self._lastAttackAmbient = actor:PlaySoundHit("attackAmbient")
+            if self._lastAttackAmbient then
+                self.lastTimeOnAttackAmbient = brain._currentTime
+            end
+        end
+    end
+
+
+end
+
+function AiStates.runToPlayer:OnRelease(brain)
+	--Game:Print("error:RUN TO ON RELEASE")
+	--Game.freezeUpdate = true
+end
+
+function AiStates.runToPlayer:Evaluate(brain)
+	local actor = brain._Objactor
+
+	if brain.r_closestEnemy or actor.Animation == actor.AiParams.collisionAnim then
+		return 0.9
+	end
+	return 0.0
+end

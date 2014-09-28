@@ -1,0 +1,43 @@
+o.Mesh = "ammo_chaingun_2sidedShape"
+o.Pack = "pud_chaingun.dat"
+o.takeDistance = 1.8
+o.Scale = 1
+o.DisabledInVoosh = true
+o.AmmoAdd = 50
+o.RespawnTime = 15
+o.s_SubClass ={}
+
+--============================================================================
+function o:OnInitTemplate()
+    self.CubeMap = nil
+    self.DetailMap = nil
+    self.NormalMap = nil
+    self.Destroy = nil
+    self.Impulse = nil
+    self:ReplaceFunction("_Synchronize","Synchronize")
+    self:ReplaceFunction("Synchronize","nil")
+end
+--============================================================================
+function AmmoMiniGun:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity)
+end
+--============================================================================
+function AmmoMiniGun:OnTake(player)
+    if player.Ammo.MiniGun >= CPlayer.s_SubClass.MaxAmmo.MiniGun then return true end
+    self.TakeFX(player._Entity, self.AmmoAdd)
+	Game.PlayerAmmoFound =  Game.PlayerAmmoFound + 1
+end
+--============================================================================
+function AmmoMiniGun:TakeFX(pe,add)
+    local player = EntityToObject[pe]
+    
+    if player then
+        player.Ammo.MiniGun = player.Ammo.MiniGun + add * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player:CheckMaxAmmo()
+        if player == Player then player:PickupFX() end
+    end
+
+    Templates["AmmoMiniGun.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("AmmoMiniGun.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eu")
+--============================================================================

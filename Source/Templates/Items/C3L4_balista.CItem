@@ -1,0 +1,12 @@
+o.BaseObj = "CItem"
+o.Model = "C3L4_balista"
+o.Scale = 4
+
+
+
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint4_getmass",
+	minVel = 1.6,
+	minDelayBetweenSounds = 1.0,
+}

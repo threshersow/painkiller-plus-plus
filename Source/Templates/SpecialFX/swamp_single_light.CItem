@@ -1,0 +1,34 @@
+o.Mesh = "polySurfaceShape89990"
+o.Pack = "kamien.dat"
+o.Scale = 0.1
+
+function swamp_single_light:OnDamage()
+	Game:Print("ERROR: swamp_single_light")
+end
+
+function swamp_single_light:OnCreateEntity()
+    --self:PO_Create(BodyTypes.FromMesh)
+    --ENTITY.PO_EnableGravity(self._Entity,false)
+	ENTITY.EnableDraw(self._Entity,false)
+
+--    local e = ENTITY.Create(ETypes.Trail,"trail_swamp_lights","trailSwamp")
+--    ENTITY.AttachTrailToBones(self._Entity,e)
+--    WORLD.AddEntity(e)
+--	self:BindFX("swamp_lights",0.2)
+	self.time = 0
+end
+
+
+
+function swamp_single_light:OnUpdate()
+	if self.time then
+		self.time = self.time + 1
+		if self.time > 3 then
+		   local e = ENTITY.Create(ETypes.Trail,"trail_swamp_lights","trailSwamp")
+		   ENTITY.AttachTrailToBones(self._Entity,e)
+		   WORLD.AddEntity(e)
+		   self:BindFX("swamp_lights",0.2)
+			self.time = nil
+		end
+	end
+end

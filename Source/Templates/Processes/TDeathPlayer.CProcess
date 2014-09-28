@@ -1,0 +1,120 @@
+--============================================================================
+-- Player Death Task
+--============================================================================
+TDeathPlayer.AllowRespawn = false
+TDeathPlayer.TickCount = 0
+TDeathPlayer._RCnt = 8 * 30 -- respawn counter
+TDeathPlayer.TimeOut = 0
+TDeathPlayer.CheckPoint = nil
+TDeathPlayer.QuickSave = nil
+o.BaseName = "TDeathPlayer.CProcess"
+--============================================================================
+function TDeathPlayer:Tick(delta)
+	Game.LevelStarted = false
+
+	if not self.CheckPoint then
+		local slot = SaveGame:FindLastSave("CheckPoint",Lev._Name)
+		self.CheckPoint = slot
+		if not slot then self.CheckPoint = "" end
+		if Game.GMode == GModes.SingleGame then
+			SOUND.Play2D("specials/game-over")
+		end
+	end
+	
+	if not self.QuickSave then
+		local slot = SaveGame:FindLastSave("Quick")
+		self.QuickSave = slot
+		if not slot then self.QuickSave = "" end
+	end
+
+    self.TimeOut = self.TimeOut + delta
+    if self.TimeOut > 2 and INP.Action(Actions.Fire) then
+        if Game.GMode == GModes.SingleGame then
+			local slot = self.CheckPoint
+			if slot and slot ~= "" then
+				o = {}
+				DoFile("../SaveGames/"..slot.."/SaveGame.Info",false)
+				local chkTime = o.Timestamp
+				o = {}
+				DoFile("../SaveGames/000/SaveGame.Info",false)
+				local startTime = "0"
+				if o.Timestamp then startTime = o.Timestamp end
+				
+				if startTime < chkTime then
+					self.startTime = 0
+					self.statStep = 0
+					Game.GameInProgress = true
+					SaveGame:LoadRequest(slot)
+					INP.Reset()
+                    return
+				else
+					SaveGame:LoadRequest(0,true)
+					INP.Reset()
+                    return
+				end
+			else
+				SaveGame:LoadRequest(0,true)
+				INP.Reset()
+                return
+			end
+        else
+            Game.PlayerRespawnRequest(Player.ClientID)
+        end
+    elseif self.TimeOut > 2 and INP.Action(Actions.AltFire) then
+		if Game.GMode == GModes.SingleGame then
+			local slot = self.QuickSave
+			if slot and slot ~= "" then
+				self.startTime = 0
+				self.statStep = 0
+				Game.LevelStarted = false
+				Game.GameInProgress = true
+				SaveGame:LoadRequest(slot)
+				INP.Reset()
+			end
+        else
+            Game.PlayerRespawnRequest(Player.ClientID)
+        end
+    elseif INP.Key(Keys.Enter) == 1 and not IsFinalBuild() then
+        SaveGame:LoadRequest(0,true)
+        INP.Reset()
+        return
+    end        
+end
+--============================================================================
+function TDeathPlayer:PostRender(delta)
+    self.TickCount = self.TickCount + delta * 20
+    if self.TickCount > math.pi then self.TickCount = math.pi end
+    local alpha = 100 * (1-(1+math.cos(self.TickCount))/2)
+    local w,h = R3D.ScreenSize()
+    HUD.DrawQuad(0,0,0,w,h,R3D.RGBA(210,0,0,alpha))
+    Hud:Quad(Hud._matGameOver,w/2,h/2,1,true)        
+
+	HUD.SetFont("timesbd",22)
+
+    if self.TimeOut > 2 and Game.GMode == GModes.SingleGame then
+		local y = h/2+60*h/768
+		
+--		if self.CheckPoint and self.CheckPoint ~= "" then
+			local width = HUD.GetTextWidth(TXT.SPStats.PressFireCheckpt)
+			HUD.PrintXY(w/2-width/2+1,y+1,TXT.SPStats.PressFireCheckpt,"timesbd",0,0,0,22)
+			HUD.PrintXY(w/2-width/2,y,TXT.SPStats.PressFireCheckpt,"timesbd",255,186,122,22)
+			y = y + 30 * h/768
+--		end
+
+		if self.QuickSave and self.QuickSave ~= "" then
+			width = HUD.GetTextWidth(TXT.SPStats.PressAltFire)
+			HUD.PrintXY(w/2-width/2+1,y+1,TXT.SPStats.PressAltFire,"timesbd",0,0,0,22)
+			HUD.PrintXY(w/2-width/2,y,TXT.SPStats.PressAltFire,"timesbd",255,186,122,22)
+			y = y + 30 * h/768
+		end
+
+        width = HUD.GetTextWidth(TXT.SPStats.PressEscape)
+        HUD.PrintXY(w/2-width/2+1,y+1,TXT.SPStats.PressEscape,"timesbd",0,0,0,22)
+        HUD.PrintXY(w/2-width/2,y,TXT.SPStats.PressEscape,"timesbd",255,186,122,22)
+    elseif self.TimeOut > 2 then
+		local width = HUD.GetTextWidth(TXT.SPStats.PressFire)
+		HUD.PrintXY(w/2-width/2+1,h/2+60*h/768+1,TXT.SPStats.PressFire,"timesbd",0,0,0,22)
+		HUD.PrintXY(w/2-width/2,h/2+60*h/768,TXT.SPStats.PressFire,"timesbd",255,186,122,22)
+    end
+end
+--============================================================================

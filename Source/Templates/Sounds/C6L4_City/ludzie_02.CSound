@@ -1,0 +1,9 @@
+ludzie_02.Volume = 80
+ludzie_02.Interval = 8
+ludzie_02.RandomShift = 2
+ludzie_02.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+ludzie_02.Sound ="c6l4_city/ludzie_04;c6l4_city/ludzie_05;c6l4_city/ludzie_06"

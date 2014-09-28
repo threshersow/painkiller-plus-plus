@@ -1,0 +1,123 @@
+o.Model = "mutaNemo"
+o.Scale = 4.0
+o.Health = 90
+o.CreatePO = true
+o.WalkSpeed = 3.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 8
+o.throwHeart = true
+o.NeverRun = true
+o.enableGibWhenHPBelow = -45
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    Mass     = 60,
+}
+
+
+o.s_SubClass = {
+--    rotateHead = 0.8,			-- zakres
+--    rotateHeadBone = "k_szyja",
+--    rotateHeadMaxSpeed = 0.2,
+    Animations = {
+        idle = {1.0, false},
+        hit    = {1.0, false, {
+						{0.5,'Splash'},
+						{0.5,'SpawnDecalWater'},
+					}},
+        alarm    = {1.0, false, {
+						{0.5, 'Alarm',}
+					}},
+        swim     = {1.0, true, {
+					}},
+        atak    = {1.5, false,{
+                        {0.00,'CalcVel'},
+						{0.05,'SetVel'},
+                        {0.6,'damage'},
+                        {0.99,'StopFlying'},
+           				{1.0,'Splash'},
+                        {1.0,'SpawnDecalWater'},
+                    }},
+    },
+    RagdollCollisions = {
+        MinStren = 4.0,
+        MinTime = 0.6,
+        Bones = {
+				{"root", "bodyfalls", true},		-- joint, {sounds}, blood
+			},
+    },
+    Hits = {"hit"},
+    NearAttacks = {"atak",},
+    walk = {"swim"},
+
+--    ragdollJoint = "root",
+
+    DeathJoints = {
+        'headup1','ogon1','ogon2','root',
+    },
+
+	GibExplosionStrength = 5000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+        {"root","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"root", "gibSplash", true},
+			},
+    },
+
+}
+
+o.DeathTimer = 111
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear",}
+o.AiParams.viewDistance = 40
+o.AiParams.viewDistance360 = 720
+o.AiParams.viewAngle = 720
+
+o.AiParams.weaponDamage = 10
+o.AiParams.attackRange = 3.2
+o.AiParams.attackRangeAngle = 70
+
+o.AiParams.hearing = 3.0
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+--o.AiParams.guardRange = 10
+o.AiParams.stopAfterWalking = 0.5
+o.AiParams.stopAfterWalkingTime = {20,40}
+o.AiParams.walkStep = 6.0
+
+o.AiParams.delayBetweenAttacks = 20
+o.AiParams.moveDisplacement = 2.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.changePosAfterFire = 0.4
+o.AiParams.soundAmbientDelay = 8
+
+o.AiParams.updateSpeed = 0.25
+o.AiParams.alwaysSee = false	-- dont use so frequent pliz
+o.AiParams.huntPlayer = false
+    
+o.shadow = 64
+
+--o.walkWithAngle = true
+o.AiParams.AnimOnSawEnemy = "alarm"
+
+o.spawnDecalFreq = 0.6
+o.spawnParticlesFreq = 0.3
+
+o.AiParams.jumpStren = 7.0
+o.AiParams.jumpUpStren = 0.6
+o._DontCheckFloors = true

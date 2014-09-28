@@ -1,0 +1,10 @@
+Miecze.Volume = 60
+Miecze.Interval = 6
+Miecze.RandomShift = 2
+Miecze.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Miecze.Sound ="C5L4_Hell/miecze_01;C5L4_Hell/miecze_02;C5L4_Hell/miecze_03;C5L4_Hell/miecze_04"
+

@@ -1,0 +1,45 @@
+FX_sground.Model = "sground"
+FX_sground.Scale = 2
+FX_sground.NotCountable = true
+
+FX_sground.s_SubClass = 
+{
+    Animations = {  
+        idle        = {0.7},
+    },
+}
+function FX_sground:OnPrecache()
+	Cache:PrecacheParticleFX("FX_sground")
+	Cache:PrecacheParticleFX("FX_sground1")
+end
+
+function FX_sground:OnCreateEntity()
+    self:BindFX("FX_sground",0.1,"e1")
+    self:BindFX("FX_sground",0.1,"e3")
+    self:BindFX("FX_sground",0.1,"e5")
+    self:BindFX("FX_sground",0.1,"e7")
+    self:BindFX("FX_sground",0.1,"e9")
+    self:BindFX("FX_sground",0.1,"e11")
+    self:BindFX("FX_sground",0.1,"e13")
+    self:BindFX("FX_sground",0.1,"e15")
+    self:BindFX("FX_sground1",0.1,"e17")
+    self:BindFX("FX_sground1",0.1,"e18")
+    self:BindFX("FX_sground1",0.1,"e19")
+    self:BindFX("FX_sground1",0.1,"e20")
+end
+
+function FX_sground:OnFinishAnim(name)
+    ENTITY.UnregisterAllChildren(self._Entity)
+    GObjects:ToKill(self)
+end
+
+
+function FX_sground:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+
+o.Immortal = true

@@ -1,0 +1,93 @@
+--============================================================================
+PBulletTimeControler.Slowdown = 0
+PBulletTimeControler.FadeInTime = 0
+PBulletTimeControler.FadeMaxTime = 0
+PBulletTimeControler.FadeOutTime = 0
+PBulletTimeControler._time = 0
+o.BaseName = "PBulletTimeControler.CProcess"
+--============================================================================
+function PBulletTimeControler:New(slowdown,fin,fmax,fout)
+    local p = Clone(self)
+    p.Slowdown    = slowdown
+    p.FadeInTime  = fin
+    p.FadeMaxTime = fmax
+    p.FadeOutTime = fout
+    if Game.IsDemon then
+        SOUND.Play2D("specials/morp_into_demon/demon-start",100,true)
+--    else
+--        SOUND.Play2D("specials/bullet-time/bullet-time-start",100,true)
+    end
+    
+    if Game.IsDemon then
+        p._snd = SOUND2D.Create("specials/morp_into_demon/demon-loop",true)
+    else
+        p._snd = SOUND2D.Create("specials/bullet-time/bullet-time-loop",true)
+    end
+    
+    SOUND.StreamPause(0)
+    SOUND.StreamPause(1)
+
+    SOUND2D.SetLoopCount(p._snd,0)
+    SOUND2D.Play(p._snd,true)
+    return p
+end
+--============================================================================
+function PBulletTimeControler:OnToKill()
+    
+    WORLD.SetWorldSpeed(1)
+    
+    Game.BulletTime = false
+    Game._BTimeProc = nil
+
+    SOUND2D.Delete(self._snd)
+    if CProcess.Delete then
+        CProcess.Delete(self)
+    end
+    
+    if Lev._ambient then
+        SOUND.StreamResume(0)
+    else
+        SOUND.StreamResume(1)
+    end
+end
+--============================================================================
+function PBulletTimeControler:Tick(delta)
+    if self._ToKill then return end
+    
+    self._time = self._time + delta / INP.GetTimeMultiplier()
+    local a
+    
+    if self._time < self.FadeInTime then        
+        a = 1 - (1-self.Slowdown)*(self._time/self.FadeInTime)
+        --Game:Print(self.Slowdown.." : "..a)
+    elseif self._time < self.FadeInTime + self.FadeMaxTime then            
+        -- full slowdown     
+        a = self.Slowdown
+    elseif self._time < self.FadeInTime + self.FadeMaxTime + self.FadeOutTime then
+        -- fadeout
+        a = self.Slowdown + (1-self.Slowdown)*((self._time-self.FadeInTime-self.FadeMaxTime)/self.FadeOutTime)
+        if not self.once then
+            SOUND2D.Stop(self._snd)
+            if Game.IsDemon then
+                SOUND.Play2D("specials/morp_into_demon/demon-stop",100,true) 
+            else
+                SOUND.Play2D("specials/bullet-time/bullet-time-stop",100,true)
+            end
+            if Lev._ambient then
+                SOUND.StreamResume(0)
+            else
+                SOUND.StreamResume(1)
+            end
+            self.once = true
+        end
+
+        --Game:Print(self.Slowdown.." : "..a)
+    else
+        -- normal speed
+        a = 1
+        GObjects:ToKill(self)
+    end
+
+    WORLD.SetWorldSpeed(a)
+end
+--============================================================================

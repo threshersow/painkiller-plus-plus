@@ -1,0 +1,9 @@
+Kamyk_02.Volume = 60
+Kamyk_02.Interval = 15
+Kamyk_02.RandomShift = 4
+Kamyk_02.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Kamyk_02.Sound ="C7L3_Mine/Kamyk_03;C7L3_Mine/Kamyk_04"

@@ -1,0 +1,9 @@
+o.BaseObj = "CItem"
+o.Model = "hangman_a"
+o.Scale = 2
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "lg_getmass",
+	minVel = 1.5,
+	minDelayBetweenSounds = 1.0,
+}

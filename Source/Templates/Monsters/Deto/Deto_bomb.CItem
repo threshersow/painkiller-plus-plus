@@ -1,0 +1,77 @@
+o.Mesh = "polySurfaceShape950"
+o.Pack = "deto_pack.dat"
+o.Scale = 0.15
+o.Health = 1
+o.forceOut = 80				-- sila explozji na boki
+o.forceUp =	550				-- sila explozji do gory
+o.timeToLive = 50		 	-- w sec.
+o.Friction = 0.5
+o.flySpeed = 1000
+
+o.ExplosionStrength = 2000
+o.ExplosionRange = 6
+o.Damage = 30
+
+--function o:OnPrecache()
+--end
+
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.InsideItems)
+	--ENTITY.PO_SetLinearDamping(self._Entity, 0.1)
+
+    --ENTITY.EnableCollisions(self._Entity,true,0.3,0.01)
+
+	ENTITY.PO_SetMovedByExplosions(self._Entity, false)			-- ?
+
+	--ENTITY.SetAngularVelocity(self._Entity, FRand(12, 15), FRand(0, 2), FRand(0, 2)) 
+	self:AddTimer("Detonate",self.timeToLive * FRand(0.9, 1.1))
+	
+	ENTITY.EnableCollisions(self._Entity,true,0.3,0.1)
+end
+
+function o:Detonate()
+	local x,y,z = self.Pos.X,self.Pos.Y,self.Pos.Z
+	ENTITY.EnableCollisions(self._Entity,false) -- disable next callbacks        
+	ENTITY.PO_Enable(self._Entity,false)
+
+	WORLD.Explosion2(x,y,z,self.ExplosionStrength,self.ExplosionRange,nil,AttackTypes.Grenade,self.Damage)  
+	self:Client_Explosion(x,y,z)
+
+	GObjects:ToKill(self)
+end
+
+o.CustomOnDeath = o.Detonate
+
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+	ENTITY.EnableCollisions(self._Entity,false)
+	SOUND.Play3D("actor/deto/deto-putdynamite",x,y,z,8,24)		-- upadajacy dynamit
+end
+
+function o:Client_Explosion(x,y,z)
+    ENTITY.PO_Enable(entity,false)
+    
+    -- special FX
+    SOUND.Play3D("actor/deto/deto-dynamite-explosion",x,y,z,12,48)
+    AddPFX("Grenade",0.6,Vector:New(x,y,z))            
+    
+    -- physical parts
+    --[[local n = math.random(1,2) -- how many (min,max)
+    local scales = {0.6, 0.8}
+    for i = 1, n do
+        local scale = scales[math.random(1,2)]
+        local ke = AddItem("KamykWybuch.CItem",scale,Vector:New(x,y+0.5+i/10,z),false,Quaternion:New_FromEuler(FRand(0,3.14), FRand(0,3.14), FRand(0,3.14)))
+        local vx = FRand(-20,30) -- velocity x
+        local vy = FRand(15,30)  -- velocity y
+        local vz = FRand(-20,30) -- velocity z
+        ENTITY.SetVelocity(ke,vx,vy,vz)
+        ENTITY.SetTimeToDie(ke,FRand(1,2)) -- lifetime (min,max)
+    end--]]
+
+    -- light
+    AddAction({{"Light:a[1],a[2],a[3],200,200,100, 8, 10 , 1, 0.02,0.1,0.02"}},nil,nil,x,y+1.5,z)
+    if Game._EarthQuakeProc then
+        Game._EarthQuakeProc:Add(x,y,z, 12, 10 --[[g.ExplosionCamDistance--]], 0.25, 0.25)
+    end
+end
+
+-- #### po jakims czasie col. normal?

@@ -1,0 +1,22 @@
+o.Model = "CRL_item"
+o.Scale = 0.3
+o.DisabledInVoosh = true
+o.SlotIndex = 4
+o.RespawnTime = Cfg.WeaponRespawnTime
+o.Ammo = 
+{
+    Grenades = 5,
+    MiniGun  = 0
+}
+
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/machinegun",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"take-rl"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

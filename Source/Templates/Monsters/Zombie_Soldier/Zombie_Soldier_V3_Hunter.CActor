@@ -1,0 +1,5 @@
+o.BaseObj = "Zombie_Soldier_V3.CActor"
+
+o.AiParams.alwaysSee = true
+
+o.RunSpeed = 1.2

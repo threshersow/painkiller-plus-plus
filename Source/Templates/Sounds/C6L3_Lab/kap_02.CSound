@@ -1,0 +1,10 @@
+kap_02.Volume = 80
+kap_02.Interval = 13
+kap_02.RandomShift = 10
+kap_02.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+kap_02.Sound ="C6L3_Lab/kap_03;C6L3_Lab/kap_04"
+

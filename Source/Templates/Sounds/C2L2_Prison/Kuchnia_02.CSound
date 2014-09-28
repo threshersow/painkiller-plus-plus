@@ -1,0 +1,10 @@
+Kuchnia_02.Volume = 50
+Kuchnia_02.Interval = 6
+Kuchnia_02.RandomShift = 2
+Kuchnia_02.Falloff =
+{
+  Start = 3,
+  End = 20
+}
+Kuchnia_02.Sound ="C2L2_Prison/kuchnia_01;C2L2_Prison/kuchnia_01;C2L2_Prison/kuchnia_05;C2L2_Prison/kuchnia_06"
+

@@ -1,0 +1,10 @@
+Deszcz_strych.Volume = 70
+Deszcz_strych.Interval = 0
+Deszcz_strych.RandomShift = 0
+Deszcz_strych.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+Deszcz_strych.Sound ="C2L4_Asylum/Deszcz_strych"
+

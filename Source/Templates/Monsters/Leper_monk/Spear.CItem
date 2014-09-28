@@ -1,0 +1,50 @@
+Spear.Mesh = [[polySurfaceShape991]]
+Spear.Pack = [[laska.dat]]
+Spear.Scale = 0.125
+Spear.Mass = 40
+Spear.Restitution = 0.1
+Spear.Damage = 50
+Spear.RotateSpeed = 30
+Spear.ThrowSpeed = 20
+Spear.LifeTime = 90			-- after 1st collision
+Spear.TimeToLive = 150			-- after create
+Spear.AngularDamping = 0.2		-- sprawdzic ### 
+--============================================================================
+function Spear:OnCollision(x,y,z,nx,ny,nz,e)
+	if e then
+		local obj = EntityToObject[e]
+		if obj and not self.deathTimer then
+			if obj.OnDamage and obj == Player then
+				PlaySound2D("actor/leper_monk/lepperm-stick-hit")
+				obj:OnDamage(self.Damage, self.ObjOwner)
+			end
+			GObjects:ToKill(self)
+		else
+			if not self.deathTimer then
+				self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+				PlaySound3D("actor/leper_monk/lepperm-stick-hits-ground",x,y,z,18,36,nil)
+			end
+		end
+	else
+		if not self.deathTimer then
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+			PlaySound3D("actor/leper_monk/lepperm-stick-hits-ground",x,y,z,18,36,nil)
+		end
+	end
+end
+--============================================================================
+function Spear:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+	self.timer = 15
+end
+--============================================================================
+function Spear:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			ENTITY.EnableCollisions(self._Entity, true)
+		end
+	end
+end

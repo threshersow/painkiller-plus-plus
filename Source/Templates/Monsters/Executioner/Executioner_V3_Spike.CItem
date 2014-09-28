@@ -1,0 +1,180 @@
+--Executioner_V3_Spike.Mesh = "polySurfaceShape180"
+--Executioner_V3_Spike.Pack = "knife.dat"
+
+o.Mesh = "polySurfaceShape12"
+o.Pack = "kusza_belt.dat"
+
+Executioner_V3_Spike.Scale = 0.09
+Executioner_V3_Spike.Mass = 4
+Executioner_V3_Spike.Restitution = 0.1
+
+Executioner_V3_Spike.Damage = 10
+Executioner_V3_Spike.DamageRay = 10
+Executioner_V3_Spike.ImpulseSTR = 14
+
+Executioner_V3_Spike.LifeTime = 90					-- max. czas zycia po kolizji
+Executioner_V3_Spike.TimeToLive = 12 * 30			-- max. czas zycia
+Executioner_V3_Spike.AngularDamping = 0.2
+Executioner_V3_Spike.SoundsImpact = {"impacts/knife-stone","impacts/knife-stone2","impacts/knife-stone3","impacts/knife-stone4"}
+--============================================================================
+function Executioner_V3_Spike:OnCollision(x,y,z,nx,ny,nz,e_other,h_me,h_other,vx,vy,vz,vl)
+	local eg = true
+	if e_other then
+		local obj = EntityToObject[e_other]
+		if obj then
+			if obj ~= self.ObjOwner then
+
+				local x1,y1,z1 = MDL.GetJointPos(self.ObjOwner._Entity, self._joint)
+				local v = Vector:New(x1-self.Pos.X,y1-self.Pos.Y,z1-self.Pos.Z)
+				v:Normalize()
+
+				if not obj.Pinned and not self.ObjOwner.AiParams.disablePullCloser then
+					if obj._Class == "CActor" then
+						--ENTITY.PO_SetFlying(e_other, true)
+						local a = self.ImpulseSTR
+						local j = MDL.GetJointFromHavokBody(e_other, h_other)
+						if j >= 0 then
+							MDL.ApplyVelocitiesToJointLinked(e_other, j,v.X*a, v.Y*a + a*0.5, v.Z*a)
+						else
+							MDL.ApplyVelocitiesToAllJoints(e_other, v.X*a, v.Y*a + a*0.5, v.Z*a)
+						end
+						PHYSICS.SetHavokBodyVelocity(h_other,v.X*a, v.Y*a + a, v.Z*a)  
+						--Game:Print("impuls ACTOR "..obj._Name)
+                        PlaySound3D('impacts/stake-body'..math.random(1,2),self.Pos.X,self.Pos.Y,self.Pos.Z,14,50)
+					else
+						if obj._Class == "CPlayer" then
+							ENTITY.PO_SetPlayerFlying(e_other, 0.33)
+							-- todo: raz dostal, to drugiemy wyl kolizje?
+							--Game:Print("PLAYER "..(v.X*self.ImpulseSTR).." "..(v.Y*self.Impulse + self.Impulse*0.5).." "..(v.Z*self.Impulse))
+							ENTITY.SetVelocity(e_other, v.X*self.ImpulseSTR,self.ImpulseSTR*0.66,v.Z*self.ImpulseSTR)
+						else
+							local a = self.ImpulseSTR * 0.3
+							ENTITY.SetVelocity(e_other, v.X*a,v.Y*a + a*0.5,v.Z*a)
+						end
+						--else
+						--Game:Print("impuls nie ACTOR "..obj._Name.." "..(v.X*self.Impulse).." "..(v.Y*self.Impulse+self.Impulse*0.5).." "..(v.Z*self.Impulse))
+						--WORLD.HitPhysicObject(h_other,obj.Pos.X,obj.Pos.Y,obj.Pos.Z, v.X*self.Impulse,v.Y*self.Impulse,v.Z*self.Impulse)
+						--SOUND.Play3D("impacts/painkiller-default"..math.random(1,2),self.Pos.X,self.Pos.Y,self.Pos.Z,14,50)
+						--end
+					end
+				end
+				if obj.OnDamage then
+					if obj == Player then
+						PlaySound2D("actor/vamp_small/svamp-knife-hit")
+					end
+					obj:OnDamage(self.Damage, self.ObjOwner)
+				end
+				eg = false
+				if self.ObjOwner._spikesThrown then
+					if obj._Class == "CPlayer" then		-- fake
+						self.ObjOwner._spikesThrown = 0
+					else
+						self.ObjOwner._spikesThrown = self.ObjOwner._spikesThrown - 1
+					end
+				end
+				GObjects:ToKill(self)
+			end
+		end
+	end
+	if eg then
+		if not self.deathTimer then
+			if self._sndLoop then
+				ENTITY.Release(self._sndLoop)
+				self._sndLoop = nil
+			end
+
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+			ENTITY.PO_EnableGravity(self._Entity,true)
+			local name = self.SoundsImpact[math.random(1, table.getn(self.SoundsImpact))]
+			PlaySound3D(name,x,y,z,18,36,nil)
+			
+			-- tu bindowac do czegos
+			
+			--ENTITY.PO_Remove(self._Entity)
+            ENTITY.PO_Enable(self._Entity, false)
+			--ENTITY.PO_SetEntitySteered(self._Entity, true)
+			ENTITY.SetVelocity(0,0,0,0,0,0)
+			ENTITY.SetPosition(self._Entity,x,y,z)
+			local joint = MDL.GetJointFromHavokBody(e_other,h_other)
+			ENTITY.ComputeChildMatrix(self._Entity,e_other,joint)
+			ENTITY.RegisterChild(e_other,self._Entity,true,joint,false)
+		end
+	end
+	
+end
+--============================================================================
+function Executioner_V3_Spike:OnCreateEntity()
+	self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Noncolliding)
+    ENTITY.PO_EnableGravity(self._Entity,false)
+
+	self.timer = 4
+	self._lastTimeDamage = Game.currentTime
+end
+--============================================================================
+function Executioner_V3_Spike:Render()
+	if self._enabled and not self.ObjOwner._died then
+		local x,y,z = MDL.GetJointPos(self.ObjOwner._Entity, self._joint)
+		R3D.DrawSprite1DOF(self.Pos.X,self.Pos.Y,self.Pos.Z,x,y,z,0.1,R3D.RGB(255,155,155),"particles/trailpainkiller")
+		if not self._snd --[[and self._joint == 11--]] then		-- dzwiek tylko do jendego jointa
+			self._snd = self:BindSound("actor/executioner/exe-electricity-loop",10,50,true)
+		end
+	else
+		if self._snd then
+			ENTITY.Release(self._snd)
+			self._snd = nil
+		end
+	end
+end
+
+function Executioner_V3_Spike:OnUpdate()
+	if not self._enabled then return end
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.EnableCollisions(self._Entity, true)
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+		end
+	end
+
+	if self.ObjOwner.Animation == "atak_strzal_powrot" then
+		GObjects:ToKill(self)
+	end
+
+	if self.deathTimer then
+		self.deathTimer = self.deathTimer - 1
+		if self.deathTimer < 0 then
+			if self.ObjOwner._spikesThrown then
+				self.ObjOwner._spikesThrown = self.ObjOwner._spikesThrown - 1
+			end
+
+			GObjects:ToKill(self)
+			AddPFX("BodyExplosion",0.3,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+		end
+	end
+
+	if self._lastTimeDamage + 14 < Game.currentTime and not self.ObjOwner._died then
+		--if not self._sndHit then 
+			--painkiller-electro-chime-shock-loop.wav 
+		--end
+		local x,y,z = MDL.GetJointPos(self.ObjOwner._Entity, self._joint)
+		local v = Vector:New(self.Pos.X - x,self.Pos.Y - y,self.Pos.Z - z)
+		v:Normalize()
+		v:MulByFloat(1.5)
+		--DEBUGcx, DEBUGcy, DEBUGcz = self.Pos.X,self.Pos.Y,self.Pos.Z
+        --DEBUGfx, DEBUGfy, DEBUGfz = x + v.X, y + v.Y, z + v.Z
+        local b,d,x,y,z,nx,ny,nz,he,e = WORLD.LineTrace(self.Pos.X,self.Pos.Y,self.Pos.Z, x + v.X, y + v.Y, z + v.Z)
+		if e then
+			local obj = EntityToObject[e]
+			if obj and obj.OnDamage then
+				if obj == Player then
+					self._lastTimeDamage = Game.currentTime
+					PlaySound2D('actor/executioner/exe-electricity-hit')
+				end
+				obj:OnDamage(self.DamageRay, self.ObjOwner)
+				--Game:Print(obj._Name.." damage")
+			end
+		end
+	end
+
+end

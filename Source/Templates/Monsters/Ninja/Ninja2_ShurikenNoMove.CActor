@@ -1,0 +1,10 @@
+o.BaseObj = "Ninja2.CActor"
+o.NeverMove = true
+
+o.AiParams.aiGoals = {"idle","hear","throw",}
+
+o.AiParams.alwaysSee = true
+
+o.AiParams.throwRangeMin = 1
+o.AiParams.throwRangeMax = 50
+o.AiParams.minDelayBetweenThrow = 1

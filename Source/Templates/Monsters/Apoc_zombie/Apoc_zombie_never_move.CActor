@@ -1,0 +1,2 @@
+o.BaseObj = "Apoc_zombie.CActor"
+o.NeverMove = true

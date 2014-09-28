@@ -1,0 +1,24 @@
+o.Model = "C6L1_Car_pissan_yellow_gib"
+o.Scale = 3
+o.Health = 300
+o.Spawnable = true 
+
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint5_getmass",
+	minVel = 2.0,
+	angular = true,
+	minDelayBetweenSounds = 1.0,
+}
+
+o.alarmON = false
+o.killOnCollision = false
+
+o.TimeToDisappear = 60.0		-- sec.
+o.SoundHitByBulletMiniGunOnly = true
+
+o.CollisionDetect = {
+	MinTime = 1.2,
+	MinStren = 3.0,
+	joint = "joint1_getmass",
+}

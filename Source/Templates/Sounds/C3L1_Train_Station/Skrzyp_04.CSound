@@ -1,0 +1,10 @@
+Skrzyp_04.Volume = 100
+Skrzyp_04.Interval = 7
+Skrzyp_04.RandomShift = 3
+Skrzyp_04.Falloff =
+{
+  Start = 5,
+  End = 40
+}
+Skrzyp_04.Sound ="C3L1_Train_Station/Skrzyp_04"
+

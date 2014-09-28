@@ -1,0 +1,32 @@
+sgKamyk.Mesh = "pSphereShape1"
+sgKamyk.Pack = "kamyk.dat"
+sgKamyk.Scale = 0.05
+sgKamyk.Restitution = 0.8 -- sprezystosc
+sgKamyk.LinearDamping = 0.8  -- tlumienie liniowe
+sgKamyk.trail = "trail_sgkamyk"  -- tlumienie liniowe
+
+function sgKamyk:OnPrecache()
+    Cache:PrecacheParticleFX("sgKamykFX")
+end
+
+function sgKamyk:OnCreateEntity()
+    
+    self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Particles)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+
+    if not Cfg.NoSmoke then
+    --local r = Quaternion:New_FromEntity(self._Entity)    
+    local pfx = AddPFX('sgKamykFX',0.6) --,nil,r) -- 
+    ENTITY.RegisterChild(self._Entity,pfx)
+    end
+    
+    local e = ENTITY.Create(ETypes.Trail,self.trail,"trailName")
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+
+end
+
+function sgKamyk:OnInitTemplate()
+    self:ReplaceFunction("Update", nil)
+end

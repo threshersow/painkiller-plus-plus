@@ -1,0 +1,12 @@
+o.BaseObj = "CItem"
+o.Model = "AC_lamp1"
+o.Scale = 2
+o.s_SubClass.bindFX = {"pochodnia", 0.25, "joint7"}
+o.BillBoard = {"yello.CBillboard", nil, "joint7",0,0.3,0}
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint6_getmass",
+	minVel = 0.4,
+	minDelayBetweenSounds = 0.6,
+}
+

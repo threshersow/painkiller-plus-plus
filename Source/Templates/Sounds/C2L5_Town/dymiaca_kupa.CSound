@@ -1,0 +1,10 @@
+dymiaca_kupa.Volume = 100
+dymiaca_kupa.Interval = 0 
+dymiaca_kupa.RandomShift = 0
+dymiaca_kupa.Falloff =
+{
+  Start = 8,
+  End = 20
+}
+dymiaca_kupa.Sound ="C2L5_Town/dymiaca_kupa"
+

@@ -1,0 +1,19 @@
+Kamyktank.Mesh = "pSphereShape1"
+Kamyktank.Pack = "Kamyk.dat"
+Kamyktank.Scale = 1.2
+Kamyktank.Restitution = 0.8 -- sprezystosc
+Kamyktank.LinearDamping = 0.8  -- tlumienie liniowe
+
+function Kamyktank:OnPrecache()
+    Cache:PrecacheParticleFX("KamyktankFX")
+end
+
+function Kamyktank:OnCreateEntity()
+    
+    self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Particles)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+
+    local pfx = AddPFX('KamyktankFX',0.6)
+    ENTITY.RegisterChild(self._Entity,pfx)    
+end

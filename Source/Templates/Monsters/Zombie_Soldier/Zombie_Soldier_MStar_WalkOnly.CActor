@@ -1,0 +1,4 @@
+o.BaseObj = "Zombie_Soldier_MStar.CActor"
+o.NeverRun = true
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = true 

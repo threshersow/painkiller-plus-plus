@@ -1,0 +1,17 @@
+o.Scale = 3.6
+--o.Mass = 250
+o.DestroyPack = "Monk_rozwalony.dat"
+o.Destroy.LifetimeAfterExplosion = 14	-- sec.
+o.Destroy.MinSpeedOnCollision = 13
+
+o.Destroy.AverageVariation = 16
+o.Destroy.Effect = "explo_beczka"
+--o.Destroy.Strength = 6000
+o.Destroy.EffectScale = 0.7
+--o.Destroy.ExplosionStrength = 800
+--o.Destroy.ExplosionRadius = 3
+o.Destroy.AverageDelay = 32
+--o.Destroy.ExplosionDamage = 100
+o.Health = 32
+o.Pack = "Monk_caly.dat"
+o.Mesh = "polySurfaceShape148"

@@ -1,0 +1,162 @@
+o.Model = "DevilMonkv2"
+o.Scale = 1.4
+o.Health = 120
+o.CreatePO = true
+o.WalkSpeed = 1.5
+o.RunSpeed = 1.5
+o.RotateSpeed = 15		-- degrees per 1/30 sec
+o.throwHeart = true
+o.FX = 'DevilKosaKulared'
+o.enableGibWhenHPBelow = -69
+
+o.Poison = {
+	checkSpeed = 2,	-- ile razy na sekunde ma spradzac, czy jest w zasiegu trucizny
+	Range = 2.5,
+	TimeOut = 100,	-- jak dlugo dziala
+	Freq = 24,		-- jak czesto trucizna zadaje rany
+	DamageHp = 4,
+}
+
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 150,
+}
+
+o.s_SubClass = {
+    SoundDir = 'DevilMonk',
+	rotateHead = 3.1415 * 0.3,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+
+    Animations = {
+        idle = {0.7, false},
+        walk = {0.8, true,{
+							{0.65,'PlaySound',"step1"},
+                            {0.65,'FootFX','s_p_srodstopie'},
+							{0.07,'PlaySound',"step2"},
+                            {0.07,'FootFX','s_l_srodstopie'},
+						}},
+        run = {1.4, true,{
+   							{0.65,'PlaySound',"step1"},
+                            {0.65,'FootFX','s_p_srodstopie'},
+							{0.07,'PlaySound',"step2"},
+                            {0.07,'FootFX','s_l_srodstopie'},
+                        }},
+
+        atak1 = {1.3, true,{
+					        {0.0,'BindTrailSword','trail_sword','trail_kosa1','trail_kosa2'},
+                            {0.4,'PlaySound',"atak"},
+                            {0.9,'PlaySound',"swish"},
+                            {1.0,'damage',8,0},
+                            {1.6,'EndTrailSword'},
+						}},
+        atak2 = {1.0, true,{
+							{0.0,'BindTrailSword','trail_sword','trail_kosa1','trail_kosa2'},
+                            {0.8,'damage'},
+                            {0.4,'PlaySound',"atakgas"},
+                            {0.8,'PlaySound',"swish"},
+                            {1.6,'EndTrailSword'},
+						}},
+        hit1 = {1.0, false, {
+                            {0.0,'PlaySoundHit',"hit" },
+                        }},
+        hit2 = {1.0, false, {
+                            {0.0,'PlaySoundHit',"hit"},
+                        }},
+    },
+
+    ragdollJoint = "root",
+    Hits = {"hit1", "hit2"},
+    Ambients = {"idle"},
+    NearAttacks = {"atak1", "atak2"},
+
+    DeathJoints = {
+        's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+        'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+        'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+        'k_ogo','k_zebra','k_ramiona',
+        'k_glowa',
+    },
+    BreakableJoints = {},
+    notBleedingJoints = {
+		br1 = {},
+    },
+    CollidableRagdoll = false,
+
+    RagdollCollisions = {
+	MinStren = 4.0,
+	MinTime = 0.6,
+	Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				{"br1", "weaponlost", false},
+			}
+    },
+    GibExplosionStrength = 8000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"k_ogo","FX_gib_blood",-1},
+				{"k_ramiona","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"k_szyja","FX_gib_blood",-1},
+				{"root","FX_gib_blood",1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"k_ogo", "gibSplash", true},
+				{"k_ramiona", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"br1", "weaponlost", false},
+			},
+	    },
+}
+
+o.DeathTimer = 99
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear"}
+    
+o.AiParams.viewDistance = 38
+o.AiParams.viewDistance360 = 5
+o.AiParams.viewAngle = 160
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 3.4
+o.AiParams.attackRangeAngle = 120
+o.AiParams.delayBetweenAttacks = 10
+
+o.AiParams.perception = 0.7
+o.AiParams.walkStep = 10.0
+o.AiParams.hearing = 1.0
+
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+    
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+o.AiParams.moveDisplacement = 3.5
+o.AiParams.updateSpeed = 0.33				-- brain (visibility) update speed, 1.0 - update every frame !!!!
+
+--o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+
+o.shadow = 128

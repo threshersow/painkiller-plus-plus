@@ -1,0 +1,10 @@
+o.BaseObj = "Templar.CActor"
+o.Model = "templar"
+o.s_SubClass.Animations.atak1   = {1.2,false,{
+					{0.0,'PlaySound',"atak"},
+					{0.6,'PlaySound',"shoot"},
+
+					{0.70,'ThrowImmid',nil,true,nil,-10},
+					{0.70,'ThrowImmid',nil,true,},
+					{0.70,'ThrowImmid',nil,true,nil, 10},
+				}}

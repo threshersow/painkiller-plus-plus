@@ -1,0 +1,13 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "impacts/",
+	SoundHitByBullet = {
+		samples = {"bullet-wood","bullet-wood2","bullet-wood3",},
+	},
+	SoundImpact = {
+		samples = {"barrel-wood-fallsdown1","barrel-wood-fallsdown2","barrel-wood-fallsdown3"},
+	},
+	DestroySound = {
+		samples = {"barrel-wood-explode"},
+	},
+}
+

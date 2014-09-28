@@ -1,0 +1,2 @@
+o.BaseObj = "Gladiator3.CActor"
+o.s_SubClass.NearAttacks = {"atak2"}

@@ -1,0 +1,72 @@
+Energyred.Model = "Energy"
+Energyred.Scale = 0.4
+Energyred.SoulTakeDistance = 1.8
+Energyred.takeDistance = 1.8
+Energyred.HPadd = 6
+Energyred.CatchMaxSpeed = 1
+Energyred.TimeToLive = 9 * 30
+--============================================================================
+function Energyred:OnCreateEntity()
+    self:BindFX("energy_red",0.2,"e1")
+    self:BindFX("energy_red",0.2,"e2")
+    self:BindFX("energy_red",0.2,"e3")
+    self:BindFX("energy_red",0.2,"e4")
+    self:BindFX("energy_red",0.2,"e5")
+    self:BindFX("energy_red",0.2,"e6")
+    self.TimeToLive = self.TimeToLive * Game.SoulStayFactor
+    self.takeDistance = self.SoulTakeDistance + Game.SoulCatchDistance
+    self._velocity = 0
+end
+--============================================================================
+--[[function Energyred:OnTake(player)
+    if not player then return end
+    player.Health = player.Health + self.HPadd * Game.SoulHealthFactor
+    player.SoulsCount = player.SoulsCount + 1
+    player.TotalSoulsCount = player.TotalSoulsCount + 1
+    player:PickupFX()
+    self:Snd2D("pickup")
+    Game.FlashDemon = true
+end
+--]]
+
+function Energyred:Tick(delta)
+	if self._enableSoulCatch then
+		local dist = self.Pos:Dist(PX,PY+1,PZ)
+		self._velocity = self._velocity + delta
+		if self._velocity > self.CatchMaxSpeed then
+			self._velocity = self.CatchMaxSpeed
+		end
+		local v = Vector:New(PX - self.Pos.X, PY + 1 - self.Pos.Y, PZ - self.Pos.Z)
+		v:Normalize()
+		v:MulByFloat(self._velocity)
+		self.Pos.X = self.Pos.X + v.X
+		self.Pos.Y = self.Pos.Y + v.Y
+		self.Pos.Z = self.Pos.Z + v.Z
+		local dist2 = self.Pos:Dist(PX,PY+1,PZ)
+		--Game:Print(dist.." "..dist2)
+		if dist2 < dist then
+			return
+		else
+			self.Pos.X = PX
+			self.Pos.Y = PY
+			self.Pos.Z = PZ
+			if debugMarek then Game:Print("soul catch") end
+		end
+	end
+end
+
+--============================================================================
+function Energyred:OnTake(player,delta)
+	local dist = self.Pos:Dist(PX,PY+1,PZ)
+	if Game.SoulCatchDistance > 0 and dist > self.SoulTakeDistance then
+		self._enableSoulCatch = true
+		return true
+	end
+    if not player then return end
+    player.Health = player.Health + self.HPadd * Game.SoulHealthFactor
+    player.SoulsCount = player.SoulsCount + 1
+    player.TotalSoulsCount = player.TotalSoulsCount + 1
+    player:PickupFX()
+    Templates["Energyred.CItem"]:Snd2D("pickup")
+	Game.FlashDemon = true
+end

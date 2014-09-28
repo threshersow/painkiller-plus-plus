@@ -1,0 +1,75 @@
+o.BaseObj = "Zombie.CActor"
+o.Model = "zombie_v2"
+o.s_SubClass.SoundDir = "zombie"
+o.enableGibWhenHPBelow = -40
+o.s_SubClass.Animations.nadziewa = {1.0, false, {
+				{0.5,'PlaySound',"swish"},
+				{0.3,'PlaySound',"atak3"},
+				{0.7,'PlaySound','resurrect'},
+				{0.7,'Take'},
+			}}
+
+o.s_SubClass.Animations.atak1          = {1.7, false,{
+                    		{0.0,'BindTrailSword','trail_sword','joint2','joint3'},
+                            {0.0,'PlaySound',"atak1"},
+                            {0.6,'PlaySound',"swish"},
+                            {0.7,'damage',},
+                            {1.4,'PlaySound',"swish"},
+                            {1.5,'damage',},
+                            {1.6,'EndTrailSword'},
+						}}
+o.s_SubClass.Animations.atak3          = {1.0, false,{				-- z tarcza
+                            {0.2,'PlaySound',"atak3"},
+                            {0.3,'PlaySound',"swish"},
+                            {0.25,'ShieldBlow',},
+                            {0.3,'BindTrailSword','trail_sword','joint2','joint3'},
+                            {0.7,'PlaySound',"atak1"},
+                            {0.8,'PlaySound',"swish"},
+                            {0.8,'damage',},
+                            {1.5,'EndTrailSword'},
+						}}
+
+o.s_SubClass.gibFX = "gibExplosion"
+o.s_SubClass.GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"r_p_bark_root","FX_gib_blood",1},
+				{"r_l_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+}				
+
+o.s_SubClass.RagdollCollisionsGib = {
+        MinStren = 6.0,
+        MinTime = 0.8,
+        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"r_l_bark_root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"joint1", "weaponlost", false},
+			}
+}
+
+				
+o.s_SubClass.GibExplosionStrength = 5000
+o.s_SubClass.GibExplosionRange = 2.0
+o.s_SubClass.GibExplosionDeltaY = -1.0
+o.s_SubClass.gibShader = "palskinned_bloody"
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear", "beheadZombie", "zombieRevive"}
+o.AiParams.holdJoint = "joint2"
+o.AiParams.GuardStill = true
+o.AiParams.holdJointDisplaceSword = Vector:New(1.1,0.0,0.0)
+o.reviveFXsrc = "spawn_effect"
+o.reviveFXdst = "spawn_effect"
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.viewAngle = 360
+o.AiParams.CanBehead = "zombie_soldier_V2"
+o.AiParams.ReviveSwordFX = {"pochodnia",0.1,"joint2",1.5,0.0,0.0}
+o.shadow = 128

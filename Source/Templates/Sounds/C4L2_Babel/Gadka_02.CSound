@@ -1,0 +1,10 @@
+Gadka_02.Volume = 80
+Gadka_02.Interval = 20
+Gadka_02.RandomShift = 8
+Gadka_02.Falloff =
+{
+  Start = 6,
+  End = 20
+}
+Gadka_02.Sound ="C4L2_Babel/Gadka_03;C4L2_Babel/Gadka_05"
+

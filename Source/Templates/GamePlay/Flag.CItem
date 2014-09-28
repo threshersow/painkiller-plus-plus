@@ -1,0 +1,216 @@
+o.Model = "flag_blue"
+o.Scale = 2.5
+o.Team = 0
+o._captured = false
+o.RespawnTime = 30
+o.s_Editor.Team = { "ComboBox"  , {"Blue|0", "Red|1"} }
+
+function Flag:PreApply()
+    if self.Team == 0 then
+        self.Model = "flag_blue"
+    else
+        self.Model = "flag_red"
+    end
+end
+--============================================================================
+function Flag:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,true)
+    ENTITY.SetSynchroString(self._Entity,"Flag.CItem")
+    self:Client_OnCreateEntity(self._Entity)
+    self._RespawnPos = Clone(self.Pos)
+end
+--============================================================================
+function Flag:Client_OnCreateEntity(entity)
+	--BindFX(entity,"pentagram1",0.1,"root")
+    --BindFX(entity,"pentagram2",0.1,"e1")
+    --BindFX(entity,"pentagram2",0.1,"e2")
+    -- jezeli jest wziety to musze schowac particle
+    --if not ENTITY.IsDrawEnabled(entity) then
+    --    ENTITY.EnableDraw(entity,false,true)
+    --end
+    local a = MDL.SetAnim(entity,"idle",true,1)    
+    MDL.SetAnimTimeScale(entity, a, 2)
+end
+--============================================================================
+function Flag:OnTake(player)
+    
+    if player.Team ~= self.Team and not player.HasFlag then
+        self.TakeFX(player._Entity,1,self.Team)
+        self._blockedBy = player
+        self._captured = true
+        self._ReturnTime = nil
+        return false
+    end
+    
+    if player.Team == self.Team and self._captured then 
+        self._ReturnTime = nil
+        self._captured = false
+        self:TryToRespawn(true)
+        local x,y,z = ENTITY.GetPosition(self._Entity)
+        self.OnFinishFX(player._Entity,2,self.Team,x,y,z)
+    end  
+
+    return true
+end
+--============================================================================
+function Flag:UnbindItem(delivered)
+    if self._blockedBy then
+        local owner = self._blockedBy
+        self._blockedBy = nil
+        
+        local mode = 0
+        if MPCfg.GameState ~= GameStates.Finished then
+            if owner._died then
+                local x,y,z = ENTITY.GetPosition(owner._Entity)
+                local rp = Clone(self._RespawnPos)
+                self._RespawnPos:Set(x,y+1,z)
+                self:TryToRespawn(true)
+                self._RespawnPos = rp
+            end
+            if delivered then
+                self._captured = false
+                self:TryToRespawn(true)
+                mode = 1
+            else
+                if owner._died and owner._diedInDeathZone then
+                    self._ReturnTime = 0.5
+                else
+                    self._ReturnTime = self.RespawnTime
+                end
+            end      
+        end
+        
+        local x,y,z = ENTITY.GetPosition(self._Entity)
+        self.OnFinishFX(owner._Entity,mode,self.Team,x,y,z) 
+               
+        if Game.GMode == GModes.SingleGame then
+            GObjects:ToKill(self)
+        end
+    end
+end   
+--============================================================================
+function Flag:Tick(delta)    
+    if self._ReturnTime then    
+        --Game:Print("ReturnTime: "..self._ReturnTime)
+        self._ReturnTime = self._ReturnTime - delta
+        if self._ReturnTime <= 0 then
+            self.Pos = Clone(self._RespawnPos)
+            ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+            self._ReturnTime = nil
+            self.Place = 1             
+            self._captured = false
+            local x,y,z = ENTITY.GetPosition(self._Entity)
+            self.OnFinishFX(nil,3,self.Team,x,y,z)
+        end
+    end
+end
+--============================================================================
+function Flag:TakeFX(pe,sound)
+    local player = EntityToObject[pe]    
+    local t = Templates["Flag.CItem"]
+    local bindlight = true
+    
+    if player then
+        if player == Player then                             
+            bindlight = false
+            player:PickupFX() 
+         end
+        player.HasFlag = true
+    end
+
+    Templates["Flag.CItem"]:SndEnt("get",pe) 
+        
+    BindSoundToEntity(pe,"multiplayer/ctf/flag-loop-mono",20,45,true,-1,nil,nil,nil,nil,0)
+    if bindlight then
+        --local obj = CloneTemplate("Pent_Light.CLight")
+        --obj.Pos:Set(0,2,0)
+        --obj:Apply()    
+        --ENTITY.RegisterChild(pe,obj._Entity,true)
+        
+        obj = CloneTemplate("Flag.CItem")
+        local ps = Game:FindPlayerStatsByEntity(pe)
+        if ps then
+            if ps.Team ==1 then obj.Team = 0 else obj.Team = 1 end
+        end
+        obj.Pos:Set(0,1.8,-0.18)
+        obj:Apply()
+        ENTITY.EnableNetworkSynchronization(obj._Entity,false)
+        ENTITY.RegisterChild(pe,obj._Entity,true)
+    end
+    
+    local ps = Game:FindPlayerStatsByEntity(pe)
+    if ps then 
+        local txt = string.gsub(Languages.Texts[770],"$PLAYER",ps.Name)
+        local color = Languages.Texts[769]
+        if ps.Team == 0 then color = Languages.Texts[768] end        
+        txt = string.gsub(txt,"$COLOR",color)
+        CONSOLE_AddMessage(txt)
+    end
+    
+end
+Network:RegisterMethod("Flag.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "ebb")
+--============================================================================
+-- [NET - SERVER & ALL CLIENTS]
+function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
+    local x,y,z = ENTITY.GetPosition(pe)        
+    local player = EntityToObject[pe]    
+
+    if mode == 0 or mode == 1 then
+        ENTITY.KillAllChildrenByName(pe,"multiplayer/ctf/flag-loop-mono")
+        ENTITY.KillAllChildrenByName(pe,"Pent_Light")
+        ENTITY.KillAllChildrenByName(pe,"flag_red")
+        ENTITY.KillAllChildrenByName(pe,"flag_blue")
+        
+        if player then
+            player.HasFlag = false    
+        end
+    end
+    
+    local txt = nil
+    local ps = Game:FindPlayerStatsByEntity(pe)
+    if ps then         
+        if mode == 0 then 
+            Templates["Flag.CItem"]:SndEnt("drop",fx,fy,fz) 
+            txt = string.gsub(Languages.Texts[774],"$PLAYER",ps.Name) --$PLAYER dropped the $COLOR flag
+        end
+        if mode == 1 then 
+            if fteam == 1 then fteam = 0 else fteam = 1 end
+            CPlayer:Common_UpdateStats(false,-1,ps.ClientID,AttackTypes.Flag,1)
+            if Player and ps.Team == Player.Team then
+                Templates["Flag.CItem"]:Snd2D("score") 
+            end
+            if Player and ps.Team ~= Player.Team then
+                Templates["Flag.CItem"]:Snd2D("score_lose") 
+            end            
+            Templates["Flag.CItem"]:Snd3D("appear",fx,fy,fz)
+            txt = string.gsub(Languages.Texts[771],"$PLAYER",ps.Name) --$PLAYER scores for the $COLOR team (delivered)
+        end
+        if mode == 2 then 
+            Templates["Flag.CItem"]:SndEnt("returned",pe)
+            Templates["Flag.CItem"]:Snd3D("appear",fx,fy,fz)
+            txt = string.gsub(Languages.Texts[773],"$PLAYER",ps.Name) --$PLAYER has returned the $COLOR flag
+        end                        
+    else
+        Game:Print("nie ma playera!!!")
+    end
+    
+    if mode== 3 then         
+        Templates["Flag.CItem"]:Snd3D("returned",fx,fy,fz)
+        Templates["Flag.CItem"]:Snd3D("appear",fx,fy,fz)
+        txt = Languages.Texts[772] --$COLOR flag returned
+    end
+
+    if txt then 
+        local color = Languages.Texts[769]
+        if fteam == 1 then color = Languages.Texts[768] end        
+        txt = string.gsub(txt,"$COLOR",color)        
+        CONSOLE_AddMessage(txt) 
+    end
+end
+Network:RegisterMethod("Flag.OnFinishFX", NCallOn.ServerAndAllClients, NMode.Reliable, "ebbfff") 
+--============================================================================
+function Flag:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+--============================================================================

@@ -1,0 +1,10 @@
+Panna_02.Volume = 100
+Panna_02.Interval = 17
+Panna_02.RandomShift = 8
+Panna_02.Falloff =
+{
+  Start = 1.5,
+  End = 17
+}
+Panna_02.Sound ="C2L4_Asylum/Panna_03;C2L4_Asylum/Panna_04"
+

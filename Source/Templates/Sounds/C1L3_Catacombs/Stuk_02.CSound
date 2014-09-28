@@ -1,0 +1,10 @@
+Stuk_02.Volume = 80
+Stuk_02.Interval = 8
+Stuk_02.RandomShift = 4
+Stuk_02.Falloff =
+{
+  Start = 4,
+  End = 30
+}
+Stuk_02.Sound ="C1L3_Catacombs/stuk_02"
+

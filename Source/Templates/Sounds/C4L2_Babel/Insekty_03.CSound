@@ -1,0 +1,10 @@
+Insekty_03.Volume = 30
+Insekty_03.Interval = 0
+Insekty_03.RandomShift = 0
+Insekty_03.Falloff =
+{
+  Start = 10,
+  End = 60
+}
+Insekty_03.Sound ="C4L2_Babel/Insekty_03"
+

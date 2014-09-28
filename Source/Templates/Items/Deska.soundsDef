@@ -1,0 +1,12 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "impacts/",
+	SoundHitByBullet = {
+		samples = {"bullet-wood","bullet-wood2","bullet-wood3",},
+	},
+	collsiondetect = {
+		samples = {"pallet-impact1","pallet-impact2","pallet-impact3"},
+		dist1 = 10,
+		dist2 = 40,
+	},
+}
+

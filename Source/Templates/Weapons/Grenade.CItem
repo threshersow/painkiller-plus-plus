@@ -1,0 +1,15 @@
+Grenade.Mesh = [[polySurfaceShape234]]
+Grenade.Pack = [[granat.dat]]
+Grenade.Scale = 0.4
+Grenade.Timeout = 2*30+9
+Grenade.Restitution = 1.4 -- sprezystosc
+Grenade.Friction = 0.8 -- tarcie
+Grenade.LinearDamping = 0.5  -- tlumienie liniowe
+--Grenade.AngularDamping = 0.4 -- tlumienie katowe
+Grenade.Mass = 40
+Grenade.Softness = 1
+Grenade.ExplosionCamMove = 0.18
+Grenade.ExplosionCamRotate = 0.18
+Grenade.ExplosionCamDistance = 18
+Grenade.TestDeathZone = true
+Grenade.SoundInWater = "impacts/bulletbig-water"
