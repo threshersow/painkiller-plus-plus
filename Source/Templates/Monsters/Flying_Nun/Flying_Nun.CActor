@@ -1,0 +1,120 @@
+o.Model = "zakonnica"
+o.Scale = 1.0
+o.CreatePO = true
+o.Health = 135
+o.FlySpeed = 0.5
+o.RotateSpeed = 10
+o.throwHeart = true
+--o.enableGibWhenHPBelow = -35
+o.Animation = "fly"
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    --Mass     = 120,
+}
+
+
+o.s_SubClass = {
+    rotateHead = 1.5,
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.1,
+    rotateHeadRight = Vector:New(1.0, -1.0, 1.0),
+    rotateHeadLeft =  Vector:New(1.0, -1.0, 1.0),
+    rotateHeadCoords = Vector:New(1, 3, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+	SoundDir = "Flying_Nun",
+    Animations = {
+		fly     = {1.0, false,{
+			}},
+		atak    = {1.0, false, {
+                {0.5,'ThrowImmid',nil,true},
+            }},
+    },
+--    bindFX = {
+--	    {"witch_fx", 0.22, "miotla",0,0,-3.2},		--2.6
+--    },
+	Ambients = {"idle"},
+
+	DeathJoints = {
+		'r_l_lokiec','k_zebra','r_p_lokiec','n_p_kolano','n_l_kolano','k_szyja',
+	},
+
+    RagdollCollisions = {
+        MinStren = 4.0,
+        MinTime = 0.8,
+        Bones = {
+				{"root", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				{"miotla", "weaponlost", true},		-- joint, {sounds}, blood
+			},
+    },
+	GibExplosionStrength = 60000,
+	GibExplosionRange = 4.6,
+	GibExplosionDeltaY = -2.5,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"r_l_bark","witch_flame",-1},
+				{"r_p_bark","witch_flame",-1},
+				{"root","witch_flame",1},		-- spr. czy dobry kierunek
+				{"k_zebra","witch_flame",-1},
+				{"k_szyja","witch_flame",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_zebra", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"miotla", "weaponlost", false},
+			},
+	    },
+
+}
+o.DeathTimer = -1
+
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"FNunFlyArea","FNunThrow"}
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 0
+o.AiParams.viewAngle = 90
+
+o.AiParams.perception = 0.7
+o.AiParams.walkStep = 10.0
+o.AiParams.escapeTime = 120
+
+o.AiParams.updateSpeed = 0.33
+o.AiParams.ThrowableItem = "Flying_Nun_Fireball.CItem"
+o.AiParams.throwAnim = "atak"
+o.AiParams.throwAmmo = 99999
+o.AiParams.throwRangeMin = 6
+o.AiParams.throwRangeMax = 30
+o.AiParams.minDelayBetweenThrow = 2
+
+
+o.AiParams.throwDistMinus = 0.0			-- <0 celuje za gracza, 0> przed gracza
+o.AiParams.throwItemBindTo = "dlo_prawa_root"
+o.AiParams.throwMaxAngleYawDiff = 30.0
+o.AiParams.throwMaxAnglePitchDiff = 30.0
+
+o.AiParams.throwVelocity = 14
+o.AiParams.homingMissile = true
+o.AiParams.homingMissileAngleChangeSpeed = 8
+
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaPingPong = true			-- true, lata tam i z powrotem po krzywej
+o.AiParams.screamDelay = 6.0
+
+o.doNotUseWP = true
+o._DontCheckFloors = true
+o.flyingMode = true
+
+o.shadow = 0
+o.pushRagdollAtDeathSpeed = 10
+
+o.TimeToDelete = 30 * 999999

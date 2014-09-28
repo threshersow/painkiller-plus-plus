@@ -1,0 +1,8 @@
+o.Scale = 0.3
+o.Mass = 400
+o.Pack = "linka.dat"
+o.Mesh = "linkaShape"
+
+o.DetailMap.DefaultDetailTex = false
+
+o.Pinned = true

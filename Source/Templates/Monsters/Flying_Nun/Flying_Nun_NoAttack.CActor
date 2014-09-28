@@ -1,0 +1,5 @@
+o.BaseObj = "Flying_Nun.CActor"
+
+o.AiParams.aiGoals = {"FNunFlyArea"}
+o.FlySpeed = 0.4
+o.throwHeart = false

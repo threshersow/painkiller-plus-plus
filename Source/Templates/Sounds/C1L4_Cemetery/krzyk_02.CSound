@@ -1,0 +1,10 @@
+krzyk_02.Volume = 100
+krzyk_02.Interval = 5
+krzyk_02.RandomShift = 2
+krzyk_02.Falloff =
+{
+  Start = 1,
+  End = 10
+}
+krzyk_02.Sound ="C1L4_Cemetery/krzyk_03"
+

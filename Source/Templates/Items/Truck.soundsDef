@@ -1,0 +1,9 @@
+o.s_SubClass.SoundsDefinitions = {
+	DestroySound = {
+		dist1 = 60,
+		dist2 = 120,
+		samples = {"$/actor/tank/tank-death"},
+	},
+
+}
+

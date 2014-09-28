@@ -1,0 +1,5 @@
+o.BaseObj = "CItem"
+o.Model = "C2L2_Fan"
+o.Scale = 10
+o.FanRotateSpeed = 2.0
+

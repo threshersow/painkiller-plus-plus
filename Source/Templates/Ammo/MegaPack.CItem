@@ -1,0 +1,49 @@
+o.Mesh = "polySurfaceShape17745"
+o.Pack = "megapack_ammo.dat"
+o.Scale = 1
+o.RespawnTime = 60
+o.s_SubClass ={}
+o.takeDistance = 1.8
+o.DisabledInVoosh = true
+--============================================================================
+function o:OnInitTemplate()
+    self.CubeMap = nil
+    self.DetailMap = nil
+    self.NormalMap = nil
+    self.Destroy = nil
+    self.Impulse = nil
+    self:ReplaceFunction("_Synchronize","Synchronize")
+    self:ReplaceFunction("Synchronize","nil")
+end
+--============================================================================
+function MegaPack:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity)
+end
+--============================================================================
+function MegaPack:OnTake(player)    
+    self.TakeFX(player._Entity)
+	Game.PlayerAmmoFound =  Game.PlayerAmmoFound + 1
+end
+--============================================================================
+function MegaPack:TakeFX(pe)
+    local player = EntityToObject[pe]    
+    if player then
+        player.Ammo.Shotgun  = player.Ammo.Shotgun  + 10  * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.MiniGun  = player.Ammo.MiniGun  + 45 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.Grenades = player.Ammo.Grenades + 4  * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.Stakes   = player.Ammo.Stakes   + 8  * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.Electro  = player.Ammo.Electro  + 20 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.Shurikens  = player.Ammo.Shurikens  + 20 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.IceBullets  = player.Ammo.IceBullets  + 4 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.Rifle  = player.Ammo.Rifle  + 30 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.FlameThrower  = player.Ammo.FlameThrower  + 8 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.Bolt  = player.Ammo.Bolt  + 15 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player.Ammo.HeaterBomb  = player.Ammo.HeaterBomb  + 16 * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player:CheckMaxAmmo()    
+        if player == Player then player:PickupFX() end
+    end
+    
+    Templates["MegaPack.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("MegaPack.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "e")
+--============================================================================

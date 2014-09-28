@@ -1,0 +1,19 @@
+stake_imp.Mesh = "pSphereShape1"
+stake_imp.Pack = "kamyk.dat"
+stake_imp.Scale = 0.05
+stake_imp.Restitution = 0.8 -- sprezystosc
+stake_imp.LinearDamping = 0.8  -- tlumienie liniowe
+
+function stake_imp:OnCreateEntity()
+
+    self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Particles)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+
+    --local pfx = AddPFX('stakeKamykFX',0.6)
+    --ENTITY.RegisterChild(self._Entity,pfx)
+end
+
+function stake_imp:OnInitTemplate()
+    self:ReplaceFunction("Update", nil)
+end

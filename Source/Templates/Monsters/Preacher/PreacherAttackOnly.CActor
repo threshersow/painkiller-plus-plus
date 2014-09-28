@@ -1,0 +1,5 @@
+o.BaseObj = "Preacher.CActor"
+
+o.AiParams.aiGoals = {"idle", "hear","hunt","attack","flee"}
+o.AiParams.immortalBodiesCounter = -1 
+o.RunSpeed = 1.2

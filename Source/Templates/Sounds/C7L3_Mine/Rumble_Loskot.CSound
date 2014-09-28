@@ -1,0 +1,9 @@
+Rumble_Loskot.Volume = 60
+Rumble_Loskot.Interval = 11
+Rumble_Loskot.RandomShift = 3
+Rumble_Loskot.Falloff =
+{
+  Start = 6,
+  End = 60
+}
+Rumble_Loskot.Sound ="C7L3_Mine/Rumble_Loskot_01;C7L3_Mine/Rumble_Loskot_02;C7L3_Mine/Rumble_Loskot_03"

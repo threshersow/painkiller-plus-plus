@@ -1,0 +1,3 @@
+o.ParticleFX = "camsnowcastle"
+o._IsPE = true
+--o.SoundLoop = "misc/wind-loop"

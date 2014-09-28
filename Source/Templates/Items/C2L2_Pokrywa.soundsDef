@@ -1,0 +1,9 @@
+o.s_SubClass.SoundsDefinitions = {
+	SoundImpact = {
+		path = "impacts/",
+		samples = {"klapa-wybuch","klapa-wybuch-ver2"},
+		dist1 = 30,
+		dist2 = 80,
+	},
+}
+

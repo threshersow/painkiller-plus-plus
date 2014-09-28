@@ -1,0 +1,12 @@
+--o.Mesh = "polySurfaceShape478"
+--o.Pack = "mlot.dat"
+--o.Scale = 1.0
+o.Model = "Thor_mlot"
+o.Scale = 10.0
+o.Health = 3000
+o.Mass = 1000
+
+
+o.effect = "palskinned_freeze"
+o.BlendOutSpeed = 3.0
+o.shadow = 128

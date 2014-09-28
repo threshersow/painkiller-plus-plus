@@ -1,0 +1,33 @@
+o.Scale = 0.3
+o.Mass = 300
+o.Friction = 3
+o.DestroyPack = "skrzynia_ammo_zlom.dat"
+o.TestDeathZone = true
+o.Rot = Quaternion:New(0.999974,-1.86407e-005,-0.00722159,-6.84467e-005)
+o.Health = 32
+o.Pack = "skrzynia_ammo_cala.dat"
+o.BaseObj = "CItem"
+o.Mesh = "polySurfaceShape70659"
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)
+
+o.Destroy.ExplosionStrength = 3000
+o.Destroy.ExplosionDamage = 200
+o.Destroy.ExplosionRadius = 7
+o.Destroy.AverageDelay = 24
+o.Destroy.AverageVariation = 12
+o.Destroy.Strength = 250
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.Effect = "explo_ammobox"
+o.Destroy.EffectScale = 0.4
+o.Destroy.LifetimeAfterExplosion = 3
+o.Destroy.LifetimeAfterExplosion = 1
+
+--o.s_SubClass.DestroySound = {"barrel-tnt-explode"}
+--o.s_SubClass.SoundImpact = {"box-metal-impact1","box-metal-impact2","box-metal-impact3"}
+--o.s_SubClass.SoundHitByBullet = {"bullet-metal","bullet-metal2","bullet-metal3","bullet-metal4","bullet-metal5","bullet-metal6",}
+
+o.SoundHitByBulletMiniGunOnly = true

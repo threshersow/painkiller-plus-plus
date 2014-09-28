@@ -1,0 +1,9 @@
+Ciezary.Volume = 80
+Ciezary.Interval = 12
+Ciezary.RandomShift = 4
+Ciezary.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Ciezary.Sound ="C7L3_Mine/Ciezary_01;C7L3_Mine/Ciezary_02;C7L3_Mine/Ciezary_03"

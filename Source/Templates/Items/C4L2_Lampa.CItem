@@ -1,0 +1,6 @@
+o.BaseObj = "CItem"
+o.Model = "C4L2_Lampa"
+o.Scale = 6
+
+o.BillBoard = {"C4L2_Lampa.CBillboard", nil, "joint2_getmass",2.3,0,0}
+

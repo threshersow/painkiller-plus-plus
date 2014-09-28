@@ -1,0 +1,20 @@
+o.Mesh = "pCubeShape2"
+o.Pack = "C3L1_Wagon_Drzwi_cale.dat"
+o.DestroyPack = "C3L1_Wagon_Drzwi_zlom.dat"
+--o.Mass = 40
+o.Health = 50
+o.Scale = 0.8
+
+o.TestDeathZone = true
+
+--o.Destroy.ExplosionStrength = 0
+--o.Destroy.ExplosionDamage = 0
+--o.Destroy.ExplosionRadius = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 150
+o.Destroy.MinSpeedOnCollision = 15
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 1
+o.Destroy.LifetimeAfterExplosion = 6
+o.SoundHitByBulletMiniGunOnly = true

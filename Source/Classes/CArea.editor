@@ -1,0 +1,124 @@
+--============================================================================
+function CArea:EditRender(delta)
+    if not Editor.EditAreas then return end
+
+    -- Bezier Curve Drawing
+    if Editor.SelObj == self and INP.Key(Keys.C) == 2 then
+        local cpts = CalcNaturalCubicSpline(self.Points)
+		local n = table.getn(self.Points)
+        for i=0,10*n do
+            local p = NCubicPoint(cpts,i/(10*n))
+            --local p = BezierPoint(self.Points,i/50)
+            R3D.RenderBox(p.X-0.071,p.Y-0.071,p.Z-0.071,p.X+0.071,p.Y+0.071,p.Z+0.071,R3D.RGB(200,200,200))            
+        end
+    end
+
+    local col = R3D.RGB(0,200,100)
+    if Editor.SelObj == self then col = R3D.RGB(200,200,0) end
+    local n = table.getn(self.Points)
+    for i=1,n do
+        local p = self.Points[i]
+        R3D.RenderBox(p.X-0.07,p.Y-0.07,p.Z-0.07,p.X+0.07,p.Y+0.07,p.Z+0.07,col)
+        if Editor.SelObj == self then
+            local sx,sy,sz = R3D.VectorToScreen(p.X,p.Y,p.Z)
+            if sz<1 and sx>0 and sy>0 then 
+                HUD.PrintXY(sx+3,sy,i) 
+            end            
+        end
+       
+        local px = p.X + math.sin(p.A)
+        local pz = p.Z + math.cos(p.A)
+        R3D.RenderLine(p.X,p.Y,p.Z,px,p.Y,pz,R3D.RGB(200,0,0))
+    end
+
+    if Editor.SelObj == self and self._picked>0 then 
+        local p = self.Points[self._picked]
+        R3D.RenderBox(p.X-0.071,p.Y-0.071,p.Z-0.071,p.X+0.071,p.Y+0.071,p.Z+0.071,R3D.RGB(255,255,0))
+        Editor:DrawAxis(self.Points[self._picked]:Get())        
+        if INP.Key(Keys.X) == 2 then
+            p.A = p.A + 0.01
+        end
+        if INP.Key(Keys.Z) == 2 then
+            p.A = p.A - 0.01
+        end
+    end
+   
+end
+--============================================================================
+function CArea:EditTick(delta)
+
+    if not Editor.EditAreas then return end
+
+    if Editor.SelObj == self then        
+        -- adding points
+        if INP.Key(Keys.I) == 1 then    
+            if not self:AddFirstPoint() then
+                if self._picked < 0 then self._picked = 1 end
+                local x,y,z = self.Points[self._picked]:Get()
+                self:AddPointAt(x+0.5,y,z+0.5,self._picked)
+                self._picked = self._picked+1				
+            end
+        end    
+		if INP.Key(Keys.J) == 1 then
+			local n = table.getn(self.Points)
+            if not self:AddFirstPoint() and n > 2 and self._picked < n then
+                if self._picked < 0 then self._picked = 1 end
+				local cpts = CalcNaturalCubicSpline(self.Points)
+				local p = NCubicPoint(cpts,(self._picked-0.5)/(n-1))
+                self:AddPointAt(p.X,p.Y,p.Z,self._picked)
+                self._picked = self._picked+1				
+            end
+		end
+        -- moving picked point
+        if self._picked > 0 then        
+            local ox,oy,oz = self.Points[self._picked]:Get()
+            local m,x,y,z = Editor:MoveByAxis(ox,oy,oz)
+            if m then
+                if INP.Key(Keys.LeftCtrl) == 2 then        
+                    self:MoveAllPoints(x-ox,y-oy,z-oz)
+                end
+                self.Points[self._picked]:Set(x,y,z)
+                Editor.ObjEdited = true
+                return
+            end
+            -- delete
+            if INP.Key(Keys.D) == 1 then    
+                self:RemovePoint(self._picked)
+                self._picked = -1
+            end
+        end
+        
+    end
+
+    -- picking point 
+    if MOUSE.LB() == 1 then        
+        local n = table.getn(self.Points)
+        for i=1,n do
+            local sx,sy,sz = R3D.VectorToScreen(self.Points[i]:Get())
+            if Dist2D(MX,MY,sx,sy) <  10  then
+                self._picked = i                
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+                break
+            end
+        end
+        if Editor.ObjEdited == false then
+            self._picked = -1
+            if Editor.SelObj == self then Editor:SelectObject(nil) end
+        end
+    end    
+end
+--============================================================================
+function CArea:Rescale(delta)
+    local n = table.getn(self.Points)
+    for i=1,n do
+        self.Points[i]:MulByFloat(delta)
+    end
+end
+--============================================================================
+function CArea:FlipZ()
+    local n = table.getn(self.Points)
+    for i=1,n do
+        self.Points[i].Z = -self.Points[i].Z
+    end
+end

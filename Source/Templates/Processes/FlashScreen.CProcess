@@ -1,0 +1,19 @@
+--============================================================================
+-- Flash Screen Task
+--============================================================================
+FlashScreen.TickCount = 0
+FlashScreen.Color = Color:New(100,100,150)
+FlashScreen.MaxAlpha = 60
+FlashScreen.Time = 2*math.pi/30
+o.BaseName = "FlashScreen.CProcess"
+--============================================================================
+function FlashScreen:PostRender(delta)
+    self.TickCount = self.TickCount + delta * 2 * math.pi / self.Time
+    if self.TickCount > math.pi*2 then 
+        GObjects:ToKill(self)
+    end    
+    self.Color.A = self.MaxAlpha * (1-(1+math.cos(self.TickCount))/2)
+    local w,h = R3D.ScreenSize()
+    HUD.DrawQuadRGBA(0,0,0,w,h,self.Color.R,self.Color.G,self.Color.B,self.Color.A)
+end
+--============================================================================

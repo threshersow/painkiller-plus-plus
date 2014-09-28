@@ -1,0 +1,7 @@
+o.Mesh = "polySurfaceShape414"
+o.Pack = "Tarcza_sama.dat"
+o.Scale = 0.06
+o.Restitution = 1
+o.Mass = 50
+o.TestDeathZone = true
+o.SoundInWater = "impacts/bulletbig-water"

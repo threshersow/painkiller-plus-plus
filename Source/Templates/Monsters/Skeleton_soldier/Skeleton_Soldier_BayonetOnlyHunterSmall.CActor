@@ -1,0 +1,4 @@
+o.BaseObj = "Skeleton_Soldier.CActor"
+
+o.AiParams.aiGoals = {"idle","attack","hunt"}
+o.Scale = 1.1

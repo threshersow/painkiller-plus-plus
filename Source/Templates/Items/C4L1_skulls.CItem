@@ -1,0 +1,30 @@
+o.Mesh = "statdest_pulapkaczaszkowaAShape"
+o.Pack = "czachy.dat"
+o.Scale = 0.3
+o.Mass = 1000
+o.NotCountable = true
+
+o.DestroyPack = "czachy_ZLOM.dat"
+o.Destroy.LifetimeAfterExplosion = 5
+
+o.Destroy.AverageVariation = 16
+o.Destroy.Effect = "skorient_dust"
+o.Destroy.Strength = 600
+o.Destroy.EffectScale = 0.5
+o.Destroy.ExplosionStrength = 2000
+o.Destroy.ExplosionRadius = 6
+o.Destroy.AverageDelay = 32
+o.Destroy.Treasures = 
+{
+    Coins  = {10, 's'},
+}
+o.Destroy.ExplosionDamage = 0
+o.TestDeathZone = true
+o.Health = 333
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)
+
+
+o.fireballSpeed = 20.0
+o.fireFreqency = 3.0		-- co ile sek
+o.randomFire = true			-- jesli true, to przypadkowe sprzela, jesli false, to kolejno
+

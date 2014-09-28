@@ -1,0 +1,10 @@
+Machinka_01.Volume = 100
+Machinka_01.Interval = 8
+Machinka_01.RandomShift = 4
+Machinka_01.Falloff =
+{
+  Start = 5,
+  End = 40
+}
+Machinka_01.Sound ="C3L2_Factory/machinka_01"
+

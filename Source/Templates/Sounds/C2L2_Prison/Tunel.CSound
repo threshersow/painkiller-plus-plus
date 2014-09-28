@@ -1,0 +1,11 @@
+Tunel.Volume = 70
+Tunel.Interval = 0
+Tunel.RandomShift = 0
+Tunel.Falloff =
+{
+  Start = 7,
+  End = 15
+
+}
+Tunel.Sound ="C2L2_Prison/Tunel"
+

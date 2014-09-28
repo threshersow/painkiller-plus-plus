@@ -1,0 +1,10 @@
+Wiatr_cat.Volume = 50
+Wiatr_cat.Interval = 0
+Wiatr_cat.RandomShift = 0
+Wiatr_cat.Falloff =
+{
+  Start = 2,
+  End = 40
+}
+Wiatr_cat.Sound ="C1L3_Catacombs/wiatr"
+

@@ -1,0 +1,2 @@
+o.BaseObj = "Beast.CActor"
+o.AiParams.aiGoals = {"idle","hunt", "hear","flee","attack", "JumpUP","beastRoll"}

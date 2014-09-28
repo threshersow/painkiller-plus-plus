@@ -1,0 +1,10 @@
+Ptaki.Volume = 100
+Ptaki.Interval = 5
+Ptaki.RandomShift = 3
+Ptaki.Falloff =
+{
+  Start = 10,
+  End = 40
+}
+Ptaki.Sound ="C3L4_Castle/Ptaki_01;C3L4_Castle/Ptaki_02"
+

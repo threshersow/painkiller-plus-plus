@@ -1,0 +1,23 @@
+o.s_SubClass.ParticlesDefinitions = {
+	breath = {
+		pfx = "bekanie",
+		scale = 0.4,
+		joint = "k_szczeka1",
+		bind = true,
+		offset = Vector:New(0,0,0),
+		rotation = Vector:New(-math.pi/2, -math.pi/2, math.pi/6),
+	},
+	breakbottle = {
+		pfx = "breakbottle",
+		scale = 0.2,
+		joint = "joint21",
+		offset = Vector:New(0,0,0),
+	},
+	explodeSpecial = {
+		pfx = "HBalkoexplode",
+		scale = 0.6,
+		joint = "root",
+		offset = Vector:New(0,0,0),
+	},
+
+}

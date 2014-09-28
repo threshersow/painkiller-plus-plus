@@ -1,0 +1,10 @@
+Gwar_02.Volume = 40
+Gwar_02.Interval = 0
+Gwar_02.RandomShift = 0
+Gwar_02.Falloff =
+{
+  Start = 2,
+  End = 15
+}
+Gwar_02.Sound ="C4L2_Babel/Gwar_02"
+

@@ -1,0 +1,28 @@
+--============================================================================
+-- FadeInOut Task
+--============================================================================
+o.BaseName = "FadeInOut.CProcess"
+FadeInOut.Time = 5
+--============================================================================
+function FadeInOut:New(in_out,tm)
+    if in_out then R3D.ClearScreen() end
+    local p = Clone(self)
+    p.In = in_out
+    p.Time = tm
+    p._timeout = 0
+    return p
+end
+--============================================================================
+function FadeInOut:PostRender(delta)
+    self._timeout = self._timeout + delta
+    if self._timeout >= self.Time then 
+        self._timeout = self.Time
+        GObjects:ToKill(self)
+    end    
+    local alpha = self._timeout / self.Time
+    if self.In then alpha = 1 - alpha end
+    local w,h = R3D.ScreenSize()
+    --Game:Print(alpha)
+    HUD.DrawQuadRGBA(0,0,0,w,h,0,0,0,alpha*255)
+end
+--============================================================================

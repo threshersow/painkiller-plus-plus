@@ -1,0 +1,17 @@
+o.Mesh = "sack_2sidedShape"
+o.Pack = "C4L1_sack_fireworks_caly.dat"
+o.DestroyPack = "C4L1_sack_fireworks_zlom.dat"
+o.Scale = 0.5
+o.Health = 9
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 0
+o.Destroy.EffectScale = 0.25
+o.Mass = 600
+o.Destroy.MinSpeedOnCollision = 30
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+o.Destroy.CustomThrowItem = {"C4L1_Fireworks_stick1.CItem","C4L1_Fireworks_stick2.CItem","C4L1_Fireworks_stick3.CItem","C4L1_Fireworks_stick4.CItem","C4L1_Fireworks_stick5.CItem"}
+o.Destroy.CustomThrowItemCount = 9
+o.Destroy.Effect = "explo_sack"

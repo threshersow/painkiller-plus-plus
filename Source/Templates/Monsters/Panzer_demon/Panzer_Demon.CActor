@@ -1,0 +1,258 @@
+o.Model = "panzer_demon"
+o.Scale = 4.0
+o.Health = 1000
+o.CreatePO = true
+o.WalkSpeed = 1.55
+o.RotateSpeed = 5		-- degrees per 1/30 sec
+o.throwHeart = "red"
+
+o.NeverRun = true
+o.disableNoAnimDetection = true
+--o.enableGibWhenHPBelow = 0
+o.disableFreeze = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    BodyScale = 0.9,
+    Mass     = 1000,
+    InertiaTensorMultiplier = 0.05,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.5,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+	
+	rotateHeadRight = Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadLeft =  Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadCoords = Vector:New(1, 3, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+
+    Animations = {
+		idle = {1.0, false},
+        walk = {0.7, true,{
+							{1.65,'Stomp',"leg_1_3"},
+							{0.8,'Stomp',"leg_2_3"},
+							{0.8,'Stomp',"leg_4_3"},
+							{1.65,'Stomp',"leg_3_3"},
+						}},
+
+        atak1 = {1.0, false,{
+							{1.1,'Stomp',"leg_5_3"},
+							{2.8,'Stomp',"leg_1_3"},
+							{2.8,'Stomp',"leg_2_3"},
+  							{2.8,'Stomp',"k_sz",1.5},
+							{2.801,'Shockwave',},
+						}},
+        atak2 = {1.0, false,{
+							{0.5,'StartFlame',},
+							{0.6,'CheckFlame',},
+							{0.8,'CheckFlame',},
+							{1.0,'CheckFlame',},
+							{1.2,'CheckFlame',},
+							{1.4,'CheckFlame',},
+							{1.6,'CheckFlame',},
+							{1.8,'CheckFlame',},
+							{2.0,'CheckFlame',},
+							{2.2,'CheckFlame',},
+							{2.4,'CheckFlame',},
+							{2.5,'EndFlame',},
+						}},
+        atak3 = {1.0, false,{
+							{1.0,"ThrowImmid",nil,true,nil,nil,6,5,-2.4},
+							{1.0,"ThrowImmid",nil,true,nil,nil,6,5,2.4},
+							{1.0,'Stomp',"k_sz"},
+						}},
+        atak4 = {1.0, false,{		-- 3
+							--{1.5,"Eat"},
+						}},
+
+        rot45L = {2.0, MC.ETransX + MC.ETransZ + MC.ERot, {
+							{1.65,'Stomp',"leg_1_3"},
+							{2.95,'Stomp',"leg_2_3"},
+							{1.45,'Stomp',"leg_3_3"},
+							{2.8,'Stomp',"leg_4_3"},
+                        }},
+        rot45R = {2.0, MC.ETransX + MC.ETransZ + MC.ERot, {
+							{2.8,'Stomp',"leg_1_3"},
+							{1.5,'Stomp',"leg_2_3"},
+							{2.95,'Stomp',"leg_3_3"},
+							{1.6,'Stomp',"leg_4_3"},
+                        }},
+		enter = {1.0, false, {
+							{0.9,'Stomp',"leg_1_3"},
+							{1.9,'Stomp',"leg_2_3"},
+							{3.2,'Stomp',"leg_1_3"},
+							{3.5,'Stomp',"leg_2_3"},
+							{4.0,'Stomp',"leg_4_3"},
+						}},
+    },
+
+    ragdollJoint = "root",
+
+    --NearAttacks = {"atak1", "atak2"},
+
+    DeathJoints = {
+        'root','k_szyja','leg3_1','leg5_1','leg4_2','leg_1_2',
+    },
+    --BreakableJoints = {},
+    --CollidableRagdoll = false,
+
+    RagdollCollisions = {
+		MinStren = 5.0,
+		MinTime = 0.6,
+		Bones = {
+					{"leg_1_1", "bodyfalls", true},		-- joint, {sounds}, blood
+					{"leg_4_1", "bodyfalls", true},
+					{"leg_5_1", "bodyfalls", true},
+					{"leg_2_2", "bodyfalls", true},
+					{"root", "bodyfalls", true},
+					{"k_szyja", "bodyfalls", true},
+				}
+    },
+   	rotate45L = "rot45L",
+	rotate45R = "rot45R",
+
+	GibExplosionStrength = 60000,
+	GibExplosionRange = 50,
+	GibExplosionDeltaY = -15.0
+
+--[[	
+	,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"r_l_arm","FX_gib_blood",-1},		-- "FX_gib_blood"
+				{"r_p_arm","FX_gib_blood",1},
+				{"n_l_bio","FX_gib_blood",-1},
+				{"n_p_bio","FX_gib_blood",1},
+				{"k_head","FX_gib_blood",-1},
+				{"k_chest","FX_gib_blood",1},
+				{"root","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"r_l_arm", "gibSplash", true},
+				{"r_p_arm", "gibSplash", true},
+				{"n_l_bio", "gibSplash", true},
+				{"n_p_bio", "gibSplash", true},
+				{"k_head", "gibSplash", true},
+				{"k_chest", "gibSplash", true},
+				{"root", "gibSplash", true},
+			},
+	    },
+	WPminDist = 0.1,
+	WPmaxDist = 1.9,--]]
+}
+
+o.DeathTimer = 200
+
+o.AiParams = {}
+--o.AiParams.aiGoals = {"idle",--[["idlePanzer",--]]}
+o.AiParams.aiGoals = {"idlePanzer",}
+
+
+    
+o.AiParams.viewDistance = 120
+o.AiParams.viewDistance360 = 0
+o.AiParams.viewAngle = 60
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 3.0
+o.AiParams.attackRangeAngle = 90
+o.AiParams.delayBetweenAttacks = -1
+
+o.AiParams.perception = 1.0
+o.AiParams.walkStep = 25.0
+o.AiParams.hearing = 1.0
+
+--o.AiParams.GuardStill = true
+--o.AiParams.guardAngle = {0,0}
+--o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+--o.AiParams.guardChangePosition = {}
+--o.AiParams.guardRange = -1
+--o.AiParams.stopAfterWalking = 0.0
+--o.AiParams.stopAfterWalkingTime = {30,90}
+
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+o.AiParams.moveDisplacement = 3.5
+o.AiParams.updateSpeed = 1.0
+
+o.AiParams.walkAreaRandom = false
+o.AiParams.alwaysSee = true
+
+
+o.AiParams.findPathSpeed = 0.08
+o.minimumTimeBetweenHitAnimation = 60
+
+o.AiParams.explosionWhenWalkRange = 0.5
+o.AiParams.explosionWhenWalkStreng = 100
+o.AiParams.explosionWhenWalkDamage = 20
+o.AiParams.soundAmbientDelay = 6.0
+
+
+o.AiParams.ThrowableItem = "Panzer_Demon_rocket.CItem"
+o.AiParams.throwItemBindTo = "root"
+
+o.AiParams.throwDistMinus = 0.0
+
+o.AiParams.throwMaxAngleYawDiff = 5
+o.AiParams.throwMaxAnglePitchDiff = 5
+
+o.AiParams.throwVelocity = 25
+o.AiParams.throwDeltaY = 1.7
+o.AiParams.homingMissileAngleChangeSpeed = 5
+
+o.AiParams.explosionWhenWalkRange = 5.0
+o.AiParams.explosionWhenWalkStreng = 1000
+o.AiParams.explosionWhenWalkDamage = 40
+o.AiParams.walkDecal = "stake"
+
+-- atak4 --
+--o.AiParams.eatRange = 7.0
+--
+
+o.StompTimeOut = 16
+o.StompRange = 80
+o.CameraM = 0.3
+
+o.shadow = 256
+
+o.AiParams.homingMissile = true
+
+o.doNotUseWP = true
+ 
+o.Poison = {		-- do slowdown
+	--checkSpeed = 2,
+	--Range = 2.5,
+	TimeOut = 90,
+	Freq = 999,		-- jak czesto zadaje rany
+	--DamageHp = 4,
+	SlowDown = 0.15,
+}
+
+o.ShockWave = {
+	range = 120,
+	damage = 80,
+	explosionStren = 6500,
+	playerHitStr = 16,
+	HitDecal = "decal_Mlot",
+	FXwhenHit = "FX_Thorhit.CActor",
+
+    eqTimeOut = 8,
+    eqRange = 60,
+    eqCameraMove = 0.4,
+}
+
+--o.eatHPBonus = 0.15
+
+o.AiParams.minTimeBetweenAttacksWhenClose = 3.0
+o.AiParams.minTimeBetweenAttacksWhenFar = 5.0		-- wtedy glownie rakiety
+o.AiParams.farAttackRange = 35.0					-- > 30
+
+o.AiParams.useAttacks = {true,false,true}			-- shockwave, freeze, rockets
+o.AiParams.freezeDamage = 5

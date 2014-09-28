@@ -1,0 +1,18 @@
+o.Mesh = "polySurfaceShape26109"
+o.Pack = "kamien_niebieski.dat"
+o.Scale = 0.3
+
+o.takeDistance = 1.4
+o.TimeToLive = 20 * 30
+o.BonusItemValue = 15
+
+o.force = {20,200,20}
+o.rotate = {10,80,10}
+o.angularDamping = 0.5
+o.Friction = 2.5
+
+
+o.s_SubClass.bindFX = {
+       {"flarka_kielich", 0.2, nil, {0.06, -0.08, 0.1}, {0.4, 0.4, 0.4}},
+       {"FLARA_HOSTIE", 1, nil, {0, 0, 0}, {0.9, 0.9, 0.9}},
+}

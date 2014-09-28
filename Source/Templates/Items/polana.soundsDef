@@ -1,0 +1,16 @@
+o.s_SubClass.SoundsDefinitions = {
+	burnin = {
+		samples = {"actor/evilmonkv3/evil_blowfire-loop"},
+		dist1 = 2,
+		dist2 = 6,
+	},
+	DestroySound = {
+		samples = {"actor/evilmonkv3/evil_blowfire-stop"},
+		dist1 = 15,
+		dist2 = 50,
+	},
+
+	SoundHitByBullet = {
+		samples = {"impacts/belt-impact1","impacts/belt-impact2","impacts/belt-impact3",},
+	},
+}

@@ -1,0 +1,147 @@
+----------------------------------------------------------------
+-- skacze na playera, rani go gdy jest w zasiegu podczas skoku
+----------------------------------------------------------------
+-- uzywane parametry:
+--
+----------------------------------------------------------------
+AiStates.Jump = {
+	name = "Jump",
+    _lastTimeJump = 0,
+    lastTimeDamage = -100,
+}
+
+function AiStates.Jump:OnInit(brain)
+	local actor = brain._Objactor
+	self.active = true
+	self.state = 0
+
+	if debugMarek then Game:Print(actor._Name.." jump") end
+	self.lastTimeDamage = -100
+	if brain.r_closestEnemy then
+		actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+	end
+	self._animName = nil
+end
+
+function AiStates.Jump:OnUpdate(brain)
+    local actor = brain._Objactor
+    local aiParams = actor.AiParams
+    if self.state == 0 then
+		if not actor._isRotating then
+			actor:Stop()
+			if aiParams.prepareJumpAnim then
+				actor:SetAnim(aiParams.prepareJumpAnim, false)
+			end
+			self.state = 1
+		end
+    end
+    if self.state == 1 then
+		if not actor._isAnimating or not aiParams.prepareJumpAnim then
+			if brain.r_closestEnemy then
+				self.state = 2
+				local index = MDL.GetAnim(actor._Entity,aiParams.jumpAnim)
+				local distToE = Dist3D(actor._groundx,actor._groundy,actor._groundz, brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+				if distToE > aiParams.attackRange then
+					local speed = aiParams.jumpSpeed * aiParams.jumpAnimLen / distToE
+					if debugMarek then Game:Print("%%% speed anim = "..speed.." "..distToE) end
+					actor:SetAnim(aiParams.jumpAnim, false, speed)
+					actor._proc = Templates["PMove.CProcess"]:New(actor, aiParams.jumpSpeed)
+					actor._proc:SetDir(Vector:New(brain.r_closestEnemy._groundx - actor._groundx, 0, brain.r_closestEnemy._groundz - actor._groundz))
+					GObjects:Add(TempObjName(), actor._proc)
+				else
+					self.active = false
+				end
+			else
+				self.active = false
+			end
+		else
+			if actor.Animation ~= aiParams.prepareJumpAnim then
+				if debugMarek then Game:Print(actor._Name.." prepare jump canceled by : "..actor.Animation) end
+				self.active = false
+			else
+				if brain.r_closestEnemy then
+					local distToE = Dist3D(actor._groundx,actor._groundy,actor._groundz, brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+					if distToE <= aiParams.attackRange then
+						self.active = false
+					end
+				end
+			end
+		end
+    end
+    if self.state == 2 then
+		if actor.Animation == aiParams.jumpAnim and brain.r_closestEnemy then
+			if self.lastTimeDamage + 0.5 < brain._currentTime then
+				local dist = Dist3D(actor._groundx,actor._groundy,actor._groundz, brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+				if dist < aiParams.jumpDamageRange then
+					self.lastTimeDamage = brain._currentTime
+					brain.r_closestEnemy:OnDamage(actor.CollisionDamage, actor)
+					actor._proc:Stop()
+					actor:SetIdle()
+				end
+			end
+		end
+
+		if not actor._isAnimating then
+			if brain.r_closestEnemy and aiParams.afterJumpAnim then
+				if debugMarek then Game:Print(actor._Name.." afterJumpAnim") end
+				 --actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+                 brain._enemyLastSeenShootTarget = Vector:New(0,brain.r_closestEnemy._groundy + 1.8,0)
+				self._animName = aiParams.afterJumpAnim[math.random(1,table.getn(aiParams.afterJumpAnim))]
+				actor:SetAnim(self._animName, false)
+				self.state = 3
+			else
+				self.active = false
+				if debugMarek then Game:Print("jump_atak fin ok") end
+			end
+
+            if actor._proc then			-- ## pozniej na funkcje z cactora
+                actor._proc:Stop()
+            end
+
+		else
+			if actor.Animation ~= aiParams.jumpAnim then
+				if debugMarek then Game:Print("anim ~= jump_atak" ..actor.Animation) end
+				self.active = false
+			else
+				if math.random(100) < 15 and brain.r_closestEnemy and not aiParams.doNotRotateWhileJumping then
+					actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+					actor._proc:SetDir(Vector:New(brain.r_closestEnemy._groundx - actor._groundx, 0, brain.r_closestEnemy._groundz - actor._groundz))
+				end
+			end
+		end
+	end
+    if self.state == 3 then
+		if not actor._isAnimating or actor.Animation ~= self._animName then
+			if debugMarek then Game:Print(actor._Name.."koniec afterJump" ..actor.Animation) end
+			self.active = false
+		end
+	end
+	self._lastTimeJump = brain._currentTime
+end
+
+function AiStates.Jump:OnRelease(brain)
+	local actor = brain._Objactor
+	self.active = false
+	if actor._proc then
+		GObjects:ToKill(actor._proc)
+		actor._proc = nil
+	end
+	if debugMarek then Game:Print(actor._Name.." Jump on release") end
+end
+
+function AiStates.Jump:Evaluate(brain)
+	if self.active then
+		return 0.63
+	end
+	if brain.r_closestEnemy and not brain.escape then
+		local actor = brain._Objactor
+		local aiParams = actor.AiParams
+		if self._lastTimeJump + aiParams.minDelayBetweenJumps < brain._currentTime and actor._state ~= "ATTACKING" then
+			if brain._distToNearestEnemy > aiParams.jumpRangeMin and brain._distToNearestEnemy < aiParams.jumpRangeMax then
+				return 0.56
+			end
+		end
+	end
+	return 0.0
+end
+

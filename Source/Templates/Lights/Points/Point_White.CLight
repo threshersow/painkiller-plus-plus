@@ -1,0 +1,3 @@
+Point_White["Color"] = Color:New(255,255,255,0)
+Point_White["Range"] = 10
+Point_White["Type"] = 2

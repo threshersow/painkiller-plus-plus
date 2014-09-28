@@ -1,0 +1,10 @@
+ziemia.Volume = 40
+ziemia.Interval = 10
+ziemia.RandomShift = 3
+ziemia.Falloff =
+{
+  Start = 4,
+  End = 14
+}
+ziemia.Sound ="C1L4_Cemetery/ziemia_01;C1L4_Cemetery/ziemia_02;C1L4_Cemetery/ziemia_03"
+

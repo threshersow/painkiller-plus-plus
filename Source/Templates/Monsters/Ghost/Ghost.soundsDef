@@ -1,0 +1,25 @@
+o.s_SubClass.SoundsDefinitions = {
+	disap = {
+		samples = {"ghost_dissappear"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	bodyhit = {
+		samples = {"ghost_body-hit"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+        ambientsWhileLive = {
+		samples = {"ghost_idle1","ghost_idle2","ghost_idle3","ghost_idle4"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+        OnSpawn = {
+		samples = {"ghost_appear"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+
+}

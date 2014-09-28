@@ -1,0 +1,21 @@
+o.Scale = 0.4
+o.Mass = 400
+o.Pack = "pilka.dat"
+o.Mesh = "polySurfaceShape14692"
+
+o.Restitution = 5 -- sprezystosc
+o.Friction = 0.8 -- tarcie
+o.LinearDamping = 0.5  -- tlumienie liniowe
+o.Mass = 40
+o.Softness = 1
+
+
+o.CollisionDetect = {
+	MinTime = 0.3,
+	MinStren = 5.0,
+}
+
+o.SoundImpactMinDelay = 0.5
+
+o.DetailMap.DefaultDetailTex = false
+

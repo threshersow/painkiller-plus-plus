@@ -1,0 +1,106 @@
+o.Mesh = "kulkaaShape"
+o.Pack = "kulka.dat"
+
+o.Health = 1
+o.Scale = 0.2
+o.Restitution = 0.0 	-- sprezystosc
+o.AngularDamping = 0.96
+o.TimeToLive = 5 * 30
+
+o.s_Poison = {
+	Range = 2.0,
+	TimeOut = 45,	-- jak dlugo dziala
+	Freq = 20,		-- jak czesto trucizna zadaje rany
+	DamageHp = 5,
+}
+
+
+o.Mass = 150
+o.Damage = 5
+
+function o:CustomOnDamage()
+    GObjects:ToKill(self)
+end
+
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+	self.timer = 3
+	self.mode = 0
+--	ENTITY.AddToIntersectionSolver(self._Entity)
+	self._fx = self:BindFX("flying")
+    if not self.ObjOwner.AiParams.throwAngle then
+        ENTITY.PO_EnableGravity(self._Entity, false)
+    end
+end
+
+function o:OnUpdate()
+	if not self._enabled then return end
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			--Game:Print("corn throwable enable col")
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+			self.timer = nil
+		end
+	else
+		if math.random(100) < 20 and Player and not Player._poisoned then
+			local x,y,z = self.Pos.X, self.Pos.Y, self.Pos.Z
+			local dist = Dist3D(x,y,z, Player._groundx,Player._groundy, Player._groundz)
+			--local distLast = 9999
+			--if self._fx_lastx then
+				dist2 = Dist3D(x,y,z, Player._groundx,Player._groundy + 1.7, Player._groundz)
+			--end
+			if dist < self.s_Poison.Range or dist2 < self.s_Poison.Range then
+				--Game:Print("PLAYER poisoned")
+                --Player:PlaySoundHit2D("hero/hero_poison"..math.random(1,3))
+                
+                if not SOUND2D.IsPlaying(Player._oldSND) then
+	                Player._oldSND = PlaySound2D("hero/hero_poison"..math.random(1,3),nil,nil,true)
+	            end
+
+				Player._poisoned = self.s_Poison.TimeOut
+				Player._poisonedTime = 0
+				Player._poison = self.s_Poison
+				Player._DrawColorQuad = true
+				Player._ColorOfQuad = Color:New(255, 10, 10)
+				Player._QuadAlphaMax = 46
+			end
+			--self._fx_lastx = x
+			--self._fx_lasty = y
+			--self._fx_lastz = z
+		end
+	end
+	
+end
+
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+    local obj = EntityToObject[e]
+    if obj and not self.deathTimer then
+		if obj == self then
+			--Game:Print("Col woth self")
+		else
+			if obj.OnDamage and obj ~= self then
+				--Game:Print("Col woth "..obj._Name)
+				if obj == Player then
+					PlaySound2D("actor/corn/corn-damage")
+				end
+				obj:OnDamage(self.Damage, self.ObjOwner)
+			end
+			GObjects:ToKill(self)
+		end
+    else
+        if not self.deathTimer then
+            self.deathTimer = true
+            PlaySound3D("actor/corn/cornThrowable-hits-ground"..math.random(1,2),x,y,z,18,36,nil)
+        end
+    end
+    
+    ENTITY.EnableCollisions(self._Entity, false)
+    --GObjects:ToKill(self)
+    if self._fx then
+		PARTICLE.Die(self._fx)
+	end
+	-- dodac random timer, zeby nie w tej samej chwili wszystkie particle?
+    self:BindFX("whenHitGround")
+end

@@ -1,0 +1,10 @@
+Insekty_01.Volume = 20
+Insekty_01.Interval = 0
+Insekty_01.RandomShift = 0
+Insekty_01.Falloff =
+{
+  Start = 15,
+  End = 80
+}
+Insekty_01.Sound ="C4L2_Babel/Insekty_01"
+

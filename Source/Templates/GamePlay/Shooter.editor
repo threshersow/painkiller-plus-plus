@@ -1,0 +1,35 @@
+function Shooter:EditTick(delta)
+    if Editor.SelObj == self then        
+        if INP.Key(Keys.NumPlus) == 2 then        
+            self.Explosion.Range = self.Explosion.Range + 2 * delta
+        end
+        if INP.Key(Keys.NumMinus) == 2 then        
+            self.Explosion.Range = self.Explosion.Range - 2 * delta
+            if self.Explosion.Range < 0.01 then self.Explosion.Range = 0.01 end 
+        end
+    else
+        -- picking point 
+        if MOUSE.LB() == 1 then        
+            local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+            if Dist2D(MX,MY,sx,sy) <  15  then
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+            end
+        end    
+    end
+
+end
+--============================================================================
+function Shooter:EditRender(delta)
+    R3D.DrawSphere(0.4,Color:New(255,100,234):Compose(),self.Pos.X,self.Pos.Y,self.Pos.Z)
+    R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,Color:New(255,200,234):Compose())
+    if Editor.SelObj == self then 
+        local x = self.Pos.X
+        local y = self.Pos.Y
+        local z = self.Pos.Z
+        local px,py,pz = VectorRotateByQuat(0,0,3,self.Rot.W,self.Rot.X,self.Rot.Y,self.Rot.Z)
+        R3D.RenderLine(x,y,z,x+px,y+py,z+pz,R3D.RGB(255,255,0))
+        R3D.DrawDirLight(R3D.RGB(255,255,255),x,y,z,px,py,pz) 
+    end
+end
+

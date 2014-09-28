@@ -1,0 +1,11 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+o.Scale = 0.4
+o.Health = 1
+o.Immortal = true
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)
+
+o.spawnFreq = 3.0
+o.fireBallAngle = 72
+o.fireBallSpawnMinDist = 4.0
+o.fireBallSpawnMaxDist = 40.0

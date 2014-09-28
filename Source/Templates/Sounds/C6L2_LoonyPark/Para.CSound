@@ -1,0 +1,9 @@
+Para.Volume = 100
+Para.Interval = 10
+Para.RandomShift = 5
+Para.Falloff =
+{
+  Start = 7,
+  End = 70
+}
+Para.Sound ="C6L2_LoonyPark/Para_01;C6L2_LoonyPark/Para_02;C6L2_LoonyPark/Para_03;C6L2_LoonyPark/Para_04"

@@ -1,0 +1,176 @@
+o.Model = "rusek"
+o.Scale = 1.4
+o.CreatePO = true
+o.Health = 100
+o.WalkSpeed = 1.6
+o.RunSpeed = 1.6
+o.RotateSpeed = 8
+o.enableGibWhenHPBelow = -55
+o.Animation = "idle1"
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,	-- pozniej sphere
+    Mass     = 200,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.45,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+	SoundDir = 'soldier',
+	Animations = {
+		idle1   = {1.0,false},
+		idle2   = {1.0,false},
+		walk   = {1.0,true,{
+			}},
+		run   = {1.0,true,{
+			}},
+
+		atak1   = {1.0,false,{
+					{0.8,'ThrowImmid'},
+				}},
+		atak2   = {1.0,false,{			-- 0.83
+					{0.3,'WeaponFire',},
+					{0.55,'WeaponFire',},
+					{0.8,'WeaponFire',},
+				}},
+		hit1   = {1.0,false,{
+				}},
+		hit2   = {1.0,false,{
+
+				}},
+    },
+
+	RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				{"gun","weaponlost",false},
+			},
+    },
+
+
+    Hits = {"hit1", "hit2"},
+    Ambients = {"idle1","idle2"},
+    
+    DeathJoints = {
+        'k_szyja','n_p_kolano','n_l_kolano','k_ogo','r_l_lokiec','r_p_lokiec','gun',
+        'r_p_bark','r_l_bark',
+    },
+   	notBleedingJoints = {
+		gun = {},
+    },
+
+    gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"r_p_bark_root","FX_gib_blood",1},
+				{"r_l_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+    },
+	gibShader = "palskinned_bloody",
+    	
+	GibExplosionStrength = 7000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+    RagdollCollisionsGib = {
+        MinStren = 6.0,
+        MinTime = 0.8,
+        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"r_p_bark_root", "gibSplash", true},
+				{"r_l_bark_root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"gun","weaponlost",false},
+			},
+    },
+
+}
+
+
+
+o.DeathTimer = 140                  -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt", "hear","flee","FarAttack","throw"}
+
+o.AiParams.viewDistance = 90
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 100
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 2.499
+o.AiParams.attackRangeAngle = 100
+o.AiParams.hearing = 1.2
+o.AiParams.perception = 1.0
+o.AiParams.changePosAfterFire = 0.95
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {-120,120}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1			-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 1.0
+o.AiParams.stopAfterWalkingTime = {90,120}
+
+o.AiParams.walkStep = 7.0
+--o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.moveDisplacement = 3.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 100
+
+o.AiParams.updateSpeed = 0.25
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+o.shadow = 128
+
+o.AiParams.delayBetweenAttacks = 35
+o.AiParams.weapon = {
+		maxDist = 45,
+		minDist = 2.5,
+		maxYaw = 45,
+		maxPitch = 45,
+		bulletsPerShot = 1,
+		spreadAngle = 3.0,
+		damagePerBullet = 10,
+		PO_HitForce = 10,
+		fireParticle = "monstershot",	
+		fireParticleSize = 0.2,
+		bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+	}
+
+o.shadow = 128
+o.AiParams.FarAttacks = {"atak2",}
+
+o.AiParams.ThrowableItem = "GrenadeSoldier.CItem"
+o.AiParams.throwItemBindTo = "dlo_lewa_root"
+o.AiParams.weaponBindPos = "gun"
+o.AiParams.weaponBindPosShift = Vector:New(-1,-0.6,0.4)
+o.AiParams.throwAngle = 30
+
+o.AiParams.throwAnim = "atak1"
+o.AiParams.throwRangeMin = 10
+o.AiParams.throwRangeMax = 30
+o.AiParams.throwDistMinus = 0
+o.AiParams.minDelayBetweenThrow = 8
+o.AiParams.throwAmmo = 99999
+o.AiParams.FarAttacks = {"atak2",}
+o.AiParams.notBreakAttackByThrow = true
+o.AiParams.throwAngularVelocitySpeed = 10

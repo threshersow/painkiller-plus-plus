@@ -1,0 +1,10 @@
+Krypta.Volume = 100
+Krypta.Interval = 5
+Krypta.RandomShift = 2
+Krypta.Falloff =
+{
+  Start = 1,
+  End = 10
+}
+Krypta.Sound ="C1L1_Cathedrals/krypta_01;C1L1_Cathedrals/krypta_02"
+

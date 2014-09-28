@@ -1,0 +1,83 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'$/actor/evilmonk/evil_krok1',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'$/actor/evilmonk/evil_krok2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	bodyfalls = {
+		samples = {"$/actor/evilmonk/evil_bodyfalls","$/actor/evilmonk/evil_bodyfalls1"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	hit = {
+		samples = {'evilv3_hit1','evilv3_hit2','evilv3_hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	weaponlost = {
+		samples = {"evilv3-weapon-lost1","evilv3-weapon-lost2","evilv3-weapon-lost3"},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	onAttackOnce = {
+		samples = {"evilv3_halt1", "evilv3_halt2", "evilv3_halt3", "evilv3_halt4",},
+		playChance = 0.5,
+		dist1 = 30,
+		dist2 = 70,
+	},
+	blowprep = {
+		samples = {"evil_blowfire-prepare",},
+		playChance = 0.3,
+		dist1 = 10,
+		dist2 = 30,
+	},
+	blowstart = {
+		samples = {"evil_blowfire-start",},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak = {
+		samples = {'evilv3_attack1','evilv3_attack2','evilv3_attack3','evilv3_attack4',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	throwvoice = {
+		samples = {'evilv3-cluster-bomb-throw-voice', 'evilv3-cluster-bomb-throw-voice2','evilv3-cluster-bomb-throw-voice3'},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	swish = {
+		samples = {'evilv3-cluster-bomb-throw-swish'},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	fuse = {
+		samples = {'fuse_burning-start', },
+		dist1 = 12,
+		dist2 = 48,
+	},
+
+
+	gib_splash = {
+		path = "impacts/",
+		samples = {"meat-splash1","meat-splash2","meat-splash3","meat-splash4","meat-splash5"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	death = {
+		samples = {"evilv3_death1","evilv3_death2","evilv3_death3"},
+		dist1 = 12,
+		dist2 = 42,
+	},
+
+	damage = {
+		samples = {"evil-fire-hit"},
+	},
+
+}

@@ -1,0 +1,115 @@
+SoulMP.Model = "Energy"
+SoulMP.Scale = 0.5
+SoulMP.takeDistance = 1.8
+SoulMP.HealthAdd = 15
+SoulMP.MaxLimit = 250
+SoulMP.TimeToLive = 30 * 30
+o.s_SubClass ={}
+--============================================================================
+function SoulMP:OnPrecache()
+	Cache:PrecacheParticleFX("energy_red")
+	
+	-- ###marek
+	local mdl = ENTITY.Create(ETypes.Model,"PKW_item","cache",0.03)
+	ENTITY.Release(mdl)
+    mdl = ENTITY.Create(ETypes.Model,"ASG_item","cache",0.03)
+    ENTITY.Release(mdl)
+    mdl = ENTITY.Create(ETypes.Model,"KGRitem","cache",0.03)
+    ENTITY.Release(mdl)
+    mdl = ENTITY.Create(ETypes.Model,"CRL_item","cache",0.03)
+    ENTITY.Release(mdl)
+    mdl = ENTITY.Create(ETypes.Model,"ESL_item","cache",0.02)
+    ENTITY.Release(mdl)
+ 
+
+end
+--============================================================================
+function SoulMP:OnCreateEntity()
+    --Log("SoulMP:OnCreateEntity\n")
+    self:PO_Create(BodyTypes.Simple,1.2,ECollisionGroups.Particles)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false) -- moze to nie jest przyslane?
+    ENTITY.PO_SetFreedomOfRotation(self._Entity, EFreedomsOfRotation.Disabled) -- albo to ??
+    ENTITY.SetSynchroString(self._Entity,"SoulMP.CItem")
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,false)
+    self:Client_OnCreateEntity(self._Entity)
+    ENTITY.PO_SetMissile(self._Entity, MPProjectileTypes.Soul )
+end
+--============================================================================
+function SoulMP:GetPlayerState(player)
+    self.WeaponSlot = player:GetCurWeaponSlotIndex()
+    self.Ammo = Clone(player.Ammo)
+    self.Client_SetWeaponModel(self._Entity,self.WeaponSlot)
+end
+gNrSoul = 0
+--============================================================================
+function SoulMP:Client_SetWeaponModel(entity,b)    
+    Log("SoulMP:Client_SetWeaponModel:"..gNrSoul.."\n")
+    if entity == nil or entity == 0 then 
+        return
+        --MsgBox("Nie ma entity") 
+    end
+    local e = nil    
+    if b == 1 then e =  ENTITY.Create(ETypes.Model,"PKW_item","",0.03) end
+    if b == 2 then e =  ENTITY.Create(ETypes.Model,"ASG_item","",0.03) end
+    if b == 3 then e =  ENTITY.Create(ETypes.Model,"KGRitem","",0.03) end
+    if b == 4 then e =  ENTITY.Create(ETypes.Model,"CRL_item","",0.03) end
+    if b == 5 then e =  ENTITY.Create(ETypes.Model,"ESL_item","",0.02) end
+    if b == 6 then e =  ENTITY.Create(ETypes.Model,"RTF_ITEM","",0.02) end
+    if b == 7 then e =  ENTITY.Create(ETypes.Model,"kk2item","",0.02) end
+    MDL.SetAnim(entity,"idle2",true,1,0)
+    Quaternion:New_FromEuler(0, FRand(2 * math.pi) ,0):ToEntity(e)    
+    local j = MDL.GetJointIndex(entity,"root")
+    ENTITY.RegisterChild(entity,e,true,j)   
+    WORLD.AddEntity(e)
+end
+Network:RegisterMethod("SoulMP.Client_SetWeaponModel", NCallOn.AllClients, NMode.Reliable, "eb")
+--============================================================================
+function SoulMP:Client_OnCreateEntity(entity)
+    gNrSoul = gNrSoul + 1
+    Log("SoulMP:Client_OnCreateEntity:"..gNrSoul.."\n")
+    --Log("SoulMP:Client_OnCreateEntity\n")
+    BindFX(entity,"energy_red",0.2,"e1")
+    BindFX(entity,"energy_red",0.2,"e2")
+    BindFX(entity,"energy_red",0.2,"e3")
+    BindFX(entity,"energy_red",0.2,"e4")
+    BindFX(entity,"energy_red",0.2,"e5")
+    BindFX(entity,"energy_red",0.2,"e6")    
+end
+--============================================================================
+function SoulMP:OnTake(player)
+   --Log("SoulMP:OnTake: "..player._Name.."\n")
+    if player.Health < self.MaxLimit then
+        player.Health = player.Health + self.HealthAdd
+        if player.Health > self.MaxLimit then player.Health = self.MaxLimit  end        
+    end
+    local a = self.Ammo
+    self.TakeFX(player._Entity,player.Health,self.WeaponSlot,a.Shotgun,a.MiniGun,a.Grenades,a.Stakes,a.Shurikens,a.Electro,a.Rifle, a.FlameThrower, a.Bolt, a.HeaterBomb)
+end
+--============================================================================
+function SoulMP:TakeFX(pe,health,weaponSlot,aShotgun,aMiniGun,aGrenades,aStakes,aShurikens,aElectro,aRifle,aFlameT,aBolt,aHeaterBomb)
+    local player = EntityToObject[pe]    
+    if player then
+        player.Health = health
+        player.Ammo.Shotgun      = player.Ammo.Shotgun      + aShotgun
+        player.Ammo.MiniGun      = player.Ammo.MiniGun      + aMiniGun
+        player.Ammo.Grenades     = player.Ammo.Grenades     + aGrenades
+        player.Ammo.Stakes       = player.Ammo.Stakes       + aStakes
+        player.Ammo.Shurikens    = player.Ammo.Shurikens    + aShurikens
+        player.Ammo.Electro      = player.Ammo.Electro      + aElectro
+        player.Ammo.Rifle        = player.Ammo.Rifle        + aRifle
+        player.Ammo.FlameThrower = player.Ammo.FlameThrower + aFlameT
+        player.Ammo.Bolt         = player.Ammo.Bolt         + aBolt
+        player.Ammo.HeaterBomb   = player.Ammo.HeaterBomb   + aHeaterBomb
+            
+        player:CheckMaxAmmo()
+        player._healthDecCnt = 0            
+        player.EnabledWeapons[weaponSlot] = CPlayer.EnabledWeapons[weaponSlot]        
+        if player == Player then
+            player:Client_OnTakeWeapon(weaponSlot)
+            player:PickupFX() 
+        end
+    end
+    Templates["SoulMP.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("SoulMP.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eubuuuuuuuuuu")
+--============================================================================

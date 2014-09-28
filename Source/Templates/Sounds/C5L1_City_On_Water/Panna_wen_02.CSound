@@ -1,0 +1,10 @@
+Panna_wen_02.Volume = 100
+Panna_wen_02.Interval = 12
+Panna_wen_02.RandomShift = 3
+Panna_wen_02.Falloff =
+{
+  Start = 10,
+  End = 50
+}
+Panna_wen_02.Sound ="C5L1_City_On_Water/Panna_02"
+

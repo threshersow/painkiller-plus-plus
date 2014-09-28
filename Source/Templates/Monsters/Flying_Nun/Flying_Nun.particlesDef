@@ -1,0 +1,9 @@
+o.s_SubClass.bindFX = {
+	{"zakonspell",1.0,'dlo_prawa_root',0,-0.1,-0.13},{"zakonglow",1.0,'k_szyja',0,0,0},
+}
+
+o.s_SubClass.Light = {
+	template = "flying_nun_Light.CLight",
+ 	joint = "dlo_prawa_root",
+	offset = Vector:New(0,0,0),
+}

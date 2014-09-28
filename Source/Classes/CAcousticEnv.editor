@@ -1,0 +1,5 @@
+CAcousticEnv.s_Editor = {
+        ["Room.Type"] = { "ComboBox", Acoustics.RoomTypes},
+        ["Player.Ground"] = { "ComboBox", Acoustics.GroundTypes},
+    }
+

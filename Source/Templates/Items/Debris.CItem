@@ -1,0 +1,65 @@
+o.Mesh = "polySurfaceShape89990"
+o.Pack = "kamien.dat"
+o.Scale = 0.33
+o.Restitution = 0.2
+o.Damage = 0.5					-- mnozony jest przez predkosc obiektu w momencie kolizji
+o.ThrowForce = 120				-- throwvelocity 100
+o.LifeTime = 180				-- after 1st col
+o.TimeToLive = 30 * 5
+o.CollisionSound = {"impacts/fall-rumble1","impacts/fall-rumble2","impacts/fall-rumble3"}
+
+--============================================================================
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+	local ecol = true
+	if y < self._lockedPos - 1.0 then
+	--if e then
+		--[[local obj = EntityToObject[e]
+		if obj and obj._Class ~= "CItem" then
+			if obj ~= self.ObjOwner then
+				if obj.OnDamage then
+					local v = Vector:New(ENTITY.GetVelocity(self._Entity))
+					local x,y,z,mag = ENTITY.GetVelocity(self._Entity)
+					local damage = self.Damage * mag
+					if mag > 8 then
+						PlaySound3D("impacts/bullet-body2",obj.Pos.X,obj.Pos.Y,obj.Pos.Z,3,5,obj)
+						obj:OnDamage(damage, self)
+					end
+					ecol = false
+				end
+				--GObjects:ToKill(self)
+			end
+		else--]]
+			local name = self.CollisionSound[math.random(1,table.getn(self.CollisionSound))]
+			PlaySound3D(name, x,y,z, 10, 50)
+            AddPFX("butk",FRand(0.12, 0.16),Vector:New(x,y,z))
+		--end
+	end
+	if not self.timer then
+		self.timer = math.random(self.LifeTime*0.8,self.LifeTime*1.2)
+	end
+end
+--============================================================================
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMeshSweep,nil,ECollisionGroups.Noncolliding)
+    self.timerInit = 5
+    self._lockedPos = self.Pos.Y
+end
+--============================================================================
+function o:OnUpdate()
+	if self.timerInit then
+		self.timerInit = self.timerInit - 1
+		if self.timerInit < 0 then
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+   			ENTITY.EnableCollisions(self._Entity, true, 0.8, 2.0)
+   			self.timerInit = nil
+   		end
+   	else
+		if self.timer then
+			self.timer = self.timer - 1
+			if self.timer < 0 then
+				GObjects:ToKill(self)
+			end
+		end
+
+	end
+end

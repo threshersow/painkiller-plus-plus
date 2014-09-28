@@ -1,0 +1,10 @@
+Wentylator.Volume = 60
+Wentylator.Interval = 0
+Wentylator.RandomShift = 0
+Wentylator.Falloff =
+{
+  Start = 1,
+  End = 30
+}
+Wentylator.Sound ="C3L2_Factory/Wentylator"
+

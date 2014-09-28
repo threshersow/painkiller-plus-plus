@@ -1,0 +1,119 @@
+Teleport.Rot = Quaternion:New()
+Teleport.Frozen = false
+
+Teleport.Destination = {Area = {Name="",Point=1}} -- tylko do konwersji
+Teleport.DestPoint = {AName = "", APoint = 1}
+
+function Teleport:OnApply()      
+    
+    if self.Destination and self.Destination.Area.Name ~= "" then -- tylko do konwersji
+        self.DestPoint.AName = self.Destination.Area.Name
+        self.DestPoint.APoint = self.Destination.Area.Point
+    end
+    self.Destination = nil
+    
+    local w = self.Size.Width/2
+    local h = self.Size.Height/2
+    local d = self.Size.Depth/2
+
+    local p = {}    
+    p[1] = Vector:New(-w,-h,-d)
+    p[2] = Vector:New(-w,-h,d)
+    p[3] = Vector:New(w,-h,d)
+    p[4] = Vector:New(w,-h,-d)
+    p[5] = Vector:New(-w,h,-d)
+    p[6] = Vector:New(-w,h,d)
+    p[7] = Vector:New(w,h,d)
+    p[8] = Vector:New(w,h,-d)
+
+    for i,v in p  do
+        if self.Rot then v.X, v.Y, v.Z =  self.Rot:TransformVector(v.X, v.Y, v.Z) end
+        v.X = v.X 
+        v.Y = v.Y 
+        v.Z = v.Z 
+    end
+    
+    if self._Entity then
+        EntityToObject[self._Entity] = nil
+        ENTITY.Release(self._Entity)
+    end
+    self._Entity = ENTITY.Create(ETypes.Region)
+    REGION.BuildFromPoint(self._Entity,p)
+    ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)
+    WORLD.AddEntity(self._Entity,true)
+    EntityToObject[self._Entity] = self
+end
+
+function Teleport:RestoreFromSave()
+    self:OnApply()
+end
+
+function Teleport:PostRestoreFromSave()
+    EntityToObject[self._Entity] = self
+end
+
+
+function Teleport:OnEnter(entity)
+
+    if self.Frozen then return end
+    
+    local x,y,z,a
+    if self.DestPoint.AName then
+        local area = getfenv()[self.DestPoint.AName]
+        if area then 
+            x,y,z,a = area:GetPoint(self.DestPoint.APoint)                 
+        end
+    end
+
+    -- teleport local spectator
+    if Game._procSpec and Game._procSpec._entCam == entity and x then 
+        Game._procSpec:Teleport(x,y,z,a)
+        return
+    end
+        
+    if Game.GMode == GModes.MultiplayerClient then 
+        if Player and Player._Entity == entity then
+            RawCallMethod(self.MovePlayer,entity,x,y,z,a)
+        end
+        return 
+    end
+    
+    local obj = EntityToObject[entity]
+    if obj and obj._Class == "CPlayer" and x then        
+        self.MovePlayer(entity,x,y,z,a)
+    end
+end
+
+function Teleport:MovePlayer(entity,x,y,z,a)
+    local ox,oy,oz = ENTITY.GetPosition(entity)
+    local player = EntityToObject[entity]
+    if player then        
+        if Game:IsServer() and not MPCfg.ProPlus then player:CheckTeleFrag(x,y,z) end
+        ENTITY.SetPosition(entity,x,y,z)    
+        ENTITY.SetOrientation(entity,a)
+        local vx,vy,vz,vl = ENTITY.GetVelocity(entity)
+        --if vl > Tweak.MultiPlayerMove.PlayerSpeed then
+        --    local delta = vl - Tweak.MultiPlayerMove.PlayerSpeed
+        --    vl = vl - delta / 2
+        --end
+        vx = math.sin(a)
+		vz = math.cos(a)        
+        ENTITY.SetVelocity(entity,vx*vl,vy,vz*vl)
+        --obj:ForceAnim("idle",true,1,0)
+        if player == Player then
+            CAM.SetAng(-a / (math.pi/180) - 180, 0, 0)        
+            Game:UpdateViewFromPlayer()
+            --if Game.GMode ~= GModes.MultiplayerClient then 
+                SOUND.Play2D("misc/teleport",100,true,true)
+            --end
+        end
+    end
+    if not player or player ~= Player then
+        -- in
+        SOUND.Play3D("misc/teleport",ox,oy,oz,20,50,true)
+        -- out
+        SOUND.Play3D("misc/teleport",x,y,z,20,50,true)
+    end
+end
+Network:RegisterMethod("Teleport.MovePlayer", NCallOn.ServerAndAllClients, NMode.Reliable, "effff") 
+

@@ -1,0 +1,10 @@
+Megawon.Volume = 50
+Megawon.Interval = 20
+Megawon.RandomShift = 4
+Megawon.Falloff =
+{
+  Start = 20,
+  End = 100
+}
+Megawon.Sound ="C3L1_Train_Station/megawon_01;C3L1_Train_Station/megawon_02"
+

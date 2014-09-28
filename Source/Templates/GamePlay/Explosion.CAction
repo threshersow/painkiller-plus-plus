@@ -1,0 +1,17 @@
+o.Frozen = true
+o.Pos = Vector:New(0,0,0)
+o.Explosion = 
+{
+  Strength = 5000,
+  Range = 3,
+  Damage = 0,
+}
+
+o.Sequence = {
+    {"L:WORLD.Explosion2(o.Pos.X,o.Pos.Y,o.Pos.Z,o.Explosion.Strength,o.Explosion.Range,nil,0,o.Explosion.Damage)"},
+}
+
+--============================================================================
+function Explosion:OnLaunch()
+    self.Frozen = false
+end

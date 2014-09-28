@@ -1,0 +1,10 @@
+kosc.Volume = 50
+kosc.Interval = 5
+kosc.RandomShift = 1
+kosc.Falloff =
+{
+  Start = 3,
+  End = 20
+}
+kosc.Sound ="C1L2_Atrium_Complex/kosc_01;C1L2_Atrium_Complex/kosc_02;C1L2_Atrium_Complex/kosc_03"
+

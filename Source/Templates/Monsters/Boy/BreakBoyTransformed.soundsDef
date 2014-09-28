@@ -1,0 +1,45 @@
+
+o.s_SubClass.SoundsDefinitions.atakBB = {
+        samples = {'Boy-atakBB','Boy-atakBB2'},
+		dist1 = 10,
+		dist2 = 30,
+}
+
+o.s_SubClass.SoundsDefinitions.swish = {
+        samples = {'Boy-swish'},
+		dist1 = 10,
+		dist2 = 30,
+}
+
+o.s_SubClass.SoundsDefinitions.damage = {
+        samples = {'Boy-damageBB'},
+		dist1 = 10,
+		dist2 = 30,
+}
+
+o.s_SubClass.SoundsDefinitions.death = {
+		samples = {"Boy-deathBB1","Boy-deathBB2","Boy-deathBB3"},
+		dist1 = 16,
+		dist2 = 60,
+	}
+o.s_SubClass.SoundsDefinitions.hit = {
+		samples = {"Boy-hitBB1","Boy-hitBB2","Boy-hitBB3"},
+		dist1 = 16,
+		dist2 = 60,
+	}
+
+
+o.s_SubClass.SoundsDefinitions.walkVoice = {
+        samples = {"Boy-walkvoiceBB1","Boy-walkvoiceBB2","Boy-walkvoiceBB3"},
+		playChance = 0.15,
+   		dist1 = 15,
+		dist2 = 50,
+    }
+
+
+--------------------------------
+o.s_SubClass.SoundsDefinitionsBindings.atak = {
+            {0.0,'PlaySoundHit',"atakBB"},
+            {1.3,'PlaySound',"swish"},
+}
+o.s_SubClass.SoundsDefinitionsBindings.onAttackOnce = nil

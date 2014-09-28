@@ -1,0 +1,8 @@
+o.BaseObj = "Zombie.CActor"
+o.NeverRun = true
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear"}
+
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.moveDisplacement = -1

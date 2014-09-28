@@ -1,0 +1,82 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'Pinokio-krok1',},
+		dist1 = 7,
+		dist2 = 26,
+	},
+	step2 = {
+		samples = {'Pinokio-krok2',},
+		dist1 = 7,
+		dist2 = 26,
+	},
+	death  = {
+		samples = {"Pinokio-death1","Pinokio-death2","Pinokio-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	atak = {
+		samples = {'Pinokio-atak1','Pinokio-atak2'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+	atakNose = {
+		samples = {'Pinokio-atakNose'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+
+    hit = {
+		samples = {'Pinokio-hit1','Pinokio-hit2','Pinokio-hit3',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	bodyfalls = {
+		samples = {"Pinokio-bodyfalls",},
+		dist1 = 16,
+		dist2 = 50,
+	},
+	damage = {
+		samples = {"Pinokio-damage",},
+	},
+    onAttackOnce = {
+        samples = {"Pinokio-halt1","Pinokio-halt2"},
+   		dist1 = 16,
+		dist2 = 60,
+    },
+    walkVoice = {
+        samples = {"Pinokio-walkvoice1","Pinokio-walkvoice2","Pinokio-walkvoice3"},
+		playChance = 0.3,
+   		dist1 = 30,
+		dist2 = 70,
+    },
+    wakeup = {
+        samples = {"Pinokio_wakeup"},
+   		dist1 = 30,
+		dist2 = 70,
+    }
+}
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+            {0.0,'PlaySound',"step1"},
+			{0.35,'PlaySound',"step2"},
+            {0.0,'PlaySoundHit',"walkVoice"},
+		},
+		run   = {
+            {0.0,'PlaySound',"step1"},
+			{0.35,'PlaySound',"step2"},
+            {0.0,'PlaySoundHit',"walkVoice"},
+		},
+        hit1 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        hit2 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        atak = {
+            {0.0,'PlaySoundHit',"atak"},
+		{0.5,'PlaySoundHit',"atakNose"},
+        },
+
+
+}

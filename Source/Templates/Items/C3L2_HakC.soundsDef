@@ -1,0 +1,6 @@
+o.s_SubClass.SoundsDefinitions = {
+	SoundHitByBullet = {
+		samples = {"bullet-metal","bullet-metal2","bullet-metal3","bullet-metal4","bullet-metal5","bullet-metal6",},
+	},
+}
+

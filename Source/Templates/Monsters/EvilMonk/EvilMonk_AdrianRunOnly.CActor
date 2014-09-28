@@ -1,0 +1,17 @@
+o.BaseObj = "EvilMonk.CActor"
+o.Scale = 1.0
+o.WalkSpeed = 1.1
+o.RunSpeed = 0.79
+o.RotateSpeed = 20
+o.NeverRun = false
+o.NeverWalk = true
+
+o.AiParams.viewDistance = 200
+o.AiParams.viewDistance360 = 200
+o.AiParams.viewAngle = 360
+
+o.AiParams.GuardStill = false
+o.AiParams.moveDisplacement = 2
+
+o.AiParams.huntPlayer = true
+

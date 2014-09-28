@@ -1,0 +1,5 @@
+o.BaseObj = "CItem"
+o.Model = "DM_Wiatrak"
+o.Scale = 3
+o.FanRotateSpeed = -7.0
+

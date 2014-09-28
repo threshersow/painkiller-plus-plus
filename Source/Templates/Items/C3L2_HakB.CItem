@@ -1,0 +1,12 @@
+o.BaseObj = "CItem"
+o.Model = "C3L2_HakB"
+o.Scale = 6
+o.Mass = 600
+
+o.CollisionDetect = {
+	MinTime = 1.2,
+	MinStren = 5.0,
+	joint = "joint2_getmass",
+}
+
+o.SoundHitByBulletMiniGunOnly = true

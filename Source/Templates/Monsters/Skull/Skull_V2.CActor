@@ -1,0 +1,18 @@
+o.Model = "skull"
+o.BaseObj = "Skull.CActor"
+
+o.s_SubClass.Animations.fire_head = {1.0, false, {
+				{0.0,'PlaySound',"suic"},
+				{0.40,'PlaySound',"aim" },
+                {0.8,'PlaySound',"fire" },
+				{0.8,'firehead'},
+				{0.8,'PlaySound','skullf'},
+			}}
+			
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee","shot_head"}
+
+o.AiParams.immortalTime = 6 * 30
+o.AiParams.ShotHeadFreq = 8.0
+o.AiParams.dontCareAboutOrientationDuringAttack = false		-- ###
+o.AiParams.huntPlayer = false
+

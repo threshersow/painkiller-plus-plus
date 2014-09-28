@@ -1,0 +1,28 @@
+--C2L1_Wagonik.Mesh = "polySurfaceShape65191"
+--C2L1_Wagonik.Pack = "wagonik.dat"
+C2L1_Wagonik.Model = "C2L1_Wagonik"
+C2L1_Wagonik.Health = 4000
+--C2L1_Wagonik.Mass = 200
+C2L1_Wagonik.Friction = 1
+C2L1_Wagonik.Scale = 0.3
+
+-- special additions
+
+C2L1_Wagonik.WagonikStates =
+{
+    IsUp = 0,
+    IsDown = 1,
+    GoingUp = 2,
+    GoingDown = 3,
+    Stopped = 4,
+}
+o.Mass = 700
+C2L1_Wagonik.GoingState = C2L1_Wagonik.WagonikStates.IsDown
+C2L1_Wagonik.GoUp = false
+C2L1_Wagonik.GoDown = false
+C2L1_Wagonik.Stop = false
+C2L1_Wagonik.PosDown = Vector:New(0,0,0)
+C2L1_Wagonik.PosUp = Vector:New(0,10,0)
+C2L1_Wagonik.GoSpeed = 50.0
+C2L1_Wagonik.Acceleration = 0.02
+C2L1_Wagonik.LastHoldJointPos = Vector:New(0,0,0)

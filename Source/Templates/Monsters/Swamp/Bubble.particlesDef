@@ -1,0 +1,13 @@
+o.s_SubClass.ParticlesDefinitions = {
+	combustion = {
+		pfx = "explo_buble",
+		scale = 0.6,
+		offset = Vector:New(0,0,0),
+	},
+	extinguish = {
+		pfx = "bubble_smoke",
+		scale = 6.0,
+		offset = Vector:New(0,0,0),
+	},
+
+}

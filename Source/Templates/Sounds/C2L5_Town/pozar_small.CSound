@@ -1,0 +1,10 @@
+pozar_small.Volume = 70
+pozar_small.Interval = 0 
+pozar_small.RandomShift = 0
+pozar_small.Falloff =
+{
+  Start = 4,
+  End = 20
+}
+pozar_small.Sound ="C2L5_Town/pozar_small"
+

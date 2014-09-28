@@ -1,0 +1,10 @@
+Zascianek_02.Volume = 40
+Zascianek_02.Interval =6
+Zascianek_02.RandomShift = 2
+Zascianek_02.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Zascianek_02.Sound ="C1L3_Catacombs/zascianek_02"
+

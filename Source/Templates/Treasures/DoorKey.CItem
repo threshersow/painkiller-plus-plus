@@ -1,0 +1,17 @@
+o.Mesh = "polySurfaceShape1"
+o.Pack = "DoorKey.dat"
+
+o.Scale = 1.0
+--o.TimeToLive = 20 * 30
+
+o.Value = 100
+o.takeDistance = 1.0
+
+--o.isHolyItem = true
+
+o.s_SubClass.bindFX = {
+        {"flarka_kielich", 0.4, nil, {-0.2, 0.1, 0}, {0.4, 0.4, 0.4}},
+        {"FLARA_HOSTIE", 3, nil, {0, 0, 0}, {0.9, 0.9, 0.9}},
+}
+
+o.rotationAngle = Vector:New(1,2,3)

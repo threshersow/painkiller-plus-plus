@@ -1,0 +1,9 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "impacts/",
+	DestroySound = {
+		samples = {"stonebig-impact2"},
+	},
+}
+
+
+

@@ -1,0 +1,9 @@
+Stone.Mesh = "polySurfaceShape89990"
+Stone.Pack = "kamien.dat"
+Stone.Scale = 0.3
+
+function Stone:OnCreateEntity()
+    self:PO_Create(BodyTypes.FromMesh)
+end
+
+

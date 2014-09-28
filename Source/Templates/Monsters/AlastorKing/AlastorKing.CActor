@@ -1,0 +1,193 @@
+o.Model = "kingalastor"
+o.Scale = 25.0
+o.CreatePO = true
+o.Health = 3300
+o.WalkSpeed = 1.0
+o.RotateSpeed = 15.0
+o.Animation = "idle1"
+o.disableFreeze = true
+o.throwHeart = false
+--o.ShotgunCheckAllPellets = true
+
+o.s_SubClass = {
+	rotateHead = 0.7,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+
+	rotateHeadRight = Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadLeft =  Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadCoords = Vector:New(2, 3, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+
+    Animations = {
+        idle1   = {1.2,false,{
+					{0.0,'PlaySoundHitBinded',"idle1"},
+				},0.5},
+        rot90L   = {1.7,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.2,'PlaySoundHitBinded',"rv"},
+						{1.7,'PlaySound',"krok2"},
+						{1.7,'Stomp','s_l_srodstopie'},
+					}, 0.1, true},
+        rot90P   = {1.7,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.3,'PlaySoundHitBinded',"voice1"},
+						{1.2,'PlaySound',"krok1"},
+						{1.2,'Stomp','s_p_srodstopie'},
+					}, 0.1, true},
+        rot45P   = {1.7,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.2,'PlaySound',"krok2"},
+						{1.2,'Stomp','s_l_srodstopie'},
+					}, 0.1, true},
+        rot45L   = {1.7,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.8,'PlaySound',"krok2"},
+						{0.8,'Stomp','s_l_srodstopie'},
+					}, 0.1, true},
+
+        walk   = {1.0,true,{
+					{0.0,'PlaySound',"krok1"},
+					--{0.8,'Stomp','s_p_pie'},
+					{0.8,'Stomp','s_p_srodstopie'},
+					{0.8,'PlaySound',"krok2"},
+					--{0.0,'Stomp','s_l_pie'},
+					{0.0,'Stomp','s_l_srodstopie'},
+				},0.5},
+        atak_fireballs   = {0.8,false, {			-- fireballe	-- gracz daleko
+					{0.0,'PlaySound',"charge"},
+					{0.5,'FireballCreate'},
+					{1.0,'FireballCreate'},
+					{1.5,'FireballCreate'},
+					{2.0,'FireballCreate'},
+					{3.5,'PlaySound',"fireballsEnd"},
+					{3.5,'FireballsThrow'},
+				},0.5},
+        atak_hit   = {0.65,true, {		-- reka					-- gracz w odp. zasiegu (trace) i kacie
+        			{0.7,'PlaySoundHitBinded',"av"},
+					{1.2,'PlaySound',"naskok"},
+					{1.2,'Stomp','s_p_srodstopie',1.5},
+					{1.34,'PlaySound',"groundhit"},
+					{1.34,'StrikeGround'},
+					{1.34,'Stomp','dlo_prawa_root',1.8},
+					{1.04,'EnableRotate'},
+					{1.26,'DisableRotate'},
+				},0.5, true},
+        atak_sphere_of_fire   = {1.0,false,{					-- do golemow?
+					--{1.0,'PlaySoundHitBinded',"idle2"},
+					--{1.2,'PlaySound',"wingsshow"},
+					--{2.6,'PlaySound',"wingidle"},
+                    {0.0,'SphereOfFireFX'},
+					{0.0,'PlaySound','sphere'},
+					{1.0,'Shockwave'},
+				},0.5},
+        atak_zieje   =  {0.65,false,{							-- razem z atak_hit? ale gracz dalej od WP
+					{0.3,'PlaySound',"zieje"},
+					{0.3,'StartFlame'},
+					{1.7,'EndFlame'},
+				},0.5},
+        atak_wall_of_fire   =  {1.5,false,{						-- gracz w odp. zasiegu
+        			{0.0,'PlaySound',"breakfloor1"},
+					{1.8,'PlaySound',"breakfloor2"},
+					{3.8,'PlaySound',"breakfloor3"},
+					{3.8,'PlaySound',"swish"},
+					{4.3,'PlaySound',"groundhit"},
+        			{1.2,'BurnWings'},
+					{4.3,'Firewall'},
+				},0.5},
+        laugh = {0.8,false,{
+        			{0.0,'PlaySound',"laugh"},
+				},0.5},
+        stuned = {0.8,false,{						-- gracz w odp. zasiegu
+        			{0.0,'PlaySound',"stunned"},
+				},0.5},
+    },
+
+    Ambients = {"idle1",},
+   	rotate45L = "rot45L",
+	rotate45R = "rot45P",
+	rotate90L = "rot90L",
+	rotate90R = "rot90P",
+}
+
+o.DeathTimer = 10000
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    --Mass     = 1000000,
+    --BodyScale = 10.0,
+}
+
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"groundAttackAlastorB",}
+
+o.AiParams.updateSpeed = 1.0
+o.AiParams.forceRotateHead = true
+o.disbleRotWhenStartWalk = true
+
+o.disableNoAnimDetection = false
+o.AiParams.alwaysSee = true
+--o.doNotUseWP = true
+o._DontCheckFloors = true
+
+
+o.AiParams.Explosion = {		-- do rozwalania stonegolemow
+	ExplosionStrength = 300000,
+	ExplosionRange = 45,
+	Damage = 0,
+}
+
+o.AiParams.wingJoints = {"wing_l_z1_1","wing_l_z1_2","wing_l_z1_3","wing_l_z1_4","wing_l_z1_5",
+						 "wing_l_z_1","wing_l_z_2","wing_l_z_3","wing_l_z_4","wing_l_z_5",
+						 "wing_l_1","wing_l_2","wing_l_3","wing_l_4","wing_l_5",
+						 
+						 "wing_p_z1_1","wing_p_z1_2","wing_p_z1_3","wing_p_z1_4","wing_p_z1_5",
+						 "wing_p_z_1","wing_p_z_2","wing_p_z_3","wing_p_z_4","wing_p_z_5",
+						 "wing_p_1","wing_p_2","wing_p_3","wing_p_4","wing_p_5",
+						}
+
+o.StompTimeOut = 14				-- eartq params
+o.StompRange = 100
+o.CameraRot = 0.33
+o.CameraMov = 0.33
+
+o.CollisionDetect = 0.2
+
+
+o.AiParams.throwMaxAngleYawDiff = 30
+o.AiParams.throwMaxAnglePitchDiff = 30
+
+o.AiParams.walkDamage = 10
+o.AiParams.strikeDamage = 70
+
+o.onlyWPmove = true
+
+
+o.ShockWave = {
+	range = 110,
+	damage = 80,
+	explosionStren = 100000,
+	playerHitStr = 16,
+	FXwhenHit = "FX_Thorhit.CActor",
+	FXwhenHitScale = 1.0,
+    eqTimeOut = 20,
+    eqRange = 110,
+    eqCameraMove = 0.42,
+}
+
+o.flameDamage = 10
+o.AiParams.homingMissile = true
+o.AiParams.homingMissileAngleChangeSpeed = 3
+o.AiParams.throwVelocity = 45
+
+
+o.AiParams.ThrowableItem = "AlastorKingfireball.CItem"
+
+
+o.HitDecal = "decal_Mlot"
+o.FXwhenHit = "FX_Thorhit.CActor"
+
+o.AiParams.TimeBetweenFireball = 15
+o.AiParams.TimeBetweenZieje = 5
+o.AiParams.TimeBetweenHit = 5
+o.AiParams.TimeBetweenWall = 20
+o.AiParams.TimeBetweenShock = 45
+
+o.AiParams.distWhenSphereAttack = 65		-- odl. od golema ze wykonuje atak
+o.IsBoss = true
+o.velocityUpOnDeath = 28.0

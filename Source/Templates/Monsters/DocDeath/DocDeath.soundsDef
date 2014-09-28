@@ -1,0 +1,67 @@
+o.s_SubClass.SoundsDefinitions = {
+	missed = {
+		samples = {"Dd-missed1","Dd-missed2"},
+		dist1 = 8,
+		dist2 = 30,
+	},
+	step1 = {
+		samples = {'DD-krok1',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'DD-krok2',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	bodyfalls = {
+		samples = {"dd_bodyfalls"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	swish = {
+		samples = {'dd_swish',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	atak1 = {
+		samples = {'dd-at1a','dd-at1b'},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},	
+	atak2 = {
+		samples = {'dd-at2a','dd-at2b'},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},	
+	inhale = {
+		samples = {'dd_inhale'},
+		dist1 = 10,
+		dist2 = 30,
+	},	
+	onAttackOnce = {
+		samples = {"dd-halt1", "dd-halt2", "dd-halt3"},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	hit = {
+		samples = {'dd-hit1','dd-hit2','dd-hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	weaponlost = {
+		samples = {"dd_weapon-lost","dd_weapon-lost2",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	death = {
+		samples= {"dd-death1","dd-death2","dd-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	damage = {
+		samples= {"dd-damage"},
+	}
+}

@@ -1,0 +1,117 @@
+o.Model = "vamp"
+o.Scale = 8.5
+o.Health = 4000
+o.CreatePO = true
+o.WalkSpeed = 1.4
+o.RotateSpeed = 3
+o.Animation = "idle_1"
+o.disableFreeze = true
+o.stones = "EarthquakeStones"		-- area, skad spadaja kamienie
+o.StompTimeOut = 9
+o.StompRange = 70
+o.CameraRot = 0.30
+o.CameraMov = 0.33
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.7,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.12,
+
+	Animations = {
+		idle_1        = {1.0,false},
+		idle_2        = {1.0,false},
+		walk          = {1.0,true, {
+                    {1.0,'Stomp','s_p_srodstopie'},
+                    {3.0,'Stomp','s_l_srodstopie'},
+                    {1.0,'PlaySound',"krok1"},
+                    {3.0,'PlaySound',"krok2"},
+                    {0.8,'PlaySound',"krok1"},
+                    {2.8,'PlaySound',"krok2"},
+                }},
+		attack_ground = {1.3,false, {
+                    {1.2,'Spawn'},
+                }},
+		earthquake    = {1.5,false, {
+                    {1.0,'Eq'},
+                    {0.0,'PlaySound',"eq"},
+                    {0.8,'PlaySound',"stones"},
+                }},
+		take_stone    = {1.3,false, {
+                    {0.6,'PlaySound',"takestone"},
+                    {2.0,'PlaySound',"takestone2"},
+                    {1.0,'TakeToThrow'},
+                }},
+		throw_stone   = {1.6,false, {
+                    {1.0,'PlaySound',"swish"},
+                    {0.0,'PlaySound',"throw"},
+			        {1.1,'ThrowTaken',nil,true}
+                }},
+        rotL90   = {1.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						--{0.2,'PlaySoundHitBinded',{'alastor-rotate-voice2','alastor-rotate-voice3'},30,120,},
+						{1.6,'PlaySound',"krok2"},
+						{1.6,'Stomp','s_l_srodstopie'},
+						{2.8,'PlaySound',"krok1"},
+						{2.8,'Stomp','s_p_srodstopie'},
+
+					}, nil, true},
+        rotP90   = {1.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.5,'PlaySound',"krok1"},
+						{1.5,'Stomp','s_p_srodstopie'},
+						{3.4,'PlaySound',"krok2"},
+						{3.4,'Stomp','s_l_srodstopie'},
+					}, nil, true},
+
+   },
+	Ambients = {"idle_1","idle_2"},
+	DeathJoints = {},
+	ragdollJoint = "root",
+	CollidableRagdoll = true,
+
+	Specular = {
+		polySurfaceShape6 = {128, 128, 128, 20},
+	},
+	rotate90L = "rotL90",
+	rotate90R = "rotP90",
+
+}
+
+o.DeathTimer = 50
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"attackVamp","animVamp","walkVamp","throwVamp","earthqVamp"}
+o.AiParams.viewDistance = 75
+o.AiParams.viewDistance360 = 75
+o.AiParams.viewAngle = 360
+o.AiParams.updateSpeed = 0.25
+o.AiParams.walkStep = 8
+o.AiParams.walkArea = "VampWalkPath"
+
+o.AiParams.actionsWhenNoEnemy = {
+    {"idle", 0.1,},				-- action, chance
+    {"walk", 0.9,},
+}
+
+o.AiParams.actionsWhenEnemy = {
+    {"walk", 0.2,},
+    {"earthq", 0.4,},
+    {"throw", 0.3,},
+}
+
+--o.SpawnTemplate = "EvilMonk.CActor"
+o.shadow = 256
+
+o.AiParams.explosionWhenWalkStreng = 1300.0
+o.AiParams.explosionWhenWalkRange = 5
+o.AiParams.explosionWhenWalkDamage = 33
+
+o.AiParams.throwItemBindTo = 'dlo_lewa_root'
+o.AiParams.throwItemBindToOffset = Vector:New(1.5,0,0.7)
+o.AiParams.ThrowableItem = "VampStone.CItem"
+o.AiParams.throwVelocity =  100
+
+o.doNotUseWP = true
+

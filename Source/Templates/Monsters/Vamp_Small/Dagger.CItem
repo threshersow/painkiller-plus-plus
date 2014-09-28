@@ -1,0 +1,95 @@
+Dagger.Mesh = "polySurfaceShape180"
+Dagger.Pack = "knife.dat"
+Dagger.Scale = 0.03
+Dagger.Mass = 40
+Dagger.Restitution = 0.1
+Dagger.Damage = 15
+Dagger.LifeTime = 90				-- max. czas zycia po kolizji
+Dagger.TimeToLive = 12 * 30			-- max. czas zycia
+Dagger.AngularDamping = 0.2
+Dagger.SoundsImpact = {"impacts/knife-stone","impacts/knife-stone2","impacts/knife-stone3","impacts/knife-stone4"}
+--============================================================================
+function Dagger:OnCollision(x,y,z,nx,ny,nz,e,h_me,h_other,vx,vy,vz,vl)
+	local eg = true
+	if e then
+		local obj = EntityToObject[e]
+		if obj then
+			if obj ~= self.ObjOwner then
+				if obj.OnDamage then
+					if obj == Player then
+						PlaySound2D("actor/vamp_small/svamp-knife-hit")
+					end
+					obj:OnDamage(self.Damage, self.ObjOwner)
+				end
+				eg = false
+				GObjects:ToKill(self)
+			end
+		end
+	end
+	if eg then
+		if not self.deathTimer then
+			if self._sndLoop then
+				ENTITY.Release(self._sndLoop)
+				self._sndLoop = nil
+			end
+
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+			
+			ENTITY.PO_Enable(self._Entity, false)
+			ENTITY.SetPosition(self._Entity,x,y,z)
+			
+			--[[local q2 = Quaternion:New(ENTITY.GetRotationQ(self._Entity))
+			
+			local v = Vector:New(-vx,-vy,-vz)
+		    v:Normalize()
+		    Game:Print(v.X.." "..v.Y.." "..v.Z)
+			local q = Quaternion:New_FromNormalZ(v.X, v.Y, v.Z)--]]
+			
+			local q = self._orgQ
+			q:ToEntity(self._Entity)
+
+			ENTITY.SetVelocity(0,0,0,0,0,0)
+			local joint = MDL.GetJointFromHavokBody(e_other,h_other)
+			ENTITY.ComputeChildMatrix(self._Entity,e_other,joint)
+			ENTITY.RegisterChild(e_other,self._Entity,true,joint,true)
+
+--			GObjects:ToKill(self)
+		
+			local name = self.SoundsImpact[math.random(1, table.getn(self.SoundsImpact))]
+			PlaySound3D(name,x,y,z,18,36,nil)
+		end
+	end
+end
+--============================================================================
+function Dagger:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+    ENTITY.PO_EnableGravity(self._Entity,false)
+   	local e = ENTITY.Create(ETypes.Trail,"trail_kolek","trailName")
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+	self.timer = 4
+	self._orgQ = Clone(self.Rot)
+end
+--============================================================================
+function Dagger:OnUpdate()
+	if not self._enabled then return end
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.EnableCollisions(self._Entity, true)
+			if self._joint ~= 14 then       -- narazie, zeby tylko jeden noz (vamp_samll rzuca dwa) bylo slychac
+                self._sndLoop = self:BindSound("actor/vamp_small/knifes-rotating-loop",3,18,true)
+            end
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+		end
+	end
+
+	if self.deathTimer then
+		self.deathTimer = self.deathTimer - 1
+		if self.deathTimer < 0 then
+			GObjects:ToKill(self)
+			AddPFX("BodyExplosion",0.3,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+		end
+	end
+end

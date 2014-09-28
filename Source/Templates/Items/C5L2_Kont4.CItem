@@ -1,0 +1,5 @@
+o.BaseObj = "CItem"
+o.Model = "C5L2_Kont4"
+o.Scale = 3
+o.Friction = 1
+o.RagdollCollDamage = 2222

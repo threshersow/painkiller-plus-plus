@@ -1,0 +1,10 @@
+krzyk_01.Volume = 70
+krzyk_01.Interval = 7
+krzyk_01.RandomShift = 3
+krzyk_01.Falloff =
+{
+  Start = 4,
+  End = 15
+}
+krzyk_01.Sound ="C1L4_Cemetery/krzyk_01;C1L4_Cemetery/krzyk_02"
+

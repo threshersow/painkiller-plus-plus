@@ -1,0 +1,36 @@
+CSound.s_Editor = {
+        Sound  = { "BrowseEdit", {"*.wav", "data\\sounds\\",true} },
+        Interval  = { "SpinEdit"  , {"%.1f", 0, 999, 1} },
+        RandomShift  = { "SpinEdit"  , {"%.1f", 0, 999, 1} },
+        Volume = { "SpinEdit"  , {"%.0f", 0, 100, 1} },
+        ["Falloff.Start"] = { "SpinEdit", {"%.1f", 0.1, 999, 0.1} },
+        ["Falloff.End"] = { "SpinEdit"  , {"%.1f", 0.1, 999, 0.1} },
+    }    
+--============================================================================
+function CSound:EditTick(delta)    
+    if not Editor.EditSounds then return end    
+
+    if Editor.SelObj ~= self and MOUSE.LB() == 1 then        
+        -- picking point 
+        local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+        if Dist2D(MX,MY,sx,sy) <  15  then
+            Editor.ObjEdited = true                
+            Editor:SelectObject(self)
+        end    
+    end
+end
+--============================================================================
+function CSound:EditRender(delta)
+    if not Editor.EditSounds then return end    
+    
+    local ztest = true
+    if INP.Key(Keys.LeftCtrl) == 2 then ztest = false end   
+    
+    if Editor.SelObj == self  then
+        R3D.DrawSphere(self.Falloff.Start,R3D.RGBA(150,150,0,0),self.Pos.X,self.Pos.Y,self.Pos.Z,ztest)
+        R3D.DrawSphere(self.Falloff.End,R3D.RGBA(0,0,255,0),self.Pos.X,self.Pos.Y,self.Pos.Z,ztest)
+    else
+        R3D.DrawSphere(0.4,R3D.RGBA(155,155,9,0),self.Pos.X,self.Pos.Y,self.Pos.Z,ztest)
+    end
+    R3D.RenderBox(self.Pos.X-0.10,self.Pos.Y-0.10,self.Pos.Z-0.10,self.Pos.X+0.10,self.Pos.Y+0.10,self.Pos.Z+0.10,R3D.RGBA(255,255,0,0),ztest)
+end

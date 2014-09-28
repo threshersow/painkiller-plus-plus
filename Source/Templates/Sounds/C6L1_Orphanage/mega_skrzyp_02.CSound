@@ -1,0 +1,9 @@
+mega_skrzyp_02.Volume = 50
+mega_skrzyp_02.Interval = 13
+mega_skrzyp_02.RandomShift = 3
+mega_skrzyp_02.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+mega_skrzyp_02.Sound ="C6L1_Orphanage/mega_skrzyp_03;C6L1_Orphanage/mega_skrzyp_04;C6L1_Orphanage/mega_skrzyp_05"

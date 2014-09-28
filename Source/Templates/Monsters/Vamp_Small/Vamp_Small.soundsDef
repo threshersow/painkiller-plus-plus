@@ -1,0 +1,58 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'svamp-krok1',},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'svamp-krok2'},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	prepare = {
+		samples = {'svamp-prepare',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	take = {
+		samples = {'svamp-take-knifes',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	atak = {
+		samples = {'svamp-at1','svamp-at2',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	hit = {
+		samples = {'svamp-hit1','svamp-hit2','svamp-hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	onAttackOnce = {
+		samples = {"svamp-halt1", "svamp-halt2", "svamp-halt3","svamp-halt4",},	
+		playChance = 0.8,
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {'$/actor/hellbiker/hellb-boddyfalls1','$/actor/hellbiker/hellb-boddyfalls2'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    morph = {
+        samples = {"svamp-morph_into_bigger",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	death = {
+        samples = {"svamp-death1","svamp-death2","svamp-death3","svamp-death4","svamp-death5","svamp-death6"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    damage = {
+        samples = {"svamp-knife-hit"},
+	},
+}
+

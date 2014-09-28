@@ -1,0 +1,61 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'zombie_krok1',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'zombie_krok2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	swish = {
+		samples = {'zombie_swish1','zombie_swish2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak1 = {
+		samples = {'zombie_at1','zombie_at2','zombie_at3',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak3 = {
+		samples = {'zombie_at3',},
+		dist1 = 10,
+		dist2 = 25,
+	},
+	hit = {
+		samples = {'monster_zombie_warlord_hit1','monster_zombie_warlord_hit2','monster_zombie_warlord_hit3'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"zombie-bodyfalls1","zombie-bodyfalls2"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"zombie-weapon-lost1","zombie-weapon-lost2","zombie-weapon-lost3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	attackAmbient = {
+		samples = {'zombie_attackscream1','zombie_attackscream2','zombie_attackscream3',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    death = {
+		samples = {"monster_zombie_warlord_death1","monster_zombie_warlord_death2","monster_zombie_warlord_death3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    OnSpawn = {
+		samples = {'zombie_at1','zombie_at2','zombie_at3'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    damage = {
+		samples = {"zombie_hits_hero"},
+    },
+}

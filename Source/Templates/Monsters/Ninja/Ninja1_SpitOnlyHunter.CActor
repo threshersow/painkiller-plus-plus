@@ -1,0 +1,7 @@
+o.BaseObj = "Ninja1.CActor"
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee"}
+
+o.AiParams.moveDisplacement = -1
+
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = true

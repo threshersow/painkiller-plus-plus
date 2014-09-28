@@ -1,0 +1,12 @@
+o.Mesh = "polySurfaceShape1"
+o.Pack = "kabina_cala.dat"
+o.DestroyPack = "kabina_zlom.dat"
+o.Health = 4
+o.Mass = 2000
+o.Friction = 1
+o.Scale = 0.2
+o.Destroy.Strength = 200
+o.Destroy.AverageDelay = 32
+o.Destroy.AverageVariation = 16
+o.Destroy.MinSpeedOnCollision = 4
+o.SoundHitByBulletMiniGunOnly = true

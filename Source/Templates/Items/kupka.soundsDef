@@ -1,0 +1,10 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "impacts/",
+
+	DestroySound = {
+		samples = {"grenade-wm-explode"},
+		dist1 = 40,
+		dist2 = 120,
+	},
+
+}

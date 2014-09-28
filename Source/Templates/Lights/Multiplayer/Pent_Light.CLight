@@ -1,0 +1,4 @@
+Pent_Light["Color"] = Color:New(217,71,9,0)
+Pent_Light["Range"] = 8
+Pent_Light["Type"] = 2
+Pent_Light["IsDynamic"] = true

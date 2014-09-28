@@ -1,0 +1,10 @@
+tree_01.Volume = 70
+tree_01.Interval = 8
+tree_01.RandomShift = 3
+tree_01.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+tree_01.Sound ="C3L6_FOREST/tree_01"
+

@@ -1,0 +1,24 @@
+C2L1_Drezynka.Model = "C2L1_Drezynka"
+C2L1_Drezynka.Health = 4000
+C2L1_Drezynka.Mass = 2000
+C2L1_Drezynka.Friction = 0
+C2L1_Drezynka.Scale = 1.5
+
+-- special additions
+
+DrezynkaStates =
+{
+    Stopped = 0,
+    Going = 1,
+    GoingFree = 2,
+}
+
+C2L1_Drezynka.GoingState = DrezynkaStates.Stopped
+C2L1_Drezynka.Go = false
+C2L1_Drezynka.Pos = Vector:New(0.0,0.0,0.0)
+C2L1_Drezynka.PosStart = Vector:New(0.0,0.0,0.0)
+C2L1_Drezynka.DistGoFree = 700
+C2L1_Drezynka.Acceleration = 0.05
+C2L1_Drezynka.MaxSpeed = 30.0
+C2L1_Drezynka.CurSpeed = 0.0
+C2L1_Drezynka.SpeedVector = Vector:New(0.0,0.0,1.0)

@@ -1,0 +1,232 @@
+o.Model = "leper"
+o.Scale = 1.05
+o.CreatePO = true
+o.Health = 90
+o.WalkSpeed = 2
+o.RotateSpeed = 2
+o.NeverRun = true
+o.Animation = "idle3"
+
+o.enableGibWhenHPBelow = -45
+
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 100,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.5,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.14,
+
+	Animations = {
+		idle1   = {1.0,false},
+		walk1   = {1.0,true,{
+				{0.0,'PlaySoundHit',"walk_voice1"},
+				{0.65,'PlaySound',"walk1_1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{1.0,'PlaySound',"walk1_2"},
+				--{1.0,'FootFX','s_l_srodstopie'},
+			}},
+		idle2   = {1.0,false},
+		walk2   = {1.0,true, {
+				{0.0,'PlaySoundHit',"walk_voice3"},
+				{0.65,'PlaySound',"walk1_1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{1.6,'PlaySound',"walk1_1"},
+				{1.6,'FootFX','s_l_srodstopie'},
+			}},
+		idle3   = {1.0,false},
+		walk3   = {1.0,true,{
+				{0.0,'PlaySoundHit',"walk_voice1"},
+				{0.65,'PlaySound',"walk3_1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{1.0,'PlaySound',"walk3_2"},
+				--{1.0,'FootFX','s_l_srodstopie'},
+			}},
+		idle4   = {1.0,false,{
+				{0.1,'PlaySoundHit',"idle4"},
+			}},
+		walk4   = {1.0,true,{
+				{0.0,'PlaySoundHit',"walk_voice2"},
+				{0.65,'PlaySound',"walk4_1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{1.6,'PlaySound',"walk4_1"},
+				{1.6,'FootFX','s_l_srodstopie'},
+			}},
+		idle5   = {1.0,false,{
+				{0.1,'PlaySoundHit',"idle5"},
+			}},
+		walk5   = {1.0,true,{
+				{0.0,'PlaySoundHit',"walk_voice3"},
+				{0.8,'PlaySound',"walk1_2"},
+				{1.4,'PlaySound',"walk3_2"},
+				}},
+		idle6   = {1.0,false,{
+				{0.1,'PlaySoundHit',"idle6"},
+			}},
+		walk6   = {1.0,true, {
+				{0.0,'PlaySoundHit',"walk_voice2"},
+				{0.65,'PlaySound',"walk4_1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{1.6,'PlaySound',"walk4_1"},
+				{1.6,'FootFX','s_l_srodstopie'},
+				}},
+
+		atak1   = {0.7,false,{
+					{0.2,'PlaySound',"atak1"},
+					{1.1,'PlaySound',"swish_atak1"},
+					{1.2,'ThrowImmid'},
+				}},
+		atak2   = {0.8,false,{
+					{0.0,'PlaySound',"atak2"},
+					{0.3,'PlaySound',"swish_atak2"},
+					{0.4,'damage'},
+				}},
+		atak3   = {0.7,false,{
+					{0.55,'PlaySound',{'$/actor/vamp_small/mvamp_guts'},12,40,},
+					{0.6,'TakeMeat'},
+					{1.2,'ThrowTaken'},
+				}},
+		hit1   = {1.0,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+		hit2   = {1.0,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+    },
+
+    RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_P_lokiec1", "bodyfalls", true},	-- joint, {sounds}, blood
+				{"r_L_lokiec", "bodyfalls", true},		-- joint, {sounds}, blood
+			},
+    },
+
+
+	GibExplosionStrength = 5000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_L_bark","FX_gib_blood",-1},
+				{"r_P_bark1","FX_gib_blood",1},
+				{"r_P_bark_root1","FX_gib_blood",1},
+				{"r_L_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_L_bark", "gibSplash", true},
+				{"r_P_bark1", "gibSplash", true},
+				{"r_P_bark_root1", "gibSplash", true},
+				{"r_L_bark_root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				--{"miecz", {"zombs-weapon-lost1","zombs-weapon-lost2","zombs-weapon-lost3",}, false},
+			},
+	    },
+
+
+    notBleedingJoints = {
+		--joint21 = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+
+	NearAttacks = {"atak2",},
+    Hits = {"hit1", "hit2"},
+
+    DeathJoints = {
+        'k_glowa','n_p_kolano','n_l_kolano','r_P_bark1','r_L_bark','k_ogo','k_glowa',
+    },
+	idlesList = {"idle1","idle2","idle3","idle4","idle5","idle6"},
+	walkList = {"walk1","walk2","walk3","walk4","walk5","walk6"},
+
+	bodyParts = {
+		{"weapon1","weapon2","weapon3","weapon4","weapon5"},		-- na pierwszym miejscu musi byc weapon
+		{"body1","body2","body3","body4"},
+		{"head1","head2","head3",},
+		{"rl1","rl2","rl3"},
+		{"rp1","rp2","rp3"},
+		{"np1","np2","np3"},
+		{"nl1","nl2","nl3"},
+	},
+	weapons = {"LeperHook.CItem","GenericLeperThrowable.CItem","LeperHammer.CItem","LeperKnife.CItem","LeperTorch.CItem"},
+    Specular =      {
+                        body1 = {30, 30, 30, 20},
+                        body2 = {30, 30, 30, 20},
+                        body3 = {30, 30, 30, 20},
+                        body4 = {30, 30, 30, 20},
+    },
+}
+
+
+o.DeathTimer = 140                  -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt", "hear","flee","throw",}
+o.AiParams.aiGoalsAfterThrow = {"idle","hunt", "hear","attack","throw","flee"}
+o.AiParams.viewDistance = 90
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 100
+
+o.AiParams.weaponDamage = 15
+o.AiParams.attackRange = 2.5
+o.AiParams.attackRangeAngle = 120
+o.AiParams.hearing = 1.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1			-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.4
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+o.AiParams.walkStep = 5.0
+--o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 20
+o.AiParams.moveDisplacement = 2.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 100
+
+o.AiParams.updateSpeed = 0.1
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+o.AiParams.ThrowableItem = ""
+o.AiParams.throwItemBindTo = "dlo_prawa_root1"
+o.AiParams.throwAnim = "atak1"
+o.AiParams.throwAmmo = 1
+o.AiParams.throwRangeMin = 5
+o.AiParams.throwRangeMax = 40
+o.AiParams.minDelayBetweenThrow = 2
+o.AiParams.escapeAfterThrowTime = 0		-- 0 - no escape
+o.AiParams.throwAngle = 30
+--o.AiParams.throwVelocity = 60
+o.AiParams.throwDistMinus = -1.0			-- <0 celuje za gracza, 0> przed gracza
+o.AiParams.throwAngularVelocitySpeed = 20
+
+o.AiParams.NextThrowableItem = "meat.CItem"
+
+o.shadow = 128
+
+
+o.AiParams.findPathSpeed = 0.07

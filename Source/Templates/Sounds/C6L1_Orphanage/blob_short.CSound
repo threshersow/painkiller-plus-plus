@@ -1,0 +1,9 @@
+blob_short.Volume = 60
+blob_short.Interval = 6
+blob_short.RandomShift = 2
+blob_short.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+blob_short.Sound ="C6L1_Orphanage/blob_short_01;C6L1_Orphanage/blob_short_02;C6L1_Orphanage/blob_short_03;C6L1_Orphanage/blob_short_04"

@@ -1,0 +1,29 @@
+C5L2_Winda.Mesh = "SuwniceMale_GoraShape3"
+C5L2_Winda.Pack = "winda.dat"
+C5L2_Winda.Health = 4000
+C5L2_Winda.Mass = 200
+C5L2_Winda.Friction = 1
+C5L2_Winda.Scale = 0.3
+
+-- special additions
+
+o.WindaStates =
+{
+    IsUp = 0,
+    IsDown = 1,
+    GoingUp = 2,
+    GoingDown = 3,
+    Stopped = 4,
+}
+
+C5L2_Winda.GoingState = o.WindaStates.IsDown
+C5L2_Winda.GoUp = false
+C5L2_Winda.GoDown = false
+C5L2_Winda.Stop = false
+C5L2_Winda.PosDown = Vector:New(0,0,0)
+C5L2_Winda.PosUp = Vector:New(0,10,0)
+C5L2_Winda.GoSpeed = 3.0
+C5L2_Winda.HeightDifference = 10
+C5L2_Winda.StartingAtTop = false
+
+C5L2_Winda.SoundType = 1		-- typ dzwieku 1 .. 6

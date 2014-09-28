@@ -1,0 +1,162 @@
+o.Model = "stonegolem"
+o.Scale = 15.0
+o.Health = 1000
+o.CreatePO = true
+o.WalkSpeed = 1.55
+o.RotateSpeed = 7		-- degrees per 1/30 sec
+--o.throwHeart = "red"
+o.Animation = "idle1"
+o.NotCountable = true
+o.NeverRun = true
+o.disableNoAnimDetection = true
+--o.enableGibWhenHPBelow = -69
+--o.disableFreeze = true		-- bo nie dziala confuse
+o.notBleeding = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 50000,
+    InertiaTensorMultiplier = 0.05,
+}
+
+o.s_SubClass = {
+    Animations = {
+		idle1 = {1.0, false},
+
+        walk = {1.0, true,{
+							{1.0,'PlaySound',"step1"},
+                            {1.0,'Stomp','s_p_kostka',},
+							{2.5,'PlaySound',"step2"},
+                            {2.5,'Stomp','s_l_kostka',},
+						},0.4},
+
+        atak = {1.3, false,{
+							{0.3,'PlaySound',"atak"},
+							{0.4,'PlaySound',"swish"},
+							{1.2,"damage"},
+							{1.21,"HiT"},
+						},0.4},
+        rotL90 = {1.6, MC.ETransX + MC.ETransZ + MC.ERot, {
+							{0.75,'PlaySound',"step2"},
+							{0.75,'Stomp','s_l_kostka'},
+							{1.5,'PlaySound',"step1"},
+							{1.5,'Stomp','s_p_kostka'},
+                        }},
+        rotP90 = {1.6, MC.ETransX + MC.ETransZ + MC.ERot, {
+							{0.5,'PlaySound',"step1"},
+							{0.5,'Stomp','s_p_kostka'},
+							{1.2,'PlaySound',"step2"},
+							{1.2,'Stomp','s_l_kostka'},
+                        }},
+
+    },
+
+    CollidableRagdoll = true,
+    ragdollJoint = "root",
+    Ambients = {"idle1",},
+    NearAttacks = {"atak",},
+
+    jointsT = {
+		'n_p_kolano','n_l_kolano',
+		'n_p_biodro','n_l_biodro',
+		'r_l_lokiec','r_p_lokiec',
+		'r_l_bark','r_p_bark',
+		'k_zebra',
+    },
+
+    RagdollCollisions = {
+	MinStren = 8.0,
+	MinTime = 0.5,
+	Bones = {
+				{"n_p_kolano"},		-- joint, {sounds}, blood
+				{"n_l_kolano"},
+				{"r_l_lokiec"},
+				{"r_p_lokiec"},
+				{"k_zebra"},
+				{"root"},
+			}
+    },
+   	rotate90L = "rotL90",
+	rotate90R = "rotP90",
+}
+
+o.DeathTimer = 10
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack","hunt"}
+    
+o.AiParams.viewDistance = 80
+o.AiParams.viewDistance360 = 10
+o.AiParams.viewAngle = 170
+
+o.AiParams.weaponDamage = 5
+o.AiParams.weaponRange = 28.0
+o.AiParams.attackRange = 24.0
+o.AiParams.attackRangeAngle = 110
+o.AiParams.delayBetweenAttacks = 10
+
+o.AiParams.perception = 1.0
+o.AiParams.walkStep = 10.0
+o.AiParams.hearing = 1.0
+
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+o.AiParams.moveDisplacement = 0.0
+o.AiParams.updateSpeed = 0.3
+
+o.AiParams.walkAreaRandom = false
+o.AiParams.alwaysSee = true
+
+o.shadow = 128
+o.AiParams.findPathSpeed = 0.08
+o.minimumTimeBetweenHitAnimation = 60
+
+--o.AiParams.explosionWhenWalkRange = 0.5
+--o.AiParams.explosionWhenWalkStreng = 100
+--o.AiParams.explosionWhenWalkDamage = 0
+--o.AiParams.soundAmbientDelay = 6.0
+
+
+o.AiParams.ThrowableItem = "DemonSpell.CItem"
+o.AiParams.throwItemBindTo = "r_l_dlo_k2"
+o.AiParams.throwItemBindToOffset = Vector:New(0, 0, 0)
+o.AiParams.throwDistMinus = 0.0
+o.AiParams.throwAnim = "spell"
+o.AiParams.throwAmmo = 99999
+o.AiParams.throwRangeMin = 8
+o.AiParams.throwRangeMax = 44
+o.AiParams.minDelayBetweenThrow = 4.0
+o.AiParams.escapeAfterThrowTime = 0		-- 0 - no escape
+o.AiParams.throwVelocity = 40
+o.AiParams.throwDeltaY = 1.4
+o.AiParams.soundAmbientDelay = 7.0
+
+o.AiParams.explosionWhenWalkRange = 6.0
+o.AiParams.explosionWhenWalkStreng = 500
+o.AiParams.explosionWhenWalkDamage = 20
+
+o.AiParams.wakeUpWhenPlayerHurtInDistance = 20.0
+
+o.enableUnGib = 0.5		-- czas
+o.enableUnGibReturn = 2.0
+o.enableUnGibStart = 1.0		-- czas
+
+o.StompTimeOut = 12
+o.StompRange = 30
+o.CameraM = 0.2
+
+o.effect = "palskinned_freeze"
+o.BlendOutSpeed = 1.0
+
+o.deathBlendTime = 2.0
+
+o.SelfExplStr = 500000

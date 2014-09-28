@@ -1,0 +1,68 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path = "weapons/painkiller",
+    dist1   = 15,
+    dist2   = 50,
+    disablePitch = true,
+    rotor_loop = 
+    {
+        samples = {"pain-rotor-loop"},
+    },
+    rotor_start =
+    {   
+        samples = {"pain-rotor-star"}
+    },
+    rotor_stop =
+    {   
+        samples = {"pain-rotor-stop"}
+    },
+    rotor_hit_enemy = 
+    {
+        samples = {"painkiller-hit"},
+    },
+    rotor_hit_wall = 
+    {
+        samples = {"painkiller-spoon_hits_geometry"},
+    },
+    electro_loop = 
+    { 
+        samples = {"painkiller-electro-chime-loop"},
+    },
+    shock_loop = 
+    { 
+        samples = {"painkiller-electro-chime-shock-loop"},
+    },
+    head_shot = 
+    {
+        samples = {"painkiller-shoot"},
+    },
+    head_back = 
+    {
+        samples = {"painkiller-spoon-back"},
+    },
+    head_reload = 
+    {
+        samples = {"painkiller-reload"},
+    },
+    head_hit_enemy = 
+    {
+        path = "impacts",
+        samples = {"stake-body1","stake-body2"},
+        dist1   = 15,
+        dist2   = 25,
+    },
+    head_hit_wall = 
+    {
+        path = "impacts",
+        samples = {"painkiller-default1","painkiller-default2"},
+        dist1   = 15,
+        dist2   = 25,
+    },
+    head_hit_water = 
+    {
+        path = "impacts",
+        samples = {"bullet-water1","bullet-water2","bullet-water3","bullet-water4","bullet-water5"},
+        dist1   = 20,
+        dist2   = 50,
+    },
+}

@@ -1,0 +1,34 @@
+o.BaseObj = "Templar.CActor"
+o.AiParams.aiGoals = {"idle","hear","FarAttack","closeAttack"}
+
+o.Scale = 2
+
+o.AiParams.delayBetweenAttacks = 50
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.viewAngle = 180
+
+o.AiParams.weapon = {
+		maxDist = 100,
+		minDist = 2.5,
+		maxYaw = 90,
+		maxPitch = 90,
+	}
+
+o.AiParams.FinishMovementBeforeAttack = false
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,10}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.stopAfterWalking = 0.5
+o.AiParams.stopAfterWalkingTime = {30,80}
+
+o.AiParams.changePosAfterFire = 0.6
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = true
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.shadow = 0

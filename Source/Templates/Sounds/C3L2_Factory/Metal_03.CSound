@@ -1,0 +1,10 @@
+Metal_03.Volume = 60
+Metal_03.Interval = 7
+Metal_03.RandomShift = 7
+Metal_03.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+Metal_03.Sound ="C3L2_Factory/metal_03"
+

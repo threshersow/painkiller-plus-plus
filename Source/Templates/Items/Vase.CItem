@@ -1,0 +1,19 @@
+Vase.Mesh = "WAZAShape"
+Vase.Pack = "cale_przedmioty.dat"
+
+
+Vase.DestroyPack = "waza_zlom.dat"
+Vase.Health = 2
+Vase.Mass = 60
+Vase.Destroy.ExplosionStrength = 0
+Vase.Destroy.AverageDelay = 0
+Vase.Destroy.AverageVariation = 0
+Vase.Destroy.Strength = 12
+Vase.Destroy.Effect = "explode_dust"
+Vase.Destroy.EffectScale = 0.3
+o.Destroy.Treasures = 
+{
+    Coins  = {4, 'g'},
+}
+Vase.Destroy.MinSpeedOnCollision = 10
+o.SoundHitByBulletMiniGunOnly = true

@@ -1,0 +1,117 @@
+o.s_SubClass.SoundsDefinitions = {
+	walk1_1 = {
+		samples = {'lep_walk1_krok1',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	walk1_2 = {
+		samples = {'lep_walk1_krok2',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	walk3_2 = {
+		samples = {'lep_walk3_krok2',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	walk3_1 = {
+		samples = {'lep_walk3_krok1',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	walk4_2 = {
+		samples = {'lep_walk4_krok2',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	walk4_1 = {
+		samples = {'lep_walk4_krok1',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	hit = {
+		samples = {'lepper-hit1','lepper-hit2','lepper-hit3','lepper-hit4',},
+		dist1 = 20,
+		dist2 = 70,
+	},
+	walk_voice1 = {
+		samples = {'lepper-walk-voice1','lepper-walk-voice2','lepper-walk-voice3'},
+		playChance = 0.35,
+		dist1 = 22,
+		dist2 = 50,
+	},
+	walk_voice2 = {
+		samples = {'lepper-walk-voice4','lepper-walk-voice5','lepper-walk-voice6'},
+		playChance = 0.35,
+		dist1 = 22,
+		dist2 = 50,
+	},
+	walk_voice3 = {
+		samples = {'lepper-walk-voice3','lepper-walk-voice4','lepper-walk-voice7'},
+		playChance = 0.35,
+		dist1 = 22,
+		dist2 = 50,
+	},
+	idle4 = {
+		samples = {'lepper-idle4'},
+		playChance = 0.12,
+		dist1 = 22,
+		dist2 = 40,
+	},
+	idle5 = {
+		samples = {'lepper-idle5'},
+		playChance = 0.12,
+		dist1 = 22,
+		dist2 = 40,
+	},
+	idle6 = {
+		samples = {'lepper-idle6'},
+		playChance = 0.12,
+		dist1 = 22,
+		dist2 = 40,
+	},
+	atak1 = {
+		samples = {'lepper-atak1_1','lepper-atak1_2','lepper-atak1_3'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	swish_atak1 = {
+		samples = {'leper_swish1'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	atak2 = {
+		samples = {'lepper-atak2_1','lepper-atak2_2','lepper-atak2_3'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	swish_atak2 = {
+		samples = {'lepper-hand-swish1','lepper-hand-swish2'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	onAttackOnce = {
+		samples = {"lepper-halt1", "lepper-halt2", "lepper-halt3"},
+		playChance = 0.75,
+		dist1 = 30,
+		dist2 = 70,
+	},
+    
+	death = {
+		samples = {"lepper-death1","lepper-death2","lepper-death3","lepper-death4",},
+		dist1 = 20,
+		dist2 = 60,
+	},
+
+    damage = {
+		samples = {"lepper_hand_hit"},
+    },
+
+    bodyfalls = {
+		samples = {"lepper_bodyfalls"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+}
+

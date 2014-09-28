@@ -1,0 +1,17 @@
+o.Scale = 0.8
+o.Mass = 2000
+o.Pack = "skrzynie_metal.dat"
+o.Mesh = "polySurfaceShape12494"
+o.Immortal = true
+
+
+o.CollisionDetect = {
+	MinTime = 1.0,
+	MinStren = 5.0,
+	enableShuffle = true,
+}
+
+
+o.SoundImpactMinDelay = 1.0
+
+o.SoundHitByBulletMiniGunOnly = true

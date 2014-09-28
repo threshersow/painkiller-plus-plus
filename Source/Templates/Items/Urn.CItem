@@ -1,0 +1,23 @@
+Urn.Mesh = "URNAShape"
+Urn.Pack = "cale_przedmioty.dat"
+
+Urn.DestroyPack = "urna_zlom.dat"
+Urn.Scale = 0.6
+Urn.Mass = 60
+Urn.Health = 5
+
+Urn.Destroy.ExplosionStrength = 0
+Urn.Destroy.AverageDelay = 1
+Urn.Destroy.AverageVariation = 0
+Urn.Destroy.Strength = 5
+Urn.Destroy.Effect = "explode_dust"
+Urn.Destroy.EffectScale = 0.3
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+Urn.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+
+o.SoundHitByBulletMiniGunOnly = true

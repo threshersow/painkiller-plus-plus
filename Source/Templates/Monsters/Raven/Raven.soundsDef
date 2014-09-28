@@ -1,0 +1,7 @@
+o.s_SubClass.SoundsDefinitions = {
+	death = {
+		samples = {"raven_death","raven_death2",},
+	        dist1 = 12,
+		dist2 = 50,
+	},
+}

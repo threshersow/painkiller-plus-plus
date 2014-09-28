@@ -1,0 +1,36 @@
+EDITOR.AddObjectTemplate("Particles","FX_rexplodePCF","FX_rexplodePCF.CActor");	
+
+FX_rexplodePCF.Model = "rexplode"
+FX_rexplodePCF.Scale = 3.0
+FX_rexplodePCF.NotCountable = true
+
+FX_rexplodePCF.s_SubClass = 
+{
+    Animations = {  
+        idle        = {0.7},
+    },
+}
+
+function FX_rexplodePCF:OnPrecache()
+	Cache:PrecacheParticleFX("FX_rexplodePCF")
+end
+
+function FX_rexplodePCF:OnCreateEntity()
+    self:BindFX("FX_rexplodePCF",0.2,"e0")
+
+
+end
+
+function FX_rexplodePCF:OnFinishAnim(name)
+    GObjects:ToKill(self)
+end
+
+
+function FX_rexplodePCF:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+o.Immortal = true

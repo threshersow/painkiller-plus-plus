@@ -1,0 +1,10 @@
+Wojna_ambience.Volume = 100
+Wojna_ambience.Interval = 0
+Wojna_ambience.RandomShift = 0
+Wojna_ambience.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Wojna_ambience.Sound ="C5L4_Hell/Wojna_dalej"
+

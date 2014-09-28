@@ -1,0 +1,114 @@
+o.s_SubClass.SoundsDefinitions = {
+	stepl = {
+		samples = {'monster_skull_krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	stepr = {
+		samples = {'monster_skull_krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	hit = {
+		samples = {'monster_skull_hit_1','monster_skull_hit_2','monster_skull_hit_3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {'$/actor/devilmonk/devil_bodyfalls'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	onAttackOnce = {
+		samples = {"monster_skull_halt1", "monster_skull_halt2", "monster_skull_halt3"},
+		playChance = 0.5,
+		dist1 = 30,
+		dist2 = 70,
+	},
+	attack_him = {
+		samples = {"monster_skull_halt1", "monster_skull_halt2", "monster_skull_halt3"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	idle_head = {
+		samples = {'monster_skull_idle1','monster_skull_idle2',},
+		dist1 = 20,
+		dist2 = 40,
+		playChance = 0.4,
+	},
+	idle_bones = {
+		samples = {'monster_skull_idle_bones',},
+		dist1 = 20,
+		dist2 = 40,
+	},
+	grr_aim = {
+		samples = {'monster_skull_grr2_aim','monster_skull_grr1_aim'},
+		dist1 = 25,
+		dist2 = 40,
+	},
+	fire = {
+		samples = {'monster_skull_fire_shotgun',},
+		dist1 = 30,
+		dist2 = 56,
+	},
+	aim = {
+		samples = {'monster_skull_aim',},
+		dist1 = 15,
+		dist2 = 30,
+	},
+	catch = {
+		samples = {'monster_skull_shield1','monster_skull_shield2',},
+		dist1 = 30,
+		dist2 = 50,
+	},
+	catchHellb = {
+		samples = {"monster_skull_kill_hellbiker"},
+		dist1 = 30,
+		dist2 = 50,
+	},
+
+	weaponlost = {
+		samples = {"skull-weapon-lost"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	idlegun = {
+		samples = {'monster_skull_idle_gun-hand',},
+		dist1 = 16,
+		dist2 = 48,
+	},
+	idlegunsw = {
+		samples = {'monster_skull_idle_gun-swish',},
+		dist1 = 16,
+		dist2 = 48,
+	},
+	suic = {
+		samples = {'monster_skull_suicide_prepare',},
+		dist1 = 16,
+		dist2 = 48,
+	},
+    skullf = {
+        samples = {'monster_skull_fireonhead',},
+		dist1 = 16,
+		dist2 = 48,
+	},
+
+	death = {
+        samples = {"monster_skull_death2","monster_skull_death1"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    attackAmbient = {
+        samples = {"monster_skull_halt1","monster_skull_halt2","monster_skull_halt3","monster_skull_idle1","monster_skull_idle2",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+--    OnSpawn = {
+--        samples = {"grr_aim"},
+--		dist1 = 16,
+--		dist2 = 60,
+--	},
+
+}

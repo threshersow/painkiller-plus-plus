@@ -1,0 +1,34 @@
+o.s_SubClass.ParticlesDefinitions = {
+	warp = {
+		pfx = "flamewarp",
+		scale = 0.4,
+		offset = Vector:New(0,0,0),
+	},
+
+	explode = {
+		pfx = "tankdestroy",
+		scale = 1.5,
+		joint = "root",
+		offset = Vector:New(0,0,0),
+	},
+	tankflame = {
+		pfx = "tankflame",
+		scale = 1.0,
+		joint = "root",
+		offset = Vector:New(0,0,0),
+	},
+	tankflameBarrel = {
+		pfx = "tankflame",
+		scale = 0.8,
+		joint = "lufa",
+		offset = Vector:New(0,0,0),
+	},
+
+	shot = {
+		pfx = "tankshot",
+		scale = 1.0,
+		joint = 'lufa',
+		offset = Vector:New(0,0.6,-5.6),
+	},
+	
+}

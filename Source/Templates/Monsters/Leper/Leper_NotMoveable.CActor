@@ -1,0 +1,5 @@
+o.BaseObj = "Leper.CActor"
+o.NeverMove = true
+
+o.AiParams.aiGoals = {"idle","hear","throw",}
+o.AiParams.aiGoalsAfterThrow = {"idle", "hear","attack","throw"}

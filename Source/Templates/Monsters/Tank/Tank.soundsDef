@@ -1,0 +1,13 @@
+o.s_SubClass.SoundsDefinitions = {
+	death = {
+		samples = {"tank-death"},
+        dist1 = 40,
+		dist2 = 140,
+	},
+    engineAccelerate = {
+        samples = {"tank-engine"},
+	    dist1 = 20,
+		dist2 = 100,
+        playChance = 0.3,
+    }
+}

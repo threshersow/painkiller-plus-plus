@@ -1,0 +1,139 @@
+o.Model = "psyho_elektro"
+o.Scale = 1.3
+o.Health = 80
+o.CreatePO = true
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 15
+o.throwHeart = true
+o.NeverRun = true
+o.Animation = "idle_zwiazany"
+o.enableGibWhenHPBelow = -59
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 120,
+    InertiaTensorMultiplier = 0.15,
+}
+
+
+o.s_SubClass = {
+	SoundDir = "psycho_elektro",
+	rotateHead = 0.6,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.1,
+
+	Animations = {
+		idle_zwiazany   = {1.0,false},
+		idle_zwiazany1   = {1.0,false,{
+				{0.35,'PlaySound',"idlez"},
+			}},
+		idle_rozwiazany  = {1.0,false},
+
+		atak_explohead   = {1.6,false, {
+				{0.4,'PlaySound',"explode"},
+				{1.6,'Explode',},
+			}},
+		atak_rozwiazany  = {1.0,false, {
+				{0.1,'PlaySound',"at1"},
+				{0.15,'PlaySound',"swish"},
+				{0.3,'damage',},
+				{0.8,'PlaySound',"at3"},
+				{0.9,'PlaySound',"swish2"},
+				{1.05,'damage',},
+			}},
+
+		walk_zwiazany   = {1.0,true, {
+				{0.4,'PlaySound',"step1"},
+				{1.0,'PlaySound',"step2"},
+			}},
+		walk_zwiazany_elektro   = {1.0,true, {
+				{0.4,'PlaySound',"step1zw"},
+				{1.0,'PlaySound',"step2zw"},
+			}},
+		walk_rozwiazany  = {1.0,true, {
+				{0.4,'PlaySound',"step1"},
+				{1.0,'PlaySound',"step2"},
+			}},
+	},
+	
+	NearAttacks = {"walk_zwiazany",},
+	ragdollJoint = "root",
+	walk = {"walk_zwiazany"},
+	Ambients = {"idle_zwiazany",},
+	
+	DeathJoints = {
+        's_p_kostka','s_l_kostka',
+        'dlo_lewa_root',
+        'dlo_prawa_root',
+        'k_glowa',
+    },
+    
+	RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 0.6,
+		Bones = {
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+			},
+	},
+
+    GibExplosionStrength = 7000,
+	GibExplosionRange = 3.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+		{"r_l_bark","FX_gib_blood",-1},
+		{"r_p_bark","FX_gib_blood",-1},
+		{"n_l_biodro","FX_gib_blood",-1},
+		{"n_p_biodro","FX_gib_blood",-1},
+		{"k_szyja","FX_gib_blood",-1},
+		{"root","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"root", "gibSplash", true},
+			},
+	    },
+}	    
+
+o.DeathTimer = 140
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle", "hear","attack"}
+
+o.AiParams.walkStep = 5.0
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.viewAngle = 360
+o.AiParams.attackRange = 2.6
+o.AiParams.attackRangeAngle = 360
+o.AiParams.weaponDamage = 20
+
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {20,60}
+o.AiParams.updateSpeed = 0.25
+
+o.AiParams.chanceOfEscapeAfterFire = 0
+o.AiParams.delayBetweenAttacks = 60
+o.AiParams.moveDisplacement = -1
+o.AiParams.perception = 1.0
+o.AiParams.hearing = 2.0
+
+o.AiParams.untieHp = 0.5
+o.shadow = 128

@@ -1,0 +1,10 @@
+nagrobek_03.Volume = 90
+nagrobek_03.Interval = 5
+nagrobek_03.RandomShift = 2
+nagrobek_03.Falloff =
+{
+  Start = 2,
+  End = 8
+}
+nagrobek_03.Sound ="C1L4_Cemetery/nagrobek_05"
+

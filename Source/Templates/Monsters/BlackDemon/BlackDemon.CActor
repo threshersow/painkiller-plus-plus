@@ -1,0 +1,187 @@
+o.Model = "BlackDemon"
+o.Scale = 4.0
+o.Health = 1000
+o.CreatePO = true
+o.WalkSpeed = 1.55
+o.RotateSpeed = 8		-- degrees per 1/30 sec
+o.throwHeart = "red"
+o.Animation = "idle1"
+o.NeverRun = true
+o.disableNoAnimDetection = true
+o.enableGibWhenHPBelow = -69
+o.disableFreeze = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 500,
+    InertiaTensorMultiplier = 0.05,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.4,		-- dodac inny limit na Y (x = 0.7, y = 0.1)
+	rotateHeadBone = "k_head",
+	rotateHeadMaxSpeed = 0.2,
+	SoundDir = "blackdemon",
+    Animations = {
+		idle1 = {1.0, true},
+		idle2 = {1.0, true},
+        walk = {0.8, true,{
+							{0.65,'PlaySound',"step1"},
+                            {0.65,'FootFX','n_p_stop1'},
+							{0.07,'PlaySound',"step2"},
+                            {0.07,'FootFX','n_l_stop1'},
+                            
+                            --{0.35,'Explode','r_l_dlo_root'},
+                            --{0.9,'Explode','r_p_dlo_root'},
+                            {0.35,'Explode','root'},
+                            {0.9,'Explode','root'},
+
+						}},
+
+        atak1 = {1.3, true,{
+							{0.3,'PlaySound',"atak"},
+							{0.4,'PlaySound',"swish"},
+							{0.5,"damage"},
+						}},
+        atak2 = {1.0, true,{
+							{0.3,'PlaySound',"atak"},
+							{0.5,'PlaySound',"swish2"},
+							{0.6,"damage"},
+						}},
+        rotL90 = {1.6, MC.ETransX + MC.ETransZ + MC.ERot, {
+							{0.75,'PlaySound',"step2"},
+							{0.75,'FootFX','n_l_stop1'},
+							{1.5,'PlaySound',"step1"},
+							{1.5,'FootFX','n_p_stop1'},
+                        }},
+        rotP90 = {1.6, MC.ETransX + MC.ETransZ + MC.ERot, {
+							{0.5,'PlaySound',"step1"},
+							{0.5,'FootFX','n_p_stop1'},
+							{1.2,'PlaySound',"step2"},
+							{1.2,'FootFX','n_l_stop1'},
+                        }},
+		angry = {0.8, false, {
+							{0.0,'PlaySound',"angry"},
+						}},
+		spell = {1.0, false, {
+							{0.0,'PlaySound',"atak"},
+							{0.8,'ThrowImmid',nil,true},
+						}},
+
+    },
+
+    ragdollJoint = "root",
+    Hits = {"angry"},
+    Ambients = {"idle1","idle2"},
+    NearAttacks = {"atak1", "atak2"},
+
+    DeathJoints = {
+		'K_ogo','k_head',
+        'r_l_arm','r_p_arm','r_p_dlo_root','r_l_dlo_root',
+        'n_p_kol','n_l_kol','n_p_stop','n_l_stop',
+        'r_p_lok','r_l_lok','k_chest',
+    },
+    BreakableJoints = {},
+    CollidableRagdoll = false,
+
+    RagdollCollisions = {
+	MinStren = 5.0,
+	MinTime = 0.6,
+	Bones = {
+				{"K_ogo", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"k_head", "bodyfalls", true},
+			}
+    },
+   	rotate90L = "rotL90",
+	rotate90R = "rotP90",
+
+
+	GibExplosionStrength = 35000,
+	GibExplosionRange = 2.5,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"r_l_arm","FX_gib_blood",-1},		-- "FX_gib_blood"
+				{"r_p_arm","FX_gib_blood",1},
+				{"n_l_bio","FX_gib_blood",-1},
+				{"n_p_bio","FX_gib_blood",1},
+				{"k_head","FX_gib_blood",-1},
+				{"k_chest","FX_gib_blood",1},
+				{"root","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"r_l_arm", "gibSplash", true},
+				{"r_p_arm", "gibSplash", true},
+				{"n_l_bio", "gibSplash", true},
+				{"n_p_bio", "gibSplash", true},
+				{"k_head", "gibSplash", true},
+				{"k_chest", "gibSplash", true},
+				{"root", "gibSplash", true},
+			},
+	    },
+
+}
+
+o.DeathTimer = 140
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt","throw"}
+    
+o.AiParams.viewDistance = 80
+o.AiParams.viewDistance360 = 10
+o.AiParams.viewAngle = 170
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 3.0
+o.AiParams.attackRangeAngle = 90
+o.AiParams.delayBetweenAttacks = -1
+
+o.AiParams.perception = 1.0
+o.AiParams.walkStep = 10.0
+o.AiParams.hearing = 1.0
+
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+o.AiParams.moveDisplacement = 3.5
+o.AiParams.updateSpeed = 0.3
+
+o.AiParams.walkAreaRandom = false
+o.AiParams.alwaysSee = true
+
+o.shadow = 128
+o.AiParams.findPathSpeed = 0.08
+o.minimumTimeBetweenHitAnimation = 60
+
+o.AiParams.explosionWhenWalkRange = 0.5
+o.AiParams.explosionWhenWalkStreng = 100
+o.AiParams.explosionWhenWalkDamage = 0
+o.AiParams.soundAmbientDelay = 6.0
+
+
+o.AiParams.ThrowableItem = "DemonSpell.CItem"
+o.AiParams.throwItemBindTo = "r_l_dlo_k2"
+o.AiParams.throwItemBindToOffset = Vector:New(0, 0, 0)
+o.AiParams.throwDistMinus = 0.0
+o.AiParams.throwAnim = "spell"
+o.AiParams.throwAmmo = 99999
+o.AiParams.throwRangeMin = 8
+o.AiParams.throwRangeMax = 44
+o.AiParams.minDelayBetweenThrow = 4.0
+o.AiParams.escapeAfterThrowTime = 0		-- 0 - no escape
+o.AiParams.throwVelocity = 40
+o.AiParams.throwDeltaY = 1.4
+

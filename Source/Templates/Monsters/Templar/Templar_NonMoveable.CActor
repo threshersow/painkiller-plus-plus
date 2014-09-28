@@ -1,0 +1,16 @@
+o.BaseObj = "Templar.CActor"
+o.NeverMove = true
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.viewAngle = 180
+o.AiParams.aiGoals = {"idle","hear","FarAttack","closeAttack"}
+
+o.AiParams.weapon = {
+		maxDist = 100,
+		minDist = 2.5,
+		maxYaw = 90,
+		maxPitch = 90,
+	}
+
+o.shadow = 0

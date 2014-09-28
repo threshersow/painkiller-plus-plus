@@ -1,0 +1,12 @@
+o.s_SubClass.SoundsDefinitions = {
+    path = "doors",
+    dist1 = 5,
+    dist2 = 15,
+	Rope = {
+		samples = {"rope-creak1","rope-creak1","rope-creak1"},
+	},
+	Hit = {
+        path = "actor/hellbiker",
+		samples = {"hellb-attack-head-hit"},
+	},
+}

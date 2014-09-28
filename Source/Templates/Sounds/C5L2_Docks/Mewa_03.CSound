@@ -1,0 +1,10 @@
+Mewa_03.Volume = 70
+Mewa_03.Interval = 8
+Mewa_03.RandomShift = 2
+Mewa_03.Falloff =
+{
+  Start = 3,
+  End = 60
+}
+Mewa_03.Sound ="C5L2_Docks/mewa_03"
+

@@ -1,0 +1,90 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'lep_walk4_krok1',},
+		dist1 = 6,
+		dist2 = 24,
+	},
+	step2 = {
+		samples = {'lep_walk4_krok2',},
+		dist1 = 6,
+		dist2 = 24,
+	},
+	death = {
+		samples = {"lepper-death1","lepper-death2","lepper-death3","lepper-death4",},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	atak1 = {
+		samples = {'lepper-atak1_1','lepper-atak1_2','lepper-atak1_3'},
+		dist1 = 12,
+		dist2 = 50,
+	},
+	atak2 = {
+		samples = {'lepper-atak2_1','lepper-atak2_2','lepper-atak2_3'},
+		dist1 = 12,
+		dist2 = 50,
+	},
+	atak3 = {
+		samples = {'lepper-atak2_1','lepper-atak2_2','lepper-atak2_3'},
+		dist1 = 12,
+		dist2 = 50,
+	},
+	hit = {
+		samples = {'lepper-hit1','lepper-hit2','lepper-hit3','lepper-hit4',},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	falling = {
+		samples = {'apoc_zombie2_falling','apoc_zombie2_falling2','apoc_zombie2_falling3'},
+		dist1 = 25,
+		dist2 = 100,
+        joint = "root",
+	},
+	attackVoice = {
+		samples = {'apoc_zombie2_attackVoice1','apoc_zombie2_attackVoice2','apoc_zombie2_attackVoice3'},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	bodyfalls = {
+		samples = {"lepper_bodyfalls"},
+		dist1 = 16,
+		dist2 = 80,
+	},
+    reconstruct = {
+		samples = {"apoc_zombie2-reconstruction"},
+		dist1 = 16,
+		dist2 = 80,
+        joint = "root",
+    },
+}
+
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+    atak1   = {
+        {0.0,'PlaySoundHit',"atak1"},
+    },
+    atak2   = {
+        {0.0,'PlaySoundHit',"atak2"},
+    },
+    atak3   = {
+        {0.0,'PlaySoundHit',"atak3"},
+    },
+    run1   = {
+		{0.0,'PlaySound',"step1"},
+		{0.7,'PlaySound',"step2"},
+	},
+    run2   = {
+		{0.0,'PlaySound',"step1"},
+		{0.7,'PlaySound',"step2"},
+	},
+    run3   = {
+		{0.0,'PlaySound',"step1"},
+		{0.7,'PlaySound',"step2"},
+	},
+    hit1 = {
+        {0.0,'PlaySoundHit',"hit"},
+    },
+    hit2 = {
+        {0.0,'PlaySoundHit',"hit"},
+    },
+}

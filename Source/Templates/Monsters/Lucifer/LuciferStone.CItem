@@ -1,0 +1,146 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "meteor_caly.dat"
+o.Scale = 0.9
+
+o.Mass = 100
+o.DestroyPack = "meteor_zlom.dat"
+o.Destroy.Strength = 800
+o.Destroy.ExplosionStrength = 4600
+o.Destroy.ExplosionDamage = 200
+o.Destroy.ExplosionRadius = 13
+o.Destroy.PartsNoncollidableWithSelf = true
+o.Health = 1
+o.demonHitDisable = true
+o.Destroy.AverageDelay = 0.0
+o.Destroy.AverageVariation = 0
+--o.Destroy.MinSpeedOnCollision = 10
+o.Destroy.LifetimeAfterExplosion = 1.5
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.EffectScale = 1.0
+
+o.Pos = Vector:New(0,0,-4)
+o.Restitution = 0.2
+o.speed = 80
+o._fx = 'nun_spell'
+o.TimeToLive = 20 * 30
+o.earthqRange = 20
+o.earthqTime = 15
+o.earthqStren = 0.4
+o.soundBindPosY = 20
+o.NotCountable = true
+
+o.MaxStartDelay = 70
+o.FallSpeed = 100
+o.AfterHitSpeed = 100
+
+o.Damage = 101	-- tyle rani lucyfera
+--o.CollisionSound = {"impacts/stonebig-impact1","impacts/stonebig-impact2","impacts/stonebig-impact3","impacts/stonebig-impact4","impacts/stonebig-impact5"}
+o.explSound = "actor/giant/meteor-blow"
+--============================================================================
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+	local donotDamage = false
+	if e then
+		local obj = EntityToObject[e]
+		if obj then
+			if obj ~= Lucifer_001 or (obj == Lucifer_001 and self._hit) then
+				obj:OnDamage(self.Damage--[[*FRand(1.01,1.2)--]], nil, AttackTypes.Stone)
+			end
+			if obj == Lucifer_001 and not self._hit then
+				--Game:Print(self._Name.." donotDamage")
+				donotDamage	= true
+			end
+		else
+			--if y < 10 then
+				--local name = self.CollisionSound[math.random(1,table.getn(self.CollisionSound))]
+				--PlaySound3D(name, x,y,z, 30, 100)
+				PlaySound3D("weapons/machinegun/rocket_hit", x,y,z, 30, 120)
+				Game._EarthQuakeProc:Add(x,y,z, self.earthqTime, self.earthqRange, self.earthqStren,  self.earthqStren, 1.0)
+			--end
+		end
+	end
+	--ENTITY.EnableCollisions(self._Entity, false)
+	ENTITY.PO_EnableGravity(self._Entity,true)
+	if donotDamage then
+		ENTITY.EnableCollisions(self._Entity, false)
+		ENTITY.EnableCollisions(self._Entity, true, 0.1, 0.1)
+	else
+		self:OnDamage(100, self)		
+	end
+
+	--WORLD.Explosion2(x,y,z, 1000,20, nil, AttackTypes.Rocket, FRand(50,100))
+	--WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,nil,AttackTypes.Rocket,self.Explosion.Damage)
+
+	SOUND.Play3D(self.explSound,x,y,z,30,160)
+end
+--============================================================================
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMeshSweep,nil,ECollisionGroups.Noncolliding)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+	self.timer = math.random(5, self.MaxStartDelay)
+	self.mode = 0
+end
+--============================================================================
+function o:OnUpdate()
+	if self.mode == 0 then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.mode = 1
+			ENTITY.SetVelocity(self._Entity, self._desiredVel.X,self._desiredVel.Y,self._desiredVel.Z)
+			if self._enableGrav then
+				--Game:Print("ENABLE GRAV")
+				ENTITY.PO_EnableGravity(self._Entity,true)
+				AddObject("FX_sground.CActor",3.0, Vector:New(self.Pos.X, self.Pos.Y + 5.0, self.Pos.Z))
+				Game._EarthQuakeProc:Add(self.Pos.X, self.Pos.Y + 5.0, self.Pos.Z, self.earthqTime, self.earthqRange, self.earthqStren,  self.earthqStren, 1.0)
+			end
+		end
+	end
+	if self.mode == 1 and self.Pos.Y > 0 then
+		--local v = Vector:New(Player._groundx - self.Pos.X+FRand(-20.0,20.0), Player._groundy+FRand(1.0,2.0) - self.Pos.Y, Player._groundz - self.Pos.Z+FRand(-20.0,20.0))
+		--v:Normalize()
+		--local rnd = FRand(0.7, 1.0)
+		--ENTITY.SetVelocity(self._Entity,  v.X * self.speed * rnd, v.Y * self.speed * rnd, v.Z * self.speed * rnd)
+		
+		ENTITY.EnableCollisions(self._Entity, true, 1.5, 10)
+		ENTITY.SetAngularVelocity(self._Entity, FRand(-8,8), FRand(-8,8), FRand(-8,8))
+
+		if self._enableGrav then
+			self._timer = 50
+		else
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+		end
+		self.mode = 2
+		self:BindFX(self._fx, 0.6, -1)
+	end
+	if self._timer then
+		self._timer = self._timer - 1
+		if self._timer < 0 then
+			self._timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+		end
+	end
+
+	if self.mode == 2 then
+		if self.Pos.Y < self.soundBindPosY then
+			self:BindSound("actor/giant/meteor-fall"..math.random(1,3),100,400,false)
+			self.mode = 3
+		end
+	end
+end
+
+
+function o:CustomOnDamage(damage, owner, attacktype)
+	if attacktype == AttackTypes.Demon then
+		--Game:Print("  Lstone: demon attack")
+		if Lucifer_001 and Lucifer_001.Health > 0 then
+			local v = Vector:New(CAM.GetForwardVector())    --self.Pos.X - Lucifer_001._groundx,self.Pos.Y - (Lucifer_001._groundy + FRand(18,24)), self.Pos.Z - Lucifer_001._groundz
+			v:Normalize()
+			ENTITY.PO_EnableGravity(self._Entity,false)
+			local speed = self.AfterHitSpeed
+			self._hit = true
+			ENTITY.SetVelocity(self._Entity,  v.X * speed, v.Y * speed, v.Z * speed)
+			return true
+		end
+	end
+	return false
+end
+

@@ -1,0 +1,44 @@
+--============================================================================
+PFadeInOutLight.FadeInTime  = 0
+o.FadeMidTime = 0
+o.FadeOutTime = 0
+o.CurTime = 0
+o.Intensity = 0
+o._Entity = nil
+
+o.BaseName = "PFadeInOutLight.CProcess"
+--============================================================================
+function PFadeInOutLight:New(entity,intensity,fin,fmid,fout)
+    local dl = Clone(self)
+    dl._Entity = entity
+    dl.Intensity = intensity
+    dl.FadeInTime = fin
+    dl.FadeMidTime = fin + fmid
+    dl.FadeOutTime = fin + fmid + fout
+    return dl
+end
+--============================================================================
+function PFadeInOutLight:Tick(delta)
+    if self._ToKill then return end
+    
+    self.CurTime = self.CurTime +  delta
+    
+    local intensity = 0
+    if self.CurTime <= self.FadeInTime then
+        intensity = self.CurTime/self.FadeInTime * self.Intensity
+    elseif self.CurTime <= self.FadeMidTime then
+        intensity = self.Intensity
+    elseif self.CurTime <= self.FadeOutTime then
+        local fout = self.FadeOutTime - self.FadeMidTime
+        intensity = (1 - (self.CurTime - self.FadeMidTime) / fout) * self.Intensity
+    end
+    
+    --Game:Print(intensity)
+    
+    LIGHT.SetIntensity(self._Entity,intensity)    
+    if self.CurTime > self.FadeOutTime then 
+        ENTITY.Release(self._Entity)
+        self._ToKill = true 
+    end
+end
+--============================================================================

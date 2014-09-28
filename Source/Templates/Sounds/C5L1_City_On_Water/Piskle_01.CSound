@@ -1,0 +1,10 @@
+Piskle_01.Volume = 70
+Piskle_01.Interval = 7
+Piskle_01.RandomShift = 4
+Piskle_01.Falloff =
+{
+  Start = 6,
+  End = 30
+}
+Piskle_01.Sound ="C5L1_City_On_Water/Piskle_01"
+

@@ -1,0 +1,65 @@
+o.s_SubClass.SoundsDefinitions = {
+	krok1 = {
+		samples = {'vamp_krok1'},
+		dist1 = 40,
+		dist2 = 70,
+		joint = "s_p_srodstopie",
+	},
+	krok2 = {
+		samples = {'vamp_krok2'},
+		dist1 = 40,
+		dist2 = 70,
+		joint = "s_l_srodstopie",
+	},
+	eq = {
+		samples = {'vamp-earthquake1','vamp-earthquake2',},
+		dist1 = 40,
+		dist2 = 70,
+	},
+	stones = {
+		samples = {'vamp-stonestremors'},
+		dist1 = 60,
+		dist2 = 100,
+	},
+	takestone = {
+		samples = {'vamp-take_stone',},
+		joint = 'dlo_lewa_root',
+		dist1 = 32,
+		dist2 = 70,
+	},
+	takestone2 = {
+		samples = {'vamp-take_stone_stone',},
+		joint = 'dlo_lewa_root',
+		dist1 = 32,
+		dist2 = 70,
+	},
+	swish = {
+		samples = {'vamp_stone-swish',},
+		joint = 'dlo_lewa_root',
+		dist1 = 40,
+		dist2 = 70,
+	},
+	throw = {
+		samples = {'vamp-throw_stone2','vamp-throw_stone',},
+		joint = 'dlo_lewa_root',
+		dist1 = 40,
+		dist2 = 70,
+	},
+	hurt = {
+		samples = {"vamp-hit1","vamp-hit2","vamp-hit3","vamp-hit4","vamp-hit5",},
+		dist1 = 40,
+		dist2 = 70,
+	},
+	damage = {
+		samples = {"bullet-body2",},
+		dist1 = 40,
+		dist2 = 90,
+	},
+	death = {
+		samples =  {"vamp-death",},
+		dist1 = 40,
+		dist2 = 90,
+	},
+
+}
+

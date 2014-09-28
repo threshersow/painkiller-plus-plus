@@ -1,0 +1,10 @@
+Ziemia_04.Volume = 60
+Ziemia_04.Interval = 7
+Ziemia_04.RandomShift = 3
+Ziemia_04.Falloff =
+{
+  Start = 2,
+  End = 30
+}
+Ziemia_04.Sound ="C1L3_Catacombs/ziemia_04;C1L3_Catacombs/ziemia_05"
+

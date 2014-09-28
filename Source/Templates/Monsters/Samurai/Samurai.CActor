@@ -1,0 +1,192 @@
+o.Model = "samuraj"
+o.CreatePO = true
+o.Scale = 1.32
+o.Health = 99
+o.WalkSpeed = 1.2
+o.RunSpeed = 1.4
+o.RotateSpeed = 19
+o.throwHeart = true
+o.Animation = "idle1"
+o.enableGibWhenHPBelow = -35
+
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 120,
+    InertiaTensorMultiplier = 0.05,
+}
+
+o.s_SubClass = {
+    rotateHead = 3.1415 * 0.3,
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.25,
+    SoundDir = "samurai",
+	Animations = {
+		idle1   = {1.0,false},			-- speed, movingcurve, events
+		idle2   = {1.0,false},
+		walk   = {1.2,true, {
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.07,'PlaySound',"step2"},
+				{0.07,'FootFX','s_l_srodstopie'},
+				}},
+		walk_macha_mieczami   = {1.3,true, {
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.07,'PlaySound',"step2"},
+				{0.07,'FootFX','s_l_srodstopie'},
+				}},
+
+		run    = {1.3,true, {
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.07,'PlaySound',"step2"},
+				{0.07,'FootFX','s_l_srodstopie'},
+				}},
+		atak1  = {1.2,true, {
+				{0.0,'BindTrailSword','trail_zombie','Trail_miecz_P','d_P_bron'},
+				{0.0,'BindTrailSword2','trail_zombie','trail_miecz_L','d_L_bron1'},
+				{0.6,'damage'},			-- "damage", PO_Hit back, PO_Hit_up
+				{1.7,'damage'},			-- "damage", PO_Hit back, PO_Hit_up
+
+				{0.3,'PlaySound',"at3"},
+				{1.2,'PlaySound',"atak"},
+
+				{0.4,'PlaySound',"swish"},
+				{1.1,'PlaySound',"swish"},
+				{1.4,'PlaySound',"swish"},
+
+				{0.4,'PlaySound',"step1"},
+				{0.4,'FootFX','s_l_srodstopie'},
+				{0.8,'PlaySound',"step2"},
+				{0.8,'FootFX','s_p_srodstopie'},
+				{1.3,'PlaySound',"step1"},
+				{1.3,'FootFX','s_l_srodstopie'},
+				{2.25,'EndTrailSword'},
+				{2.25,'EndTrailSword2'},
+
+				},nil, true},        -- 5 parametr - move pos with anim, a nie jest to animacja chodzenia
+		atak2  = {1.0,false, {			-- fireball
+				{0.0,'PlaySound',"at1"},
+				{1.5,'ThrowImmid',nil,true},
+				}},
+		hit1 = {1.0, false, {
+				{0.0,'PlaySoundHit',"hit"},
+				}},
+		hit2 = {1.0, false, {
+				{0.0,'PlaySoundHit',"hit"},
+				}},
+	},
+	NearAttacks = {"atak1",},
+	walk = {"walk","walk_macha_mieczami"},
+	ragdollJoint = "root",
+	Ambients = {"idle1","idle2"},
+	Hits = {"hit1", "hit2"},
+
+	RagdollCollisions = {
+		MinStren = 2.6,
+		MinTime = 0.8,
+		Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"d_P_bron", "weaponlost", false},
+				{"d_L_bron1", "weaponlost", false},
+		},
+	},
+
+	DeathJoints = {
+        's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+        'n_l_kolano','n_l_biodro','dlo_lewa_root',
+        'k_ogo','k_zebra','k_ramiona',
+        'k_glowa',
+    },
+	BreakableJoints = {},
+	CollidableRagdoll = false,
+    notBleedingJoints = {
+		d_P_bron = {},
+		d_L_bron1 = {},
+    },
+    
+    GibExplosionStrength = 7000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.2,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"r_L_bark","FX_gib_blood",-1},
+				{"r_P_bark1","FX_gib_blood",-1},
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"r_L_bark", "gibSplash", true},
+				{"r_P_bark1", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"n_l_biodro", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"d_L_bron1", "weaponlost", true},
+				{"d_P_bron", "weaponlost", false},
+			},
+	    },
+}
+
+o.DeathTimer = 110                   -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee","throw"}
+o.AiParams.viewDistance = 36
+o.AiParams.viewDistance360 = 5
+o.AiParams.viewAngle = 150
+
+o.AiParams.weaponDamage = 20
+o.AiParams.weaponRange = 3.2
+o.AiParams.attackRangeAngle = 179
+
+o.AiParams.attackRange = 7
+o.AiParams.attackRangeMinDist = 4
+o.AiParams.escapeTimeWhenToCloseToPlayer = 38
+
+o.AiParams.hearing = 1.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {15,90}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1				-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 1.0
+o.AiParams.stopAfterWalkingTime = {30,60}
+
+o.AiParams.walkStep = 6.8
+o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 8
+o.AiParams.moveDisplacement = 3.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.02
+o.AiParams.escapeTime = 90
+
+o.AiParams.updateSpeed = 0.33
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+
+o.AiParams.ThrowableItem = "Fireball.CItem"
+o.AiParams.throwItemBindTo = "k_glowa"
+o.AiParams.throwItemBindToOffset = Vector:New(2.0, 0, 0)
+o.AiParams.throwAnim = "atak2"
+o.AiParams.throwAmmo = 99999
+o.AiParams.throwRangeMin = 12
+o.AiParams.throwRangeMax = 32
+o.AiParams.minDelayBetweenThrow = 8
+o.AiParams.escapeAfterThrowTime = 0		-- 0 - no escape
+o.AiParams.throwVelocity = 40
+
+o.shadow = 128

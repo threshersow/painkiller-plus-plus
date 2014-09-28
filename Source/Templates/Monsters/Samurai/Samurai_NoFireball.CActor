@@ -1,0 +1,4 @@
+o.BaseObj = "Samurai.CActor"
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee"}
+o.AiParams.hearing = 0.8

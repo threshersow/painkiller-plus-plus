@@ -1,0 +1,8 @@
+o.BaseObj = "Skull.CActor"
+
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee","TakeHostage"}
+o.AiParams.takeHostages = true
+o.AiParams.holdJoint = "k_szyja"			-- miejsce, gdzie go trzyma
+o.AiParams.holdJointDisplace = Vector:New(0.6,0.6,0.6)
+
+

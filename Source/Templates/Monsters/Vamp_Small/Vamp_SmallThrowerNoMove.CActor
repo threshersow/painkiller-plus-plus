@@ -1,0 +1,25 @@
+o.BaseObj = "Vamp_Small.CActor"
+o.Health = 100
+--o.enableGibWhenHPBelow = 0
+o.AiParams.delayBetweenAttacks = 25
+o.NeverMove = true
+
+o.AiParams.weapon = {
+		name = "3_daggers",
+		bulletsPerShot = 0,
+		maxDist = 105,
+		minDist = 2.2,
+		spreadAngle = 0.5,
+		damagePerBullet = 10,
+		PO_HitForce = 100,
+		maxYaw = 45,
+		maxPitch = 45,
+		--fireParticle = "RifleHitWall",	
+		--fireParticleSize = 0.2,
+	}
+
+
+o.AiParams.alwaysSee = true
+o.AiParams.aiGoals = {"idle","FarAttack", "hear",}
+
+o.enableTransformHP = 0

@@ -1,0 +1,231 @@
+o.BaseObj = "BubbleV2.CItem"
+o.TimeToLive = nil
+o.movingAngle = 45
+o.delays = {15,60}		-- min, max jak dlugo w ziemi przed wyskokiem
+o.NeverMove = true
+o.ExplosionStrength = 3000
+o.ExplosionRange = 30
+o.Damage = 10
+o.splashFX = "FX_splash_swamp.CActor"
+--o.explodeFX = "explo_bUblemo_sw"
+o.explodeFX = "explo_bUblemo_sw"
+-------------------------
+
+function BubbleV2_moving:OnCreateEntity()
+    self:PO_Create(BodyTypes.Simple, 0.2,ECollisionGroups.Noncolliding)
+	ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+    self.__Pos = Vector:New(0,0,0)
+
+    ENTITY.SetVelocity(self._Entity,0,0,0)
+    ENTITY.PO_Enable(self._Entity,false)
+
+    self._CurAnimIndex = MDL.SetAnim(self._Entity,"idle",true, 1.5, 0.0)
+    self._CurAnimLength = MDL.GetAnimLength(self._Entity, self._CurAnimIndex)
+    --if not debugMarek then
+		if self.waterImpJoint and not self._objWaterImpact then
+			local e = self._Entity
+			local j  = MDL.GetJointIndex(e,self.waterImpJoint)
+			--if debugMarek then Game:Print(self._Name.." *** 2 *** enable water imp "..j) end
+			local x,y,z = MDL.GetJointPos(e,j)
+
+   			local ke,obj = AddItem("StoneX.CItem",nil,Vector:New(x+1.0,y,z),true)
+			obj.ObjOwner = self
+			ENTITY.ComputeChildMatrix(ke,e,j)
+			ENTITY.RegisterChild(e,ke,true,j)
+						
+			obj.speedUp = 0
+			obj.speedDown = 0
+			obj.impAmplitude = self.waterImpAmplitude
+			obj.impPeriod = self.waterImpPeriod
+			obj.impRange = self.waterImpRange
+			obj.impSpeed = self.waterImpSpeed
+
+			self._objWaterImpact = obj
+		end
+	--end
+    ENTITY.EnableDraw(self._Entity,false)
+	self._movin = false
+	self._burn = true
+end
+
+function BubbleV2_moving:OnDamage(damage, owner, attacktype)
+	if attacktype and attacktype == AttackTypes.Bubble then
+		return
+	end
+	if self._moveTarget1 and self._moveTarget2 and self._movin and not self._burningFX then
+		PlaySound3D("actor/Swamp/Swamp_bubbleHit",self.Pos.X,self.Pos.Y,self.Pos.Z, 40,200)
+		if debugMarek then
+			DebugSphereX,DebugSphereY,DebugSphereZ = self.Pos.X,self.Pos.Y + 3.0,self.Pos.Z
+			DebugSphereRange = self.ExplosionRange
+		end
+		--AddObject("FX_rexplode.CActor",2,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z),r,true) 
+		AddPFX(self.explodeFX,0.6,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+
+		if self._sndLoop then
+			SND.Stop(self._sndLoop)
+		end
+		
+		--if not self._burningFX then
+		--	self._burningFX = self:BindFX("swampflame",1.0,'root')
+		--end
+
+		local x,y,z = self.Pos.X, self.Pos.Y+3.0, self.Pos.Z		
+		self._movin = false
+		if math.random(100) < 50 then
+			self.Pos.X,self.Pos.Y, self.Pos.Z = self._moveTarget1.Pos.X, self._moveTarget1.Pos.Y, self._moveTarget1.Pos.Z
+		else
+			self.Pos.X,self.Pos.Y, self.Pos.Z = self._moveTarget2.Pos.X, self._moveTarget2.Pos.Y, self._moveTarget2.Pos.Z
+		end
+		ENTITY.SetPosition(self._Entity, self.Pos.X, self.Pos.Y, self.Pos.Z)
+		ENTITY.EnableDraw(self._Entity,false)
+
+		ENTITY.SetVelocity(self._Entity,0,0,0)
+		ENTITY.PO_Enable(self._Entity,false)
+		WORLD.Explosion2(x,y,z,self.ExplosionStrength,self.ExplosionRange,nil,AttackTypes.Bubble,self.Damage)
+
+		self._delay = math.random(self.delays[1], self.delays[2])
+		self._delay2 = self._delay
+	end
+end
+
+
+function BubbleV2_moving:OnUpdate()
+	if self._moveTarget1 and self._moveTarget2 then
+		self.__Pos.X = self._moveTarget1.Pos.X
+		self.__Pos.Y = self._moveTarget1.Pos.Y
+		self.__Pos.Z = self._moveTarget1.Pos.Z
+		local dist = Dist3D(Player._groundx, Player._groundy + 2, Player._groundz, self.Pos.X, self.Pos.Y, self.Pos.Z)
+		if dist < self.DamageDist then
+			Player:OnDamage(self.Damage, self.ObjOwner)
+			self:OnDamage(self.Health + 2,self)
+		end
+
+		if not self._movin then
+			PlaySound3D("actor/swamp/Swamp_bubbleThrowfromFire"..math.random(1,2),self.Pos.X, self.Pos.Y, self.Pos.Z, 30, 160)
+			if self._delay2 then
+				self._delay2 = self._delay2 - 1
+				if self._delay2 < 0 then
+					self._delay2 = nil
+				end
+				return
+			end
+			
+			--[[if math.random(100) < 50 then
+				self.Pos.X,self.Pos.Y, self.Pos.Z = self._moveTarget1.Pos.X, self._moveTarget1.Pos.Y, self._moveTarget1.Pos.Z
+			else
+				self.Pos.X,self.Pos.Y, self.Pos.Z = self._moveTarget2.Pos.X, self._moveTarget2.Pos.Y, self._moveTarget2.Pos.Z
+			end--]]
+			
+			ENTITY.EnableDraw(self._Entity,true)
+			ENTITY.PO_Enable(self._Entity,true)
+
+			local dist = Dist2D(self.Pos.X, self.Pos.Z, self._moveTarget1.Pos.X, self._moveTarget1.Pos.Z)
+			local dist2 = Dist2D(self.Pos.X, self.Pos.Z, self._moveTarget2.Pos.X, self._moveTarget2.Pos.Z)
+
+			local x,y,z = self._moveTarget1.Pos.X, self._moveTarget1.Pos.Y, self._moveTarget1.Pos.Z
+			if dist2 > dist then
+				x,y,z = self._moveTarget2.Pos.X, self._moveTarget2.Pos.Y, self._moveTarget2.Pos.Z
+			end
+
+			if not self._sndLoop then
+				self._sndLoop = self:BindSound("actor/Swamp/Swamp_bubbleFlying-loop",15,60,true)	
+			else
+				SND.Play(self._sndLoop)
+			end
+			self._movin = true
+			
+			local x2,y2,z2 = self.Pos.X, self.Pos.Y, self.Pos.Z
+			
+			local dx = x2 - x
+			local dy = y2 - y
+			local dz = z2 - z
+
+			local v = Vector:New(dx, dy, dz)
+			v:Normalize()
+
+				local distToTarget = Dist3D(x2,y2,z2, x,y,z)
+			local vel
+			local angleXZ = math.atan2(z2 - z, x2 - x)
+			local x,y,z = CalcThrowVectorGivenAngle(distToTarget, self.movingAngle, angleXZ)
+			
+			ENTITY.SetVelocity(self._Entity,-x,y,-z)
+			self._delay = 10
+		else
+			if self._delay then 
+				self._delay = self._delay - 1
+				if self._delay == 0 then
+					self._delay = nil
+				end
+			else
+				if self.Pos.Y < 60 then
+					AddObject(self.splashFX, 1.0, Vector:New(self.Pos.X, self.Pos.Y, self.Pos.Z),nil,true)
+					local dist = Dist2D(self.Pos.X, self.Pos.Z, self._moveTarget1.Pos.X, self._moveTarget1.Pos.Z)
+					local dist2 = Dist2D(self.Pos.X, self.Pos.Z, self._moveTarget2.Pos.X, self._moveTarget2.Pos.Z)
+					self.Pos.X, self.Pos.Y, self.Pos.Z = self._moveTarget1.Pos.X, self._moveTarget1.Pos.Y, self._moveTarget1.Pos.Z
+					if dist2 < dist then
+						self.Pos.X, self.Pos.Y, self.Pos.Z = self._moveTarget2.Pos.X, self._moveTarget2.Pos.Y, self._moveTarget2.Pos.Z
+					end
+					ENTITY.SetPosition(self._Entity, self.Pos.X, self.Pos.Y, self.Pos.Z)
+
+					self._movin = false
+					ENTITY.SetVelocity(self._Entity,0,0,0)
+					ENTITY.PO_Enable(self._Entity,false)
+					ENTITY.EnableDraw(self._Entity,false)
+					
+					if self._sndLoop then
+						SND.Stop(self._sndLoop)
+					end
+					
+ 					self._delay2 = math.random(self.delays[1],self.delays[2])
+				end
+			end
+		end
+	else
+		if self._movin then
+			if self.Pos.Y < 60 then
+				AddObject(self.splashFX, 1.0, Vector:New(self.Pos.X, self.Pos.Y, self.Pos.Z),nil,true)
+				ENTITY.SetPosition(self._Entity, self.__Pos.X, self.__Pos.Y, self.__Pos.Z)
+				self.Pos.X = self.__Pos.X
+				self.Pos.Y = self.__Pos.Y
+				self.Pos.Z = self.__Pos.Z
+
+				self._movin = false
+				ENTITY.SetVelocity(self._Entity,0,0,0)
+				ENTITY.EnableDraw(self._Entity,false)
+				ENTITY.PO_Enable(self._Entity,false)
+				
+				if self._sndLoop then
+					SND.Stop(self._sndLoop)
+				end
+				
+ 				self._delay2 = math.random(self.delays[1],self.delays[2])
+			end
+		else
+			if ENTITY.PO_IsEnabled(self._Entity) then
+				ENTITY.SetVelocity(self._Entity,0,0,0)
+				ENTITY.EnableDraw(self._Entity,false)
+				ENTITY.PO_Enable(self._Entity,false)
+			end
+		end
+	end
+end
+
+
+function BubbleV2_moving:OnRelease()
+	Game:Print("   ERROR: BubbleV2_moving:OnRelease()")
+	if self._sndLoop then				-- narazie
+		ENTITY.Release(self._sndLoop)
+		self._sndLoop = nil
+	end
+	if self._objWaterImpact then
+		GObjects:ToKill(self._objWaterImpact)
+		self._objWaterImpact = nil
+	end
+	if debugMarek then
+		Game.freezeUpdate = true
+	end
+end
+
+function BubbleV2_moving:RestoreFromSave()
+	self._CurAnimLength = MDL.GetAnimLength(self._Entity, self._CurAnimIndex)
+end

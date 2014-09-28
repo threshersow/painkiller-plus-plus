@@ -1,0 +1,19 @@
+o.BaseObj = "EvilMonkV2.CActor"
+o.Scale = 1.2
+o.Health = 9
+o.RotateSpeed = 8
+
+o.AiParams.aiGoals = {"idle","throwAndDie", "hear"}
+o.AiParams.viewDistance = 20
+o.viewDistance360 = 20
+o.AiParams.viewAngle = 360
+
+o.AiParams.attackRange = 20
+o.AiParams.hearing = 1.0
+o.AiParams.perception = 1.0
+    
+o.AiParams.guardAngle = {0,10}
+o.AiParams.delayBetweenAttacks = 0
+
+o.AiParams.throwImmid = true
+o.NeverMove = true

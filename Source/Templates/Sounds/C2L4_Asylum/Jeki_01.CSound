@@ -1,0 +1,10 @@
+Jeki_01.Volume = 70
+Jeki_01.Interval = 14
+Jeki_01.RandomShift = 5
+Jeki_01.Falloff =
+{
+  Start = 1.7,
+  End = 15
+}
+Jeki_01.Sound ="C2L4_Asylum/Jeki_01"
+

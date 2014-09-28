@@ -1,0 +1,52 @@
+EDITOR.AddObjectTemplate("Particles","FX_xplode","FX_xplode.CActor");	
+
+FX_xplode.Model = "rexplode"
+FX_xplode.Scale = 3.0
+FX_xplode.NotCountable = true
+
+FX_xplode.s_SubClass = 
+{
+    Animations = {  
+        idle        = {0.7},
+    },
+}
+
+function FX_xplode:OnPrecache()
+	Cache:PrecacheParticleFX("FX_xplode1")
+	Cache:PrecacheParticleFX("FX_xplode")
+end
+
+function FX_xplode:OnCreateEntity()
+    self:BindFX("FX_xplode1",0.2,"e0")
+    self:BindFX("FX_xplode",0.2,"e1")
+    self:BindFX("FX_xplode",0.2,"e2")
+    self:BindFX("FX_xplode",0.2,"e3")
+    self:BindFX("FX_xplode",0.2,"e4")
+    self:BindFX("FX_xplode",0.2,"e5")
+    self:BindFX("FX_xplode",0.2,"e6")
+    self:BindFX("FX_xplode",0.2,"e7")
+    self:BindFX("FX_xplode",0.2,"e8")
+    self:BindFX("FX_xplode",0.2,"e9")
+    self:BindFX("FX_xplode",0.2,"e10")
+    self:BindFX("FX_xplode",0.2,"e11")
+    self:BindFX("FX_xplode",0.2,"e12")
+    self:BindFX("FX_xplode",0.2,"e13")
+    self:BindFX("FX_xplode",0.2,"e14")
+    self:BindFX("FX_xplode",0.2,"e15")
+    self:BindFX("FX_xplode",0.2,"e16")
+
+end
+
+function FX_xplode:OnFinishAnim(name)
+    GObjects:ToKill(self)
+end
+
+
+function FX_xplode:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+o.Immortal = true

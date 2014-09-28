@@ -1,0 +1,9 @@
+o.s_SubClass.SoundsDefinitions = {
+	collisiondetect = {
+		path = "impacts/",
+		samples = {"beachball-bounce1","beachball-bounce2","beachball-bounce3"},
+		dist1 = 16,
+		dist2 = 40,
+	},
+}
+

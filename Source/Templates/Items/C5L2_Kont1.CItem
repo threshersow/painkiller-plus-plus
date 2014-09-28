@@ -1,0 +1,11 @@
+o.BaseObj = "CItem"
+o.Model = "C5L2_Kont1"
+o.Scale = 3
+o.Immortal = true
+
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint4_getmass",
+	minVel = 0.4,
+	minDelayBetweenSounds = 1.0,
+}

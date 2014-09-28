@@ -1,0 +1,21 @@
+o.Scale = 0.15
+o.BaseObj = "CItem"
+o.DontTranslateToZero = true
+o.Mesh = "roboShape"
+o.Pack = "robolongCALY.dat"
+o.DestroyPack = "robolongDEAD.dat"
+o.Pos = Vector:New(0,0,0)
+--o.Immortal = true
+--o.Pinned = true
+
+o.Destroy.ExplosionStrength = 100
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+o.Destroy.AverageDelay = 0
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 0
+o.Destroy.EffectScale = 2
+o.Destroy.LifetimeAfterExplosion = 5
+o.Destroy.PartsNoncollidableWithSelf = false
+o.Destroy.Effect = "explode_dust"
+o.Health = 1

@@ -1,0 +1,10 @@
+Peron_01.Volume = 60
+Peron_01.Interval = 0
+Peron_01.RandomShift = 0
+Peron_01.Falloff =
+{
+  Start = 5,
+  End = 40
+}
+Peron_01.Sound ="C3L1_Train_Station/Peron_01"
+

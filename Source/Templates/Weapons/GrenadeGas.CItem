@@ -1,0 +1,15 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+
+o.Scale = 0.02
+o.Restitution = 0.8 -- sprezystosc
+o.LinearDamping = 0.2  -- tlumienie liniowe
+o.slowDown = 0.4
+o.TimeToLive = 30 * 5
+o.Mass = 40
+o.HPDrainDistance = 1
+o.HPDrain = 2
+o.burninFX = "molotow"
+o.FXwhileFlying = "molotow"
+o.Decal = "molotov"
+o.whileFlyingSize = 0.06

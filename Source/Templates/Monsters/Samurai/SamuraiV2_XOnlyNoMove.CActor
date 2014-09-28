@@ -1,0 +1,10 @@
+o.BaseObj = "SamuraiV2.CActor"
+o.AiParams.aiGoals = {"idle","hear","throw","samuraiV2AB"}
+
+o.AiParams.alwaysSee = true
+
+o.NeverMove = true
+
+o.AiParams.throwRangeMin = 1
+o.AiParams.throwRangeMax = 200
+o.AiParams.minDelayBetweenThrow = 2.0

@@ -1,0 +1,10 @@
+Wiatr_04.Volume = 40
+Wiatr_04.Interval = 0
+Wiatr_04.RandomShift = 0
+Wiatr_04.Falloff =
+{
+  Start = 3,
+  End = 40
+}
+Wiatr_04.Sound ="C3L2_Factory/Wiatr_04"
+

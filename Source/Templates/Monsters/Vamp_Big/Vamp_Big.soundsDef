@@ -1,0 +1,85 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'mvamp-krok1'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'mvamp-krok2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak = {
+		samples = {'mvamp-at'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	swish = {
+		samples = {'mvamp-swish'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	takestone = {
+		samples = {'vamp-take_stone',},
+		dist1 = 30,
+		dist2 = 60,
+	},
+	guts = {
+		samples = {'mvamp_guts',},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	throw = {
+		samples = {'vamp-throw_stone2','vamp-throw_stone',},
+		dist1 = 30,
+		dist2 = 60,
+	},
+	bodyfalls = {
+		samples = {'$/actor/hellbiker/hellb-boddyfalls1','$/actor/hellbiker/hellb-boddyfalls2'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	run = {
+		samples = {"mvamp-run-barrel","mvamp-run-barrel2"},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	hit = {
+		samples = {"mvamp-hit1","mvamp-hit2","mvamp-hit3","mvamp-hit4"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	onAttackOnce = {
+		samples = {"mvamp-halt1","mvamp-halt2"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	gib_splash = {
+		samples = {"$/impacts/meat-splash1","$/impacts/meat-splash2","$/impacts/meat-splash3","$/impacts/meat-splash4","$/impacts/meat-splash5"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	ex = {	--
+		samples = {"$/impacts/barrel-tnt-explode"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+
+        attackAmbient = {
+		samples = {'mvamp-attackscream1','mvamp-attackscream2','mvamp-attackscream3',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	death = {
+		samples = {"mvamp-death","mvamp-death2","mvamp-death3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	damage = {
+		samples = {"mvamp-hand-hit"},
+	},
+}
+

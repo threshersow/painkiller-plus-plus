@@ -1,0 +1,10 @@
+Skrzyp_op_01.Volume = 60
+Skrzyp_op_01.Interval = 7
+Skrzyp_op_01.RandomShift = 4
+Skrzyp_op_01.Falloff =
+{
+  Start = 4,
+  End = 20
+}
+Skrzyp_op_01.Sound ="C2L3_Opera/Skrzyp_op_01"
+

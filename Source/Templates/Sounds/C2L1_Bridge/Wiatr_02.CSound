@@ -1,0 +1,10 @@
+Wiatr_02.Volume = 60
+Wiatr_02.Interval = 0
+Wiatr_02.RandomShift = 0
+Wiatr_02.Falloff =
+{
+  Start = 50,
+  End = 100
+}
+Wiatr_02.Sound ="C2L1_Bridge/wiatr_02"
+

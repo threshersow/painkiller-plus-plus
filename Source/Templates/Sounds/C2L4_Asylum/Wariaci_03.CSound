@@ -1,0 +1,10 @@
+Wariaci_03.Volume = 70
+Wariaci_03.Interval = 20
+Wariaci_03.RandomShift = 7
+Wariaci_03.Falloff =
+{
+  Start = 2,
+  End = 30
+}
+Wariaci_03.Sound ="C2L4_Asylum/Wariaci_04"
+

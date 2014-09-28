@@ -1,0 +1,38 @@
+o.s_SubClass.ParticlesDefinitions = {
+    flame = {
+        pfx = "panzerflamethr",
+        scale = 1.0,
+        pos1Offset = Vector:New(0,2.0,0),
+        pos2Offset = Vector:New(0,3.2,2),
+    },
+    charge = {
+        pfx = "pspider_spell",
+        joint = "k_sz",
+        scale = 1.1,
+        offset = Vector:New(0,4,0),
+    },
+    chargeFlash = {
+        pfx = "pspider_flash",
+        joint = "k_sz",
+        scale = 8.0,
+        offset = Vector:New(0,4,0),
+    },
+    hitImmortal = {
+        pfx = "pspider_armour",
+        scale = 0.6,
+    },
+	shot = {
+		pfx = "tankshot",
+		scale = 1.5,
+	},
+	AB = {
+		pfx = "pspider_break",
+		scale = 8.5,
+	        joint = "root",
+		offset = Vector:New(0,0,0),
+	},
+	isImmortal = {
+	        pfx = "pspider_immortal",
+        	scale = 1.0,
+	},
+}

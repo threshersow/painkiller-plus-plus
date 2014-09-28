@@ -1,0 +1,12 @@
+o.s_SubClass.SoundsDefinitions = {
+	SoundHitByBullet = {
+		path = "impacts/",
+		samples = {"bullet-wood","bullet-wood2","bullet-wood3",},
+	},
+	CreakSound = {
+		samples = {"doors/whicked-woodscrape1","doors/whicked-woodscrape2","doors/whicked-woodscrape3",},
+		dist1 = 14,
+		dist2 = 42,
+	},
+}
+

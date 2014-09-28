@@ -1,0 +1,35 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "multiplayer/ctf",
+    disablePitch = true,
+    dist1 = 30,
+    dist2 = 80,
+    get = 
+    {    
+        samples = {"flag-get"},
+        samples_stereo = {"flag-get-stereo"},
+    },
+    drop = 
+    {    
+        samples = {"flag-drop"},
+        samples_stereo = {"flag-drop-stereo"},
+    },
+    returned = 
+    {    
+        samples = {"flag-returned"},
+        samples_stereo = {"flag-returned-stereo"},
+    },
+    appear = 
+    {    
+        samples = {"flag-appear"},
+    },
+    score = 
+    {    
+        samples = {"score"},
+        samples_stereo = {"score-stereo"},
+    },
+    score_lose = 
+    {    
+        samples = {"score-lose"},
+    },
+}

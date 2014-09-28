@@ -1,0 +1,9 @@
+o.BaseObj = "Psycho_elektro.CActor"
+o.AiParams.aiGoals = {"idle"}
+o.AiParams.GuardStill = false
+o.CreatePO = false
+o.Health = 9999
+
+o.LifeTime = 10.0
+o.FadeIn = 1.0
+o.FadeOut = 1.0

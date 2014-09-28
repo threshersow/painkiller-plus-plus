@@ -1,0 +1,10 @@
+wycie.Volume = 70
+wycie.Interval = 7
+wycie.RandomShift = 3
+wycie.Falloff =
+{
+  Start = 2,
+  End = 10
+}
+wycie.Sound ="C1L4_Cemetery/wycie"
+

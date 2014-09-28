@@ -1,0 +1,9 @@
+lup.Volume = 80
+lup.Interval = 11
+lup.RandomShift = 2
+lup.Falloff =
+{
+  Start = 2,
+  End = 20
+}
+lup.Sound ="C6L1_Orphanage/lup_01;C6L1_Orphanage/lup_02;C6L1_Orphanage/lup_03"

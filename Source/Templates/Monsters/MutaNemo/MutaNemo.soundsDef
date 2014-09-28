@@ -1,0 +1,66 @@
+o.s_SubClass.SoundsDefinitions = {
+	death  = {
+		samples = {"mnemo-death1","mnemo-death2",},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	atak = {
+		samples = {'mnemo-atak1','mnemo-atak2'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+    hit = {
+		samples = {'mnemo-hit1','mnemo-hit2',},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	waterSpash = {
+		path = "impacts/",
+		samples = {"water-splash1","water-splash2","water-splash3"},
+		dist1 = 8,
+		dist2 = 30,
+	},
+	damage = {
+		samples = {"mnemo-damage"},
+	},
+	swim = {
+		samples = {"mnemo-swim1","mnemo-swim2"},
+		dist1 = 8,
+		dist2 = 30,
+	},
+    onAttackOnce = {
+        samples = {"mnemo-halt1","mnemo-halt2"},
+   		dist1 = 10,
+		dist2 = 40,
+    },
+	swish = {
+        	samples = {"mnemo-swish",},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	jaw = {
+        	samples = {"mnemo-jaw1","mnemo-jaw2","mnemo-jaw3"},
+		dist1 = 10,
+		dist2 = 40,
+		playChance = 0.7,
+	},
+
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+        hit = {
+			{0.5,'PlaySound',"waterSpash"},
+			{0.0,'PlaySound',"hit"},
+        },
+        atak = {
+			{1.0,'PlaySound',"waterSpash"},
+			{0.4,'PlaySound','swish'},
+			{0.8,'PlaySound','jaw'},
+			{0.0,'PlaySound',"atak"},
+        },
+        swim = {
+		{0.4,'PlaySound','jaw'},
+		{1.2,'PlaySound','jaw'},
+		{1.9,'PlaySound','jaw'},
+	},
+}

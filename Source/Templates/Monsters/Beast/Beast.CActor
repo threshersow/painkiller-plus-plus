@@ -1,0 +1,196 @@
+o.Model = "beast"
+o.Scale = 1.05
+o.CreatePO = true
+o.Health = 150
+o.WalkSpeed = 1.3
+o.RunSpeed = 1.3
+o.RotateSpeed = 8
+o.Animation = "idle3"
+o.enableGibWhenHPBelow = -45
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Sphere,
+    Mass     = 200,
+    Friction = 0.0,
+    Restitution = 0.0,
+}
+
+o.s_SubClass = {
+    rotateHead = 0.6,
+    rotateHeadBone = "k_head",
+    rotateHeadMaxSpeed = 0.14,
+    rotateHeadRight = Vector:New(0.0, 1.0, -1.0),
+    rotateHeadLeft =  Vector:New(0.0, 1.0, -1.0),
+    rotateHeadCoords = Vector:New(1, 2, 3),
+    Animations = {
+		idle2   = {1.0,false},
+		idle1   = {1.0,false,{
+				{0.3,'PlaySound','idle3'},
+				}},
+		idle3   = {1.0,false},
+		atak_jump_start   = {1.2,false,{
+				{0.0,'BindRandomSound','atakJump'},
+			}},
+		atak_jump   = {1.2,false,{
+				{0.0,'SetVel'},
+				--{0.1,'BindRandomSound',{'ninja_sword_jump-start-swish',},12,48},
+				{0.35,'StopFlying'},
+				{0.33,'PlaySound','walk1'},
+				{0.37,'PlaySound','walk2'},
+			}},
+		walk   = {1.2,true,{
+				{0.6,'PlaySound','walk'},
+				{1.17,'PlaySound','walk'},
+			}},
+		run   = {1.8,true,{
+				{1.0,'PlaySound','walk'},
+				{1.0,'FootFX','joint1'},
+				{1.0,'FootFX','joint2'},
+				{0.2,'PlaySound','walk'},
+				{0.2,'FootFX','n_p_stopa3'},
+				{0.2,'FootFX','n_l_stopa3'},
+			}},
+
+		to_ball   = {1.0,false,{
+					{0.0,'PlaySound',"toball"},
+				}},
+		turlanie   = {8.0,false,{	--1.66
+					--[[{0.0,'PlaySound',"atak2"},
+					{0.3,'PlaySound',"swish_atak2"},
+					{0.4,'damage'},--]]
+					{0.05, 'StartMovement'},
+					{1.566, 'StopMovement'},
+				}},
+		atak1   = {1.4,false,{
+					{0.3,'damage'},
+					{0.0,'PlaySound',"atak"},
+				}},
+		hit1   = {1.2,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+		hit2   = {1.2,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+		rot_l  = {3.0,MC.ETransX + MC.ETransZ + MC.ERot,{
+				}},
+		rot_p  = {3.0,MC.ETransX + MC.ETransZ + MC.ERot,{
+				}},
+    },
+
+    RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"k_head", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"k_ogo", "bodyfalls", true},
+			},
+    },
+
+
+	NearAttacks = {"atak1",},
+    Hits = {"hit1", "hit2"},
+    Ambients = {"idle3","idle2","idle1"},
+    
+    DeathJoints = {
+        'k_head','k_ogo','n_l_stopa1','n_p_stopa1','r_l_dlo_root','r_p_dlo_root','r_l_bark','r_p_bark',
+    },
+    rotate45L = "rot_l",
+	rotate45R = "rot_p",
+
+	GibExplosionStrength = 7000,
+	GibExplosionRange = 1.8,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"k_head","FX_gib_blood",-1},
+		        {"n_p_biodro", "FX_gib_blood",-1},
+				{"n_l_biodro", "FX_gib_blood",-1},
+				{"r_l_bark", "FX_gib_blood",-1},
+				{"r_p_bark", "FX_gib_blood",-1},
+				{"r_p_bark_root", "FX_gib_blood",1},
+				{"k_ogo", "FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+		        {"n_p_biodro", "gibSplash", true},
+				{"n_l_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_head", "gibSplash", true},
+				{"r_p_bark_root", "gibSplash", true},
+				{"k_ogo", "gibSplash", true},
+			},
+	    },
+
+}
+
+
+o.DeathTimer = 75                  -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt","hear","flee","closeAttack", "JumpUP", "beastRoll"}
+o.AiParams.viewDistance = 90
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 179
+
+o.AiParams.weaponDamage = 12
+o.AiParams.attackRange = 1.8
+o.AiParams.attackRangeAngle = 90
+o.AiParams.hearing = 2.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {-120,120}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1			-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 1.0
+o.AiParams.stopAfterWalkingTime = {90,120}
+
+o.AiParams.walkStep = 5.0
+--o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 20
+o.AiParams.moveDisplacement = 3.5
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 100
+
+o.AiParams.updateSpeed = 0.2
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+o.shadow = 128
+
+
+o.AiParams.jumpRangeMin = 4
+o.AiParams.jumpRangeMax = 13
+o.AiParams.jumpAnim = "atak_jump"
+o.AiParams.prepareJumpAnim = "atak_jump_start"
+o.AiParams.jumpDamageRange = 2.0
+o.CollisionDamage = 25							-- w skoku
+o.AiParams.doNotRotateWhileJumping = true
+o.AiParams.minDelayBetweenJumps = 4.5
+o.AiParams.jumpAngle = 20.0 
+o.AiParams.jumpDistanceMinus = -4.0				-- na jaka odleglosc przed graczem ma skakac
+o.AiParams.jumpAnimLen = 1.0					-- w sec.
+
+o.AiParams.rollSpeed = 6.0
+o.AiParams.minDelayBetweenRoll = 6.0
+o.AiParams.rollRangeMin = 9
+o.AiParams.rollRangeMax = 15
+o.AiParams.rollAnimPrepare = "to_ball"
+o.AiParams.rollAnim = "turlanie"
+o.AiParams.rollDamage = 30
+o.AiParams.soundAmbientDelay = 1.0
+
+o.disbleRotWhenStartWalk = true
+

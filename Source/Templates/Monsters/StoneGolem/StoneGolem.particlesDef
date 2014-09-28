@@ -1,0 +1,18 @@
+o.s_SubClass.ParticlesDefinitions = {
+	forJoints = {
+		pfx = 'stonegolemdust',
+		scale = 0.5,
+	},
+	spawn = {   
+		pfx = "stonegolemspawn",
+		scale = 3.0,
+		joint = "root",
+	},
+	hit = {   
+		pfx = "stonegolemhit",
+		scale = 3.0,
+		joint = "dlo_lewa_root",
+		offset = Vector:New(5,0,0),
+	},
+
+}

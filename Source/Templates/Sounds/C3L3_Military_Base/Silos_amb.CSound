@@ -1,0 +1,10 @@
+Silos_amb.Volume = 80
+Silos_amb.Interval = 6
+Silos_amb.RandomShift = 3
+Silos_amb.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+Silos_amb.Sound ="C3L3_Military_Base/Silos_amb"
+

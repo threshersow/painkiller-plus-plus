@@ -1,0 +1,195 @@
+o.Model = "leper_Monk"
+o.Scale = 1.4
+o.CreatePO = true
+o.Health = 1000
+o.WalkSpeed = 6.0
+o.RotateSpeed = 3.0
+
+o.throwHeart = "red"
+o.Animation = "idle01"
+o.enableGibWhenHPBelow = -59
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 140,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.4,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.18,
+
+	Animations = {
+		hit01   = {1.0,false,{
+				{0.0,'PlaySoundHit',"hit"},
+			}},
+		hit02   = {1.0,false,{
+				{0.0,'PlaySoundHit',"hit"},
+			}},
+		idle01   = {1.0,false},
+		idle02   = {1.0,false,{
+			}},
+		odpychajacy = {1.4,false, {
+				{0.0,'PlaySound',"magic"},
+				--{0.9,'BindFXPush'},
+				{0.9,'damage',16,10},
+			}},
+		palom_rzut = {1.0,false,{
+				{0.9,'PlaySound',"swish"},
+				{0.2,'PlaySound',"voice"},
+				{0.8,'PlaySound',"throw"},
+				{0.92,'ThrowImmid'},
+			}},
+		trupami_rzut = {1.0,false,{
+				{0.0,'PlaySound',"corpse"},
+				{1.0,'Take'},
+				{4.3,'ThrowRagdoll'},
+			}},
+		walk = {1.0,true, {
+			{0.65,'PlaySound',"step1"},
+			{0.65,'FootFX','s_l_srodstopie'},
+			--{1.0,'PlaySound',{'lepperm_stick-krok',},5,20,},
+			{0.07,'PlaySound',"step2"},
+			{0.07,'FootFX','s_p_srodstopie'},
+		}},
+		run = {1.0,true, {
+			{0.65,'PlaySound',"step1"},
+			{0.65,'FootFX','s_l_srodstopie'},
+			{0.07,'PlaySound',"step2"},
+			{0.07,'FootFX','s_p_srodstopie'},
+		}},
+    },
+
+    RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"r_p_bark", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_l_bark", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"k_glowa", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"br1", "weaponlost", false},		-- joint, {sounds}, blood
+			},
+    },
+
+    notBleedingJoints = {
+		br1 = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+	Ambients = {"idle01","idle02"},
+    DeathJoints = {
+        'k_glowa','n_p_kolano','n_l_kolano','r_l_lokiec','r_p_lokiec','r_p_bark','r_l_bark','k_ogo','k_szyja',
+    },
+
+	NearAttacks = {"odpychajacy",},
+
+    GibExplosionStrength = 8000,
+	GibExplosionRange = 3.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"root","FX_gib_blood",1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"br1", "weaponlost", false},
+			},
+	    },
+
+}
+
+
+o.DeathTimer = 130
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","throwCorpse","hear","hunt","closeAttack"}
+
+o.AiParams.viewDistance = 60
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 120
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 10.0
+o.AiParams.attackRangeAngle = 100
+o.AiParams.hearing = 1.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,60}
+
+o.AiParams.walkStep = 6.0
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 15
+o.AiParams.moveDisplacement = 3.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+
+o.AiParams.updateSpeed = 0.33
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = false
+
+
+o.AiParams.ThrowableItem = "Spear.CItem"
+o.AiParams.throwAnim = "palom_rzut"
+o.AiParams.throwAmmo = 1
+
+o.AiParams.throwRangeMin = 12
+o.AiParams.throwRangeMax = 60
+o.AiParams.minDelayBetweenThrow = 2
+o.AiParams.escapeAfterThrowTime = 40		-- 0 - no escape
+o.AiParams.throwAngle = 10
+--o.AiParams.throwVelocity = 40
+o.AiParams.throwDistMinus = 0.0			-- <0 celuje za gracza, 0> przed gracza
+o.AiParams.minDelayBetweenThrow = 3.0
+
+o.shadow = 128
+
+o.AiParams.holdJointSrc = "dlo_lewa_root"
+o.AiParams.holdJointDst = "k_szyja"
+
+o.AiParams.ABHp = 0.2
+o.AiParams.ThrowAnim = "palom_rzut"
+o.AiParams.throwItemBindTo = "dlo_prawa_root"
+
+o.AiParams.damageByThrowenRagdoll = 50
+o.AiParams.ragdollToThrowDistSearch = 50
+
+o.AiParams.ragdollLiftSpeed = 1.2					-- szybkosc podnoeszenia ragdolla (czyli tez wysokosc)
+o.AiParams.ragdollLiftRotationSpeed = 2.8			-- szybkosc obracania ragdolla
+o.AiParams.hideMesh = "polySurfaceShape991"
+o.AiParams.ragdollThrowFX = "lm_fx"
+o.AiParams.ragdollThrowFXScale = 0.5
+
+o.AiParams.throwRagdollDistMinus = 0.0
+o.AiParams.throwRagdollAngle = nil
+o.AiParams.throwRagdollVelocity = 40.0
+o.AiParams.rotateRagdollToPlayer = true				-- czy ragdoll przed rzuceniem ma sie obrocic w kierunku playera, false - do bindpos-y
+o.AiParams.throwRagdollRotationInterpolation = true	-- czy plynnie ma sie ragdoll obracac do bindpos-y
+
+o.AiParams.bindedRagdollFX = {
+	name = "leperfx",
+	scale = 0.4,
+}

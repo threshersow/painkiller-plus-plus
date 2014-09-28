@@ -1,0 +1,114 @@
+o.Mesh = "ballShape11"
+o.Pack = "ball.dat"
+o.Scale = 0.04
+o.Timeout = 2*30+5
+
+o.Restitution = 1.0 -- sprezystosc
+o.Friction = 0.8 -- tarcie
+o.LinearDamping = 0.0  -- tlumienie liniowe
+
+o.Mass = 40
+o.ExplosionCamMove = 0.18
+o.ExplosionCamRotate = 0.18
+o.ExplosionCamDistance = 18
+o.TestDeathZone = true
+o.SoundInWater = "impacts/bulletbig-water"
+o.ExplodeOnCollision = false		-- true dla rakiet
+--o.LinearDamping = 0.0
+o.Damage = 40
+o.ExplosionStrength = 3000
+o.ExplosionRange    = 5
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX("Grenade")
+    Cache:PrecacheItem("KamykWybuch.CItem")
+end
+-------------------------------------------------------------------------------
+function o:OnCreateEntity()
+    self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+    --self:PO_Create(BodyTypes.Sphere,0.2)
+    local e = ENTITY.Create(ETypes.Trail,"trail_grenade","trailName")
+	ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+    self.timer = 3
+end
+-------------------------------------------------------------------------------
+function o:Update()
+    if not self._enabled then return end
+    if self.timer then
+        self.timer = self.timer - 1
+        if self.timer < 0 then
+            self.timer = nil
+            ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+            ENTITY.EnableCollisions(self._Entity,true,0.3,0.01)
+        end
+    end
+    self.Timeout = self.Timeout - 1
+    if self.Timeout <= 0 then self:Explode(self.Pos.X, self.Pos.Y, self.Pos.Z) end
+end
+-------------------------------------------------------------------------------
+function o:Explode(x,y,z)
+    ENTITY.EnableCollisions(self._Entity,false) -- disable next callbacks        
+    ENTITY.PO_Enable(self._Entity,false)
+    PlayLogicSound("EXPLOSION",x,y,z,15,30)
+    if self.ObjOwner then
+		WORLD.Explosion2(x,y,z,self.ExplosionStrength,self.ExplosionRange,self.ObjOwner._Entity,AttackTypes.Grenade,self.Damage)    
+	else
+		WORLD.Explosion2(x,y,z,self.ExplosionStrength,self.ExplosionRange,nil,AttackTypes.Grenade,self.Damage)    
+	end
+    self:Client_Explosion(self._Entity)    
+    GObjects:ToKill(self)
+end
+-------------------------------------------------------------------------------
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+	ENTITY.PO_SetLinearDamping(self._Entity, 1.5)
+    local obj = EntityToObject[e]
+    if obj and self.ObjOwner ~= obj then
+        if obj._Class == "CPlayer" then 
+            obj:OnDamage(self.Damage,self.ObjOwner,AttackTypes.Grenade)
+            obj._GotInstantExplosion = Game.Counter
+		end
+		self:Explode(x,y,z)
+    else
+        if self.ExplodeOnCollision then
+            self:Explode(x,y,z)
+        else
+            self:Client_GrenadeCollision(self._Entity)
+        end
+    end
+end
+-------------------------------------------------------------------------------
+function o:Client_GrenadeCollision(entity)
+    local x,y,z = ENTITY.GetPosition(entity)    
+    PlaySound3D('weapons/grenadelauncher/weapon_grenade_bounce',x,y,z,15,20)
+end
+-------------------------------------------------------------------------------
+function o:Client_Explosion(entity)
+    local x,y,z = ENTITY.GetPosition(entity)
+    ENTITY.PO_Enable(entity,false)
+    
+    -- special FX
+    SOUND.Play3D("actor/maso/maso_grenade-explosion",x,y,z,12)
+    AddPFX("Grenade",0.4,Vector:New(x,y,z))            
+    
+    -- physical parts
+    local n = math.random(4,6) -- how many (min,max)
+    local scales = {0.6, 0.8}
+    for i = 1, n do
+        local scale = scales[math.random(1,2)]
+        local ke = AddItem("KamykWybuch.CItem",scale,Vector:New(x,y+0.5+i/10,z))
+        local vx = FRand(-27,37) -- velocity x
+        local vy = FRand(22,34)  -- velocity y
+        local vz = FRand(-27,37) -- velocity z
+        ENTITY.SetVelocity(ke,vx,vy,vz)
+        ENTITY.SetTimeToDie(ke,FRand(1,2)) -- lifetime (min,max)
+    end
+    
+    -- light
+    AddAction({{"Light:a[1],a[2],a[3],200,200,100, 8, 10 , 1, 0.02,0.1,0.02"}},nil,nil,x,y+1.5,z)
+    if Game._EarthQuakeProc then
+        Game._EarthQuakeProc:Add(x,y,z, 5, 18, 0.18, 0.18, false)
+    end
+end

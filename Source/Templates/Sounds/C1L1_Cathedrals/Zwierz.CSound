@@ -1,0 +1,10 @@
+Zwierz.Volume = 100
+Zwierz.Interval = 10
+Zwierz.RandomShift = 5
+Zwierz.Falloff =
+{
+  Start = 3,
+  End = 20
+}
+Zwierz.Sound ="C1L1_Cathedrals/krypta_03;C1L1_Cathedrals/krypta_03_ryk;C1L1_Cathedrals/krypta_03_stuk"
+

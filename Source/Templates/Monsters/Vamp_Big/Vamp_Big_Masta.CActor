@@ -1,0 +1,11 @@
+o.BaseObj = "Vamp_Big.CActor"
+o.Health = 99999
+o.Model = "vamp_cat"
+o.WalkSpeed = 1.1
+
+o.s_SubClass.SoundDir = "vamp_small"
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear"}
+
+o.s_SubClass.NearAttacks = {"uppercut",}
+o.disableFreeze = true

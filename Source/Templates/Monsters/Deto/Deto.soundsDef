@@ -1,0 +1,105 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'deto-krok1',},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	step2 = {
+		samples = {'deto-krok2',},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	ingnition = {
+		samples = {'deto-ignition',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	putdyn = {
+		samples = {'deto-putdynamite',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+
+	onAttackOnce = {
+		samples = {"deto-halt1", "deto-halt2", "deto-halt3"},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	hit = {
+		samples = {'deto-hit1','deto-hit2','deto-hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	deto = {
+		samples = {'deto-deto','deto-deto2','deto-deto3'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+
+	attackAmbient = {
+		samples = {"deto-attackscream1","deto-attackscream2","deto-attackscream3","deto-attackscream4",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	death = {
+		samples = {"deto-death1","deto-death2","deto-death3",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"deto-bodyfalls",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	damage = {
+		samples = {"deto-attack-head"},
+	},
+    breath1 = {
+        samples = {"deto-breath1",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+    breath2 = {
+        samples = {"deto-breath2",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+
+    throwDynamite = {
+        samples = {"deto-throwdynamite",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+		hit1   = {
+				{0.0,'PlaySoundHit',"hit"},
+				},
+        idle = {
+            {1.4,'PlaySoundHit',"breath1"},
+            {0.5,'PlaySoundHit',"breath2"},
+        },
+		hit2   = {
+				{0.0,'PlaySoundHit',"hit"},
+				},
+		detonacja   = {
+				{0.0,'PlaySoundHit',"deto"},
+                {0.8,'PlaySound',"ingnition"},
+				},
+        run_drop = {
+                {0.6,'PlaySound','throwDynamite'},
+                {0.8,'PlaySound','step1'},
+                {0.0,'PlaySound','step2'},
+
+        },
+        walk = {
+                {0.8,'PlaySound','step1'},
+                {0.0,'PlaySound','step2'},
+        },
+        run = {
+                {0.8,'PlaySound','step1'},
+                {0.0,'PlaySound','step2'},
+        },
+}

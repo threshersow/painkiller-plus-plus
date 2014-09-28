@@ -1,0 +1,5 @@
+ghost_Light["Color"] = Color:New(0,140,255,0)
+ghost_Light["Range"] = 7
+ghost_Light["Type"] = 2
+ghost_Light["IsDynamic"] = true
+ghost_Light["Intensity"] = 1

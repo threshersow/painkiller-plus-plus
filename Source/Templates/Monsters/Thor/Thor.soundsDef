@@ -1,0 +1,92 @@
+o.s_SubClass.SoundsDefinitions = {
+	idle = {
+		samples = {'thor-idle',},
+		dist1 = 100,
+		dist2 = 250,
+		joint = 'k_szyja',
+	},
+	step1 = {
+		samples = {'thor-krok1','thor-krok2','thor-krok3','thor-krok4'},
+		dist1 = 200,
+		dist2 = 350,
+		joint = 's_l_srodstopie',
+	},
+	step2 = {
+		samples = {'thor-krok1','thor-krok2','thor-krok3','thor-krok4'},
+		dist1 = 200,
+		dist2 = 350,
+		joint = 's_p_srodstopie',
+	},
+	stepgrowl = {
+		samples = {'thor-krok-growl1',},
+		dist1 = 200,
+		dist2 = 350,
+		playChance = 0.3,
+		joint = 'k_szyja',
+	},
+	stepgrowl2 = {
+		samples = {'thor-krok-growl2',},
+		dist1 = 200,
+		dist2 = 350,
+		playChance = 0.3,
+		joint = 'k_szyja',
+	},
+	idle_nh = {
+		samples = {'thor-krok-growl2','thor-krok-growl1',},
+		dist1 = 100,
+		dist2 = 250,
+		playChance = 0.6,
+		joint = 'k_szyja',
+	},
+	prepare = {
+		samples = {'thor-prepare',},
+		dist1 = 100,
+		dist2 = 250,
+		joint = 'k_szyja',
+	},
+	swish = {
+		samples = {"thor-swish"},
+		joint = "mlot1",
+		dist1 = 100,
+		dist2 = 250,
+	},
+	at = {
+		samples = {'thor-at1','thor-at2','thor-at3',},
+		dist1 = 100,
+		dist2 = 250,
+		joint = "mlot1",
+	},
+	punch = {
+		samples = {'thor-hammer-punch1','thor-hammer-punch2'},
+		dist1 = 150,
+		dist2 = 250,
+		joint = "mlot1",
+	},
+	prepare2 = {
+		samples = {'thor-prepare-long',},
+		dist1 = 100,
+		dist2 = 250,
+		joint = 'k_szyja',
+	},
+	at3 = {
+		samples = {'thor-at3',},
+		dist1 = 100,
+		dist2 = 250,
+		joint = 'k_szyja',
+	},
+    
+	death = {
+		samples = {"thor-death" },
+		dist1 = 100,
+		dist2 = 250,
+		joint = 'k_szyja',
+	},
+
+    hurt = {
+		samples = {"thor-hit1","thor-hit2","thor-hit3"},
+		dist1 = 100,
+		dist2 = 250,
+		joint = 'k_szyja',
+	},
+
+}

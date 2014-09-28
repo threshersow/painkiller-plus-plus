@@ -1,0 +1,86 @@
+StakeGunGL.Model = "KGR"
+StakeGunGL.Scale = 0.3
+StakeGunGL.Pos = Vector:New(0.45, -0.80 ,-1.1)
+StakeGunGL.Ang = Vector:New(0  , -1.57,  0)
+StakeGunGL._ShotNr = 0
+StakeGunGL.ShotCamMove = 0.025
+StakeGunGL.ShotCamRotate = 0.025
+StakeGunGL.s_SubClass = {
+
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout    = 45,
+    AltFireTimeout = 18,        
+    
+    -- Stake
+    StakeSpeed = 70,
+    BurnStakeAfterTime = 0.35,
+    EnemyThrowBack     = 3500,
+    EnemyThrowUp       = 0,
+    StakeDamage        = 130,
+    BurningStakeDamage = 180,
+    
+    -- Grenade
+    GrenadeDamage            = 120,
+    GrenadeVelocityUp        = 6,
+    GrenadeVelocityForward   = 19,
+    GrenadeExplosionStrength = 3200,
+    GrenadeExplosionRange    = 6,
+    GrenadeWMGasAmount       = 12,
+    GrenadeWMGasDamage       = 2,
+    GrenadeWMGasRange        = 1,
+    GrenadeWMGasLifeTime     = 5,
+    
+    -- Combo
+    ComboCatchDistance     = 0.7,
+    ComboExplosionDamage   = 200,
+    ComboExplosionRange    = 7,
+    ComboExplosionStrength = 5000,
+
+    Animations = 
+    {   
+        idle        = {1.0 ,0.3},
+        walk        = {1.0 ,0.3},
+        grshot      = {1.5, 0},        
+        pinshot      = {1, 0},        
+    }
+}
+
+StakeGunGL.s_MPSubClass = {
+
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout    = 1.2*30,
+    AltFireTimeout = 18,        
+
+    -- Stake
+    StakeSpeed = 70,
+    BurnStakeAfterTime = 0.35,
+    EnemyThrowBack = 2000,
+    EnemyThrowUp   = 0,
+    StakeDamage = 200,
+    BurningStakeDamage = 250,
+
+    -- Grenade
+    GrenadeDamage   = 110, -- granaty
+    GrenadeVelocityUp = 8,
+    GrenadeVelocityForward = 28,
+    GrenadeExplosionStrength = 2000,
+    GrenadeExplosionRange = 5.5,
+    GrenadeWMGasAmount = 12,
+    GrenadeWMGasDamage = 50,
+    GrenadeWMGasRange = 1,
+    GrenadeWMGasLifeTime = 2,
+    
+    -- Combo
+    ComboCatchDistance     = 0.9,
+    ComboExplosionDamage   = 200,
+    ComboExplosionRange    = 7,
+    ComboExplosionStrength = 4000,
+
+    Animations = 
+    {   
+        idle        = {1.0 ,0.3},
+        walk        = {1.0 ,0.3},
+        grshot      = {1.5, 0},        
+        pinshot     = {1.5, 0},        
+    }
+}

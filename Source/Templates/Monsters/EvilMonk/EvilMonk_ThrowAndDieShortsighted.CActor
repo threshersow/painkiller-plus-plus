@@ -1,0 +1,7 @@
+EvilMonk_ThrowAndDieShortsighted.BaseObj = "EvilMonk_ThrowAndDie.CActor"
+
+EvilMonk_ThrowAndDieShortsighted.AiParams.viewDistance = 20
+EvilMonk_ThrowAndDieShortsighted.AiParams.viewDistance360 = 0
+EvilMonk_ThrowAndDieShortsighted.AiParams.attackRange = 20
+
+

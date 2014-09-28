@@ -1,0 +1,10 @@
+Remont_02.Volume = 50
+Remont_02.Interval = 20
+Remont_02.RandomShift = 4
+Remont_02.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Remont_02.Sound ="C5L2_Docks/Remont_02"
+

@@ -1,0 +1,94 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'Girl-krok1'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'Girl-krok2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+    walkVoice = {
+        samples = {"Girl-walkvoice1","Girl-walkvoice2","Girl-walkvoice3"},
+		playChance = 0.15,
+   		dist1 = 15,
+		dist2 = 50,
+    },
+	bodyfalls = {
+		samples = {'Girl-bodyfalls'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	death = {
+		samples = {"Girl-death1","Girl-death2","Girl-death3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	damage = {
+		samples = {"Girl-damage"},
+	},
+	onAttackOnce = {
+		samples = {"Girl-halt1","Girl-halt2"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+  	hit = {
+		samples = {"Girl-hit1","Girl-hit2","Girl-hit3"},
+		dist1 = 16,
+		dist2 = 60,
+	},  
+	atak = {
+		samples = {'Girl-atak1','Girl-atak2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+}
+
+if Tweak.GlobalData.GermanVersion then
+	o.s_SubClass.SoundsDefinitions.onAttackOnce = {
+		samples = {"$/actor/nun/nun_at1","$/actor/nun/nun_at2","$/actor/nun/nun_at3"},
+		dist1 = 30,
+		dist2 = 70,
+    }
+	o.s_SubClass.SoundsDefinitions.death = {
+		samples = {"$/actor/nun/nun_de1",},
+		dist1 = 16,
+		dist2 = 60,
+    }
+    o.s_SubClass.SoundsDefinitions.hit = {
+		samples = {"$/actor/nun/nun_hit1","$/actor/nun/nun_hit3"},
+		dist1 = 16,
+		dist2 = 60,
+	}
+    o.s_SubClass.SoundsDefinitions.walkVoice = {
+        samples = {"Girl-walkvoice2","Girl-walkvoice3"},
+		playChance = 0.15,
+   		dist1 = 15,
+		dist2 = 50,
+    }
+end
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+            {0.0,'PlaySoundHit',"walkVoice"},
+            {0.4,'PlaySound',"step1"},
+			{0.0,'PlaySound',"step2"},
+		},
+		run   = {
+            {0.0,'PlaySoundHit',"walkVoice"},
+            {0.4,'PlaySound',"step1"},
+			{0.0,'PlaySound',"step2"},
+		},
+
+        hit1 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        hit2 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+
+        atak = {
+            {0.0,'PlaySound',"atak"},
+        },
+}

@@ -1,0 +1,4 @@
+o.BaseObj = "CItem"
+o.Mesh = "polySurfaceShape65226"
+o.Pack = "C2L1_Panel.dat" 
+o.Scale = 1

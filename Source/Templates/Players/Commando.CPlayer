@@ -1,0 +1,77 @@
+o.Model = "mp-model-player7"
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "multiplayer/player",
+    dist1 = 10,
+    dist2 = 50,
+    Death = 
+    {
+        path  = "multiplayer/player-skullface",    
+        dist1 = 15,
+        dist2 = 75,
+        samples = {"skullfaceplayer_death1", "skullfaceplayer_death2", "skullfaceplayer_death3", "skullfaceplayer_death4"},
+    },            
+    Death_Gib = 
+    {
+        dist1 = 15,
+        dist2 = 75,
+        samples = {"manplayer_telefrag2"},
+    },
+    Death_Telefrag = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_telefrag1","manplayer_telefrag2","manplayer_telefrag3"},
+    },
+    Hurt_Small =
+    {
+        path  = "multiplayer/player-skullface",    
+        samples = {"skullfaceplayer_hurt_small1","skullfaceplayer_hurt_small2","skullfaceplayer_hurt_small3",
+                   "skullfaceplayer_hurt_small4","skullfaceplayer_hurt_small5"}
+    },
+    Hurt_Medium =             
+    {   
+        path  = "multiplayer/player-skullface",    
+        samples = {"skullfaceplayer_hurt_medium1","skullfaceplayer_hurt_medium2",
+                   "skullfaceplayer_hurt_medium3"}
+    },
+    Hurt_Big = 
+    {
+        path  = "multiplayer/player-skullface",    
+        samples = {"skullfaceplayer_hurt_big1","skullfaceplayer_hurt_big2","skullfaceplayer_hurt_big3"}
+    },                
+Hurt_Pent = {
+				samples = {"$/actor/leper_monk/lepper-odrzut"},
+			},
+    Hurt_OnHitGround = 
+    {
+        path  = "multiplayer/player-skullface",    
+        samples = {"skullfaceplayer_jump_end-hurt1","skullfaceplayer_jump_end-hurt1"}
+    },
+    Body_Falls = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_bodyfalls"}
+    },
+    Jump = 
+    {   
+        path  = "multiplayer/player-skullface",    
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"skullfaceplayer_jump_1","skullfaceplayer_jump_2"}
+    },
+    Jump_Double = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_double_1","manplayer_double_2"}
+    },
+    Jump_End  = 
+    {
+        path  = "multiplayer/player-skullface",    
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"skullfaceplayer-jump_end1","skullfaceplayer-jump_end2"}
+    },
+}

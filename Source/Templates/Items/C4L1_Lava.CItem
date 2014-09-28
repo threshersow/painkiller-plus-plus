@@ -1,0 +1,108 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "meteor_caly.dat"
+
+o.DestroyPack = "meteor_zlom.dat"
+o.Destroy.ExplosionStrength = 3200
+
+o.Destroy.Strength = 300
+o.Destroy.ExplosionStrength = 2000
+o.Destroy.ExplosionDamage = 10
+o.Destroy.ExplosionRadius = 6
+o.Health = 1
+o.Destroy.AverageDelay = 0.0
+o.Destroy.AverageVariation = 0
+o.Destroy.MinSpeedOnCollision = 10
+o.Destroy.LifetimeAfterExplosion = 1.5
+
+o.Scale = 0.15
+o.Pos = Vector:New(0,0,-4)
+o.Restitution = 0.2
+o.speed = 100
+o._fx = 'or_lava'
+o.TimeToLive = 30 * 30
+o.earthqRange = 80
+o.earthqTime = 16
+o.earthqStren = 0.5
+o.soundBindPosY = 0
+o.NotCountable = true
+
+--o.CollisionSound = {"impacts/stonebig-impact1","impacts/stonebig-impact2","impacts/stonebig-impact3","stonebig-impact4","impacts/stonebig-impact5"}
+o.explSound = "actor/giant/giant_lapa_uderza_w_glebe"
+
+--============================================================================
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self._fx)    
+end
+--============================================================================
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+	--[[if e then
+		local obj = EntityToObject[e]
+		if obj then
+		else
+			--if y < 10 then
+				--local name = self.CollisionSound[math.random(1,table.getn(self.CollisionSound))]
+				--PlaySound3D(name, x,y,z, 30, 100)
+				PlaySound3D("weapons/machinegun/rocket_hit", x,y,z, 30, 120)
+			--end
+		end
+	end--]]
+	ENTITY.EnableCollisions(self._Entity, false)
+	--ENTITY.PO_EnableGravity(self._Entity,true)
+	self:OnDamage(99999, self)
+	Game._EarthQuakeProc:Add(x,y,z, 12, 13, 0.2, 0.2, 1.0)
+	ENTITY.PO_Enable(self._Entity, false)
+	--WORLD.Explosion2(x,y,z, 1000,6, nil, AttackTypes.Rocket, FRand(50,100))
+
+	SOUND.Play3D(self.explSound,x,y,z,30,160)
+end
+--============================================================================
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh, nil, ECollisionGroups.Noncolliding)
+	if self._fx then
+		self:BindFX(self._fx, 0.1, -1)
+	end
+	self.timer = 10
+	self:BindSound("misc/fontain-blowupmetheor")
+end
+--============================================================================
+function o:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true, 0.3, 8, 0.3)
+			self.timer = nil
+		end
+	end
+	
+	--[[if self.mode == 1 then
+		local v = Vector:New(Player._groundx - self.Pos.X+FRand(-20.0,20.0), Player._groundy+FRand(1.0,2.0) - self.Pos.Y, Player._groundz - self.Pos.Z+FRand(-20.0,20.0))
+		v:Normalize()
+		local rnd = FRand(0.7, 1.0)
+		ENTITY.SetVelocity(self._Entity,  v.X * self.speed * rnd, v.Y * self.speed * rnd, v.Z * self.speed * rnd)
+		ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.InsideItems)
+		ENTITY.EnableCollisions(self._Entity, true, 0.3, 8, 0.3)
+		self.mode = 2
+		
+	end
+	if self.mode == 4 then
+		if self.timer > 0 then
+			self.timer = self.timer - 1
+			return
+		end
+		local v = Vector:New(0.1, -1.0, 0.1)
+		v:Normalize()
+		local rnd = FRand(0.8, 1.3)
+		ENTITY.SetVelocity(self._Entity,  v.X * self.speed * rnd, v.Y * self.speed * rnd, v.Z * self.speed * rnd)
+		ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.InsideItems)
+		ENTITY.EnableCollisions(self._Entity, true, 0.3, 8, 0.3)
+		self.mode = 2
+		self:BindFX(self._fx, nil, -1)
+	end
+	if self.mode == 2 then
+		if self.Pos.Y < self.soundBindPosY then
+			self:BindSound("actor/giant/meteor-fall"..math.random(1,3),100,400,false)
+			self.mode = 3
+		end
+	end--]]
+end

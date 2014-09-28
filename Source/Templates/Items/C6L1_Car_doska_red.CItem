@@ -1,0 +1,22 @@
+o.BaseObj = "C6L1_Car_pissan_yellow.CItem"
+o.Model = "C6L1_Car_doska_red"
+o.Scale = 3
+o.Health = 300
+o.ExplStr = 1000
+o.ExplRange = 10
+o.Spawnable = true 
+
+o.Explosion = {
+	stren = 9000,
+	range = 10,
+	damage = 150,
+    fx = "Grenade",
+    fxSize = 1,
+	eqTimeOut = 10,
+	eqRange = 25,
+	eqCamera = 0.5,
+
+}
+
+
+o.RagdollCreakSound = nil

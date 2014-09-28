@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "items",
+    disablePitch = true,
+    pickup = 
+    {    
+        samples = {"item-soul-take", "item-soul-take1","item-soul-take2","item-soul-take3","item-soul-take4"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

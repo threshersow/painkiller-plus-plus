@@ -1,0 +1,10 @@
+o.BaseObj = "Templar.CActor"
+o.AiParams.aiGoals = {"idle","hear","FarAttack","closeAttack"}
+
+o.Scale = 1.8
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.viewAngle = 180
+
+o.AiParams.delayBetweenAttacks = 60

@@ -1,0 +1,10 @@
+Bat_Adrian.BaseObj = "Bat.CActor"
+
+Bat_Adrian.AiParams.viewDistance = 10
+Bat_Adrian.AiParams.viewDistance360 = 10
+Bat_Adrian.AiParams.viewAngle = 360
+Bat_Adrian.AiParams.hearing = 1
+
+
+
+

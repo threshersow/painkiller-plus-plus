@@ -1,0 +1,10 @@
+Drewno_02.Volume = 70
+Drewno_02.Interval = 12
+Drewno_02.RandomShift = 4
+Drewno_02.Falloff =
+{
+  Start = 2.7,
+  End = 15
+}
+Drewno_02.Sound ="C2L4_Asylum/Drewno_02;C2L4_Asylum/Drewno_03"
+

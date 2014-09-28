@@ -1,0 +1,10 @@
+Stolowka.Volume = 20
+Stolowka.Interval = 0
+Stolowka.RandomShift = 0
+Stolowka.Falloff =
+{
+  Start = 5,
+  End = 30
+}
+Stolowka.Sound ="C2L2_Prison/stolowka"
+

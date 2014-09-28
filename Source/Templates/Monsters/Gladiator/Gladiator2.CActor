@@ -1,0 +1,169 @@
+o.Model = "gladiator2"
+o.Scale = 1.4
+o.CreatePO = true
+o.Health = 100
+o.WalkSpeed = 1.6
+o.RunSpeed = 1.6
+o.RotateSpeed = 8
+o.enableGibWhenHPBelow = -45
+
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,	-- pozniej sphere
+    Mass     = 400,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.45,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+	SoundDir = "Gladiator",
+	Animations = {
+		idle   = {1.0,false},
+		walk   = {1.0,true,{
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.0,'PlaySound',"step2"},
+				{0.0,'FootFX','s_l_srodstopie'},
+			}},
+		run   = {1.0,true,{
+				{0.65,'PlaySound',"step1"},
+				{0.65,'FootFX','s_p_srodstopie'},
+				{0.0,'PlaySound',"step2"},
+				{0.0,'FootFX','s_l_srodstopie'},
+			}},
+
+		atak1   = {1.2,false,{
+					{0.0,'PlaySound',"atak"},
+					{0.5,'PlaySound',"shoot"},
+					{0.6,'ThrowImmid',},
+				}},
+		atak2   = {1.4,false,{
+					{0.6,'damage',12,10},
+					{0.6,'PlaySound',"shield"},
+				}},
+		hit1   = {1.0,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+		hit2   = {1.0,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+    },
+
+	RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+				{"weapon3","weaponlost",false},
+				{"tar","weaponlost",false},
+			},
+    },
+
+
+	NearAttacks = {"atak2",},
+    Hits = {"hit1", "hit2"},
+    Ambients = {"idle",},
+    
+    DeathJoints = {
+        'n_p_kolano','n_l_kolano','k_ogo','r_l_lokiec','r_p_lokiec',
+        'k_szyja','r_p_bark','r_l_bark',
+    },
+   	notBleedingJoints = {
+		weapon3 = {},
+		tar = {},
+    },
+
+    GibExplosionStrength = 12000,
+	GibExplosionRange = 1.8,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",-1},
+				{"k_ramiona","FX_gib_blood",1},
+				{"root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"weapon3","weaponlost",false},
+				{"tar","weaponlost",false},
+			},
+	    },
+}
+
+
+o.DeathTimer = 140                  -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt", "hear","flee","FarAttack","closeAttack"}
+
+o.AiParams.viewDistance = 90
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 100
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 2.499
+o.AiParams.attackRangeAngle = 100
+o.AiParams.hearing = 1.2
+o.AiParams.perception = 1.0
+o.AiParams.changePosAfterFire = 0.95
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {-120,120}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1			-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 1.0
+o.AiParams.stopAfterWalkingTime = {90,120}
+
+o.AiParams.walkStep = 7.0
+--o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.moveDisplacement = 3.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 100
+
+o.AiParams.updateSpeed = 0.25
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+o.shadow = 128
+
+o.AiParams.delayBetweenAttacks = 35
+o.AiParams.weapon = {
+		maxDist = 45,
+		minDist = 2.5,
+		maxYaw = 45,
+		maxPitch = 45,
+	}
+
+o.shadow = 128
+o.AiParams.FarAttacks = {"atak1",}
+
+o.AiParams.ThrowableItem = "Gladiator2Throwable.CItem"
+o.AiParams.throwItemBindTo = "weapon4"
+o.AiParams.weaponBindPos = o.AiParams.throwItemBindTo
+o.AiParams.throwVelocity = 42
+o.AiParams.throwDeltaY = 1.5
+o.AiParams.throwDistMinus = 0.0

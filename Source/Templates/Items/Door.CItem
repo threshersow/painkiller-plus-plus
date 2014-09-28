@@ -1,0 +1,10 @@
+o.BaseObj = "CItem"
+o.Model = "door"
+o.Scale = 2
+o.RagdollCreakSound = {
+	--checkSpeed = 0.5,		-- default is 0.2
+	joint = "drzwi",
+	minVel = 1.0,
+	minDelayBetweenSounds = 1.0,
+}
+

@@ -1,0 +1,93 @@
+o.Model = "ESL"
+o.Scale = 0.2      -- skala broni
+o.Pos = Vector:New(0.48*0.333, -0.5*0.333,-1.2*0.333) -- pozycja wzgledem kamery
+o.Ang = Vector:New(0.05,-1.51,-0.1)   -- kat wzgledem kamery
+o._ShotNr = 0
+o.ShotCamMove = 0.025
+o.ShotCamRotate = 0.025
+o.s_SubClass = {
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout    = 0.15 * 30,
+    AltFireTimeout = 2,
+    MinBurst       = 3,
+    -- Shuriken
+    ShurikenDamage            = 30, -- instant
+    ShurikenSpeed             = 70,
+    ShurikenExplodeAfterTime  = 0.66, -- time
+    ShurikenExplosionDamage   = 50,
+    ShurikenExplosionStrength = 500,
+    ShurikenExplosionRange    =  3,
+    -- Electro
+    ElectroDamage            = 8,
+    ElectroLength            = 15,
+    ElectroCenterSpeed       = 10,
+    ElectroCurveMode         = 0, -- 0 - NaturalCubicSpline, 1 - Bezier
+    ElectroAutoLockTolerance = 0.85, -- min dot product
+    -- ElectroDisk
+    ElectroDiskCost              = 75,
+    ElectroDiskDamage            = 5, -- * 30 per secends
+    ElectroDiskLifeTime          = 2,
+    ElectroDiskPinnedLifeTime    = 4.5,
+    ElectroDiskExplosionDamage   = 5,
+    ElectroDiskExplosionStrength = 60,
+    ElectroDiskExplosionRange    = 4,
+    -- odrzucanie:
+    EnemyThrowBack = 0,
+    EnemyThrowUp   = 0,
+    Animations = 
+    {   
+        idle        = {1.0 ,0.2},
+        walk        = {1.0 ,0.2},
+        SHshot      = {2.0, 0},
+        DISCshot    = {0.5, 0},
+        ELshot      = {2, 0},
+        
+    },
+    ragdollShockStren = 200,
+    ragdollShockTime = 3.0,				-- w sek.
+    ragdoll_fx = "elektrodeath",
+    ragdoll_fxscale = 0.6,
+    ragdoll_sound = "misc/shockdeadbody",
+    impulseAfterDeathY = 30,
+    impulseAfterDeathXZ = 30,
+}
+
+o.s_MPSubClass = {
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+    FireTimeout    = 0.2 * 30,
+    AltFireTimeout    = 2,  -- pociski
+    MinBurst       =  3, -- minimalna seria oddanych strzalow
+    -- Shuriken
+    ShurikenDamage = 45,
+    ShurikenSpeed = 70,
+    ShurikenExplodeAfterTime  = 0.5, -- time
+    ShurikenExplosionDamage   = 80,
+    ShurikenExplosionStrength = 500,
+    ShurikenExplosionRange    =  3,
+    -- Electro
+    ElectroDamage            = 8,
+    ElectroLength            = 33,
+    ElectroCenterSpeed       = 40,
+    ElectroCurveMode         = 0, -- 0 - NaturalCubicSpline, 1 - Bezier
+    ElectroAutoLockTolerance = 0.98, -- min dot product
+    -- ElectroDisk
+    ElectroDiskCost              = 250,
+    ElectroDiskDamage            = 5, -- * 30 per secends
+    ElectroDiskLifeTime          = 2,
+    ElectroDiskPinnedLifeTime    = 4.5,
+    ElectroDiskExplosionDamage   = 5,
+    ElectroDiskExplosionStrength = 60,
+    ElectroDiskExplosionRange    = 4,
+    -- odrzucanie:
+    EnemyThrowBack = 80,
+    EnemyThrowUp   = 0,
+    Animations = 
+    {   
+        idle        = {1.0 ,0.2},
+        walk        = {1.0 ,0.2},
+        SHshot      = {2.0, 0},
+        DISCshot    = {0.5, 0},
+        ELshot      = {2, 0},
+        
+    }
+}

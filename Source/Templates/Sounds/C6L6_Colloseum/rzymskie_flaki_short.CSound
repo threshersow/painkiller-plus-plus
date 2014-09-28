@@ -1,0 +1,10 @@
+rzymskie_flaki_short.Volume = 80
+rzymskie_flaki_short.Interval = 10
+rzymskie_flaki_short.RandomShift = 3
+rzymskie_flaki_short.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+rzymskie_flaki_short.Sound ="C6L6_Colloseum/rzymskie_flaki_01;C6L6_Colloseum/rzymskie_flaki_02;C6L6_Colloseum/rzymskie_flaki_05"
+

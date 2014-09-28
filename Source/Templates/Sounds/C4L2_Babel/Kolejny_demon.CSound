@@ -1,0 +1,10 @@
+Kolejny_demon.Volume = 60
+Kolejny_demon.Interval = 12
+Kolejny_demon.RandomShift = 4
+Kolejny_demon.Falloff =
+{
+  Start = 10,
+  End = 30
+}
+Kolejny_demon.Sound ="C4L2_Babel/kolejny_demon_01;C4L2_Babel/kolejny_demon_02"
+

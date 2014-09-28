@@ -1,0 +1,148 @@
+o.Model = "bones"
+o.Scale = 0.7
+o.Health = 50
+o.CreatePO = true
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 14
+o.throwHeart = true
+o.notBleeding = true
+o.Animation = "enter"
+ o.AnimationLoop = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    RagdollFriction = 0.4,
+    Mass     = 70,
+}
+o.s_SubClass = {
+    rotateHead = 0.6,
+    rotateHeadBone = "k_head",
+    rotateHeadMaxSpeed = 0.14,
+
+    rotateHeadRight = Vector:New(0.0, 1.0, 1.0),
+    rotateHeadLeft =  Vector:New(0.0, 1.0, 1.0),
+    rotateHeadCoords = Vector:New(1, 3, 2),
+    
+    Animations = {
+        idle = {1.4, false},
+        hit1    = {2.0, false, {
+				        {0.0,'PlaySoundHit','hit'},
+					}},
+        hit2    = {2.0, false, {
+						{0.0,'PlaySoundHit','hit'},
+					}},
+        walk    = {1.5, true, {
+						{0.5,'PlaySound','stepwalk'},
+						{1.1,'PlaySound','stepwalk'},
+					}},
+        run    = {1.8, true, {
+						{0.5,'PlaySound','steprun'},
+						{1.1,'PlaySound','stepwalk'},
+					}},
+        run1    = {1.8, true, {
+   						{0.9,'PlaySound','steprun'},
+						{1.16,'PlaySound','stepwalk'},	--
+					}},
+
+        atak1    = {0.68, false, {
+						{0.8, 'PlaySound','swish'},
+						{0.8, 'ThrowImmid'},
+						{1.15,'Explode'},
+					},0.3},
+        atak2    = {1.0, false, {
+						{0.0, 'PlaySoundAttack'},
+						{0.4, 'damage',nil,nil,'bones_attack-hit'},
+						{0.4, 'drainsoul'},
+        				{0.8, 'damage',nil,nil,'bones_attack-hit'},
+        				{0.8, 'drainsoul'},
+        				{1.16, 'damage',nil,nil,'bones_attack-hit'},
+        				{1.16, 'drainsoul'},
+        				{1.5, 'damage',nil,nil,'bones_attack-hit'},
+        				{1.5, 'drainsoul'},
+        				{1.9, 'damage',nil,nil,'bones_attack-hit'},
+        				{1.9, 'drainsoul'},
+					}},
+        enter    = {1.5, false, {
+						{1.4,'PlaySound',"born"},
+						{5.36, 'SetAnimSpeed',0.0},
+					}},
+	},
+    RagdollCollisions = {
+        MinStren = 2.8,
+        MinTime = 0.7,
+        Bones = {
+				{"k_head", "bonesfall", false},		-- joint, {sounds}, blood
+				{"n_l_biodro", "bonesfall", false},
+				{"k_zebra", "bonesfall", false},
+			},
+    },
+
+	DeathJoints = {
+        'k_head','n_l_stopa','n_p_stopa','n_p_kolano','n_l_kolano','n_l_biodro','n_p_biodro','root','k_zebra',
+    },
+    
+
+	run = {"run","run1"},
+	Hits = {"hit1", "hit2"},
+	NearAttacks = {"atak2"},
+
+}
+
+o.DeathTimer = 90
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee", "wakeup","ABbones"}
+
+o.AiParams.viewDistance = 30
+o.AiParams.viewDistance360 = 10
+o.AiParams.viewAngle = 170
+
+o.AiParams.weaponDamage = 5
+o.AiParams.attackRange = 2.5
+o.AiParams.attackRangeAngle = 80
+    
+o.AiParams.hearing = 1.0
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {0,0}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1				-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,60}
+
+o.AiParams.walkStep = 7.0
+o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 15
+o.AiParams.moveDisplacement = 3.5
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 50
+
+o.AiParams.updateSpeed = 0.3
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+o.AiParams.continousAttack = true
+o.AiParams.ABhp = 0.22
+
+o.shadow = 128
+
+o.AiParams.ThrowableItem = "BonesHead.CItem"
+o.AiParams.throwItemBindTo = "k_szczeka"
+o.AiParams.hideMesh = "bones03_polySurfaceShape1869"
+o.AiParams.throwDistMinus = 0.0
+o.AiParams.throwAngle = nil
+o.AiParams.throwVelocity = 18.0
+o.AiParams.throwAngularVelocitySpeed = 22
+
+o.RagdollCollDamage = 20
+o.AiParams.soundAmbientDelay = 3.0
+
+o.AiParams.activateOnEnemy = false
+o.AiParams.activateTimer = 200		-- -1 wylaczony, >=0 wlaczony (czas w 1/30 sec.)

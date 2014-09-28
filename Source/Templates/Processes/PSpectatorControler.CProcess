@@ -1,0 +1,2 @@
+path = "../Data/LScripts/"
+DoFile(path.."HUD/Specmode.lua")

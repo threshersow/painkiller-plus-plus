@@ -1,0 +1,21 @@
+o.Mesh = "skrzynia_duza_calaShape"
+o.Pack = "elementy_cale.dat"
+o.DestroyPack = "skrzynia_duza_zlom.dat"
+o.Health = 24
+o.Scale = 0.2
+o.TestDeathZone = true
+
+o.Destroy.ExplosionStrength = 1
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 200
+
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 's'},
+}
+
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.LifetimeAfterExplosion = 3

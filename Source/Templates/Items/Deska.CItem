@@ -1,0 +1,12 @@
+o.Scale = 0.4
+o.Mass = 400
+o.Pack = "deska.dat"
+o.Mesh = "polySurfaceShape813"
+
+o.CollisionDetect = {
+	MinTime = 1.0,
+	MinStren = 5.0,
+}
+
+o.SoundImpactMinDelay = 1.5
+

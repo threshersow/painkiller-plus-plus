@@ -1,0 +1,5 @@
+o.BaseObj = "GenericLeperThrowable.CItem"
+o.Mesh = "weapon4"
+o.Pack = "LeperKnife.dat"
+o.CollisionSound = {"impacts/knife-stone","impacts/knife-stone2","impacts/knife-stone3","impacts/knife-stone4"}
+o.LoopSound = "actor/vamp_small/knifes-rotating-loop"

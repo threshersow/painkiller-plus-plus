@@ -1,0 +1,34 @@
+o.BaseObj = "HellAngel.CActor"
+
+o.Health = 2 -- zeby sie nie wcinal itd.
+
+o.NeverMove = true
+
+o.AiParams.aiGoals = {"idle","FarAttack", "hear",}
+
+o.AiParams.changePosAfterFire = 0.0
+o.AiParams.guardAngle = {0,0}
+o.AiParams.GuardStill = true
+--o.AiParams.viewAnglePitch = 60
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+
+--o.AiParams.alwaysSee = true
+
+o.AiParams.delayBetweenAttacks = 240
+
+o.AiParams.weapon = {
+		name = "Molotow",
+		bulletsPerShot = 1,
+		maxDist = 90,
+		minDist = 6.0,
+		spreadAngle = 0,
+		damagePerBullet = 0,
+		PO_HitForce = 0,
+	}
+o.AiParams.weaponAmmo = 9999
+o.AiParams.doNotRotateWhenShooting = false
+o.AiParams.FarAttack_Priority = 1		-- im wieksze tym bardziej bedzie chcial zmienic na alak daleki
+o.AiParams.NearAttack_Priority = 0
+o.AiParams.updateSpeed = 0.03

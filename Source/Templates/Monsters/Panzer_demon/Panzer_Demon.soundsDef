@@ -1,0 +1,125 @@
+o.s_SubClass.SoundsDefinitions = {
+	step = {
+		samples = {'Panzer-krok1','Panzer-krok2','Panzer-krok3','Panzer-krok4'},
+		dist1 = 60,
+		dist2 = 150,
+	},
+	stepP = {
+		samples = {'Panzer-krok1p','Panzer-krok2p'},
+		dist1 = 60,
+		dist2 = 150,
+	},
+	stepNoize = {
+		samples = {'Panzer-scrape1','Panzer-scrape2','Panzer-scrape3','Panzer-scrape4'},
+		dist1 = 40,
+		dist2 = 120,
+        playChance = 0.2,
+	},
+	stepVoice = {
+		samples = {'Panzer-walkvoice1','Panzer-walkvoice2','Panzer-walkvoice3','Panzer-walkvoice4'},
+		dist1 = 40,
+		dist2 = 120,
+        playChance = 0.2,
+	},
+    deathVoice  = {
+		samples = {"Panzer_death",},
+		dist1 = 60,
+		dist2 = 120,
+	},
+    enter = {
+		samples = {"Panzer-enter",},
+		dist1 = 60,
+		dist2 = 120,
+	},
+    enter2 = {
+		samples = {"Panzer-enter2",},
+		dist1 = 60,
+		dist2 = 120,
+	},
+    shockwave = {
+		samples = {"Panzer-shockwave",},
+		dist1 = 60,
+		dist2 = 120,
+	},
+    shockwaveV = {
+		samples = {"Panzer-shockvoice",},
+		dist1 = 60,
+		dist2 = 120,
+	},
+    atak2 = {
+		samples = {"Panzer-atak2",},
+		dist1 = 60,
+		dist2 = 120,
+	},
+	atak3 = {
+		samples = {"Panzer-atak3"},
+		dist1 = 100,
+		dist2 = 200,
+	},
+	atak3v = {
+		samples = {"Panzer-atak3v"},
+		dist1 = 100,
+		dist2 = 200,
+	},
+	bodyfalls = {
+		samples = {"Panzer-bodyfalls",},
+		dist1 = 60,
+		dist2 = 120,
+	},
+
+
+	hit = {
+		path = "impacts/",
+		samples = {"bullet-metal","bullet-metal2","bullet-metal3","bullet-metal4","bullet-metal5"},
+		dist1 = 60,
+		dist2 = 120,
+	},
+
+}
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+            {1.65,'PlaySound','step',nil,nil,"leg_1_3"},
+			{0.8,'PlaySound','step',nil,nil,"leg_2_3"},
+            {0.4,'PlaySound','stepNoize',nil,nil,"leg_2_3"},
+            {1.2,'PlaySound','stepNoize',nil,nil,"leg_1_3"},
+            {1.0,'PlaySound','stepVoice',},
+            
+		},
+        rot45L = {
+            {1.65,'PlaySound','step',nil,nil,"leg_1_3"},
+            {2.95,'PlaySound','step',nil,nil,"leg_2_3"},
+            {1.45,'PlaySound','step',nil,nil,"leg_3_3"},
+            {2.8,'PlaySound','step',nil,nil,"leg_4_3"},
+            {1.0,'PlaySound','stepNoize',nil,nil,"leg_2_3"},
+            {0.6,'PlaySound','stepVoice',},
+        },
+        rot45R = {
+                {1.0,'PlaySound','stepNoize',nil,nil,"leg_1_3"},
+                {2.8,'PlaySound','step',nil,nil,"leg_1_3"},
+                {1.5,'PlaySound','step',nil,nil,"leg_2_3"},
+                {2.95,'PlaySound','step',nil,nil,"leg_3_3"},
+                {1.6,'PlaySound','step',nil,nil,"leg_4_3"},
+                {1.4,'PlaySound','stepNoize',nil,nil,"leg_4_3"},
+                {0.6,'PlaySound','stepVoice',},
+        },
+        enter = {
+        	{0.0,'PlaySound',"enter"},
+            {3.0,'PlaySound',"enter2"},
+			{0.9,'PlaySound','stepP',nil,nil,"leg_1_3"},
+			{1.9,'PlaySound','stepP',nil,nil,"leg_2_3"},
+			{3.2,'PlaySound','stepP',nil,nil,"leg_1_3"},
+			{3.5,'PlaySound','stepP',nil,nil,"leg_2_3"},
+			{4.0,'PlaySound','stepP',nil,nil,"leg_4_3"},
+        },
+        atak1 = {
+			{2.8,'PlaySound',"shockwave"},
+			{0.0,'PlaySound',"shockwaveV"},
+		},
+        atak2 = {
+			{0.0,'PlaySound',"atak2"},
+		},
+		atak3 = {
+			{0.0,'PlaySound',"atak3v"},
+			{1.0,'PlaySound',"atak3"},
+		},
+}

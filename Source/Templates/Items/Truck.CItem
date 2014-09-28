@@ -1,0 +1,31 @@
+o.Scale = 0.3
+o.Mass = 3000
+o.Friction = 3
+o.DestroyPack = "Ciezarowka_Zlom.dat"
+o.TestDeathZone = true
+o.Rot = Quaternion:New(0.999974,-1.86407e-005,-0.00722159,-6.84467e-005)
+o.Health = 32
+o.Pack = "Ciezarowka_Cala.dat"
+o.BaseObj = "CItem"
+o.Mesh = "auto_przedShape2"
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)
+
+
+o.Destroy.ExplosionStrength = 1000
+o.Destroy.ExplosionDamage = 200
+o.Destroy.ExplosionRadius = 10
+o.Destroy.AverageDelay = 0.2
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 200
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.Effect = "truckdestroy"
+o.Destroy.EffectScale = 1.5
+o.Destroy.LifetimeAfterExplosion = 10
+
+o.Destroy.BindEffectTo = "podwozieShape"
+o.Destroy.BindEffect = {"warp", "explode"}
+

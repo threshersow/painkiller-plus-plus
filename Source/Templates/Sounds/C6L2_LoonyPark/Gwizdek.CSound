@@ -1,0 +1,9 @@
+Gwizdek.Volume = 80
+Gwizdek.Interval = 5
+Gwizdek.RandomShift = 2
+Gwizdek.Falloff =
+{
+  Start = 2,
+  End = 20
+}
+Gwizdek.Sound ="C6L2_LoonyPark/Gwizdek_01;C6L2_LoonyPark/Gwizdek_02;C6L2_LoonyPark/Gwizdek_03;C6L2_LoonyPark/Gwizdek_04;C6L2_LoonyPark/Gwizdek_05;C6L2_LoonyPark/Gwizdek_06"

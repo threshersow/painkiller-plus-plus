@@ -1,0 +1,17 @@
+Vamp_Big_BarrelSuicide.BaseObj = "Vamp_Big_Barrel.CActor"
+
+o.AiParams.Explosion = {
+	ExplosionStrength = 2000, 
+	ExplosionRange = 6,
+	Damage = 32,
+}
+
+o.Health = 1
+
+o.BarrelExplosion = {
+	streng = 20,
+	Radius = 6.28,
+	LifetimeAfterExplosion = 3,
+}
+
+o.TimeToLive = 30 * 5

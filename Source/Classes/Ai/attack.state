@@ -1,0 +1,431 @@
+AiStates.attack = {
+	displacementTimer = 0,
+	name = "attack",
+	lastTimeOnAttack = 0,           -- dzwiek
+    lastTimeOnAttackAmbient = 0,    -- dzwiek
+}
+
+function AiStates.attack:OnInit(brain)
+	--	if debugMarek then Game:Print(brain._Objactor.Model.." saw enemy") end
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	brain._delayToHunt = nil
+	self.displacementTimer = 0
+	actor._displacement = 0
+	--if aiParams.moveDisplacement > 0 then
+	--	actor._displacement = FRand(-aiParams.moveDisplacement, aiParams.moveDisplacement)	-- jesli lost, to wylaczyc to
+	--end
+	self.attackDelay = nil
+	if aiParams.NearAttack_Priority and aiParams.NearAttack_Priority > 0.0 then
+		brain.FarAttack_Prio = 0.0
+	end
+	
+	self.firstSeeAnim = nil
+	
+	if not self.firstTime then
+
+		if actor.s_SubClass.SoundsDefinitions.onAttackOnce then
+			actor:PlaySoundAndStopLast("onAttackOnce", nil, nil, true)
+		end
+		
+		if aiParams.AnimOnSawEnemy then
+			-- jesli kat patrzenia jest maly
+			local czyZtylu = math.atan2(brain.r_closestEnemy._groundx - actor._groundx, brain.r_closestEnemy._groundz - actor._groundz)
+			local angleDist2 = AngDist(actor.angle, czyZtylu) * 180/math.pi
+			--Game:Print("angleDist2 "..angleDist2)
+			if math.abs(angleDist2) < aiParams.viewAngle*0.5 then
+				actor:RotateToVector(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+				actor:Stop()
+				actor:SetAnim(aiParams.AnimOnSawEnemy, false, FRand(0.9, 1.1))
+				self._CurrAnim = aiParams.AnimOnSawEnemy
+				self.firstSeeAnim = true
+			end
+		end
+		self.firstTime = true
+	else
+	    if actor.s_SubClass.SoundsDefinitions.onAttack then
+			if self.lastTimeOnAttack + 3 < brain._currentTime then
+				self.lastTimeOnAttack = brain._currentTime
+				--local name = actor.s_SubClass.Sounds.onAttack[math.random(1, table.getn(actor.s_SubClass.Sounds.onAttack))]
+				actor:PlaySoundAndStopLast("onAttack", nil, nil, true)
+			end
+		end
+	end
+    self.lastTimeWalkTo = -100
+end
+
+
+function AiStates.attack:OnUpdate(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	if self.firstSeeAnim then
+		if actor._isAnimating and actor.Animation == self._CurrAnim then
+			return
+		else
+			self.firstSeeAnim = nil
+			self._CurrAnim = nil
+		end
+	end
+	if brain.r_closestEnemy then
+		brain._delayBeforeHunt = 15
+		if aiParams.FarAttack_Priority then
+			brain.FarAttack_Prio = brain.FarAttack_Prio + aiParams.FarAttack_Priority * FRand(0.005, 0.01)
+			if brain.FarAttack_Prio > 1.0 then
+				brain.FarAttack_Prio = 1.0
+			end
+			--Game:Print("attack, FAR attack up to: "..brain.FarAttack_Prio)
+		end
+	
+		self.displacementTimer = self.displacementTimer + 0.017
+		if self.displacementTimer > 1 then
+			self.displacementTimer = 1
+		end
+		-- przeciwnik jest za daleko
+		if aiParams.attackRange < brain._distToNearestEnemy and (actor._state ~= "ATTACKING" or (actor._state == "ATTACKING" and aiParams.continousAttack)) then
+
+			if actor.s_SubClass.SoundsDefinitions.attackAmbient then
+				if self.lastTimeOnAttackAmbient + aiParams.soundAmbientDelay < brain._currentTime and math.random(100) < 3 then
+					self._lastAttackAmbient = actor:PlaySoundHit("attackAmbient")
+					if self._lastAttackAmbient then
+						self.lastTimeOnAttackAmbient = brain._currentTime
+					end
+				end
+			end
+
+			if self.attackDelay then
+				self.attackDelay = self.attackDelay - 1
+				if self.attackDelay == 0 then
+					local b,d,e = actor:Trace(actor._SphereSize * 1.8)
+					--Game:Print(actor._Name.." detecting?")
+					--if b then
+					--	Game:Print(actor._Name.." detected someting")
+					--end
+					if b and e then
+						--Game:Print(actor._Name.." detected")
+						
+						local obj = EntityToObject[e]
+                        if obj then
+	                        if obj._AIBrain and obj._Class == "CActor" then
+								--if debugMarek then Game:Print(actor._Name.." attack delay, bo inny koles stoi przedemna") end
+								--Game.freezeUpdate = true
+								actor:Stop()
+								
+		                        local anim = actor.s_SubClass.Ambients
+		                        if anim and anim[1] then
+									anim = anim[math.random(1,table.getn(anim))]
+									if debugMarek then Game:Print(actor._Name.." IIIDDDDDLLEE ANIM "..anim) end
+									actor:SetAnim(anim,false)
+									self.firstSeeAnim = true
+									self._CurrAnim = anim
+                                else
+                                    self.attackDelay = math.random(20,45)
+								end
+		                        return
+		                    end
+		                end
+					end
+				end
+				if self.attackDelay <= 0 then
+					self.attackDelay = nil
+				end
+			else
+				self.delay = nil
+
+				if not actor._isWalking and brain._currentTime < actor._lastCantMoveTime + 3/30 then
+					--if debugMarek then Game:Print(actor._Name.." obstacle detected") end
+					local rnd = math.random(100)
+					if rnd < 50 then
+						--if debugMarek then Game:Print(actor.Model.." ATTACK - change direction "..rnd) end		-- zamienic na escape?
+						brain._delayBeforeHunt = math.random(15, 52)
+						actor:WalkForward(brain._distToNearestEnemy * 0.5, true, math.random(-40, 40))
+					else
+						if rnd < 75 then
+							--if debugMarek then Game:Print(actor.Model.." ATTACK - move random "..rnd) end		-- zamienic na escape?
+							actor:WalkTo(actor._groundx+FRand(-4,4), actor._groundy, actor._groundz+FRand(-4,4), true)
+							brain._delayBeforeHunt = math.random(15, 52)
+						else
+							brain.escape = math.random(36, 66)
+						end
+					end
+					return
+				end
+
+				local findPathSpeed = aiParams.findPathSpeed
+				if not findPathSpeed then
+					findPathSpeed = 0.12
+				end
+				if FRand(0.0, 1.0) < findPathSpeed or not actor._isAnimating then								-- narazie
+--					if self.lastTimeWalkTo + 0.1 < brain.currentTime then
+--						self.lastTimeWalkTo = brain.currentTime
+					if aiParams.moveDisplacement > 0 and math.random(100) < 9 then
+						--if debugMarek then Game:Print(actor.Model.." displace CHANGE") end
+						local old = actor._displacement
+						if not old then
+							Game:Print(actor._Name.." >>>>>> old == nil!")
+							old = 0
+						end
+						actor._displacement = FRand(-aiParams.moveDisplacement * self.displacementTimer, aiParams.moveDisplacement * self.displacementTimer)
+						--if old == 0 then
+						--	Game:Print("new displace = "..actor._displacement.." max = "..(aiParams.moveDisplacement * self.displacementTimer).." sam timer "..self.displacementTimer)
+						--else
+							local maxDiff = 3.0 + FRand(0.0,1.2)
+							local diff = actor._displacement - old
+							--Game:Print("displace new displace wanted = "..actor._displacement.." "..diff)
+							if diff > maxDiff then
+								actor._displacement = old + maxDiff
+							end
+							if diff < -maxDiff then
+								actor._displacement = old - maxDiff
+							end
+							--Game:Print("MAX displace new displace = "..actor._displacement)
+						--end
+					end
+					if brain._currentTime < actor._lastCantMoveTime + 2/30 then
+						local b,d,e = actor:Trace(2)
+						if b and e then
+							local obj = EntityToObject[e]
+                            if obj then
+                                if obj._AIBrain and obj._Class == "CActor" then
+                                    self.attackDelay = math.random(30,60)
+                                    return
+                                end
+                            end
+						end
+						if actor._displacement then
+							--if debugMarek then Game:Print(actor.Model.." downgrade displace") end
+							actor._displacement = actor._displacement * 0.5
+						end
+						
+						-- debug
+						--[[if (aiParams.huntPlayer or aiParams.alwaysSee) and math.random(100) < 50 then
+							--Game:Print(brain._currentTime.." "..actor._lastCantMoveTime)
+							local b,d,e = actor:Trace(actor._SphereSize * 1.5)
+							if b and e then
+								local obj = EntityToObject[e]
+								if obj then
+									--Game:Print(actor._Name.." ************** PRZED SOBA MAM : "..obj._Name.." i nie moge przejsc! ****************")
+									if obj.Pinned and obj._Class == "CItem" then	-- probably slab, so can pass thru
+										aiParams.huntPlayer = nil
+										aiParams.alwaysSee = nil
+										--Game:Print(actor._Name.." ****** DISABLING ALWAYS SEE AND HUNT PLAYER")
+										brain.escape = math.random(20, 45)
+										brain._enemyLastSeenTime = -100
+										return
+									end
+								end
+							end
+						end--]]
+						--
+
+					end
+					
+					if actor._isWalking and actor.s_SubClass.rotate90R and not actor._isRotating then		-- oznacza, ze ma animacje obrotu
+						local angleAttack = math.atan2(brain.r_closestEnemy._groundx - actor._groundx, brain.r_closestEnemy._groundz - actor._groundz)
+						local aDist = AngDist(actor.angle, angleAttack)
+						--Game:Print(actor._Name..">>>> ?? "..(aDist * 180/math.pi))
+						if math.abs(aDist) > 90 * math.pi/180 then
+							--Game:Print(actor._Name.." aDist >>>>")
+							actor:Stop()
+						end
+					end
+					
+					if not actor._isWalking and actor.s_SubClass.rotate90R then
+						--Game:Print("najpierw rotate")
+						actor:RotateToVectorWithAnim(brain.r_closestEnemy._groundx, 0, brain.r_closestEnemy._groundz)
+						if not actor._isRotating then
+							--Game:Print("nie rot to walk")
+							actor:WalkTo(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz, true)
+						end
+					else
+						--Game:Print("walkto?")
+						-- todo: spr. czy sie obraca i jesli math.abs(self._distToAngle) > 60 * 3.14/180 to nie walk
+						if not actor._rotatingWithAnim or not actor._isRotating then
+							local dist = 9999
+							if actor._destx and actor._isWalking then
+								dist = Dist3D(actor._destx, actor._desty, actor._destz, brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz)
+								--Game:Print("*** DIST to last walk "..dist)
+							end
+							if dist > 0.3 or not actor._isWalking or math.random(100) < 10 then
+								--Game:Print("walkto "..dist)
+								actor:WalkTo(brain.r_closestEnemy._groundx, brain.r_closestEnemy._groundy, brain.r_closestEnemy._groundz, true)
+							--else
+								--Game:Print("*** walk SKIPPED small dist"..dist)
+							end
+						end
+					end
+				end
+			end
+		else
+			-- przeciwnik jest w zasiegu
+			-- do sprawdzenia, czy nie tak jak wczesniej rnd(18%)
+			if actor._HasMovingCurve then				-- gdy jest za blisko gracza, a porusza sie z animacja, zeby go nie przepychal
+				if brain._distToNearestEnemy < actor._SphereSize * 2 and actor._state == "ATTACKING" then
+					actor._HasMovingCurve = false
+				end
+			end
+
+
+			if actor._isWalking then
+				if debugMarek then Game:Print(actor._Name.." was walking, attack, stop") end
+				actor:Stop()
+			end
+			
+			--[[if actor._state ~= "ATTACKING" and not actor._isRotating then
+				Game:Print("~ATTACKING")
+				local angle = math.atan2(brain.r_closestEnemy._groundx - actor._groundx, brain.r_closestEnemy._groundz - actor._groundz)
+				local aDist = AngDist(actor.angle, angle)
+				if math.abs(aDist) >= aiParams.attackRangeAngle * math.pi/180 then
+					Game:Print(actor._Name.." over atatck range "..(aDist*math.pi/180))
+					if actor.s_SubClass.rotate90R then
+						actor:RotateToWithAnim(angle * 180 / math.pi)
+					else
+						actor:RotateTo(angle * 180 / math.pi)
+					end
+				end
+			else--]]
+				if math.random(100) < 18 --[[and not actor._rotatingWithAnim--]] then		--and not aiParams.doNotRotateWhenShooting
+					local angle = math.atan2(brain.r_closestEnemy._groundx - actor._groundx, brain.r_closestEnemy._groundz - actor._groundz)
+					local aDist = AngDist(actor.angle, angle)
+					if math.abs(aDist) >= 30 * math.pi/180 then
+						actor:RotateTo(angle * 180 / math.pi)
+					else
+						--actor._rotatingWithAnim = false
+					end
+				end
+			--end
+
+			
+			if (not actor._isAnimating or actor._state ~= "ATTACKING") and not actor._rotatingWithAnim then
+				if not self.delay then
+					local angleAttack = math.atan2(brain.r_closestEnemy._groundx - actor._groundx, brain.r_closestEnemy._groundz - actor._groundz)
+					local aDist = AngDist(actor.angle, angleAttack)
+		
+					local angleRange = aiParams.attackRangeAngle
+					if not angleRange then
+						angleRange = 120
+					end
+					angleRange = angleRange * 1.25		-- troche zapasu
+					if math.abs(aDist) < angleRange*math.pi/180 then
+						actor._state = "ATTACKING"
+						--local ok = false
+						
+						local att = actor.s_SubClass.NearAttacks        -- narazie
+						if att then
+							if aiParams.NearAttacks then
+								att = aiParams.NearAttacks
+							end
+							local animName = att[math.random(1,table.getn(att))]
+							actor:SetAnim(animName, aiParams.continousAttack)
+							if self._lastAttackAmbient then
+								actor:StopLastSound(self._lastAttackAmbient)
+								self._lastAttackAmbient = nil
+							end
+							self.attackDelay = 5
+						else
+							if debugMarek then Game:Print(actor._Name.." ERROR: no near attacks animations defined") end
+						end
+						PlayLogicSound("FIRE",actor._groundx,actor._groundy,actor._groundz,9,18,Player)--actor)	-- ### hack
+						self.delay = aiParams.delayBetweenAttacks * FRand(0.8, 1.2) + 2
+						self.delayStart = 1
+					else
+						--Game:Print("za duzy kat, zeby atakowac")
+					end
+				else
+					if self.delayStart then
+						if aiParams.attackRangeMinDist then
+							--Game:Print("ZA MALY DYSTANS: "..dist)
+							if brain._distToNearestEnemy < aiParams.attackRangeMinDist then
+								brain.escape = math.random(aiParams.escapeTimeWhenToCloseToPlayer * 0.9, aiParams.escapeTimeWhenToCloseToPlayer * 1.1)
+								return
+							end
+						end
+
+						if aiParams.chanceOfEscapeAfterFire > 0 then
+							if (brain._lastHitTime >= brain._lastMissedTime) and (math.random(100) < aiParams.chanceOfEscapeAfterFire*100) then
+								-- pozniej sprawdzanie, czy moze wyjsc, ilu swoich widzi
+								--if debugMarek then Game:Print(actor.Model.."ATTACK - escape after succ hit") end
+								brain.escape = math.random(aiParams.escapeTime * 0.7, aiParams.escapeTime * 1.2)
+							end
+						end
+						self.delayStart = nil
+						
+						local d = self.delay
+						if d > 30 then
+							d = 30
+						end
+						if d > 5 and math.random(100) < d then
+							local anim = actor.s_SubClass.Ambients
+		                    if anim and anim[2] then
+								anim = anim[math.random(2,table.getn(anim))]
+								if debugMarek then Game:Print(actor._Name.." IIIDDDDDLLEE ANIM w DELAY-u"..anim) end
+								actor:SetAnim(anim,false)
+								self.firstSeeAnim = true
+								self._CurrAnim = anim
+								self.delay = nil
+								return
+							end
+						end
+					end
+					self.delay = self.delay - 1
+					if self.delay <= 0 then
+						self.delay = nil
+					end
+				end
+			end
+		end
+	else
+		if (not actor._isWalking and actor._state ~= "ATTACKING") or not actor._isAnimating then
+			brain._delayBeforeHunt = nil
+            actor._state = "IDLE"
+			--Game:Print(actor._Name.." before hunt end, bo walk")
+		end
+
+		if brain._delayBeforeHunt then
+            --Game:Print(actor._Name.." before hunt "..brain._delayBeforeHunt)
+			brain._delayBeforeHunt = brain._delayBeforeHunt - 1
+			if brain._delayBeforeHunt < 0 and actor._state ~= "ATTACKING" then
+				brain._delayBeforeHunt = nil
+                actor._state = "IDLE"
+				--Game:Print(actor._Name.." before hunt end")
+			end
+		end
+
+		
+		if aiParams.continousAttack then
+			actor._state = "IDLE"
+			--if brain._delayToHunt < 4 then
+			--	brain._delayToHunt = math.random(4,6)
+			--end
+		end
+		self.state = 0
+		self.delay = nil
+	end
+end
+
+function AiStates.attack:OnRelease(brain)
+	self.delay = nil
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	brain.target = nil
+	actor._displacement = nil
+
+--	if actor._isWalking then
+--		brain._delayToHunt = FRand(15,20)
+--	else
+--		brain._delayToHunt = nil
+--	end
+	
+--	if debugMarek then Game:Print(brain._Objactor.Model.." lost enemy, dth: "..brain._delayToHunt) end
+
+	actor._state = "UNKNOWN"
+end
+
+function AiStates.attack:Evaluate(brain)
+	if brain.r_closestEnemy or brain._Objactor._state == "ATTACKING" or self.firstSeeAnim then
+		return 0.5
+	end
+	if not brain.r_closestEnemy and brain._delayBeforeHunt then
+		return 0.5
+	end
+	return 0
+end

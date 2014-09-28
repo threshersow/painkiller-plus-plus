@@ -1,0 +1,8 @@
+o.Mesh = "polySurfaceShape6132"
+o.Pack = "kontener.dat"
+--o.DestroyPack = "paletka_zlom.dat"
+o.Scale = 0.2
+o.Health = 100
+o.Friction = 1
+
+o.SoundHitByBulletMiniGunOnly = true

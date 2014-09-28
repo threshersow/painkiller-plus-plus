@@ -1,0 +1,82 @@
+o.s_SubClass.SoundsDefinitions = {
+	tojump = {
+		samples = {'loki_preapre_to_jump'},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	bodyfalls = {
+		samples = {"loki_boddyfalls"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	shake = {
+		samples = {'loki_preapre_to_jump_shake'},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	onAttackOnce = {
+		samples = {"loki_halt1","loki_halt3","loki_halt2"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	subdiv = {
+		samples = {'loki_subdivide',},
+		dist1 = 30,
+		dist2 = 70, 
+	},
+	step1 = {
+		samples = {'loki_krok1','loki_krok2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'loki_krok3','loki_krok4'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	at1 = {
+		samples = {'loki_at1',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	at2 = {
+		samples = {'loki_at2',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	swish = {
+		samples = {'loki_swish',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	jump = {
+		samples = {'loki_jump2','loki_jump'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	jumpsw = {
+		samples = {'loki_jump-swish'},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	jumpend = {
+		samples = {'loki_jump-end'},
+		dist1 = 6,
+		dist2 = 12,
+	},
+
+    death = {
+		samples = {"loki_death1","loki_death2","loki_death3","loki_death4"},
+		dist1 = 20,
+		dist2 = 60,
+	},
+	hurt = {
+		samples = {'loki_hit1','loki_hit2'},
+		dist1 = 20,
+		dist2 = 60,
+	},
+
+    damage = {
+		samples = {'loki_spoon_hit'},
+    },
+}

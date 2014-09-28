@@ -1,0 +1,10 @@
+o.s_SubClass.ParticlesDefinitions = {
+    flying = {
+        pfx = "pochodnia",
+        scale = 0.08,
+    },
+	whenHitGround = {
+        pfx = "DevilKosaKulared",
+        scale = 0.2,
+    }
+}

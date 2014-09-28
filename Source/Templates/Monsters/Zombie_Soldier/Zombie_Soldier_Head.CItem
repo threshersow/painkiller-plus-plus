@@ -1,0 +1,27 @@
+Zombie_Soldier_Head.Mesh = "polySurfaceShape543"
+Zombie_Soldier_Head.Pack = "zombi_soldier_head.dat"
+
+Zombie_Soldier_Head.Scale = 0.1 * 1.25
+Zombie_Soldier_Head.Restitution = 0.1
+Zombie_Soldier_Head.TimeToLive = 6 * 30
+
+function Zombie_Soldier_Head:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh)
+	ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Noncolliding)
+	if self.PosDestX then
+		force = {math.random(30,60),math.random(40,80),math.random(30,60)}
+		ENTITY.PO_Hit(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z, self.PosDestX * force[1], self.PosDestY * force[2], self.PosDestZ * force[3])
+	end
+    ENTITY.SetAngularVelocity(self._Entity, 0, FRand(5, 10), FRand(0, 5)) 
+	self.timer = 4
+end
+
+function Zombie_Soldier_Head:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			self.timer = nil
+		end
+	end
+end

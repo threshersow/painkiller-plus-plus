@@ -1,0 +1,4 @@
+o.BaseObj = "GenericLeperThrowable.CItem"
+o.Mesh = "weapon3"
+o.Pack = "LeperHammer.dat"
+o.CollisionSound = {"actor/zombie/zombie-weapon-lost3"}

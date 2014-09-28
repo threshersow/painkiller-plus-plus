@@ -1,0 +1,10 @@
+Drewno_01.Volume = 80
+Drewno_01.Interval = 10
+Drewno_01.RandomShift = 5
+Drewno_01.Falloff =
+{
+  Start = 2.5,
+  End = 15
+}
+Drewno_01.Sound ="C2L4_Asylum/drewno_01"
+

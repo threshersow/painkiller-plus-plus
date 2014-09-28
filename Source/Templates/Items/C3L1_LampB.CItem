@@ -1,0 +1,8 @@
+o.BaseObj = "CItem"
+o.Model = "C3L1_LampB"
+o.Scale = 7.2
+o.CollisionDetect = {
+	MinTime = 1.2,
+	MinStren = 5.0,
+	joint = "joint6_getmass",
+}

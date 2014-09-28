@@ -1,0 +1,116 @@
+Quarrel.Mesh = "polySurfaceShape12"
+Quarrel.Pack = "kusza_belt.dat"
+Quarrel.Scale = 0.14
+Quarrel.Mass = 40
+Quarrel.Restitution = 0.1
+Quarrel.Damage = 15
+Quarrel.LifeTime = 120			-- max. czas zycia po kolizji
+Quarrel.TimeToLive = 12 * 30		-- max. czas zycia
+Quarrel.AngularDamping = 0.2
+Quarrel.bindParticle = {"arrowflame", 0.2, 0,0,0.4}
+Quarrel.hitGroundParticle = {"arrow_hitground", 0.2}
+Quarrel.SoundsImpact = {"impacts/belt-impact1","impacts/belt-impact2","impacts/belt-impact3"}
+--============================================================================
+function Quarrel:OnPrecache()
+    Cache:PrecacheParticleFX("arrowflame")
+    Cache:PrecacheParticleFX("arrow_hitground")
+end
+--============================================================================
+function Quarrel:OnCollision(x,y,z,nx,ny,nz,e_other,h_me,h_other)
+	local eg = true			-- czy bind
+	if e_other then
+		local obj = EntityToObject[e_other]
+		if obj then
+			eg = false
+			if obj ~= self.ObjOwner then
+				if obj.OnDamage then
+					if obj == Player then
+						PlaySound2D("actor/vamp_small/svamp-knife-hit")
+					end
+					obj:OnDamage(self.Damage, self.ObjOwner)
+				end
+			end
+			GObjects:ToKill(self)
+		else
+			if ny > 0.9 or ny < -0.9 then 
+				eg = false
+				PlaySound3D("impacts/beltfire-impact",x,y,z,18,36)
+				GObjects:ToKill(self)
+			end
+
+			local q = Quaternion:New_FromNormal(nx,ny,nz)
+			AddPFX(self.hitGroundParticle[1], self.hitGroundParticle[2], Vector:New(x,y,z), q)
+		end
+	end
+	if self._pfx then
+		ENTITY.Release(self._pfx)
+		self._pfx = nil
+	end
+
+    if self._sndLoop then
+		ENTITY.Release(self._sndLoop)
+		self._sndLoop = nil
+	end
+
+	ENTITY.EnableCollisions(self._Entity, false)	
+	
+	if eg then
+		if not self.deathTimer then
+			if self._sndLoop then
+				ENTITY.Release(self._sndLoop)
+				self._sndLoop = nil
+			end
+
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+			local name = self.SoundsImpact[math.random(1, table.getn(self.SoundsImpact))]
+			PlaySound3D(name,x,y,z,18,36,nil)
+		end
+		ENTITY.PO_SetEntitySteered(self._Entity, true)
+		ENTITY.SetVelocity(0,0,0,0,0,0)
+		ENTITY.PO_EnableGravity(self._Entity,false)
+
+		local joint = MDL.GetJointFromHavokBody(e_other,h_other)
+		ENTITY.SetPosition(self._Entity,x,y,z)
+
+		ENTITY.ComputeChildMatrix(self._Entity,e_other,joint)
+		ENTITY.RegisterChild(e_other,self._Entity,true,joint,true)
+	end
+end
+--============================================================================
+function Quarrel:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh, nil, ECollisionGroups.Noncolliding)
+    ENTITY.PO_EnableGravity(self._Entity,false)
+	ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+ 
+    self._sndLoop = self:BindSound("actor/hellbiker_v4/nail_onfly-loop",2,6,true)
+	self._entityIndex = ENTITY.GetIndex(self._Entity)
+	local e = ENTITY.Create(ETypes.Trail,"trail_kolek","trailName")
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+	self.timer = 3
+end
+--============================================================================
+function Quarrel:OnUpdate()
+	if not self._enabled then return end
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.EnableCollisions(self._Entity, true)
+            ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+            local b = self.bindParticle
+            if b then
+				self._pfx = self:BindFX(b[1], b[2], nil, b[3], b[4], b[5])
+            end
+		end
+	end
+
+	if self.deathTimer then
+		self.deathTimer = self.deathTimer - 1
+		if self.deathTimer < 0 then
+			GObjects:ToKill(self)
+			AddPFX("BodyExplosion",0.3,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+		end
+	end
+end

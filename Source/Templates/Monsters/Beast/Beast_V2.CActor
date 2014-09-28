@@ -1,0 +1,59 @@
+o.BaseObj = "Beast.CActor"
+o.Model = "Beast2"
+--o.s_SubClass.Sounds.death = nil
+o._disableDeathSounds = true
+o.ShotgunCheckAllPellets = true
+
+o.s_SubClass.SoundDir = "beast"
+o.s_SubClass.Animations = {
+		idle2   = {1.0,false},
+		idle1   = {1.0,false,{
+				{0.3,'PlaySound','idle3'},
+				}},
+		idle3   = {1.0,false},
+		walk   = {1.2,true,{
+				{0.6,'PlaySound','walk'},
+				{1.17,'PlaySound','walk'},
+			}},
+		run   = {1.8,true,{
+				{1.0,'PlaySound','walk'},
+				{1.0,'FootFX','joint1'},
+				{1.0,'FootFX','joint2'},
+				{0.2,'PlaySound','walk'},
+				{0.2,'FootFX','n_p_stopa3'},
+				{0.2,'FootFX','n_l_stopa3'},
+			}},
+		hit1   = {1.2,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+		hit2   = {1.2,false,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+		rot_l  = {3.0,MC.ETransX + MC.ETransZ + MC.ERot,{
+				}},
+		rot_p  = {3.0,MC.ETransX + MC.ETransZ + MC.ERot,{
+				}},
+    }
+
+
+
+o.AiParams.aiGoals = {"idle","runToPlayer","hunt"}
+o.AiParams.barrelBone = "beczka"			-- bezp. trafienie w ta kosc powoduje explozje
+o.AiParams.actionDistance = 3.5
+o.AiParams.Explosion = {
+	ExplosionStrength = 5000, 
+	ExplosionRange = 6,
+	Damage = 200,
+}
+
+o.AiParams.alwaysSee = true
+
+o.BarrelExplosion = {
+	streng = 100,
+	Radius = 6.28,
+	LifetimeAfterExplosion = 3,
+}
+
+o.Health = 250
+o.enableGibWhenHPBelow = 0
+o.NeverWalk = true

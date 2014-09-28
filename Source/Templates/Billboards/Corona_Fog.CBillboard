@@ -1,0 +1,9 @@
+Corona_Fog.Type = 0
+Corona_Fog.Texture = "kula"
+Corona_Fog.Size	 = 10
+Corona_Fog.Alpha = 0.5
+Corona_Fog.Corona.FadeInTime  = 0.5
+Corona_Fog.Corona.FadeOutTime = 0.5
+Corona_Fog.Corona.DistScale   = 1
+Corona_Fog.Corona.MinSize     = 0
+Corona_Fog.Corona.TraceMargin = 1

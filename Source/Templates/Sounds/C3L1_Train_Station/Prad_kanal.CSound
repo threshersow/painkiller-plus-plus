@@ -1,0 +1,10 @@
+Prad_kanal.Volume = 30
+Prad_kanal.Interval = 0
+Prad_kanal.RandomShift = 0
+Prad_kanal.Falloff =
+{
+  Start = 2,
+  End = 15
+}
+Prad_kanal.Sound ="C3L1_Train_Station/Prad_kanal"
+

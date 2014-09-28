@@ -1,0 +1,106 @@
+o.Model = "banshee"
+o.Scale = 1.55
+o.Health = 80
+o.CreatePO = true
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 15
+o.throwHeart = true
+o.NeverRun = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 220,
+}
+
+o.s_SubClass = {
+    rotateHead = 3.1415 * 0.3,			-- zakres
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.2,
+    rotateHeadRight = Vector:New(-0.5, 1.0, 0.5),
+    rotateHeadLeft =  Vector:New(-1.0, 1.0, 1.0),
+    rotateHeadCoords = Vector:New(2, 3, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+    Animations = {
+		idle    = {1.0, false},
+		walk    = {1.5, true, {
+						--{0.0,'PlaySound',"step"},
+						--{1.3,'PlaySound',"step"},
+					}},
+		run     = {1.5, true, {
+						--{0.0,'PlaySound',"step1"},
+						--{1.3,'PlaySound',"step2"},
+					}},
+		atak1   = {1.0, false, {
+						{0.3, 'Scream',},
+						{0.4, 'SetAnimSpeed', 0.24},
+						{1.7, 'SetAnimSpeed', 1.0},
+					}},
+		atak2   = {1.4, true, {
+						--{0.6,'PlaySound',"atak" },
+						{1.3,'Attack',},
+						--{1.0,'PlaySound',"swish" },
+					}},
+
+		hit1    = {1.0, false, {
+						--{0.0,'PlaySoundHit',"hit"},
+					}},
+		hit2    = {1.0, false, {
+						--{0.0,'PlaySoundHit',"hit"},
+					}},
+	},
+
+	Hits = {"hit1", "hit2"},
+
+	DeathJoints = {
+        's_p_kostka','s_l_kostka',
+        'dlo_lewa_root',
+        'dlo_prawa_root',
+        'k_glowa',
+    },
+    
+	RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 0.6,
+		Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"r_l_lokiec", "bodyfalls", true},
+			},
+	},
+
+}
+
+o.DeathTimer = 40
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","bansheeAttack","hunt", "flee", "hear"}
+o.AiParams.walkStep = 9.0
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.viewAngle = 360
+o.AiParams.madonnaFX = true				-- rozpadanie radolla na kruki
+o.AiParams.attackRange = 2.6
+o.AiParams.attackRangeAngle = 360
+
+o.AiParams.GuardStill = true
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {20,60}
+o.AiParams.updateSpeed = 0.25
+
+o.AiParams.huntPlayer = true
+
+o.AiParams.moveDisplacement = -1
+o.AiParams.perception = 0.6
+o.AiParams.hearing = 2.0
+
+o.AiParams.screamFreq = 0.012				-- czestowtliwosc krzyczenia, oryignalnie 0.002
+o.AiParams.screamDistance = 5				-- zasieg krzyku (ogluszenia) max. glosnosc
+o.AiParams.screamDistanceMax = 26			-- zasieg krzyku (ogluszenia) cut
+o.AiParams.soundAmbientDelay = 4.5
+
+o.shadow = 64

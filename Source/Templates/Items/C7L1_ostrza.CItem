@@ -1,0 +1,4 @@
+o.BaseObj = "CItem"
+o.Model = "C7L1_ostrza"
+o.Scale = 3
+o.speed = 1.0

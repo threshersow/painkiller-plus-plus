@@ -1,0 +1,119 @@
+o.Mesh = "polySurfaceShape11"
+o.Pack = "bomb.dat"
+o.Scale = 0.12
+o.Health = 9
+o.forceOut = 80				-- sila explozji na boki
+o.forceUp =	550				-- sila explozji do gory
+o.TimeToLive = 300
+o.Friction = 0.0
+o.flySpeed = 1000
+
+o.flame_FX = "firework"
+o.flame_FXscale = 0.66
+
+o.ExplosionStrength = 5000
+o.ExplosionRange = 12
+o.Damage = 50
+o.gasElements = 9
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self.flame_FX)
+    Cache:PrecacheParticleFX("Grenade")
+    Cache:PrecacheParticleFX("barrelarabxplo")
+    Cache:PrecacheItem("BombParts.CItem")
+    Cache:PrecacheItem("KamykWybuch.CItem")
+    Cache:PrecacheSounds("actor/oficer/offic-falling-bomb1")
+    Cache:PrecacheSounds("actor/oficer/offic-falling-bomb2")
+    Cache:PrecacheSounds("actor/oficer/bomb-explode1")
+    Cache:PrecacheSounds("actor/oficer/bomb-explode2")
+    Cache:PrecacheSounds("impacts/barrel-wood-fire-loop")
+end
+
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.SphereSweep,1.0,ECollisionGroups.HCGNormalNCWithSelf)
+	--ENTITY.PO_SetLinearDamping(self._Entity, 0.1)
+
+    ENTITY.EnableCollisions(self._Entity,true,0.3,0.01)
+
+	ENTITY.PO_SetMovedByExplosions(self._Entity, false)			-- ?
+
+	if debugMarek then	
+		self._Flame = self:BindFX(self.flame_FX,self.flame_FXscale,nil,0,-0.3,0)
+	end
+	ENTITY.PO_SetLinearDamping(self._Entity, 0.6)
+	ENTITY.SetAngularVelocity(self._Entity, FRand(0.8, 1.2), FRand(0, 0.1), FRand(0, 0.1)) 
+end
+
+function o:OnUpdate()
+    local y = 0
+    if self._initPosStart then
+        y = self._initPosStart.Y
+    end
+    if self.Pos.Y < 50 + y and not self._snd then
+        if debugMarek then Game:Print("bindsnd "..self.Pos.Y) end
+        self._snd = self:BindSound("actor/oficer/offic-falling-bomb"..math.random(1,2),60,120)
+    end
+end
+
+function o:OnCollision(x,y,z,nx,ny,nz,e_other,h_me,h_other)
+	ENTITY.EnableCollisions(self._Entity,false) -- disable next callbacks        
+	ENTITY.PO_Enable(self._Entity,false)
+
+	WORLD.Explosion2(x,y,z,self.ExplosionStrength,self.ExplosionRange,nil,AttackTypes.Grenade,self.Damage)  
+	self:Client_Explosion(x,y,z)
+
+	GObjects:ToKill(self)
+end
+
+
+function o:Client_Explosion(x,y,z)
+    ENTITY.PO_Enable(entity,false)
+    
+    -- special FX
+    SOUND.Play3D("actor/oficer/bomb-explode"..math.random(1,2),x,y,z,60,120)
+    AddPFX("Grenade",1.6,Vector:New(x,y,z))
+    AddPFX("barrelarabxplo",2.0,Vector:New(x,y,z))    
+    
+    -- physical parts
+    local n = math.random(1,2) -- how many (min,max)
+    local scales = {0.6, 0.8}
+    for i = 1, n do
+        local scale = scales[math.random(1,2)]
+        local ke = AddItem("KamykWybuch.CItem",scale,Vector:New(x,y+0.5+i/10,z),false,Quaternion:New_FromEuler(FRand(0,3.14), FRand(0,3.14), FRand(0,3.14)))
+        local vx = FRand(-20,30) -- velocity x
+        local vy = FRand(15,30)  -- velocity y
+        local vz = FRand(-20,30) -- velocity z
+        ENTITY.SetVelocity(ke,vx,vy,vz)
+        ENTITY.SetTimeToDie(ke,FRand(1,2)) -- lifetime (min,max)
+    end
+
+    -- light
+    AddAction({{"Light:a[1],a[2],a[3],200,200,100, 8, 14 , 1, 0.02,0.1,0.02"}},nil,nil,x,y+1.0,z)
+
+	local amount = self.gasElements
+	for i=1,amount do
+		local obj = GObjects:Add(TempObjName(),CloneTemplate("BombParts.CItem"))
+
+		obj.ObjOwner = self.ObjOwner
+		obj.Pos.X = x + FRand(-0.8, 0.8)
+		obj.Pos.Y = y + 1.0 + i*0.05
+		obj.Pos.Z = z + FRand(-0.8, 0.8)
+
+		--table.insert(self.ObjOwner.debugHIT, {obj.Pos.X, obj.Pos.Y, obj.Pos.Z})
+		
+		if i == amount then
+			obj.TimeToLive = obj.TimeToLive * 1.2
+			obj.sound = "impacts/barrel-wood-fire-loop"
+		else
+			obj.sound = nil
+			obj.TimeToLive = FRand(obj.TimeToLive * 0.8, obj.TimeToLive * 1.2)			
+		end
+		obj:Apply()
+		obj:Synchronize()
+	end
+
+
+    if Game._EarthQuakeProc then
+        Game._EarthQuakeProc:Add(x,y,z, 15, 25 --[[g.ExplosionCamDistance--]], 0.3, 0.3)
+    end
+end

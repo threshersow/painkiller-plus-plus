@@ -1,0 +1,32 @@
+o.s_SubClass.ParticlesDefinitions = {
+	ambient1 = {
+        pfx = "monsterweap_hitground",
+        scale = 0.2,
+        offset = Vector:New(0,0,0),
+        joint = "corn1",
+		rotateWithJoint = true,
+		rotateWithJointOffset = Vector:New(math.pi/2,0,math.pi/2),
+    },
+	ambient2 = {
+        pfx = "monsterweap_hitground",
+        scale = 0.2,
+        offset = Vector:New(0,0,0),
+        rotateWithJoint = true,
+        joint = "corn2",
+        rotateWithJointOffset = Vector:New(math.pi/2,0,0),
+    },
+	ambient3 = {
+        pfx = "monsterweap_hitground",
+        scale = 0.2,
+        offset = Vector:New(0,0,0),
+        rotateWithJoint = true,
+        joint = "corn3",
+        rotateWithJointOffset = Vector:New(math.pi/2,0,-math.pi/2),
+    },
+    death = {
+        pfx = "DevilKosaKulared",
+        scale = 0.2,
+        offset = Vector:New(0,0,0),
+        joint = "root",
+    }
+}

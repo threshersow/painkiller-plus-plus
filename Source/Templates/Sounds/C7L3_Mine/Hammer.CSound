@@ -1,0 +1,9 @@
+Hammer.Volume = 60
+Hammer.Interval = 5
+Hammer.RandomShift = 2
+Hammer.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+Hammer.Sound ="C7L3_Mine/Hammer_01;C7L3_Mine/Hammer_02;C7L3_Mine/Hammer_03"

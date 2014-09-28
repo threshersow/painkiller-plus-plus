@@ -1,0 +1,95 @@
+o.s_SubClass.SoundsDefinitions = {
+	stepl = {
+		samples = {'hellb-krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	stepr = {
+		samples = {'hellb-krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	laugh = {
+		samples = {'hellb-shooting-laugh1','hellb-shooting-laugh2',},
+		dist1 = 16,
+		dist2 = 52,
+		playChance = 0.25,
+	},
+	bodyfalls = {
+		samples = {'hellb-boddyfalls1','hellb-boddyfalls2'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	run = {
+		samples = {'hellb-run1_1','hellb-run2_2','hellb-run1_2','hellb-run2_1'},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	onAttactOnce = {
+		samples = {"hellb-halt1", "hellb-halt2",},
+		playChance = 0.5,
+		dist1 = 30,
+		dist2 = 70,
+	},
+	shootLoop = {
+		samples = {"hellb2_mgun-shoot-all"},
+		dist1 = 16,
+		dist2 = 52,
+		disablePitch = true,
+	},
+	start = {
+		samples = {"hellb_atakstart"},
+		dist1 = 16,
+		dist2 = 52,
+		disablePitch = true,
+	},
+	stop = {
+		samples = {"hellb_atakstop"},
+		dist1 = 16,
+		dist2 = 52,
+		disablePitch = true,
+	},
+	shootend = {
+		samples = {"hellb2_mgun-shoot-all-end"},
+		dist1 = 16,
+		dist2 = 52,
+	},
+
+	weaponlost = {
+		samples = {"hellb-weapon-lost"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	shells = {
+		samples = {'hellb-weapon-shells2','hellb-weapon-shells1',},
+		dist1 = 16,
+		dist2 = 52,
+	},
+	hit = {
+		samples = {'hellb-hit1','hellb-hit2','hellb-hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+
+	
+	death = {
+		samples = {"hellb-death1","hellb-death2","hellb-death3" },
+   		dist1 = 30,
+		dist2 = 70,
+	},
+
+	catch = {
+		samples = {"hellb-death-choked"},
+		dist1 = 12,
+		dist2 = 26,
+        joint = "root",
+	},
+
+    OnSpawn = {
+		samples = {'hellb-hit1','hellb-hit2','hellb-hit3'},
+   		dist1 = 30,
+		dist2 = 70,
+	},
+
+
+}

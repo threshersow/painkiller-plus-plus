@@ -1,0 +1,20 @@
+o.BaseObj = "Amputee.CActor"
+o.Model = "amput_zombie"
+o.Scale = 1.4
+o.Health = 100
+o.AiParams.aggresive = true
+
+o.enableGibWhenHPBelow = nil
+o.AiParams.minDelayBetweenEncounterAndAttack = 2.5
+o.CollisionDamage = 5
+
+o.AiParams.idle = {											-- tabela przejsc
+		{"idle_kolana","lezenie_idle", 0.02, true, true, true},	-- z, do, chance, loop, breakable, LEZY
+		{"idle_kolana","walk1", 0.04, true, true, false},
+		{"walk1","lezenie_idle", 0.5, true, true, true},
+		{"walk1","lezenie_idle1", 1.0, true, true, true},
+		{"lezenie_idle1","lezenie_idle", 0.1, true, true, true},
+		{"lezenie_idle","lezenie2idle", 0.06, false, true, true},
+		{"lezenie2idle","lezenie_idle", 0.1, true, false, true},
+		{"lezenie2idle","idle_kolana", 1.0, true, false, false},
+	}

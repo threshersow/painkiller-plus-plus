@@ -1,0 +1,9 @@
+o.Model = ""
+o.s_SubClass = {
+    FireTimeout = 15,
+    FireDamage  = 9999,
+    FireRange   = 100,
+    FireRadius  = 10,
+    HowManyTraces = 30,
+    PhysicsImpulse = 300,
+}

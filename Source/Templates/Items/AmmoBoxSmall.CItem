@@ -1,0 +1,30 @@
+o.Scale = 0.6
+o.Mass = 300
+o.Friction = 3
+o.DestroyPack = "skrzynia_ammo_mniejsza_zlom.dat"
+o.TestDeathZone = true
+o.Rot = Quaternion:New(0.999974,-1.86407e-005,-0.00722159,-6.84467e-005)
+o.Health = 32
+o.Pack = "skrzynia_ammo_mniejsza_cala.dat"
+o.BaseObj = "CItem"
+o.Mesh = "polySurfaceShape70692"
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)
+
+
+o.Destroy.ExplosionStrength = 2000
+o.Destroy.ExplosionDamage = 200
+o.Destroy.ExplosionRadius = 5
+o.Destroy.AverageDelay = 24
+o.Destroy.AverageVariation = 12
+o.Destroy.Strength = 200
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 10
+o.Destroy.Effect = "explo_ammobox"
+o.Destroy.EffectScale = 0.4
+o.Destroy.LifetimeAfterExplosion = 3
+
+
+o.Destroy.LifetimeAfterExplosion = 1

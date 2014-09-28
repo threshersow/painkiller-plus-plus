@@ -1,0 +1,9 @@
+ruch_single.Volume = 100
+ruch_single.Interval = 10
+ruch_single.RandomShift = 2
+ruch_single.Falloff =
+{
+  Start = 4,
+  End = 40
+}
+ruch_single.Sound ="c6l4_city/ruch_single_01;c6l4_city/ruch_single_02;c6l4_city/ruch_single_03"

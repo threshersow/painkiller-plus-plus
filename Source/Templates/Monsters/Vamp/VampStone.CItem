@@ -1,0 +1,96 @@
+VampStone.Mesh = "polySurfaceShape89990"
+VampStone.Pack = "kamien.dat"
+VampStone.Ang = Vector:New(0,0,0)
+VampStone.Scale = 0.33
+VampStone.Pos = Vector:New(0,0,-4)
+VampStone.Restitution = 0.2
+VampStone.Damage = 0.5					-- mnozony jest przez predkosc obiektu w momencie kolizji
+VampStone.ThrowForce = 120				-- throwvelocity 100
+VampStone.LifeTime = 180				-- after 1st col
+VampStone.TimeToLive = 30 * 60
+VampStone.CollisionSound = {"impacts/stonebig-impact1","impacts/stonebig-impact2","impacts/stonebig-impact3","impacts/stonebig-impact4","impacts/stonebig-impact5"}
+VampStone.deltaYSound = 10
+--============================================================================
+function VampStone:OnCollision(x,y,z,nx,ny,nz,e)
+	local ecol = true
+	if e then
+		local obj = EntityToObject[e]
+		if obj and obj._Class ~= "CItem" then
+			if obj ~= self.ObjOwner then
+				if obj.OnDamage then
+					local v = Vector:New(ENTITY.GetVelocity(self._Entity))
+					local x,y,z,mag = ENTITY.GetVelocity(self._Entity)
+					local damage = self.Damage * mag
+					if mag > 8 then
+						PlaySound3D("impacts/bullet-body2",obj.Pos.X,obj.Pos.Y,obj.Pos.Z,3,5)
+						obj:OnDamage(damage, self)
+					end
+					ecol = false
+				end
+				--GObjects:ToKill(self)
+			end
+		else
+			if y < self.deltaYSound then
+				local name = self.CollisionSound[math.random(1,table.getn(self.CollisionSound))]
+				PlaySound3D(name, x,y,z, 10, 60)
+                AddPFX("but",0.5*self.Scale,self.Pos)
+			end
+		end
+	end
+	if not self.timer then
+        ENTITY.PO_EnableGravity(self._Entity,true)
+		self.timer = math.random(self.LifeTime*0.8,self.LifeTime*1.2)
+	end
+end
+--============================================================================
+function VampStone:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMeshSweep,nil,ECollisionGroups.Noncolliding)
+    self.timerInit = 4
+end
+--============================================================================
+function VampStone:OnUpdate()
+	if self.timerInit then
+		self.timerInit = self.timerInit - 1
+		if self.timerInit < 0 then
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+   			ENTITY.EnableCollisions(self._Entity, true, 0.8, 6.0)
+   			self.timerInit = nil
+   		end
+   	else
+		if self.timer then
+			self.timer = self.timer - 1
+			if self.timer < 0 then
+				GObjects:ToKill(self)
+				AddPFX("BodyExplosion",0.5,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+			end
+		end
+		--[[if self.adjustDirection then
+			self.adjustDirection = self.adjustDirection - 1
+			if self.adjustDirection <= 0 then
+				self.adjustDirection = nil
+				local x1,y1,z1 = self.Pos.X, self.Pos.Y, self.Pos.Z
+				local x2,y2,z2 = Player.Pos.X, Player.Pos.Y + 0.8, Player.Pos.Z		-- +0.8 celowanie troche wyzej
+				local dx = x2 - x1
+				local dy = y2 - y1
+				local dz = z2 - z1
+
+				local v = Vector:New(dx, dy, dz)
+				v:Normalize()
+
+				ENTITY.SetVelocity(self._Entity,v.X*self.ThrowForce, v.Y*self.ThrowForce, v.Z*self.ThrowForce)
+			end
+		end--]]
+		--[[if self.checkStill then
+			self.checkStill = self.checkStill - 1
+			if self.checkStill == 0 then
+				local v = Vector:New(ENTITY.GetVelocity(self._Entity))
+				local x,y,z = ENTITY.GetVelocity(self._Entity)
+				local mag = math.sqrt(x*x + y*y + z*z)
+				if mag < 0.16 then
+					GObjects:ToKill(self)
+				end
+				self.checkStill = 30
+			end
+		end]]--
+	end
+end

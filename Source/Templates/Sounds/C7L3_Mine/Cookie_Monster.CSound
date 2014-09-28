@@ -1,0 +1,9 @@
+Cookie_Monster.Volume = 100
+Cookie_Monster.Interval = 15
+Cookie_Monster.RandomShift = 5
+Cookie_Monster.Falloff =
+{
+  Start = 6,
+  End = 60
+}
+Cookie_Monster.Sound ="C7L3_Mine/Cookie_Monster_01;C7L3_Mine/Cookie_Monster_02;C7L3_Mine/Cookie_Monster_03"

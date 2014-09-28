@@ -1,0 +1,12 @@
+Teleport.s_Editor["DestPoint.AName"]=  { "ComboBox", "CSpawnPoint.FillWalkAreaBox" }
+
+function Teleport:EditRender()
+    CBox.EditRender(self)
+    --local d = self.Size.Depth/2    
+    --local s = self.Size.Width/2
+    --if self.Size.Height/2 < s then s = self.Size.Height/2 end
+    --local x,y,z = self.Rot:TransformVector(0,0,d)    
+    --R3D.DrawSprite(self.Pos.X+x,self.Pos.Y+y,self.Pos.Z+z,s,0,R3D.RGBA(55,55,155,255),"editor/a",true,self.Rot.W,self.Rot.X,self.Rot.Y,self.Rot.Z)
+    --local x,y,z = self.Rot:TransformVector(0,0,-d)    
+    --R3D.DrawSprite(self.Pos.X+x,self.Pos.Y+y,self.Pos.Z+z,s,0,R3D.RGBA(55,155,55,255),"editor/b",true,self.Rot.W,self.Rot.X,self.Rot.Y,self.Rot.Z)
+end

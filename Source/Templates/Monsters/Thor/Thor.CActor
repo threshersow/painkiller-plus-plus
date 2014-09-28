@@ -1,0 +1,227 @@
+o.Model = "Thor"
+o.CreatePO = true
+o.Health = 4000
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 5
+o.throwHeart = false
+o.Scale = 18
+o.DeathTimer = 999600
+o.Animation = "idle1"
+o.disableFreeze = true
+o.CollisionDetect = 0.3
+o.IsBoss = true
+
+o.s_SubClass = {
+    rotateHead = 0.8,
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.16,
+
+    rotateHeadRight = Vector:New(-1.0, 1.0, 0.0),
+    rotateHeadLeft =  Vector:New(-1.0, 1.0, 1.0),
+    rotateHeadCoords = Vector:New(2, 3, 1),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+  
+    Animations = {  
+        idle1         = {0.8, false, nil, 0.4},		-- 0.8
+        idle2         = {0.8, false, {
+							{0.2,'PlaySound',"idle"},
+						}, 0.5},
+        walk          = {0.66, true, {
+							{0.0,'Stomp','s_l_srodstopie',2.0},
+							{0.7,'Stomp','s_p_srodstopie',2.0},
+							{0.0,'PlaySound',"step1"},
+							{0.1,'PlaySound',"stepgrowl"},		-- binded
+							{0.7,'PlaySound',"step2"},
+							{0.8,'PlaySound',"stepgrowl2"},
+							 }, 0.3},
+
+		idle2_nohammer = {0.8, false, {
+							{0.0,'PlaySound',"idle"},
+						},0.5},
+        idle1_nohammer = {0.8, false, {
+							{0.8,'PlaySound',"idle_nh"},
+						},0.5},
+
+        walk_nohammer  = {0.66, true, {
+	        				{0.0,'Stomp','s_l_srodstopie',2.0},
+							{0.7,'Stomp','s_p_srodstopie',2.0},
+							{0.0,'PlaySound',"step1"},
+							{0.1,'PlaySound',"stepgrowl"},
+							{0.7,'PlaySound',"step2"},
+							{0.8,'PlaySound',"stepgrowl2"},
+						},0.5},
+
+        atak1         = {0.9, false, {
+						{0.3,'PlaySound',"prepare"},
+						{1.3,'ParticleWhenRised',},
+						{1.4,'PlaySound',"swish"},
+						{1.4,'PlaySound',"at"},
+						{1.65, "atak1"},
+						{1.6,'PlaySound',"punch"},
+						},0.5},
+
+        atak2         = {0.7, false, {
+        				{0.3,'PlaySound',"prepare2"},
+						{2.2, "recharge"},
+						{1.9,'PlaySound',"at3"},
+						{2.2,'PlaySound',"punch"},
+						},0.5},
+						
+        atak3         = {0.8, false, {			-- piesciami
+						{1.45, "atak1"},
+						{0.3,'PlaySound',"prepare"},
+						{1.45,'PlaySound',"punch"},
+						},0.5},
+
+
+        rot90L   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.5,'PlaySound',"step2"},
+						{1.5,'Stomp','s_p_srodstopie',1.5},
+					}, 0.2, true},
+        rot90P   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.5,'PlaySound',"step1"},
+						{1.5,'Stomp','s_l_srodstopie',1.5},
+					}, 0.2, true},
+        rot45P   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+					}, 0.2, true},
+        rot45L   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+					}, 0.2, true},
+
+        rot90Lnh   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.5,'PlaySound',"step2"},
+						{1.5,'Stomp','s_p_srodstopie',1.5},
+					}, 0.2, true},
+        rot90Pnh   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.5,'PlaySound',"step1"},
+						{1.5,'Stomp','s_l_srodstopie',1.5},
+					}, 0.2, true},
+        rot45Pnh   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+					}, 0.2, true},
+        rot45Lnh   = {1.30,MC.ETransX + MC.ETransZ + MC.ERot,{
+					}, 0.2, true},
+
+
+    },
+    Ambients = {"idle1","idle2"},
+
+    BreakableJoints = {},
+    DeathJoints = {
+		's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+		'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+		'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+		'k_miednica','k_sub_root','k_ogo','k_zebra','k_ramiona',
+		'k_glowa', 'mlot',
+	},
+   	rotate45L = "rot45L",
+	rotate45R = "rot45P",
+	rotate90L = "rot90L",
+	rotate90R = "rot90P",
+
+}
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 800000,
+    --Friction = 0.5,
+}
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"walkAndStrikeThor","strikeThor","idleThor","idleAnimThor","dropHammer"}
+o.AiParams.viewDistance = 600
+o.AiParams.viewDistance360 = 600
+o.AiParams.viewAngle = 360
+o.AiParams.alwaysSee = true
+
+o.AiParams.hearing = 0.0
+o.AiParams.perception = 0.0
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,45}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.4
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+
+o.AiParams.walkStep = 40.0
+
+o.AiParams.moveDisplacement = -1
+
+o.AiParams.escapeTime = 0
+o.CollisionDetect = 0.2
+o.AiParams.updateSpeed = 0.3
+o.AiParams.huntPlayer = false
+o.AiParams.delayBeetweenAttack = 5
+o.StompTimeOut = 9
+o.StompRange = 80
+o.CameraRot = 0.25
+o.CameraMov = 0.25
+o._DontCheckFloors = true
+
+
+o.AiParams.actions = {
+	{"idle", 0.25,},
+    {"walkToPlayerAndStrike", 0.2,},
+    {"idleAnim", 0.1,},
+    {"strike", 0.1,},
+}
+
+o.StoneParams = {
+	particlesOnCollision = "butk",
+	amountReportingCollisions = 0.5,	-- 0.0 .. 1.0	ile kamieni ma zglaszac kolizje
+	miminalMassReportingCollision = 160,
+	maximalMassReportingCollision = 20000,
+	collisionMinimumStrength = 5,		-- min velocity
+	collisionMinimumFrequency = 1.0,
+	minYwhenPFXandSound = -40.0,
+	minObjMassWhenEarthquake = 3100,
+
+	_lastTimeQuake = -100,				-- wewnetrzna zmienna, nie zmieniac
+	
+	eqTimeOut = 18,						-- trzesienie kamera od spadajacych glazow
+	eqRange = 50,
+	eqCameraMov = 0.22,
+	eqCameraRot = 0.22,
+	eqMinDelay = 20,
+	
+}
+StoneDamageModif = 0.001					-- damage on spadajacego stone = damageModif * masa * predkosc
+										-- narazie global
+
+o.Fists = {
+	flightTime = 8,
+	radius = 32,
+	hitPosDisplace = 15,
+}
+
+o.Hammer = {
+	stren = 80,
+	distance = 30,
+	random = 2.0,
+	DamageWhenPlayerIsFar = 15,			-- podrzucenie w gore gracza, zalezy od odleglosci
+	DamageRange = 300,
+	DamageWhenPlayerIsClose = 80,		-- bezposrednie trafienie mlotem
+	directHitDistance = 4,
+	hitAngleDisplace = -22,
+	hitPosDisplace = 34,
+	PlayerThrowUpMax = 40,				-- velocity
+	HitDecal = "decal_Mlot",
+	
+	FXwhenHit = "FX_Thorhit.CActor",
+	FXwhenRised = "FX_mlot.CActor",
+	FXwhenRised_Displace = Vector:New(25,0,0),
+}
+
+o.disbleRotWhenStartWalk = true
+o.disableNoAnimDetection = true
+
+o.AiParams.HammerRecharge = 0.15
+o.AiParams.stepDamage = 100
+
+o.AiParams.forceRotateHead = true
+
+o.impulseAfterDeathXZ = 20
+o.impulseAfterDeathY = 20
+o.lightWhenDestroy = {"Light:a[1],a[2],a[3],225,225,255, 10, 40 , 1, 0.2,0.6,0.2"}
+o.shadow = 512

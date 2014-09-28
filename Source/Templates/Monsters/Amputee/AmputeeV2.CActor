@@ -1,0 +1,4 @@
+o.BaseObj = "Amputee.CActor"
+o.Model = "amputee_town"
+
+o.s_SubClass.SoundDir = "amputee"

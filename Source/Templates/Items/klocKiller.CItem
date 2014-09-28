@@ -1,0 +1,16 @@
+o.BaseObj = "CItem"
+o.Pack = "klocKiller.dat"
+o.Mesh = "kloc_kamien3Shape"
+o.Scale = 0.3
+o.Mass = 20000
+o.Friction = 1
+
+o.Damage = 100
+o.timeUp = 1.0
+o.velocityUp = 0.4
+o.velocityDown = 0.6
+o.timeDown = 0.5
+o.moveDistance = 3.0
+
+o.effectDeltaY = -3.5
+--o.DetailMap.DefaultDetailTex = false 

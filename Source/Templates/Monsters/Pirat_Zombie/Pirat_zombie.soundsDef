@@ -1,0 +1,60 @@
+o.s_SubClass.SoundsDefinitions = {
+	explode = {
+		samples = {'pzomb_explode'},
+		dist1 = 30,
+		dist2 = 50,
+	},
+	onAttackOnce = {
+		samples = {"pzomb_halt1", "pzomb_halt2",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	stepwalk = {
+		samples = {'pzomb_krok1','pzomb_krok2','pzomb_krok3',},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},
+	steprun = {
+		samples = {'pzomb_run1','pzomb_run2',},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},
+	pzombfall = {
+		samples = {'pzomb_onebone1','pzomb_onebone2'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	hit = {
+		samples = {"pzomb_hit","pzomb_hit2","pzomb_hit3",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	attack = {
+		samples = {'pzomb_atack2-1','pzomb_atack2-2'},
+		dist1 = 6,
+		dist2 = 32,
+	},
+	attackAmbient = {
+		samples = {'pzomb_attackscream1','pzomb_attackscream2','pzomb_attackscream3','pzomb_attackscream4'},
+		dist1 = 12,
+		dist2 = 50,
+	},
+
+	death = {
+		samples = {'pzomb_death1','pzomb_death2','pzomb_death3'},
+	},
+	bonesfall = {
+		samples = {'pzomb_onebone1','pzomb_onebone2'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+
+	swish = {
+		samples = {'pzomb-throwhead-swish'},
+		dist1 = 6,
+		dist2 = 32,
+	},
+
+}

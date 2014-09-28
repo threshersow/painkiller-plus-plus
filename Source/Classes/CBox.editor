@@ -1,0 +1,136 @@
+CBox.s_Editor = {
+        ["Size.Width"]  = { "SpinEdit", {"%.1f", 0.1, 999, 0.1} },
+        ["Size.Height"] = { "SpinEdit", {"%.1f", 0.1, 999, 0.1} },
+        ["Size.Depth"]  = { "SpinEdit", {"%.1f", 0.1, 999, 0.1} },
+        ["ToLaunch.[new]"] = { "ComboBox", "CBox.FillToLunchBox" },
+        ["Actions.OnTouch.[new]"]    = { "TextEdit" }, 
+    }    
+
+--============================================================================
+function CBox:FillToLunchBox()
+    tmp_tab = {"-remove-"}
+    local boxes = GObjects:GetAllObjectsByClass("CSpawnPoint")
+    for i,v in boxes do
+        table.insert(tmp_tab,v._Name)
+    end
+    for i,v in GObjects.Elements do
+        if v.Frozen then 
+            table.insert(tmp_tab,v._Name)
+        end
+    end
+end
+
+--============================================================================
+function CBox:EditRender(delta)
+
+    if self._IsAE then
+        if not Editor.EditAcousticEnvs then return end
+    else
+        if not Editor.EditAreas then return end
+    end
+
+    local w = self.Size.Width/2
+    local h = self.Size.Height/2
+    local d = self.Size.Depth/2
+    
+    local p = {}    
+    
+    p[1] = Vector:New(-w,-h,-d)
+    p[2] = Vector:New(-w,-h,d)
+    p[3] = Vector:New(w,-h,d)
+    p[4] = Vector:New(w,-h,-d)
+    p[5] = Vector:New(-w,h,-d)
+    p[6] = Vector:New(-w,h,d)
+    p[7] = Vector:New(w,h,d)
+    p[8] = Vector:New(w,h,-d)
+
+    for i,v in p  do
+        if self.Rot then v.X, v.Y, v.Z =  self.Rot:TransformVector(v.X, v.Y, v.Z) end
+
+        v.X = v.X + self.Pos.X
+        v.Y = v.Y + self.Pos.Y
+        v.Z = v.Z + self.Pos.Z
+    end
+    local col = R3D.RGB(100,150,170)
+    if self.s_SubClass and self.s_SubClass._boxColor then 
+        col = self.s_SubClass._boxColor
+    end
+    R3D.RenderLine(p[1].X,p[1].Y,p[1].Z,p[2].X,p[2].Y,p[2].Z,col)
+    R3D.RenderLine(p[2].X,p[2].Y,p[2].Z,p[3].X,p[3].Y,p[3].Z,col)
+    R3D.RenderLine(p[3].X,p[3].Y,p[3].Z,p[4].X,p[4].Y,p[4].Z,col)
+    R3D.RenderLine(p[4].X,p[4].Y,p[4].Z,p[1].X,p[1].Y,p[1].Z,col)
+
+    R3D.RenderLine(p[5].X,p[5].Y,p[5].Z,p[6].X,p[6].Y,p[6].Z,col)
+    R3D.RenderLine(p[6].X,p[6].Y,p[6].Z,p[7].X,p[7].Y,p[7].Z,col)
+    R3D.RenderLine(p[7].X,p[7].Y,p[7].Z,p[8].X,p[8].Y,p[8].Z,col)
+    R3D.RenderLine(p[8].X,p[8].Y,p[8].Z,p[5].X,p[5].Y,p[5].Z,col)
+
+    R3D.RenderLine(p[1].X,p[1].Y,p[1].Z,p[5].X,p[5].Y,p[5].Z,col)
+    R3D.RenderLine(p[2].X,p[2].Y,p[2].Z,p[6].X,p[6].Y,p[6].Z,col)
+    R3D.RenderLine(p[3].X,p[3].Y,p[3].Z,p[7].X,p[7].Y,p[7].Z,col)
+    R3D.RenderLine(p[4].X,p[4].Y,p[4].Z,p[8].X,p[8].Y,p[8].Z,col)
+    
+    local col = R3D.RGB(50,130,130)
+    for i=1,4 do
+        local v = p[i]
+        R3D.RenderBox(v.X-0.07,v.Y-0.07,v.Z-0.07,v.X+0.07,v.Y+0.07,v.Z+0.07,col)
+    end
+
+    local col = R3D.RGB(50,200,200)
+    for i=5,8 do
+        local v = p[i]
+        R3D.RenderBox(v.X-0.07,v.Y-0.07,v.Z-0.07,v.X+0.07,v.Y+0.07,v.Z+0.07,col)
+    end
+
+    col = R3D.RGB(200,50,50)
+    R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,col)   
+end
+--============================================================================
+function CBox:EditTick(delta)    
+    if self._IsAE then
+        if not Editor.EditAcousticEnvs then return end
+    else
+        if not Editor.EditAreas then return end
+    end
+    -- edit
+    if Editor.SelObj == self then        
+        if (INP.Key(Keys.LeftCtrl) == 1 and INP.Key(Keys.MouseButtonLeft)==2) or 
+           (INP.Key(Keys.LeftCtrl) == 2 and INP.Key(Keys.MouseButtonLeft)==1) then
+            self._LastPos = Clone(self.Pos)
+            Editor.LMX,Editor.LMY = MX,MY
+        end
+        if INP.Key(Keys.MouseButtonLeft) == 3 or INP.Key(Keys.LeftCtrl) == 3 then
+            self._LastPos = nil
+        end
+        if INP.Key(Keys.LeftCtrl) == 2 and INP.Key(Keys.MouseButtonLeft)==2 then
+            if self._LastPos then
+                local ox = self.Pos.X - self._LastPos.X
+                local oy = self.Pos.Y - self._LastPos.Y
+                local oz = self.Pos.Z - self._LastPos.Z
+                
+                if  MX ~= OMX or MY ~= OMY then                
+                    self.Size.Width  = self.Size.Width  + ox * 2
+                    self.Size.Height = self.Size.Height + oy * 2
+                    self.Size.Depth  = self.Size.Depth  + oz * 2
+                end
+           
+                if self.Size.Width  < 0.1 then self.Size.Width  = 0.1 end
+                if self.Size.Height < 0.1 then self.Size.Height = 0.1 end
+                if self.Size.Depth  < 0.1 then self.Size.Depth  = 0.1 end
+                
+                self.Pos = Clone(self._LastPos)
+                MX,MY = Editor.LMX,Editor.LMY
+                MOUSE.SetPos(MX,MY) 
+            end
+        end
+    else
+        -- picking point 
+        if MOUSE.LB() == 1 then        
+            local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+            if Dist2D(MX,MY,sx,sy) <  15  then
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+            end
+        end    
+    end
+end

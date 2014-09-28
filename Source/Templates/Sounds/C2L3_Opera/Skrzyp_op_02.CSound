@@ -1,0 +1,10 @@
+Skrzyp_op_02.Volume = 60
+Skrzyp_op_02.Interval = 5
+Skrzyp_op_02.RandomShift = 2
+Skrzyp_op_02.Falloff =
+{
+  Start = 5,
+  End = 30
+}
+Skrzyp_op_02.Sound ="C2L3_Opera/Skrzyp_op_02;C2L3_Opera/Skrzyp_op_03"
+

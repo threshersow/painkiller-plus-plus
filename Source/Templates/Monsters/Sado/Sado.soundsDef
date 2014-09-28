@@ -1,0 +1,79 @@
+o.s_SubClass.SoundsDefinitions = {
+	onAttackOnce = {
+		samples = {"sado_halt1","sado_halt2","sado_halt3",},
+		playChance = 0.8,
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"sado_bodyfalls"},
+		dist1 = 12,
+		dist2 = 48, 
+	},
+	weaponlost = {
+		samples = {"sado-weapon-lost"},
+		dist1 = 12,
+		dist2 = 48, 
+	},
+	hit = {
+		samples = {'sado_hit1','sado_hit2','sado_hit3'},
+		dist1 = 30,
+		dist2 = 70, 
+	},
+	jumpstart = {
+		samples = {'sado-jump-start-voice',},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	voice = {
+		samples = {'sado-jump-stop-voice',},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	swish = {
+		samples = {'sado-jump-middle-swish',},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	step = {
+		samples = {'sado_krok1','sado_krok2','sado_krok3','sado_krok4',},
+		dist1 = 12,
+		dist2 = 30,
+	},
+	fire = {
+		samples = {'sado_fire-shoot1','sado_fire-shoot2','sado_fire-shoot3'},
+		dist1 = 16,
+		dist2 = 52,
+		disablePitch = true,
+	},
+	shell = {
+		samples = {'sado_fire-shell1','sado_fire-shell2','sado_fire-shell3'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	prepare = {
+		samples = {'sado_throw-prepare'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	zawleczka = {
+		samples = {'sado_apple-zawleczka'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	tvoice = {
+		samples = {'sado_throw-voice'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	tswish = {
+		samples = {'sado_throw-swish'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+    death = {
+		samples = {"sado_death1","sado_death2","sado_death3","sado_death4"},
+		dist1 = 16,
+		dist2 = 52,
+    },
+}

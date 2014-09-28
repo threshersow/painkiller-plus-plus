@@ -1,0 +1,46 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "Kamyk.dat"
+o.Restitution = 0.8 -- sprezystosc
+o.LinearDamping = 0.8  -- tlumienie liniowe
+o._fx = "dust_explode"
+o.Time = 1.0
+o.NotCountable = true
+o.EQRange = 30
+o.CameraRot = 0.2
+o.CameraMov = 0.2
+
+o.initDistance = 20
+
+function o:OnCreateEntity()
+	ENTITY.EnableDraw(self._Entity, false)
+    self:AddTimer("CatchPlayer",1.0)
+end
+
+function o:CatchPlayer()
+    local dist = Dist3D(PX,PY,PZ,self.Pos.X,self.Pos.Y,self.Pos.Z)
+    if dist < self.initDistance then
+   		self.time = self.Time
+		self._initialized = true
+
+		Game._EarthQuakeProc:Add(self.Pos.X, self.Pos.Y, self.Pos.Z, self.Time*30, self.EQRange, self.CameraMov, self.CameraRot, 1.0)
+		AddPFX(self._fx, 0.3, self.Pos)
+        self:ReleaseTimers()
+    end
+end
+
+function o:Tick(delta)
+	if self._initialized then
+		self.time = self.time - delta
+		if self.time < 0 then
+			GObjects:ToKill(self)
+			return
+		end
+		if math.random(100) < 5 then
+			local scales = {0.08, 0.12, 0.15}
+			local rnd = 0.8
+			local obj,e = AddObject("Debris.CItem",scales[math.random(1,3)],Vector:New(self.Pos.X + FRand(-rnd, rnd), self.Pos.Y + FRand(-rnd, rnd), self.Pos.Z + FRand(-rnd, rnd)),nil,true) 
+			obj.deltaYSound = 9999
+		end
+	end
+end
+

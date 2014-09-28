@@ -1,0 +1,26 @@
+--============================================================================
+-- Player Hit Task
+o.BaseName = "TPickupPlayer.CProcess"
+--============================================================================
+function TPickupPlayer:Init()
+    self.Finished = false
+    self.TickCount = 0
+end
+--============================================================================
+function TPickupPlayer:Update()
+    if self.Finished then
+        --self.Obj:AddTrigger("PICKUP_FINISHED")
+    end
+end
+--============================================================================
+function TPickupPlayer:Render(delta)
+    self.TickCount = self.TickCount + delta * 30
+    if self.TickCount > math.pi*2 then 
+        self.Finished = true 
+    end
+
+    local alpha = 60 * (1-(1+math.cos(self.TickCount))/2)
+    local w,h = R3D.ScreenSize()
+    HUD.DrawQuad(0,0,0,w,h,R3D.RGBA(100,100,150,alpha))
+end
+--============================================================================

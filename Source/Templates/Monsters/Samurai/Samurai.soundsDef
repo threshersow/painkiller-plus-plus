@@ -1,0 +1,77 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'samurai-krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'samurai-krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	at3 = {
+		samples = {'samurai_at3-shurican'},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	atak = {
+		samples = {'samurai_at4','samurai_at5','samurai_at6','samurai_at7'},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	swish = {
+		samples = {'samurai_swish1','samurai_swish2'},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	at1 = {
+		samples = {'samurai_at1',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	X = {
+		samples = {'samurai_at5','samurai_at6'},
+		dist1 = 20,
+		dist2 = 40,
+	},
+	hit = {
+		samples = {'samurai_hit3','samurai_hit2','samurai_hit1',},
+		dist1 = 30,
+		dist2 = 70, 
+	},
+	bodyfalls = {
+		samples = {"samurai_boddyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"samurai_weapon-lost","samurai_weapon-lost2"},
+		dist1 = 4,
+		dist2 = 12,
+	},
+	onAttackOnce = {
+		samples = {"samurai_halt1", "samurai_halt2", "samurai_halt3", "samurai_halt4",},
+		dist1 = 30,
+		dist2 = 70,
+		playChance = 0.65,
+	},
+	seppukubreak = {
+		samples = {"samurai_seppuku-weapon-break1","samurai_seppuku-weapon-break2"},
+		dist1 = 12,
+		dist2 = 48, 
+	},
+	seppukuhit = {
+		samples = {"samurai_seppuku-hit1","samurai_seppuku-hit2"},
+		dist1 = 12,
+		dist2 = 48, 
+	},
+	death = {
+		samples = {"samurai_death1","samurai_death2","samurai_death3","samurai_death4"},
+		dist1 = 30,
+		dist2 = 70, 
+	},
+
+    damage = {
+		samples = {"samurai_sword_hit"},
+    },
+}

@@ -1,0 +1,24 @@
+EvilMonk_ThrowAndDie.BaseObj = "EvilMonk.CActor"
+EvilMonk_ThrowAndDie.Scale = 1.2
+EvilMonk_ThrowAndDie.Health = 9
+EvilMonk_ThrowAndDie.WalkSpeed = 1.9
+EvilMonk_ThrowAndDie.RunSpeed = 1.1
+EvilMonk_ThrowAndDie.RotateSpeed = 8
+
+EvilMonk_ThrowAndDie.AiParams.aiGoals = {"idle","throwAndDie", "hear"}
+EvilMonk_ThrowAndDie.AiParams.viewDistance = 60
+EvilMonk_ThrowAndDie.AiParams.viewAngle = 360
+
+EvilMonk_ThrowAndDie.AiParams.attackRange = 50
+EvilMonk_ThrowAndDie.AiParams.hearing = 1.0
+
+EvilMonk_ThrowAndDie.AiParams.perception = 1.0
+    
+EvilMonk_ThrowAndDie.AiParams.guardAngle = {0,10}
+EvilMonk_ThrowAndDie.AiParams.delayBetweenAttacks = 0
+EvilMonk_ThrowAndDie.AiParams.moveDisplacement = 1.0
+
+EvilMonk_ThrowAndDie.AiParams.throwImmid = true
+
+o.NeverMove = true
+

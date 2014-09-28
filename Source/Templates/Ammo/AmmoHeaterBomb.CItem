@@ -1,0 +1,40 @@
+o.Mesh = "polySurfaceShape58577"
+o.Pack = "ammo_heater.dat"
+o.takeDistance = 1.8
+o.Scale = 0.5
+o.DisabledInVoosh = true
+o.RespawnTime = 15
+o.AmmoAdd = 50
+
+--============================================================================
+function AmmoHeaterBomb:OnInitTemplate()
+    self.CubeMap = nil
+    self.DetailMap = nil
+    self.NormalMap = nil
+    self.Destroy = nil
+    self.Impulse = nil
+    self:ReplaceFunction("_Synchronize","Synchronize")
+    self:ReplaceFunction("Synchronize","nil")
+end
+--============================================================================
+function AmmoHeaterBomb:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity)
+end
+--============================================================================
+function AmmoHeaterBomb:OnTake(player)    
+    if player.Ammo.HeaterBomb >= CPlayer.s_SubClass.MaxAmmo.HeaterBomb then return true end
+    self.TakeFX(player._Entity, self.AmmoAdd)
+	Game.PlayerAmmoFound =  Game.PlayerAmmoFound + 1
+end
+--============================================================================
+function AmmoHeaterBomb:TakeFX(pe,add)
+    local player = EntityToObject[pe]    
+    if player then
+        player.Ammo.HeaterBomb = player.Ammo.HeaterBomb + add * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player:CheckMaxAmmo()
+        if player == Player then player:PickupFX() end
+    end
+    Templates["AmmoHeaterBomb.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("AmmoHeaterBomb.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eu")
+--============================================================================

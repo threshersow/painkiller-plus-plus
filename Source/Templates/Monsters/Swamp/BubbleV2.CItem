@@ -1,0 +1,74 @@
+-- tym babelkiem strzela
+o.Model = "swamp_bubblev2"
+o.Scale = 50.0
+o.Health = 1
+o.TimeToLive = 200
+--o.Pinned = true
+o.Damage = 50
+o.DamageDist = 6.0
+o.GravityOnTime = 30
+
+o.waterImpJoint = "root"
+o.waterImpAmplitude = 0.2
+o.waterImpPeriod = 0.5		-- okres - dlugosc fal
+o.waterImpRange = 4.0		-- zasieg efektu
+o.waterImpSpeed = 8.0		-- szybkosc fal
+
+o.explodeFX = "explo_bUble_swampm"	
+
+function BubbleV2:OnCreateEntity()
+    self:PO_Create(BodyTypes.Simple, 0.2, ECollisionGroups.OnlyWithFixedSpecial)
+    self._CurAnimIndex = MDL.SetAnim(self._Entity,"idle",true, 1.5, 0.0)
+    self._CurAnimLength = MDL.GetAnimLength(self._Entity, self._CurAnimIndex)
+    
+	if self.waterImpJoint and not self._objWaterImpact then
+		local e = self._Entity
+		local j  = MDL.GetJointIndex(e,self.waterImpJoint)
+		local x,y,z = MDL.GetJointPos(e,j)
+
+   		local ke,obj = AddItem("StoneX.CItem",nil,Vector:New(x+1.0,y,z),true)
+		obj.ObjOwner = self
+		ENTITY.ComputeChildMatrix(ke,e,j)
+		ENTITY.RegisterChild(e,ke,true,j)
+					
+		obj.speedUp = 0
+		obj.speedDown = 0
+		obj.impAmplitude = self.waterImpAmplitude
+		obj.impPeriod = self.waterImpPeriod
+		obj.impRange = self.waterImpRange
+		obj.impSpeed = self.waterImpSpeed
+
+		self._objWaterImpact = obj
+    end
+    self.time = 0
+end
+
+function BubbleV2:OnDamage()
+	if not self._ToKill then
+		AddPFX(self.explodeFX,0.6,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+		PlaySound3D("actor/Swamp/Swamp_bubbleHit",self.Pos.X,self.Pos.Y,self.Pos.Z, 5,30)
+		if self._objWaterImpact then
+			GObjects:ToKill(self._objWaterImpact)
+			self._objWaterImpact = nil
+		end
+		Game:Print(self._Name.." $$$$$ BubbleV2:tokill()")
+		GObjects:ToKill(self)
+	end
+end
+
+
+function BubbleV2:OnUpdate()
+	local dist = Dist3D(Player._groundx, Player._groundy + 1.7, Player._groundz, self.Pos.X, self.Pos.Y, self.Pos.Z)
+	if dist < self.DamageDist then
+		Player:OnDamage(self.Damage, self.ObjOwner)
+		self:OnDamage()
+	end
+	if self.Pos.Y < 63 then
+		self:OnDamage()
+	end
+end
+
+
+function BubbleV2:RestoreFromSave()
+	self._CurAnimLength = MDL.GetAnimLength(self._Entity, self._CurAnimIndex)
+end

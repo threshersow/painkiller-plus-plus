@@ -1,0 +1,9 @@
+Rico.Volume = 80
+Rico.Interval = 10
+Rico.RandomShift = 4
+Rico.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+Rico.Sound ="C6L3_Leningrad/Rico_01;C6L3_Leningrad/Rico_02;C6L3_Leningrad/Rico_03;C6L3_Leningrad/Rico_04;C6L3_Leningrad/Rico_05;C6L3_Leningrad/Rico_06;C6L3_Leningrad/Rico_07;C6L3_Leningrad/Rico_08;C6L3_Leningrad/Rico_09;C6L3_Leningrad/Rico_10;C6L3_Leningrad/Rico_11;C6L3_Leningrad/Rico_12;C6L3_Leningrad/Rico_13;C6L3_Leningrad/Rico_14"

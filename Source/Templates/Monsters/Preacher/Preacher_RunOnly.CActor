@@ -1,0 +1,5 @@
+o.BaseObj = "Preacher.CActor"
+o.NeverWalk = true
+o.AiParams.aiGoals = {"hear","hunt","closeAttack","preacherAttack"}
+o.AiParams.immortalBodiesCounter = 0
+AlwaysSee = true

@@ -1,0 +1,10 @@
+Prad_03.Volume = 40
+Prad_03.Interval = 0
+Prad_03.RandomShift = 0
+Prad_03.Falloff =
+{
+  Start = 2,
+  End = 40
+}
+Prad_03.Sound ="C3L2_Factory/prad_03"
+

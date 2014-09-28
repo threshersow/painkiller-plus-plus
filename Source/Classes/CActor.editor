@@ -1,0 +1,293 @@
+CActor.s_Editor = {
+        Model = { "BrowseEdit", {"*.pkmdl", "data\\models\\",true} },
+        Animation = { "ComboBox", "CActor.FillAnimBox" },
+    }
+    
+function CActor:EditTick(delta)
+    if Editor.SelObj == self then
+        if self.OnEditTick then self:OnEditTick() end
+        
+        if INP.Key(Keys.P) == 1 then 
+            if not ENTITY.PO_Exist(self._Entity) then                 
+                self:PO_Create()               
+            else
+                ENTITY.PO_Remove(self._Entity)
+--                self._HadPO = false
+            end
+        end
+        if INP.Key(Keys.X) == 1 then    
+            local r = MDL.IsRagdoll(self._Entity)
+            if r == true then r = false else r = true end
+            self:EnableRagdoll(r)
+            Game:Print(self._Name.." ragdoll collision group = "..MDL.GetRagdollCollisionGroup(self._Entity))
+        end
+        if INP.Key(Keys.R) == 1 then    
+            self:EnableRagdoll(true)
+            self:SetAnim("idle_gun")
+            self:EnableRagdoll(true)
+        end
+        if INP.Key(Keys.M) == 1 then
+			Game:Print(self._Name.." ragdoll cg = "..MDL.GetRagdollCollisionGroup(self._Entity).." PO cg = "..ENTITY.PO_GetCollisionGroup(self._Entity))
+		end
+        --Editor.ObjEdited = true
+    end
+ 
+end
+--============================================================================
+function CActor:EditRender(delta)
+    --if Editor.SelObj == self and self._Path then        
+        --R3D.DrawPath(self._Path)        
+    --end
+    
+    if Editor.SelObj == self and INP.Key(Keys.T) == 2 then
+        MDL.DrawJointNames(self._Entity)
+    end
+
+    if self._AIBrain and self._AIBrain.OnRender then
+       self._AIBrain:OnRender()
+    end
+
+	if Tweak.ShowBulletsPath then
+		for i,v in DEBUGgun do
+			self:DrawVector(v[1], v[2], v[3], v[4], v[5], v[6], 255,155,255)
+		end
+	end
+	
+	if debugMarek and self._died and self._deathTimer then
+		local idx  = self:GetAnyJoint()
+		local x,y,z = MDL.GetJointPos(self._Entity,idx)
+
+		local sx,sy,sz = R3D.VectorToScreen(x,y+3.0,z)
+		local a = ""
+		if self._locked then
+			a = " LOCKED"
+		end
+		if sz<=1 then
+			HUD.PrintXY(sx+3,sy, self._Name.." "..self.Model.." : DIED, deathtimer: "..self._deathTimer.." "..a)
+		end
+	end
+    if self._AIBrain then
+		if debugMarek then
+			local goalName
+			if self._AIBrain._currentGoal then
+				goalName = self._AIBrain._goals[self._AIBrain._currentGoal].name
+			end
+			if not goalName then
+				goalName = "no goal"
+			end
+			local d = self._AIBrain._distToNearestEnemy
+			if not d then
+				d = -1
+			end
+
+			if self._AIBrain then
+				local sx,sy,sz = R3D.VectorToScreen(self._groundx,self._groundy+2.5,self._groundz)
+				if sz<=1 then
+					local a = self._displacement
+					if not self._displacement then
+						a = -1
+					end
+
+					local c = self._AIBrain._seeEnemy
+					if not c then
+						c = "dont see"
+					else
+						c = "SEE"
+					end
+					local d = self._isWalking
+					if not d then
+						d = "NOT WALK"
+					else
+						d = "WALK"
+					end
+
+					local m = ENTITY.PO_GetMass(self._Entity)
+
+					if self._AIBrain._currentGoal and self.AIenabled then
+						local x,y,z,v = ENTITY.GetVelocity(self._Entity)
+						
+						local s = ""
+						if self._AIBrain._lockedEnemy then
+							s = " ATAKUJE "..self._AIBrain._lockedEnemy._Name
+						end
+						--HUD.PrintXY(sx+3,sy, self._Name.." ,HP: "..self.Health.." Mass: "..m.."  "..self._AIBrain._currentGoal.name.." DISPL. "..a)
+                        if self._state and self._AIBrain._goals[self._AIBrain._currentGoal].name then
+                            HUD.PrintXY(sx+3,sy, self._Name.." "..self._AIBrain._goals[self._AIBrain._currentGoal].name..", "..a..", "..c..", "..self._state.." "..d.." "..s)
+                        end
+						--HUD.PrintXY(sx+3,sy, self._AIBrain._velocityx.." "..self._AIBrain._velocityy.." "..self._AIBrain._velocityz)
+					else
+						HUD.PrintXY(sx+3,sy, self._Name.." : NO GOAL, Mass: "..m)
+						--HUD.PrintXY(sx+3,sy, self._AIBrain._velocityx.." "..self._AIBrain._velocityy.." "..self._AIBrain._velocityz)
+					end
+				end
+			end            
+			local a = self._displacement
+			if not self._displacement then
+				a = -1
+			end
+			if debugPOS then
+				HUD.PrintXY(10,500+Game.POS, self.Model.."state:"..self._state..", HP: "..self.Health..", DIST_TO_ENEMY:"..d..", ANIM:"..self.Animation..", displace="..a.." "..self._CurAnimTime.." "..self._CurAnimLength)
+			end
+		end
+		if debugSOUND then
+			HUD.PrintXY(10,500+Game.POS, self.Model..", ANIMATION: "..self.Animation..", Anim len: "..self._CurAnimLength..", Anim time: "..self._CurAnimTime)
+		end
+	else
+		if debugMarek and self ~= Player then
+			HUD.PrintXY(10,500+Game.POS, self.Model.."  no AI "..self.Health)
+		end
+	end
+	
+	if debugMarek and self ~= Player then
+		Game.POS = Game.POS + 15
+
+		if A6 then
+			self:DrawVector(A1,A2,A3,A4,A5,A6)
+		end
+		
+		if self._destx then
+			self:DrawMarker(self._destx, self._desty, self._destz, 255,0,0)
+		end
+		if self._groundx then
+			self:DrawMarker(self._groundx, self._groundy, self._groundz, 105,0,0)
+		end
+
+		if DebugSphereX then
+			R3D.DrawSphere(DebugSphereRange,Color:New(155,100,234):Compose(),DebugSphereX,DebugSphereY,DebugSphereZ)
+		end
+
+		if DebugSpheres then
+			for i,v in DebugSpheres do
+				R3D.DrawSphere(v.Size,Color:New(155,100,134):Compose(),v.X, v.Y, v.Z)
+			end
+		end
+
+
+		if DEBUG1 then
+			local c = 255
+			if DEBUG100 then
+				c = 128
+			end
+			self:DrawVector(DEBUG1, DEBUG2, DEBUG3, DEBUG4, DEBUG5, DEBUG6, 0, c, 140)
+			if DEBUG7 then
+				self:DrawVector(DEBUG1, DEBUG2, DEBUG3, DEBUG7, DEBUG8, DEBUG9, 0, c, 120)
+			end
+			if DEBUG10 then
+				self:DrawVector(DEBUG10, DEBUG11, DEBUG12, DEBUG13, DEBUG14, DEBUG15, 231, 32, 120)
+			end
+		end
+
+		if DEBUGtraces then
+			for i,v in DEBUGtraces do
+				self:DrawVector(v[1],v[2],v[3], v[4],v[5],v[6], 231, 37, 110)
+			end
+		end
+
+		
+		if self.DEBUG_P1 then
+			self:DrawMarker(self.DEBUG_P1, self.DEBUG_P2, self.DEBUG_P3, 122,222,122)
+		end
+		if self.DEBUG_P4 then
+			self:DrawMarker(self.DEBUG_P4, self.DEBUG_P5, self.DEBUG_P6, 202,202,202)
+		end
+
+		if self.DEBUGl1 then
+			self:DrawMarker(self.DEBUGl1, self.DEBUGl2, self.DEBUGl3, 255,202,202)
+		end
+
+		if self.DEBUGl4 then
+			self:DrawMarker(self.DEBUGl4, self.DEBUGl5, self.DEBUGl6, 112,255,112)
+		end
+		
+		if self.DEBUGl7 then
+			self:DrawMarker(self.DEBUGl7, self.DEBUGl8, self.DEBUGl9, 185,255,166)
+		end
+
+
+		if self._debugdx2 then
+			self:DrawMarker(self._debugdx2, self._debugdy2, self._debugdz2, 120,120,255)
+		end
+		if self._debugdx3 then
+			self:DrawMarker(self._debugdx3, self._debugdy3, self._debugdz3, 120,255,120)
+		end
+		if self._debugdx4 then
+			self:DrawMarker(self._debugdx4, self._debugdy4, self._debugdz4, 1,1,1)
+		end
+
+		if self.debugHX then
+			self:DrawMarker(self.debugHX, self.debugHY, self.debugHZ, 255, 255, 255)
+		end
+		if self.d1 then
+			self:DrawVector(self.d1, self.d2, self.d3, self.d4, self.d5, self.d6, 255, 0, 40)
+		end
+		if self.DDEB then
+			for i,v in self.DDEB do
+				self:DrawVector(v[1],v[2],v[3],v[4],v[5],v[6], 255, 0, 40)
+			end
+		end
+		if self.yadebug1 then
+			self:DrawVector(self.yadebug1,self.yadebug2,self.yadebug3,self.yadebug4,self.yadebug5,self.yadebug6, 5,5,240)
+		end
+		if self.yaadebug1 then
+			self:DrawVector(self.yaadebug1,self.yaadebug2,self.yaadebug3,self.yaadebug4,self.yaadebug5,self.yaadebug6, 245,255,0)
+		end
+		if self.yaaadebug1 then
+			self:DrawVector(self.yaaadebug1,self.yaaadebug2,self.yaaadebug3,self.yaaadebug4,self.yaaadebug5,self.yaaadebug6, 45,155,0)
+		end
+		if self.yaaaadebug1 then
+			self:DrawVector(self.yaaaadebug1,self.yaaaadebug2,self.yaaaadebug3,self.yaaaadebug4,self.yaaaadebug5,self.yaaaadebug6, 45,250,30)
+		end
+		if self.yaaaaadebug1 then
+			self:DrawVector(self.yaaaaadebug1,self.yaaaaadebug2,self.yaaaaadebug3,self.yaaaaadebug4,self.yaaaaadebug5,self.yaaaaadebug6, 245, 250, 230)
+		end
+		if self.yzdebug1 then
+			self:DrawVector(self.yzdebug1,self.yzdebug2,self.yzdebug3,self.yzdebug4,self.yzdebug5,self.yzdebug6, 240, 230, 130)
+		end
+
+		if DEB4 then
+			self:DrawMarker(DEB4, DEB5, DEB6, 30, 205, 35)
+		end
+
+		if DEBUGcx then
+			self:DrawVector(DEBUGcx, DEBUGcy, DEBUGcz, DEBUGfx, DEBUGfy, DEBUGfz)
+		end
+
+		if DEB1 then
+			self:DrawMarker(DEB1, DEB2, DEB3, 0, 255, 5)
+		end
+	end
+end
+
+
+function CActor:FillAnimBox()
+    tmp_tab = FS.FindFiles("../Data/Models/"..self.Model..".*.ani",1,0)    
+    for i=1,table.getn(tmp_tab) do
+        local i1 = string.find(tmp_tab[i],'.',1,true)
+        local i2 = string.find(tmp_tab[i],'.',i1+1,true)
+        if i1 and i2 then
+            tmp_tab[i] = string.sub(tmp_tab[i],i1+1,i2-1)
+        else
+            tmp_tab[i] = "???"
+        end
+    end
+    --table.insert(tmp_tab,"")
+end
+
+function CActor:DrawVector(x1,y1,z1, x2,y2,z2, r,g,b)
+	if r and g and b then
+		R3D.RenderLine(x1,y1,z1,x2,y2,z2,R3D.RGB(r, g, b))
+	else
+		R3D.RenderLine(x1,y1,z1,x2,y2,z2,R3D.RGB(255,70,255))
+	end
+end
+
+function CActor:DrawMarker(x,y,z, r,g,b)
+    local l = R3D.DistToCamera(x,y,z) * 0.13
+    local bs = l * 0.07
+    
+    if r and g and b then
+		R3D.RenderBox(x-bs,y-bs,z-bs,x+bs,y+bs,z+bs,R3D.RGB(r,g,b),false)
+	else
+		R3D.RenderBox(x-bs,y-bs,z-bs,x+bs,y+bs,z+bs,R3D.RGB(255,50,50),false)
+	end
+end

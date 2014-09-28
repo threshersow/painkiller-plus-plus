@@ -1,0 +1,2 @@
+dust_explode["Effect"] = "dust_explode"
+dust_explode.Scale = 1.0

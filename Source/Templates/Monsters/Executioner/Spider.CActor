@@ -1,0 +1,101 @@
+o.Model = "spider"
+o.CreatePO = true
+o.Scale = 1.0
+o.Health = 2
+o.WalkSpeed = 3
+o.RunSpeed = 3
+o.RotateSpeed = 12
+o.NeverWalk = true
+o.throwHeart = false
+o.NotCountable = true
+o._DontCheckFloors = true
+o.Animation = "walk"
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    Mass     = 20,
+}
+
+o.s_SubClass = {
+	SoundDir = "loki_small",
+	Animations = {
+		walk   = {1.0,true, {
+					{0.10,'PlaySound',"step1" },
+					{0.25,'PlaySound',"step2" },
+					{0.40,'PlaySound',"step3" },
+					{0.55,'PlaySound',"step4" },
+				}},
+		jump   = {1.0,false, {
+					{0.2,"SetVel"},
+					{0.2,'PlaySound',"swish" },
+					{0.4,'PlaySound',"atak"},
+                    {0.8,'PlaySound',"jumpend" },
+				}},
+		run   = {1.0,true, {
+					{0.10,'PlaySound',"step1"},
+					{0.25,'PlaySound',"step2"},
+					{0.40,'PlaySound',"step3"},
+					{0.55,'PlaySound',"step4"},
+				}},
+	},
+	RagdollCollisions = {
+		MinStren = 2.0,
+		MinTime = 0.7,
+		Bones = {
+				{"root", {"tick_bodyfalls"}, true},		-- joint, {sounds}, blood
+			}
+	},
+	Ambients = {"walk"},
+	Hits = {"walk"},
+	ragdollJoint = "root",
+
+	DeathJoints = {
+        'odwlok8','npp','odwlok3',
+        'npt','npl','odwlok2','ntl',
+    },
+
+	BreakableJoints = {},
+	CollidableRagdoll = false,
+}
+
+o.DeathTimer = 110                   -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt","spiderJump"}
+o.AiParams.viewDistance = 15
+o.AiParams.viewDistance360 = 15
+o.AiParams.viewAngle = 360
+
+o.AiParams.attackRange = 1
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {45,90}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1				-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {0,0}
+
+o.AiParams.walkStep = 4.5
+o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.moveDisplacement = 0.5
+
+o.AiParams.updateSpeed = 0.3
+o.AiParams.alwaysSee = true
+
+o.AiParams.jumpRangeMin = 4.0
+o.AiParams.jumpRangeMax = 5.0
+o.AiParams.jumpVel = 15.0
+o.AiParams.jumpVelY = 8.0
+o.AiParams.jumpAnim = "jump"
+o.AiParams.timeToLive = 20 * 30
+o.AiParams.minDelayBetweenJumps = 2.0
+
+o.CollisionDamage = 1
+o.AiParams.jumpDamageRange = 1.6
+o.AiParams.jumpUp = 2.0
+o.AiParams.doNotRotateWhileJumping = true

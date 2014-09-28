@@ -1,0 +1,9 @@
+mega_skrzyp_01.Volume = 50
+mega_skrzyp_01.Interval = 13
+mega_skrzyp_01.RandomShift = 3
+mega_skrzyp_01.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+mega_skrzyp_01.Sound ="C6L1_Orphanage/mega_skrzyp_01;C6L1_Orphanage/mega_skrzyp_02;"

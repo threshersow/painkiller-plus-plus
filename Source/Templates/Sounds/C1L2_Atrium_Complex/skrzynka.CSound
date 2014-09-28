@@ -1,0 +1,10 @@
+skrzynka.Volume = 70
+skrzynka.Interval = 14
+skrzynka.RandomShift = 6
+skrzynka.Falloff =
+{
+  Start = 2,
+  End = 10
+}
+skrzynka.Sound ="C1L2_Atrium_Complex/skrzynka_01;C1L2_Atrium_Complex/skrzynka_02"
+

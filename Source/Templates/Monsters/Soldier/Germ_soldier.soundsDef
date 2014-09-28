@@ -1,0 +1,76 @@
+o.s_SubClass.SoundsDefinitions = {
+	onAttackOnce = {
+		samples = {"s_germ-halt1", "s_germ-halt2", "s_germ-halt3"},
+		dist1 = 20,
+		dist2 = 60,
+	},
+	hit = {
+		samples = {'s_germ-hit1','s_germ-hit2','s_germ-hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	step1 = {
+		samples = {'s_germ-krok1','s_germ-krok2'},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'s_germ-krok3','s_germ-krok4'},
+		dist1 = 3,
+		dist2 = 20,
+	},
+
+	
+	atak1 = {
+		samples = {'s_germ-atak1a','s_germ-atak2a'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	atak2 = {
+		samples = {'s_germ-atak1b','s_germ-atak2b'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	shoot = {
+		samples = {'s_germ-schmeisser-shoot-all'},
+		dist1 = 16,
+		dist2 = 60,
+        disablePitch = true,
+	},
+
+	throw = {
+		samples = {'s_grenade-throw-swish'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	zawl = {
+		samples = {'s_grenade-zawleczka'},
+		dist1 = 10,
+		dist2 = 40,
+	},
+
+
+
+	bodyfalls = {
+		samples = {"s_germ_bodyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"s_germ-weapon-lost",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	onAttack = {
+		samples = {"s_germ-attackscream1","s_germ-attackscream2","s_germ-attackscream3","s_germ-attackscream4",},
+		dist1 = 20,
+		dist2 = 70,
+		playChance = 0.5,
+	},
+	death  = {
+		samples = {"s_germ-death1","s_germ-death2","s_germ-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+}

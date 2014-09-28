@@ -1,0 +1,10 @@
+o.s_SubClass.SoundsDefinitions.weaponlost = {
+		samples = {"ninja_sword_weapon-lost2","ninja_sword_weapon-lost1",},
+		dist1 = 10,
+		dist2 = 20,
+	}
+
+o.s_SubClass.SoundsDefinitions.damage = {
+		samples = {"ninja_sword_hit"},
+    }
+

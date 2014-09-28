@@ -1,0 +1,215 @@
+-- jak zobaczy trupa (ragdola), to leci na niego
+o.TimeToLive = 90 * 30
+o.BaseObj = "Raven.CActor"
+o.AiParams.aiGoals = {"RavenIdle","Ravenhear","RavenCorpseEater"}
+o.AiParams.maxDistCorpseSearching = 40
+o.flyEmulateGravityEffect = 3.0			-- im mniejszy ten parametr, ty szybciej leci, jesli leci w dol, sensowny zakres(1.6 .. 10)
+
+--------------------------
+o._CustomAiStates.RavenCorpseEater = {
+	name = "RavenCorpseEater",
+	active = false,
+	lastTimeHEAR = -100,
+}
+
+function o._CustomAiStates.RavenCorpseEater:OnInit(brain)
+	local actor = brain._Objactor
+	self.active = true
+	self.state = 0
+end
+
+function o._CustomAiStates.RavenCorpseEater:OnUpdate(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	if brain.Objhostage2._deathTimer < 2 then
+		self.active = false
+		return
+	end
+
+	local x,y,z = brain.Objhostage2:GetJointPos("root")
+	local dist = Dist3D(x,y,z,actor._groundx,actor._groundy,actor._groundz)
+	if dist > aiParams.maxDistCorpseSearching then
+		self.active = false
+		return
+	end
+
+	if actor._flying and math.random(100) < 10 then
+		ENTITY.RemoveRagdollFromIntersectionSolver(actor._Entity)
+        local v = Vector:New(brain._velocityx, brain._velocityy, brain._velocityz)
+        if brain._velocity < 0.05 then
+            local v = Vector:New(math.sin(actor.angle), 0, math.cos(actor.angle))
+            Game:Print(actor._Name.."too little vel "..brain._velocity)
+        end
+        v:Normalize()
+    
+		local zakres = actor._SphereSize * 0.55
+		local rnd1 = FRand(-zakres, zakres)
+		local rnd2 = FRand(-zakres, zakres)
+		local rnd3 = FRand(-zakres, zakres)
+		--Game:Print(actor._Name.." test sciany")
+		local b,d,x,y,z,nx,ny,nz = WORLD.LineTrace(actor._groundx+rnd1,actor.Pos.Y+rnd2,actor._groundz+rnd3,
+		  actor._groundx+rnd1+v.X*3.4, actor.Pos.Y+rnd2+v.Y*3.4, actor._groundz+rnd3+v.Z*3.4)
+		if d then
+			if debugMarek then
+				DEBUG10,DEBUG11,DEBUG12 = x,y,z
+				DEBUG13,DEBUG14,DEBUG15 = x+nx,y+ny,z+nz
+			end
+			local mul = FRand(2.0, 2.2)
+			actor:FlyTo(x + nx*mul,y + ny*mul ,z + nz*mul)
+			--Game:Print(actor._Name.." raven wykryl sciane!!!!")
+		end
+		ENTITY.AddRagdollToIntersectionSolver(actor._Entity)
+	end
+	
+	if self.state == 0 then
+		if (not actor._flying or y > actor._groundy + 1.0) and y < actor._groundy + 3.0 then
+			-- fly up
+			local dist = FRand(1.5, 3.0)
+			local xd,yd,zd = actor._groundx,actor._groundy,actor._groundz
+			if math.random(100) < 66 then
+				PlaySound3D("actor/raven/raven_wings_flap",actor._groundx,actor._groundy,actor._groundz,10,math.random(20,30))
+			end
+			actor:AddPFX('but', actor._SphereSize * 0.6, Vector:New(actor._groundx,actor._groundy,actor._groundz))
+			dist = FRand(2.0, 3.2)
+			yd = yd + dist * 1.5
+			
+			actor:RotateToVector(self.vecx, self.vecy, self.vecz)
+			local v = Vector:New(math.sin(actor._angleDest), 0, math.cos(actor._angleDest))
+			v:Normalize()
+			if not actor._flying then
+				if not actor._lastPitch then
+					actor._lastPitch = 0
+				end
+			end
+			actor:FlyTo(xd + v.X*dist, yd, zd + v.Z*dist)
+			--Game:Print("up")
+		end
+		self._onTime = false
+		self.state = 1
+		return
+	end
+
+	if self.state == 1 then
+		if not actor._flying then
+			if debugMarek then
+				local dist = Dist3D(x,y,z,actor._groundx,actor._groundy,actor._groundz)
+				--Game:Print("koniec up. odl do ragdolla: "..dist)
+			end
+			actor:FlyTo(x,y,z)
+            self.state = 2
+			self.lastPosX = actor._groundx
+			self.lastPosZ = actor._groundz
+			self.lastTimeBlood = 0
+            return
+        end
+	end
+    if self.state == 2 and not actor._flying then
+		local distFlown = Dist2D(self.lastPosX,self.lastPosZ, actor._groundx,actor._groundz)
+		if dist > 1.0 then
+			self.state = 0
+			actor:Stop()
+			--Game:Print("podlatuje - dyst")
+		else
+			local speed = MDL.GetAnimTimeScale(actor._Entity, actor._CurAnimIndex)
+			--Game:Print("last move = "..distFlown.." animspeed = "..speed)
+			if distFlown < 0.01 then
+				if speed < 1.5 then
+					MDL.SetAnimTimeScale(actor._Entity, actor._CurAnimIndex, FRand(3.2, 4.6))
+				end
+				if math.random(100) < 6 then		-- blisko do jakiegos jointa, to pfx krew, albo kurz
+					if self.lastTimeBlood + 0.5 < brain._currentTime then
+						self.lastTimeBlood = brain._currentTime
+						--Game:Print("blood "..brain._currentTime)
+						local xsrc,ysrc,zsrc = actor:GetJointPos("dziob_1")
+						local distMin = Dist3D(xsrc,ysrc,zsrc,x,y,z)
+						local xdst = xsrc
+						local ydst = ysrc
+						local zdst = zsrc
+						if brain.Objhostage2.s_SubClass.DeathJoints then
+							for i,v in brain.Objhostage2.s_SubClass.DeathJoints do
+								local x,y,z = brain.Objhostage2:GetJointPos(v)
+								local dist = Dist3D(xsrc,ysrc,zsrc,x,y,z)
+								if dist < distMin then
+									distMin = dist
+									xdst = x
+									ydst = y
+									zdst = z
+									--Game:Print("closest joint = "..v)
+								end
+							end
+						end
+						AddPFX("gibExplosion",FRand(0.16,0.25), Vector:New(xdst,ydst - FRand(0,0.2),zdst))
+					end
+				end
+			end
+			if distFlown > 0.5 then
+				if speed >= 1.5 then
+					MDL.SetAnimTimeScale(actor._Entity, actor._CurAnimIndex, FRand(1.2, 1.4))
+				end
+			end
+			if math.random(100) < 10 then
+				if math.random(100) < 20 then
+					--Game:Print("na srodek")
+					self.vecx, self.vecy, self.vecz = x,y,z
+					self.vecx = self.vecx + FRand(-0.5, 0.5)
+					self.vecz = self.vecz + FRand(-0.5, 0.5)
+					-- pozniej tu do jonita
+					actor:FlyTo(self.vecx, self.vecy + FRand(0.3, 1.0), self.vecz)
+					MDL.SetAnimTimeScale(actor._Entity, actor._CurAnimIndex, FRand(1.2, 1.49))
+					self.state = 0
+				else
+					MDL.SetAnimTimeScale(actor._Entity, actor._CurAnimIndex, FRand(3.2, 4.6))
+					actor:Rotate(math.random(-90,90))		-- pozniej w kierku jakies jointa
+				end
+			end
+		end
+		self.lastPosX = actor._groundx
+		self.lastPosZ = actor._groundz
+    end
+end
+
+function o._CustomAiStates.RavenCorpseEater:OnRelease(brain)
+	local actor = brain._Objactor
+	brain.Objhostage2 = nil
+	self.active = nil
+end
+
+
+function o._CustomAiStates.RavenCorpseEater:Evaluate(brain)
+	if self.active then
+		return 0.8
+	else
+		local actor = brain._Objactor
+		local aiParams = actor.AiParams
+		if math.random(100) < 5 and not brain.Objhostage2 then
+            local maxDist = aiParams.maxDistCorpseSearching
+            for i,v in Actors do
+                if v.Health <= 0 then
+                    if v._enabledRD and not v._gibbed and not v.Pinned and not v.NotCountable and v.Model ~= "dead_body" then
+                        self.vecx, self.vecy, self.vecz = v:GetJointPos("root")
+                        local dist = Dist3D(self.vecx, self.vecy, self.vecz, actor._groundx,actor._groundy,actor._groundz)
+                        if dist < maxDist then
+							local b = WORLD.LineTraceFixedGeom(actor._groundx,actor._groundy + 0.2, actor._groundz, self.vecx, self.vecy, self.vecz)
+                            if not b then
+                                maxDist = dist
+                                brain.Objhostage2 = v
+                            end
+                        end
+                    end
+                end
+            end
+            if brain.Objhostage2 then
+                if brain.Objhostage2._deathTimer then
+                    --Game:Print("brain.Objhostage2._deathTimer")
+                    if brain.Objhostage2._deathTimer < 200 then
+						brain.Objhostage2._deathTimer = brain.Objhostage2._deathTimer + FRand(45, 80)
+					end
+                    return 0.8
+                else
+                    --Game:Print("!brain.Objhostage2._deathTimer")
+                end
+            end
+		end
+	end
+	return 0.0
+end

@@ -1,0 +1,78 @@
+JumpPad.Mesh = "pCubeShape1"
+JumpPad.Pack = "podest.dat"
+JumpPad.Scale = 0.2
+JumpPad.JumpStrength = 1200
+
+
+function JumpPad:OnPrecache()
+    Cache:PrecacheParticleFX("but")
+    Cache:PrecacheSounds("multiplayer/environment/jumppod")
+end
+
+
+function JumpPad:OnInitTemplate()
+    self:ReplaceFunction("Synchronize","nil")
+end
+
+function JumpPad:RestoreFromSave()
+    local w,h,d = ENTITY.GetDimensions(self._Entity)
+    self._Region = CreateRegion(w,h,d)
+    ENTITY.SetPosition(self._Region,self.Pos.X,self.Pos.Y+0.8,self.Pos.Z)    
+end
+
+function JumpPad:PostRestoreFromSave()
+    EntityToObject[self._Region] = self
+end
+
+function JumpPad:OnCreateEntity()
+    local w,h,d = ENTITY.GetDimensions(self._Entity)
+    self._Region = CreateRegion(w,h,d)
+    ENTITY.SetPosition(self._Region,self.Pos.X,self.Pos.Y+0.8,self.Pos.Z)
+    EntityToObject[self._Region] = self
+    ENTITY.EnableNetworkSynchronization(self._Entity)
+end
+
+function JumpPad:OnEnter(entity)
+    local obj = EntityToObject[entity]
+    if obj and obj._Class == "CPlayer" then
+        local cx,cy,cz = ENTITY.GetPosition(obj._Entity)        
+        
+        local vx,vy,vz,vl = ENTITY.GetVelocity(obj._Entity)
+        local hl = Dist2D(0,0,vx,vz) 
+        if hl < 1 then 
+            --Game:Print("aaaaaaaa")
+            vx = FRand(-5,5)
+            vz = FRand(-5,5)
+        end
+        ENTITY.SetVelocity(obj._Entity,vx,self.JumpStrength/45,vz)        
+        --ENTITY.PO_Impulse(obj._Entity,cx,cy,cz,0,self.JumpStrength,0)
+        ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y+0.3,self.Pos.Z)
+        --ENTITY.PO_SetPlayerShocked(obj._Entity)
+        self:AddTimer("Hide",0.2)
+        self.EnterFX(self._Entity)
+    end
+end
+
+function JumpPad:EnterFX(entity)    
+    if not entity then return end
+    local x,y,z = ENTITY.GetPosition(entity)
+    SOUND.Play3D("multiplayer/environment/jumppod",x,y,z,10,20)    
+    
+    local w,h,d = ENTITY.GetDimensions(entity)
+    AddPFX('but',0.2,Vector:New(x+w/2,y+1.2,z+d/2))
+    AddPFX('but',0.2,Vector:New(x-w/2,y+1.2,z+d/2))
+    AddPFX('but',0.2,Vector:New(x-w/2,y+1.2,z-d/2))
+    AddPFX('but',0.2,Vector:New(x+w/2,y+1.2,z-d/2))
+end
+Network:RegisterMethod("JumpPad.EnterFX", NCallOn.AllClients, NMode.Unreliable, "e") 
+ 
+
+function JumpPad:Hide()
+    self:ReleaseTimers()    
+    ENTITY.SetPosition(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z)    
+end
+
+function JumpPad:EditTick()
+    ENTITY.SetPosition(self._Region,self.Pos.X,self.Pos.Y,self.Pos.Z)    
+end
+

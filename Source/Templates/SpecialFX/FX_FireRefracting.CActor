@@ -1,0 +1,23 @@
+o.Model = "fire"
+o.Scale = 9.2
+o.NotCountable = true
+o.CreatePO = false
+
+o.s_SubClass = 
+{
+    Animations = {  
+        idle        = {2.2},
+    },
+    
+    RefractFresnel = {
+        water_fire = {
+            Refract=1.02,
+            Fresnel=0.0, 
+            ReflTint=Color:New(255,255,255),
+            RefrTint=Color:New(255,255,255)
+        },
+    },
+
+}
+
+o.Immortal = true

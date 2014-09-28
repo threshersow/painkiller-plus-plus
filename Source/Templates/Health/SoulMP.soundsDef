@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "multiplayer",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"take-backpack"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

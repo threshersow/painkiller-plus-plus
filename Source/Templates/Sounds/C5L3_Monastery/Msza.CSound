@@ -1,0 +1,10 @@
+Msza.Volume = 80
+Msza.Interval = 30
+Msza.RandomShift = 12
+Msza.Falloff =
+{
+  Start = 5,
+  End = 30
+}
+Msza.Sound ="C5L3_Monastery/Msza_01;C5L3_Monastery/Msza_02"
+

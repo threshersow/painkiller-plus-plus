@@ -1,0 +1,15 @@
+o.BaseObj = "CItem"
+o.Pack = "C3L2_wieko2.dat"
+o.Mesh = "wieko2Shape"
+o.Scale = 0.3
+o.Destroy.MinSpeedOnCollision = 10
+
+
+o.OnInitTemplate = CItem.StdOnInitTemplate
+
+function o:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh)
+end
+
+function o:OnDamage()
+end

@@ -1,0 +1,8 @@
+o.BaseObj = "Loki_Small.CActor"
+o.CreatePO = true
+o.Scale = 1.8
+o.AiParams.jumpAnimLen = 1.33
+
+o.AiParams.jumpRangeMin = 4.5
+o.AiParams.jumpRangeMax = 6.0
+o.AiParams.jumpDamageRange = 2.0

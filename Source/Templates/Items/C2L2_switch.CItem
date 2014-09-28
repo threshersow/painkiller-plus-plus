@@ -1,0 +1,5 @@
+o.BaseObj = "CItem"
+o.Model = "C2L2_switch"
+o.Scale = 2
+o.Mass = 1000
+o.InertiaTensorMultiplier = 10

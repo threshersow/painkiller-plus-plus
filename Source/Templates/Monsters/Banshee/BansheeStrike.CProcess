@@ -1,0 +1,56 @@
+--============================================================================
+BansheeStrike.TickCount = 0
+BansheeStrike.Color = Color:New(0,0,0)
+BansheeStrike.Speed = 0.5					-- szybkosc wygasania
+BansheeStrike.FadeAlphaToMax = 220		-- max. 255 
+
+BansheeStrike.strike = 0
+BansheeStrike.Up = 0
+--============================================================================
+function BansheeStrike:Add(number)
+	self.Up = self.Up + number		
+	if self.Up > 1 then
+		self.Up = 1
+	end
+end
+
+function BansheeStrike:Update(delta)
+	self.Up = self.Up * 0.6
+	if self.Up < 0.002 then
+		self.Up = 0
+	end
+	if self._killme and self.Color.A <= 0.002 then
+		GObjects:ToKill(self)
+	end
+end
+
+function BansheeStrike:Render(delta)
+	--Game:Print("self.Up "..self.Up)
+	if self.Up > 0 then
+		self.TickCount = self.TickCount + delta * self.Speed * self.Up
+	else
+		self.TickCount = self.TickCount - delta * self.Speed
+		if self.TickCount < 0 then
+			self.TickCount = 0
+		end
+	end
+	self.TickCount = self.TickCount + self.strike
+	if self.TickCount > 1 then
+		self.TickCount = 1
+	end
+
+	if self.strike > 0 then
+		self.strike = self.strike - delta
+	else
+		self.strike = 0
+	end
+
+	self.Color.A = self.FadeAlphaToMax * self.TickCount
+	if self.Color.A > 0.002 then
+		local w,h = R3D.ScreenSize()
+		HUD.DrawQuad(0,0,0,w,h,self.Color:Compose())
+	else
+		-- to kill?
+	end
+end
+--============================================================================

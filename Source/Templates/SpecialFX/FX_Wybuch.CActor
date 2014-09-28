@@ -1,0 +1,36 @@
+FX_Wybuch.Model = "Wybuch"
+FX_Wybuch.Scale = 1
+FX_Wybuch.NotCountable = true
+
+FX_Wybuch.s_SubClass = 
+{
+    Animations = {  
+        idle        = {1.0},
+    },
+}
+
+function FX_Wybuch:OnCreateEntity()
+end
+
+function FX_Wybuch:OnSetAnim(name)
+    if name == "idle" then
+        self:BindFX("Pochodnia",0.1,"e1")
+        self:BindFX("Pochodnia",0.1,"e2")
+        self:BindFX("Pochodnia",0.1,"e3")
+        self:BindFX("Pochodnia",0.1,"e4")
+        self:BindFX("Pochodnia",0.1,"e5")
+    end
+end
+
+function FX_Wybuch:OnFinishAnim(name)
+    ENTITY.UnregisterAllChildren(self._Entity)
+end
+
+function FX_Wybuch:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+
+o.Immortal = true

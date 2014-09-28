@@ -1,0 +1,10 @@
+Pan_01.Volume = 100
+Pan_01.Interval = 8
+Pan_01.RandomShift = 5
+Pan_01.Falloff =
+{
+  Start = 1.7,
+  End = 25
+}
+Pan_01.Sound ="C2L4_Asylum/Pan_01"
+

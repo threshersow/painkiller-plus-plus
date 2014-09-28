@@ -1,0 +1,168 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+
+o.Health = 10000
+o.Mass = 10000
+o.Scale = 0.3
+o.Restitution = 0.8 	-- sprezystosc
+o.LinearDamping = 0.0  -- tlumienie liniowe
+o.TimeToLive = 30 * 30
+
+o.fx = 'pspider_fireball_spell'
+o.fxSize = 1.0
+
+o.Explosion = {
+	stren = 400,
+	range = 2.4,
+	damage = 99,
+}
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self.fx)
+end
+
+function o:OnCreateEntity()
+    ENTITY.EnableDraw(self._Entity,false)
+	self:PO_Create(BodyTypes.Simple,2.5,ECollisionGroups.Noncolliding)
+	ENTITY.AddToIntersectionSolver(self._Entity)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+	self.timer = 15
+	self:BindSound("actor/samurai/samurai-Fireball",4,28,false)
+	self._homingMissileAngleChangeSpeed = 0
+end
+
+
+function o:OnUpdate()
+	if Game.freezeUpdate then return end
+	if not self._enabled then return end
+	
+	if self.timer then
+		if not self._pfx then
+            self._pfx = AddPFX(self.fx,self.fxSize)
+            ENTITY.RegisterChild(self._Entity,self._pfx)
+            self:BindSound("weapons/machinegun/rl-flyingnoise-loop",10,80,true)
+		end
+
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.PO_Remove(self._Entity)
+			self:PO_Create(BodyTypes.Simple,1.0,ECollisionGroups.HCGNormalNCWithSelf)
+			--ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+            
+		end 
+	else
+		if self.TimeToLive > 0 then
+			self.TimeToLive = self.TimeToLive - 1
+		else
+			GObjects:ToKill(self)
+			return
+		end
+		
+		if self._target and self._target.Health > 0 and self.ObjOwner.AiParams.homingMissile then
+
+			if math.random(100) < 101 then
+				local ownerAI = self.ObjOwner.AiParams
+				local x1,y1,z1 = self._target.Pos.X, self._target.Pos.Y + 1.7, self._target.Pos.Z		-- moze jak daleko to wyzej leci?
+				local x2,y2,z2 = self.Pos.X, self.Pos.Y, self.Pos.Z
+				
+				local d = Dist3D(x1,y1,z1,x2,y2,z2)
+				if d < 1.2 then
+				    PlaySound3D("actor/samurai/samurai-Fireball-hit",x2,y2,z2)
+					ENTITY.PO_Enable(self._Entity, false)
+					local ex = self.Explosion
+					WORLD.Explosion2(x2,y2,z2, ex.stren, ex.range, self.ObjOwner._Entity, AttackTypes.Rocket, ex.damage)
+					GObjects:ToKill(self)
+					Game:Print("NUN FB HIT")
+					return
+				end
+				
+				--	y1 = y1 + 1.0 + FRand(0,1)
+				--end
+				--if d > 15 then
+				--	y1 = y1 + 1.0 + FRand(0,1)
+				--end
+			
+				vel = Vector:New(ENTITY.GetVelocity(self._Entity))
+				vel:Normalize()
+				vel:MulByFloat(4)
+				
+				--local b,dist,xcol,ycol,zcol,nx,ny,nz,he,e = WORLD.LineTraceFixedGeom(self.Pos.X,self.Pos.Y,self.Pos.Z, self.Pos.X + vel.X,self.Pos.Y + vel.Y,self.Pos.Z + vel.Z)
+				--if b then
+				--	y1 = y1 + 2
+				--	if debugMarek then Game:Print("rocket col") end
+				--end
+			
+				--local x,y,z = ENTITY.GetVelocity(self._Entity)
+				--local oldV = Vector:New(x,y,z)
+				--oldV:Normalize()
+				
+				local v = Vector:New(x2 - x1, y2 - y1, z2 - z1)
+				v:Normalize()
+				
+				local angle = math.atan2(v.X, v.Z)
+				local pitch =  math.atan2(y1 - y2, math.sqrt((x1 - x2)*(x1 - x2)+(z1 - z2)*(z1 - z2)))
+				--if self._lastAngle then
+				
+					local aa = AngDist(self._lastAngle, angle)
+					local ap = AngDist(self._lastPitch, pitch)
+
+					--Game:Print(" last a "..self._lastAngle.." "..self._lastPitch)
+					--Game:Print(" angles "..angle.." "..pitch)
+					--Game:Print(" adiffs "..aa.." "..ap)
+					-- GObjects:ToKill(self)
+
+					self._homingMissileAngleChangeSpeed = self._homingMissileAngleChangeSpeed + 2
+					if self._homingMissileAngleChangeSpeed > ownerAI.homingMissileAngleChangeSpeed then
+						self._homingMissileAngleChangeSpeed = ownerAI.homingMissileAngleChangeSpeed
+					end
+					local cs = self._homingMissileAngleChangeSpeed
+
+					if (aa*180/math.pi > cs) then
+						angle = self._lastAngle + cs*math.pi/180
+					elseif (aa*180/math.pi < -cs) then
+						angle = self._lastAngle - cs*math.pi/180
+					end
+
+					if (ap*180/math.pi > cs) then
+						pitch = self._lastPitch + cs*math.pi/180
+					elseif (ap*180/math.pi < -cs) then
+						pitch = self._lastPitch - cs*math.pi/180
+					end
+
+						
+					
+					v.X,v.Y,v.Z = VectorRotate(1.0,0,0, 0, 0, pitch)
+					v.X,v.Y,v.Z = VectorRotate(v.X,v.Y,v.Z, 0, -angle+math.pi/2, 0)
+					
+					v:MulByFloat(ownerAI.throwVelocity)
+					ENTITY.SetVelocity(self._Entity, -v.X, -v.Y, -v.Z)
+				--end
+				
+				self._lastAngle = angle
+				self._lastPitch = pitch
+			end
+		end
+	end
+end
+
+
+function o:OnDamage()
+	if self._enabled then return end
+    local x2,y2,z2 = self.Pos.X, self.Pos.Y, self.Pos.Z
+    self:OnCollision(x2,y2,z2)
+end
+
+function o:OnCollision(x,y,z,nx,ny,nz,e)
+    PlaySound3D("actor/samurai/samurai-Fireball-hit",x,y,z)
+    ENTITY.PO_Enable(self._Entity, false)
+	local ex = self.Explosion
+	if not self._target then		-- jeszcze sie tworzy
+		--AddPFX("Grenade",0.4,Vector:New(x,y,z))
+		self.ObjOwner:FireBallHit()
+	else
+        WORLD.Explosion2(x,y,z, ex.stren, ex.range, self.ObjOwner._Entity, AttackTypes.Rocket, ex.damage)
+	end
+	GObjects:ToKill(self)
+end

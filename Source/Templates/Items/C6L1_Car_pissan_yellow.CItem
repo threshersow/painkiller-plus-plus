@@ -1,0 +1,46 @@
+o.Model = "C6L1_Car_pissan_yellow"
+o.Scale = 3
+o.Health = 300
+o.enableGibWhenHPBelow = 0
+o.Spawnable = true
+o.shadow = 64  
+o.Explosion = {
+	stren = 9000,
+	range = 10,
+	damage = 200,
+    fx = "Grenade",
+    fxSize = 1,
+	eqTimeOut = 10,
+	eqRange = 35,
+	eqCamera = 0.5,
+}
+
+o.CollisionDetect = {
+	MinTime = 1.2,
+	MinStren = 3.0,
+	joint = "joint1_getmass",
+}
+
+
+o.s_SubClass.RagdollCollisionsGib = {
+        MinStren = 2.0,
+        MinTime = 0.7,
+        Bones = {
+				{"joint1_getmass", "collisiondetect", false},		-- joint, {sounds}, blood
+				{"joint5_getmass", "collisiondetect", false},
+			},
+    }
+
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint5_getmass",
+	minVel = 2.0,
+	angular = true,
+	minDelayBetweenSounds = 1.0,
+}
+
+o.alarmON = false
+o.killOnCollision = false
+
+o.TimeToDisappear = 60.0		-- sec.
+o.SoundHitByBulletMiniGunOnly = true

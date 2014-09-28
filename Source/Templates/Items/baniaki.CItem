@@ -1,0 +1,22 @@
+o.Mesh = "polySurfaceShape14442"
+o.Pack = "baniak_caly.dat"
+o.DestroyPack = "baniak_zlom.dat"
+o.Scale = 0.2
+o.Health = 100
+o.Friction = 1
+
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 20
+o.Destroy.Effect = "explo_beczka"--"explode_dust"
+o.Destroy.EffectScale = 1.6			--0.3
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+
+o.SoundHitByBulletMiniGunOnly = true

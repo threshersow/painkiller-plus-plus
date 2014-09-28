@@ -1,0 +1,22 @@
+o.Mesh = "polySurfaceShape17505"
+o.Pack = "gasnica_cala.dat"
+o.DestroyPack = "gasnica_zlom.dat"
+--o.Mass = 40
+o.Health = 50
+o.Scale = 0.25
+
+o.TestDeathZone = true
+
+o.Destroy.ExplosionStrength = 3200
+o.Destroy.ExplosionDamage = 300
+o.Destroy.ExplosionRadius = 6
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 150
+o.Destroy.MinSpeedOnCollision = 15
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.EffectScale = 0.4
+o.Destroy.LifetimeAfterExplosion = 6
+
+
+o.SoundHitByBulletMiniGunOnly = true

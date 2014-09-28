@@ -1,0 +1,73 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'voodoo_krok1',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'voodoo_krok2',},
+		dist1 = 3,
+		dist2 = 20,
+	},
+	bodyfalls = {
+		samples = {"$/actor/zombie_soldier/zombs_bodyfalls1","$/actor/zombie_soldier/zombs_bodyfalls2",},
+		dist1 = 16,
+		dist2 = 50,
+	},
+	atak = {
+		samples = {'voodoo-atak1','voodoo-atak2'},
+		dist1 = 20,
+		dist2 = 50,
+		disablePitch = true,
+	},	
+	damage = {
+		samples = {'voodoo-damage'},
+		disablePitch = true,
+	},	
+
+	onAttackOnce = {
+		samples = {"voodoo-halt1", "voodoo-halt2", "voodoo-halt3"},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	hit = {
+		samples = {'voodoo-hit1','voodoo-hit2','voodoo-hit3',},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	death = {
+		samples= {"voodoo-death1","voodoo-death2","voodoo-death3",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+    walkVoice = {
+        samples = {"voodoo-walk-voice1","voodoo-walk-voice2","voodoo-walk-voice3"},
+		playChance = 0.15,
+   		dist1 = 15,
+		dist2 = 50,
+    },
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+            {0.0,'PlaySoundHitIfNotPlayingLast',"walkVoice"},
+            {0.6,'PlaySound',"step1"},
+			{0.0,'PlaySound',"step2"},
+		},
+		run   = {
+            {0.0,'PlaySoundHitIfNotPlayingLast',"walkVoice"},
+            {0.6,'PlaySound',"step1"},
+			{0.0,'PlaySound',"step2"},
+		},
+
+        hit1 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        hit2 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        atak1 = {
+			{0.0,'StopLastSound'},
+            {0.0,'PlaySound',"atak"},
+        },
+}

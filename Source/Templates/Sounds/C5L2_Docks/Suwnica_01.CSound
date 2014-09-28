@@ -1,0 +1,10 @@
+Suwnica_01.Volume = 70
+Suwnica_01.Interval = 0
+Suwnica_01.RandomShift = 0
+Suwnica_01.Falloff =
+{
+  Start = 8,
+  End = 60
+}
+Suwnica_01.Sound ="C5L2_Docks/suwnica_01"
+

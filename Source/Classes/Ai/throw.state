@@ -1,0 +1,74 @@
+AiStates.throw = {
+	name = "throw",
+	delayRandom = FRand(3,6),
+}
+
+function AiStates.throw:OnInit(brain)
+	local actor = brain._Objactor
+	--if debugMarek then Game:Print(actor.Model.." throw "..brain.r_closestEnemy._groundx.." "..brain.r_closestEnemy._groundz) end
+	local aiParams = actor.AiParams
+	actor:Stop()
+	if brain.r_closestEnemy then
+		actor:RotateToVector(brain.r_closestEnemy._groundx, 0, brain.r_closestEnemy._groundz)
+    else
+        if debugMarek then
+            Game.freezeUpdate = true
+            Game:Print("NIE WIDZI WROGA?????")
+        end
+	end
+
+    actor._disableHits = true
+	self._throwed = true
+	self.active = true
+	self.mode = 0
+end
+
+function AiStates.throw:OnUpdate(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+	if self.mode == 0 then
+		if not actor._isRotating then
+			-- tu trace, czy nie trafi w sciane
+			actor:SetAnim(aiParams.throwAnim, false)
+			aiParams.throwAmmo =  aiParams.throwAmmo - 1
+			self.mode = 1
+		end
+	else
+		if not actor._isAnimating or actor.Animation ~= aiParams.throwAnim then
+			self.active = false
+		end
+	end
+	brain._lastThrowTime = brain._currentTime
+end
+
+function AiStates.throw:OnRelease(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+    brain._lastThrowTime = brain._lastThrowTime + FRand(0,aiParams.minDelayBetweenThrow*0.5)
+	self.active = false
+    actor._disableHits = nil
+    if actor._objTakenToThrow then
+        Game:Print(actor._Name.." ERROR: actor._objTakenToThrow still exists")
+    end
+end
+
+function AiStates.throw:Evaluate(brain)
+	if self.active then
+		return 0.8
+	else
+        if brain.r_closestEnemy then
+		    local actor = brain._Objactor
+			local aiParams = actor.AiParams
+            if brain._lastThrowTime + aiParams.minDelayBetweenThrow < brain._currentTime then
+				if aiParams.throwAmmo > 0 and (not aiParams.notBreakAttackByThrow or (aiParams.notBreakAttackByThrow and actor._state ~= "ATTACKING"))then
+					if brain._distToNearestEnemy < aiParams.throwRangeMax and brain._distToNearestEnemy > aiParams.throwRangeMin then
+						if math.random(100) < (10 - brain.r_closestEnemy._velocity) * 4 then
+							return 0.61
+						end
+					end
+				end
+			end
+		end
+	end
+	return 0
+end

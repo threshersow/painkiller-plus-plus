@@ -1,0 +1,10 @@
+Knockknock.Volume = 40
+Knockknock.Interval = 25
+Knockknock.RandomShift = 12
+Knockknock.Falloff =
+{
+  Start = 10,
+  End = 30
+}
+Knockknock.Sound ="C3L4_Castle/pukanie"
+

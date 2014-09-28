@@ -1,0 +1,20 @@
+o.BaseObj = "CActor"
+o.Model = "dead_body"
+o.Scale = 1.2
+o.Health = -1
+o.NotCountable = true
+
+o.s_SubClass = {
+    RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"r_p_bark", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_l_bark", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+			},
+    },
+    DeathJoints = {
+        'n_p_kolano','n_l_kolano','r_l_lokiec','r_p_lokiec','r_p_bark','r_l_bark','k_ogo','k_szyja',
+    },
+}

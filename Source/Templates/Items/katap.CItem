@@ -1,0 +1,4 @@
+o.BaseObj = "CItem"
+o.Model = "katap"
+o.Scale = 3
+

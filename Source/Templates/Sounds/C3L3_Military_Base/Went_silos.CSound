@@ -1,0 +1,10 @@
+Went_silos.Volume = 60
+Went_silos.Interval = 0
+Went_silos.RandomShift = 0
+Went_silos.Falloff =
+{
+  Start = 1.5,
+  End = 20
+}
+Went_silos.Sound ="C3L3_Military_Base/Went_silos"
+

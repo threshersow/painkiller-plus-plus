@@ -1,0 +1,26 @@
+o.BaseObj = "HellBiker.CActor"
+o.NeverRun = true
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,20}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = 7
+o.AiParams.stopAfterWalking = 1
+
+o.AiParams.moveDisplacement = 0.3
+o.AiParams.changePosAfterFire = 0.6
+o.AiParams.delayBetweenAttacks = 20
+
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 40,
+		minDist = 2.0,
+		spreadAngle = 0.0,
+		damagePerBullet = 2,
+		PO_HitForce = 300,
+		fireParticle = "monstershot",	
+		fireParticleSize = 0.2,
+		bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+	}

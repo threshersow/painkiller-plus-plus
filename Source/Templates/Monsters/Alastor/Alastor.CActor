@@ -1,0 +1,290 @@
+o.Model = "alastor"
+o.Scale = 13.0
+o.CreatePO = true
+o.Health = 444
+o.HealthOnGround = 3000
+o.WalkSpeed = 1.0
+o.FlySpeed = 50.0
+o.RotateSpeed = 4.0
+o.RotateSpeedGround = 20.0
+o.disableFreeze = true
+o.throwHeart = false
+o.ShotgunCheckAllPellets = true
+o.IsBoss = true
+
+o.s_SubClass = {
+	rotateHead = 3.1415 * 0.25,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+
+	rotateHeadRight = Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadLeft =  Vector:New(-1.0, 1.0, 1.0),
+	rotateHeadCoords = Vector:New(2, 3, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+
+    Animations = {
+        charge   =  {0.8,false,{
+					{0.0,'PlayRandomSound2D',"charge"},
+					{0.4,'Charge'},
+					{0.8,'Charge'},
+					{1.2,'Charge'},
+					{1.6,'Charge'},
+					{2.0,'Charge'},
+					{2.4,'Charge'},
+					{2.8,'Charge'},
+					{3.2,'Charge'},
+					{3.6,'Charge'},
+					{3.9,'Charge'},
+				},0.5},
+        idle1   = {1.2,false,{
+					{0.0,'PlaySoundHitBinded',"idle1"},
+				},0.5},
+        idle2   = {1.0,false, {
+					{1.0,'PlaySoundHitBinded',"idle2"},
+					{1.2,'PlaySound',"wingsshow"},
+					{2.6,'PlaySound',"wingidle"},
+				},0.5},
+        rot90L   = {1.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.2,'PlaySoundHitBinded',"rv"},
+						{1.7,'PlaySound',"krok2"},
+						{1.7,'Stomp','s_l_kostka'},
+					}, 0.1, true},
+        rot90P   = {1.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.3,'PlaySoundHitBinded',"voice1"},
+						{1.2,'PlaySound',"krok1"},
+						{1.2,'Stomp','s_p_kostka'},
+					}, 0.1, true},
+        rot45P   = {1.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.2,'PlaySound',"krok2"},
+						{1.2,'Stomp','s_l_kostka'},
+					}, 0.1, true},
+        rot45L   = {1.8,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{0.8,'PlaySound',"krok2"},
+						{0.8,'Stomp','s_l_kostka'},
+					}, 0.1, true},
+
+		zieje01   = {0.8,false, {
+					{0.3,'PlaySound',"zieje"},
+					{0.3,'StartFlame'},
+					{1.9,'EndFlame'},
+				}, 0.5},
+		zieje02   = {1.0,false, {
+					{0.6,'PlaySound',"zieje"},
+					{1.1,'StartFlame'},
+					{2.4,'EndFlame'},
+				}, 0.5},
+		zieje02a   = {1.0,false, {
+					{0.5,'PlaySound',"atak2"},
+					{0.5,'StartFlame'},
+					{1.8,'EndFlame'},
+				}, 0.5},
+
+		spada	= {1.0, false},
+        walk   = {1.2,true,{
+					{0.0,'PlaySound',"krok1"},
+					{0.9,'Stomp','s_p_kostka'},
+					{0.9,'PlaySound',"krok2"},
+					{0.0,'Stomp','s_l_kostka'},
+				},0.5},
+        atak1   = {0.8,true, {			-- fireball
+					{1.2,'PlaySound',"swish"},
+					{0.9,'PlaySoundHitBinded',"av"},
+					{0.0,'PlaySound',"prepare"},
+					{1.2,'PlaySound',"naskok"},
+					{1.2,'Stomp','s_p_kostka',1.5},
+					{1.4,'Throw'},
+					{1.04,'EnableRotate'},
+					{1.26,'DisableRotate'},
+				},0.5, true},
+        atak2   = {1.0,true, {
+					{0.0,'PlaySoundHitBinded',"av2"},
+					{1.5,'PlaySound',"naskok"},
+					{1.5,'Stomp','s_p_kostka',1.5},
+					{1.5,'PlaySound',"atak2"},
+					{1.5,'StartFlame'},
+					{2.8,'EndFlame'},
+					{1.18,'EnableRotate'},
+					{1.5,'DisableRotate'},
+				},0.5, true},
+        atak3   = {0.65,true, {		-- ground hit
+					{0.7,'PlaySoundHitBinded',"av"},
+					{1.2,'PlaySound',"naskok"},
+					{1.2,'Stomp','s_p_kostka',1.5},
+					{1.34,'PlaySound',"groundhit"},
+					{1.34,'StrikeGround'},
+					{1.34,'Stomp','dlo_prawa_root',1.8},
+					{1.04,'EnableRotate'},
+					{1.26,'DisableRotate'},
+				},0.5, true},
+        fly   = {1.2,false,{
+					{0.3,'PlaySound',"wing"},
+					{1.3,'PlaySound',"wing2"},
+				},0.5},
+        fly_up   = {1.2,false,{
+					{0.3,'PlaySound',"wing"},
+					{1.3,'PlaySound',"wing2"},
+				},0.5},
+        break_flo   = {1.8,false,{
+					{0.0,'PlaySound',"breakfloor1"},
+					{1.8,'PlaySound',"breakfloor2"},
+					{3.8,'PlaySound',"breakfloor3"},
+					{3.8,'PlaySound',"swish"},
+					{4.3,'ExplodePhase'},
+					{4.3,'PlayRandomSound2D',"naskok"},
+					{4.3,'Stomp','dlo_prawa_root',1.5},
+				},0.5},
+    },
+
+    flyWalk = "fly",
+    Ambients = {"idle1","idle2"},
+   	rotate45L = "rot45L",
+	rotate45R = "rot45P",
+	rotate90L = "rot90L",
+	rotate90R = "rot90P",
+}
+
+o.DeathTimer = 10000
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 1000000,
+}
+
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idleAlastor","attackFlyAlastor","attackFlameAlastor","ABAlastor"}
+o.AiParams.aiGoalsGround = {"groundAttackAlastor","ABAlastor","breathAlastor",}
+
+-- o.AiParams.aiGoals = {"groundAttackAlastor","breathAlastor","ABAlastor"}
+
+
+o.AiParams.actions = {		-- 1 faza
+    {"attack", 0.4,},		-- szansa na sec, (gdy jest w idle-u)
+	{"attackFlame", 0.3,},
+}
+
+o.AiParams.updateSpeed = 0.0
+o.AiParams.forceRotateHead = true
+o.disbleRotWhenStartWalk = true
+
+o.disableNoAnimDetection = false
+o.AiParams.alwaysSee = true
+o.doNotUseWP = true
+o._DontCheckFloors = true
+o.havokInfluenceInMonsterMovement = 0.9
+o.havokInfluenceInMonsterMovementOnGround = 0.5
+
+o.flamerFX = "alastorflamethr"
+
+o.AiParams.Explosion = {		-- do rozwalania podlog
+	ExplosionStrength = 160000,
+	ExplosionRange = 45,
+	Damage = 0,
+}
+
+o.AiParams.wingJoints = {"wing_l_z1_1","wing_l_z1_2","wing_l_z1_3","wing_l_z1_4","wing_l_z1_5",
+						 "wing_l_z_1","wing_l_z_2","wing_l_z_3","wing_l_z_4","wing_l_z_5",
+						 "wing_l_1","wing_l_2","wing_l_3","wing_l_4","wing_l_5",
+						 
+						 "wing_p_z1_1","wing_p_z1_2","wing_p_z1_3","wing_p_z1_4","wing_p_z1_5",
+						 "wing_p_z_1","wing_p_z_2","wing_p_z_3","wing_p_z_4","wing_p_z_5",
+						 "wing_p_1","wing_p_2","wing_p_3","wing_p_4","wing_p_5",
+						}
+o.FloorsTimeToDelete = 2.7
+o.FloorsTimeToDeleteRandomize = 0.5
+
+o.CoronasTimeToDelete = 1.0
+o.CoronasTimeToDeleteRandomize = 0.25
+
+o.WallsTimeToDelete = 0.0
+o.WallsTimeToDeleteRandomize = 0.0
+
+o.flameDamage = 4
+
+
+o.StompTimeOut = 12				-- eartq params
+o.StompRange = 40
+o.CameraRot = 0.3
+o.CameraMov = 0.3
+o.AiParams.towerRadius = 37.5	-- poza ten obreb nie wyjdzie (teoretycznie)
+o.AiParams.towerRange = 46		-- poza ten obreb nie bedzie atakowal
+
+o.AiParams.towerRadiusBottom = 58
+o.AiParams.towerRangeBottom = 74
+
+--o.monkPFX = "pochodnia"
+
+o.enableCollisionsToMeshes = true
+o.StoneParams = {
+	particlesOnCollision = "butk",
+	amountReportingCollisions = 0.8,	-- 0.0 .. 1.0	ile procent kamieni ma zglaszac kolizje
+	miminalMassReportingCollision = 200,
+	maximalMassReportingCollision = 1800,
+	collisionMinimumStrength = 10,		-- min. velocity
+	collisionMinimumFrequency = 1.5,
+
+	timeToLive = 90.0,					-- w sek.
+	timeToLiveRandomize = 10.0,
+}
+
+o._ragdollWhenFalling = true
+o.resurectFX = {
+	name = "AlastorSpawnFX",
+	size = 6.0,
+	joint = "root",
+	deltaY = 15,
+}
+
+o.delayBetweenFlyAttacks = 30		-- ile czasu decyduje sie na nast. atak (1 faza, gdy lata)
+
+o.fallingFX = "barrel_flame_fx"
+o.CollisionDetect = 0.2
+
+o.floorsCollisionGroup = ECollisionGroups.Noncolliding
+o.nextFloorCollisionGroup = ECollisionGroups.HCGFixedWithNoncollidable
+
+o.fallingRotateSpeed = 2.8
+o.fallingAnim = "fly_up"
+
+o.HitDecal = "decal_Mlot"
+o.FXwhenHit = "FX_Thorhit.CActor"
+
+o.AiParams.throwMaxAngleYawDiff = 30
+o.AiParams.throwMaxAnglePitchDiff = 30
+o.AiParams.throwVelocity = 42
+
+o.AiParams.flyDamage = 6
+o.AiParams.walkDamage = 10
+o.AiParams.strikeDamage = 50
+
+o.particles = {
+	{0.713564,-0.126317,-0.681649,0.101118},
+	{-0.187988,49.9844,65.2178},
+
+	{0.913943,-0.154614,-0.372193,0.047701},
+	{-45.4661,50.1575,45.0698},
+
+	{0.986752,-0.161344,-0.0118298,-0.0122032},
+	{-65.3784,50.6157,-0.679199},
+
+	{0.914306,-0.144023,0.371299,-0.0737452},
+	{-47.6777,50.0987,-47.5488},
+
+	{0.690709,-0.102723,0.704798,-0.125015},
+	{0.0729255,49.7004,-65.6909},
+
+	{0.37382,-0.0479763,0.913279,-0.154529},
+	{46.717,49.7811,-47.7041},
+
+	{-0.0337065,0.0196339,0.986247,-0.16061},
+	{65.1792,49.5215,0.514648},
+
+	{0.404067,-0.0788967,-0.900305,0.141266},
+	{47.0093,49.5789,46.1035},
+}
+
+o.chargeFX = {
+	name = "AlastorchargeFX",
+	size = 1.0,
+	joints = {"root","wing_l_z1_1"},
+}
+
+o.AiParams.breathAttackDistMin = 46.0

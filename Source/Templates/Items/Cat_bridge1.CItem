@@ -1,0 +1,4 @@
+o.BaseObj = "CItem"
+o.Model = "Cat_bridge1"
+o.Scale = 1
+o.Mass = 250

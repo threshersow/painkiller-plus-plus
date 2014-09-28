@@ -1,0 +1,7 @@
+o.s_SubClass.ParticlesDefinitions = {
+    hitImmortal = {
+        pfx = "monsterweap_hitground",
+        scale = 0.2,
+    },
+
+}

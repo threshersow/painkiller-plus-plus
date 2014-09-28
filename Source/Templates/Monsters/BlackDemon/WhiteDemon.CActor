@@ -1,0 +1,4 @@
+o.BaseObj = "BlackDemon.CActor"
+o.Model = "WhiteDemon"
+o.s_SubClass.Hits = nil
+

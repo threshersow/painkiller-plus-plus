@@ -1,0 +1,120 @@
+o.s_SubClass.SoundsDefinitions = {
+	stepl = {
+		samples = {'ninja-krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	stepr = {
+		samples = {'ninja-krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	at = {
+		samples = {'ninja_at2-shurican','ninja_at3-shurican','ninja_at5','ninja_at6',},
+		dist1 = 10,
+		dist2 = 20,
+	},	
+	swish = {
+		samples = {'ninja_sword-swish',},
+		dist1 = 10,
+		dist2 = 32,
+	},
+	punch = {
+		samples = {'ninja_hand-punch',},
+		dist1 = 6,
+		dist2 = 12,
+	},
+	dart = {
+		samples = {'ninja_blow-dart1', 'ninja_blow-dart2',},
+		dist1 = 10,
+		dist2 = 30,
+	},	
+	at1 = {
+		samples = {'ninja_at1',},
+		dist1 = 6,
+		dist2 = 12,
+		playChance = 0.25,
+	},
+	hit = {
+		samples = {'ninja_hit1','ninja_hit2','ninja_hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	attack = {
+		samples = {'ninja_at1','ninja_at5'},
+		dist1 = 6,
+		dist2 = 15,
+	},
+	bodyfalls = {
+		samples = {"ninja_boddyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	onAttackOnce = {
+		samples = {"ninja_halt1", "ninja_halt2", "ninja_halt3",},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	weaponlost = {
+		samples = {"ninja_weapon-lost","ninja_weapon-lost2",},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	fik = {
+		samples = {'ninja_at6',},
+		playChance = 0.25,
+		dist1 = 10,
+		dist2 = 16,
+	},
+	roll = {
+		samples = {'ninja_sword_roll_on_floor',},
+		dist1 = 10,
+		dist2 = 20,
+		disablePitch = true,
+	},
+	jumpat = {
+		samples = {'ninja_sword_jumpattack',},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	startswish = {
+		samples = {'ninja_sword_jump-start-swish',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	jumpat2 = {
+		samples = {'ninja_sword_jumpattack2',},
+		dist1 = 8,
+		dist2 = 32,
+	},
+	missed = {
+		samples = {'ninja_sword-missed1','ninja_sword-missed2'},
+		dist1 = 8,
+		dist2 = 32,
+	},
+	shuri = {
+		samples = {'ninja_at2-shurican','ninja_at3-shurican'},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	shuriSw = {
+		samples = {'ninja_shuricane_throw-swish'},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	sprint = {
+		samples = {"ninja_sprint"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	death = {
+		samples = {"ninja_death1","ninja_death2","ninja_death3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    damage = {
+		samples = {"ninja_hand-hit"},
+    },
+}

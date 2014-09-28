@@ -1,0 +1,59 @@
+EDITOR.AddObjectTemplate("Particles","swamp_lights","swamp_lights.CActor");	
+o.CreatePO = false
+o.Health = 99999
+o.Model = "swamp_lights"
+o.Scale = 110.0
+o.NotCountable = true
+o.Immortal = true
+
+swamp_lights.s_SubClass = 
+{
+    Animations = {  
+        idle        = {0.7},
+    },
+}
+
+function swamp_lights:OnCreateEntity()
+	self._binded = {}
+end
+
+
+function swamp_lights:BindAll()
+	for i=1,30 do
+		local j = "e"..i
+		
+		local joint  = MDL.GetJointIndex(self._Entity,j)
+		local x,y,z = MDL.GetJointPos(self._Entity,joint)
+		local obj
+		if not self._binded[i] then
+			self._binded[i],obj = AddItem("swamp_single_light.CItem",nil,Vector:New(0,0,0),true)
+			obj.ObjOwner = self
+			obj.OwnerJoint = joint
+		else
+			obj = EntityToObject[self._binded[i]]
+			obj.Pos.X = 0
+			obj.Pos.Y = 0
+			obj.Pos.Z = 0
+		end
+		ENTITY.ComputeChildMatrix(self._binded[i],self._Entity,joint)
+		ENTITY.RegisterChild(self._Entity,self._binded[i],true,joint)
+	end
+end
+
+
+function swamp_lights:Update()
+	if not self._a then
+		--self:BindAll()
+		self._a = true
+	end
+end
+
+--[[
+function swamp_lights:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+--]]

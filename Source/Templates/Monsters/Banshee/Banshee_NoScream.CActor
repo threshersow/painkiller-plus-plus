@@ -1,0 +1,4 @@
+o.BaseObj = "Banshee.CActor"
+
+o.AiParams.screamFreq = 0.0
+

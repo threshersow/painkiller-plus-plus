@@ -1,0 +1,69 @@
+AiStates.flee = {
+	name = "flee",
+	timer = nil,
+}
+
+
+function AiStates.flee:OnInit(brain)
+	self.timer = brain.escape
+	local actor = brain._Objactor
+	--local dist = Dist3D(brain._GuardPos.X,brain._GuardPos.Y,brain._GuardPos.Z, actor._groundx, actor._groundy, actor._groundz)
+	local angle = math.random(100,260)
+	if not actor:WalkForward(math.random(14,24), true, angle, nil, nil, true) then
+		angle = math.random(80,130)
+		if math.random(100) < 50 then
+			angle = -angle
+		end
+		--Game:Print("WP flee failed")
+		actor:WalkForward(math.random(8,16), true, angle)
+	else
+		--Game:Print("WP flee OK")
+	end
+	--if debugMarek then Game:Print("flee ") end
+	self.rot =  false
+end
+
+
+
+function AiStates.flee:OnUpdate(brain)
+	local actor = brain._Objactor
+	if not actor._isWalking and not self.rot then
+		Patrol(actor, brain, true, true)
+	end
+	if not actor._isWalking and brain._currentTime < actor._lastCantMoveTime + 2/30 then
+		--if debugMarek then Game:Print("COLLISION while flee "..brain._currentTime..", last cm time = "..actor._lastCantMoveTime) end
+		--if math.random(100) < 66 then
+			self.rot = true
+		--end
+	end
+	
+	if self.timer then
+		if self.timer > 0 then
+			self.timer = self.timer - 1
+		else
+			self.timer = nil
+			self.rot = true
+			actor:Stop()
+			--Game:Print("flee stop")
+		end
+	end
+	if self.rot == true then
+		actor:Rotate(math.random(135,235))
+		brain.escape = false
+		if brain._enemyLastSeenTime > 0 then
+			brain._enemyLastSeenTime = brain._currentTime - 1			-- sztucznie, zeby robil hunt
+		end
+	end
+end
+
+function AiStates.flee:OnRelease(brain)
+	--local actor = brain._Objactor
+	--if debugMarek then Game:Print("flee release") end
+end
+
+function AiStates.flee:Evaluate(brain)
+	if brain.escape then
+		return 0.6666
+	end
+	return 0.0
+end

@@ -1,0 +1,9 @@
+o.Mesh = "bottle_a"
+o.Pack = "gas_bottle.dat"
+
+o.Scale = 0.2
+o.TimeToLive = 30 * 5
+o.Particle = 'molotowt'
+o.gasElements = 12
+o.destroyPFX = "molotowexplo"
+

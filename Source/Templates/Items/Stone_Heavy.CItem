@@ -1,0 +1,2 @@
+Stone_Heavy.BaseObj = "Stone.CItem"
+Stone_Heavy.Mass = 10000

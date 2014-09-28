@@ -1,0 +1,12 @@
+o.BaseObj = "Bones.CActor"
+
+o.Scale = 1
+
+o.AiParams.activateOnEnemy = true
+o.AiParams.activateTimer = 150		-- -1 wylaczony, >=0 wlaczony (czas w 1/30 sec.)
+
+o.AiParams.hearing = 0.05
+
+o.AiParams.viewDistance = 20
+o.AiParams.viewDistance360 = 15
+o.AiParams.viewAngle = 180

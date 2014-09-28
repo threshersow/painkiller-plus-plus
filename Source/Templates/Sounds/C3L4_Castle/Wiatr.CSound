@@ -1,0 +1,10 @@
+Wiatr.Volume = 60
+Wiatr.Interval = 10
+Wiatr.RandomShift = 4
+Wiatr.Falloff =
+{
+  Start = 20,
+  End = 50
+}
+Wiatr.Sound ="C3L4_Castle/wiatr_01;C3L4_Castle/wiatr_02"
+

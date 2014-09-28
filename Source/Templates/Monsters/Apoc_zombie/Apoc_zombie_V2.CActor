@@ -1,0 +1,186 @@
+--o.BaseObj = "Leper.CActor"
+o.Model = "zombieapo_v2"
+o.Scale = 1.2
+o.CreatePO = true
+o.Health = 90
+o.WalkSpeed = 1.1
+o.RunSpeed = 1.6
+o.RotateSpeed = 10
+o.Animation = "idle"
+o.enableGibWhenHPBelow = -45
+
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 100,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.5,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.14,
+	SoundDir = "leper",
+
+	Animations = {
+		idle   = {1.0,false},
+        enter   = {1.0,false},
+		run1   = {1.0,true,{
+				{0.0,'FootFX','s_l_srodstopie'},
+				{0.7,'FootFX','s_p_srodstopie'},
+			}},
+		run2   = {1.0,true, {
+				{0.0,'FootFX','s_l_srodstopie'},
+				{0.7,'FootFX','s_p_srodstopie'},
+			}},
+		run3   = {1.0,true,{
+				{0.0,'FootFX','s_l_srodstopie'},
+				{0.7,'FootFX','s_p_srodstopie'},
+			}},
+
+		atak1   = {2.0,false,{				-- 3.75
+					{3.7,'Explode'},
+				}},
+		atak2   = {2.0,false,{				-- 1.66
+					{1.62,'Explode'},
+				}},
+		atak3   = {2.0,false,{				-- 1.25
+					{1.2,'Explode'},
+					--{1.2,'ThrowTaken'},
+				}},
+		hit1   = {1.0,false,{
+				}},
+		hit2   = {1.0,false,{
+				}},
+    },
+
+    RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_P_lokiec1", "bodyfalls", true},	-- joint, {sounds}, blood
+				{"r_L_lokiec", "bodyfalls", true},		-- joint, {sounds}, blood
+			},
+    },
+
+
+	reverseGibFX = "gibExplosion",
+	GibExplosionStrength = 5000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_L_bark","FX_gib_blood",-1},
+				{"r_P_bark1","FX_gib_blood",1},
+				{"r_P_bark_root1","FX_gib_blood",1},
+				{"r_L_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+	},
+	--gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_L_bark", "gibSplash", true},
+				{"r_P_bark1", "gibSplash", true},
+				{"r_P_bark_root1", "gibSplash", true},
+				{"r_L_bark_root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				--{"miecz", {"zombs-weapon-lost1","zombs-weapon-lost2","zombs-weapon-lost3",}, false},
+			},
+	    },
+
+
+    notBleedingJoints = {
+		--joint21 = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+
+    walk = {"run1"},
+    run = {"run1"},
+
+	NearAttacks = {"atak2",},
+    Hits = {"hit1", "hit2"},
+
+    DeathJoints = {
+        'k_glowa','n_p_kolano','n_l_kolano','r_P_bark1','r_L_bark','k_ogo','k_glowa',
+    },
+	--idlesList = {"idle1","idle2","idle3","idle4","idle5","idle6"},
+	--walkList = {"walk1","walk2","walk3","walk4","walk5","walk6"},
+
+	bodyParts = {
+		{"head1","head2","head3","head4"},
+		{"torso1","torso2","torso3","torso4"},
+		{"legs1","legs2","legs3"},
+	},
+
+    Specular =      {
+                        body1 = {30, 30, 30, 20},
+                        body2 = {30, 30, 30, 20},
+                        body3 = {30, 30, 30, 20},
+                        body4 = {30, 30, 30, 20},
+    },
+}
+
+
+o.DeathTimer = 140                  -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt", "ApocZombierunToPlayer",}
+o.AiParams.viewDistance = 90
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 100
+
+o.AiParams.weaponDamage = 15
+o.AiParams.attackRange = 2.5
+o.AiParams.attackRangeAngle = 120
+o.AiParams.hearing = 1.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1			-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.4
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+o.AiParams.walkStep = 6.0
+o.randomizeWalks = 0
+--o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 20
+o.AiParams.moveDisplacement = 2.4
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 100
+
+o.AiParams.updateSpeed = 0.2
+
+o.shadow = 128
+
+o.enableUnGib = 2.5		-- czas
+o.enableUnGibReturn = 0.8
+o.enableUnGibStart = 0.3		-- czas
+
+o.AiParams.actionDistance = 2.6
+o.AiParams.actionDistanceBonusAtak1 = 4
+o.AiParams.alwaysSee = true
+
+o.AiParams.Explosion = {
+	ExplosionStrength = 1500,
+	ExplosionRange = 8,
+	Damage = 30,
+}
+
+o.colVelocityDamping = 0.3
+o.TimeToLive = 50 * 30
+o.AiParams.soundAmbientDelay = 6.5

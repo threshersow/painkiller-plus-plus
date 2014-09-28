@@ -1,0 +1,10 @@
+Wojna_local.Volume = 100
+Wojna_local.Interval = 16
+Wojna_local.RandomShift = 4
+Wojna_local.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Wojna_local.Sound ="C5L4_Hell/Wojna_03"
+

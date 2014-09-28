@@ -1,0 +1,24 @@
+o.Scale = 0.3
+o.Mass = 240
+o.DestroyPack = "gasoline_zlom.dat"
+o.Destroy.LifetimeAfterExplosion = 3
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.AverageVariation = 16
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.Strength = 600
+o.Destroy.EffectScale = 0.4
+o.Destroy.ExplosionStrength = 3200
+o.Destroy.AverageDelay = 32
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+o.Destroy.ExplosionDamage = 300
+o.TestDeathZone = true
+o.Rot = Quaternion:New(0.999974,-1.86407e-005,-0.00722159,-6.84467e-005)
+o.ObjOwner = "PlayerTmp206358"
+o.Health = 32
+o.Pack = "gasoline_caly.dat"
+o.BaseObj = "CItem"
+o.Mesh = "polySurfaceShape70486"
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)

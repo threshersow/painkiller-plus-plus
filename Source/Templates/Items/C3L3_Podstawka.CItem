@@ -1,0 +1,6 @@
+o.Scale = 1
+o.Mass = 100
+o.Pack = "C3L3_podstawka.dat"
+o.Mesh = "pCubeShape1"
+o.Friction = 0.01
+o.Health = 100000

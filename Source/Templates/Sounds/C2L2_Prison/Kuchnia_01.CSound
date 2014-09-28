@@ -1,0 +1,10 @@
+Kuchnia_01.Volume = 40
+Kuchnia_01.Interval = 8
+Kuchnia_01.RandomShift = 3
+Kuchnia_01.Falloff =
+{
+  Start = 3,
+  End = 20
+}
+Kuchnia_01.Sound ="C2L2_Prison/kuchnia_03;C2L2_Prison/kuchnia_04"
+
