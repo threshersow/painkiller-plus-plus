@@ -1,3 +1,0 @@
-o.BaseObj = "Apoc_zombie_V2.CActor"
-o.DeathTimer = 30
-o.enableUnGib = 8		-- czas

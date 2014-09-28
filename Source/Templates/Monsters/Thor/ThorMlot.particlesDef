@@ -1,9 +1,0 @@
-o.s_SubClass = {}
-o.s_SubClass.ParticlesDefinitions = {
-	LighintgHitHammer = {
-		pfx = "thor_flash",
-		scale = 6.0,
-		joint = "mlot1",
-		offset = Vector:New(0,0,0),
-	},
-}

@@ -1,9 +1,0 @@
-o.s_SubClass.SoundsDefinitions = {
-	collisiondetect = {
-		path = "impacts/",
-		samples = {"stonebig-impact5","stonebig-impact6"},
-		dist1 = 20,
-		dist2 = 60,
-	},
-}
-

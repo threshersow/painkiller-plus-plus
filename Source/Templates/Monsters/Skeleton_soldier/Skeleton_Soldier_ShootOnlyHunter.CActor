@@ -1,3 +1,0 @@
-o.BaseObj = "Skeleton_Soldier.CActor"
-
-o.AiParams.aiGoals = {"idle","FarAttack","hunt"}

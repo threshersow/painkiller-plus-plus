@@ -1,5 +1,0 @@
-o.BaseObj = "CItem"
-o.Model = "C3L3_Brama"
-o.Scale = 0.3
-
-o.SoundHitByBulletMiniGunOnly = true

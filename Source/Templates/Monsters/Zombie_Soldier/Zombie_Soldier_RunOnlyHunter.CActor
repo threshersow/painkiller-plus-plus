@@ -1,6 +1,0 @@
-o.BaseObj = "Zombie_Soldier.CActor"
-o.NeverRun = false
-o.NeverWalk = true
-
-o.AiParams.alwaysSee = true
-o.AiParams.huntPlayer = true

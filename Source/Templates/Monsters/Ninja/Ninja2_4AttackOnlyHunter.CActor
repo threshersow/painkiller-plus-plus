@@ -1,6 +1,0 @@
-o.BaseObj = "Ninja2.CActor"
-
-o.AiParams.moveDisplacement = -1
-
-o.AiParams.alwaysSee = true
-o.AiParams.huntPlayer = true
