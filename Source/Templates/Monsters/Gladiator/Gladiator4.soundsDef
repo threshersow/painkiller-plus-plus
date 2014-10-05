@@ -1,0 +1,71 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'bdemon_krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'bdemon_krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	onAttackOnce = {
+		samples = {'bdemon_halt1','bdemon_halt2'},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	atak = {
+		samples = {'bdemon_atak1','bdemon_atak2','bdemon_atak3',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	swish = {
+		samples = {'$/actor/leper/leper_swish1',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	swish2 = {
+		samples = {'$/actor/psycho_elektro/psycho_swish2',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	bodyfalls = {
+		samples = {"$/actor/zombie_soldier/zombs_bodyfalls1","$/actor/zombie_soldier/zombs_bodyfalls2"},
+		dist1 = 20,
+		dist2 = 80,
+	},
+
+    attackAmbient = {
+		samples = {'bdemon_attackscream1','bdemon_attackscream2','bdemon_attackscream3',},
+		dist1 = 20,
+		dist2 = 80,
+	},
+
+    death = {
+		samples = {"bdemon_death1","bdemon_death2","bdemon_death3",},
+		dist1 = 40,
+		dist2 = 120,
+	},
+
+    damage = {
+		samples = {"bdemon-hand-hit"},
+	},
+
+	hurt = {
+		samples = {'bdemon_hit1','bdemon_hit2','bdemon_hit3','bdemon_hit4'},
+		dist1 = 20,
+		dist2 = 80,
+	},
+
+	angry = {
+		samples = {'bdemon-angry1','bdemon-angry2'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+    mortal = {
+        samples = {'gladiator-boss-mortal'},
+		dist1 = 40,
+		dist2 = 160,
+	},
+        
+}

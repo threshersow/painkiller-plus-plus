@@ -1,0 +1,34 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path = "weapons/stake",
+    dist1   = 15,
+    dist2   = 50,
+    disablePitch = true,
+    out_of_ammo = 
+    {
+        path = "weapons/assault-rifle",
+        samples = {"weapon_rifle_empty"},
+    },
+    grenade_shot = 
+    {
+        path = "weapons/grenadelauncher",
+        samples = {"weapon_grenade_fire"},
+    },
+    grenade_reload = 
+    {
+        path = "weapons/grenadelauncher",
+        samples = {"weapon_grenade_reload"},
+    },
+    stake_shot = 
+    {
+        samples = {"weapon_stake_shoot1-1","weapon_stake_shoot1-2","weapon_stake_shoot1-3"},
+    },
+    stake_shot_mp = 
+    {
+        samples = {"weapon_stake-shoot_mp"},
+    },    
+    combo_shot = 
+    {
+        samples = {"stake-fire-combo"},
+    }
+}

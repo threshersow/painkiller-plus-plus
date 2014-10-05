@@ -1,0 +1,5 @@
+o.BaseObj = "Loki.CActor"
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee","Jump"}
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = true

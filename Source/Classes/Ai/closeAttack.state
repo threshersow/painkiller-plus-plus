@@ -1,0 +1,61 @@
+-- atak bliski, bez podchodzenia
+
+AiStates.closeAttack = {
+	_lastTimeAttack = 0,
+    name = "closeAttack",
+}
+
+function AiStates.closeAttack:OnInit(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+    actor:FullStop()
+    actor:RotateToVector(Player._groundx,Player._groundy,Player._groundz, true)
+    local att = actor.s_SubClass.NearAttacks        -- narazie
+	if att then
+        if aiParams.NearAttacks then
+            att = aiParams.NearAttacks
+        end
+    end
+
+    if not att then
+        Game:Print(actor._Name.." NEAR ATTACKS NOT DEFINED!!!!!!")
+        return
+    end
+    local animName = att[math.random(1,table.getn(att))]
+	actor:SetAnim(animName, false)
+	self.active = true
+end
+
+function AiStates.closeAttack:OnUpdate(brain)
+	local actor = brain._Objactor
+	if not actor._isAnimating then
+		self.active = false
+	else
+		self.active = false
+		for i,v in actor.s_SubClass.NearAttacks do
+			if actor.Animation == v then
+				self.active = true
+				break
+			end
+		end
+	end
+	self._lastTimeAttack = brain._currentTime
+end
+
+function AiStates.closeAttack:OnRelease(brain)
+	self.active = false
+end
+
+function AiStates.closeAttack:Evaluate(brain)
+	if self.active then
+		return 0.61
+	end
+    local actor = brain._Objactor
+	if self._lastTimeAttack + 0.3 < brain._currentTime and brain._distToNearestEnemy < actor.AiParams.attackRange and brain._seeEnemy then
+		if actor._state == "ATTACKING" and actor.AiParams.doNotBreakFarAttack then
+			return 0
+		end
+		return 0.59
+	end
+	return 0.0
+end

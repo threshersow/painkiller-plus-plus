@@ -1,0 +1,10 @@
+Jarzeniowka.Volume = 20
+Jarzeniowka.Interval = 0
+Jarzeniowka.RandomShift = 0
+Jarzeniowka.Falloff =
+{
+  Start = 2,
+  End = 10
+}
+Jarzeniowka.Sound ="C3L3_Military_Base/Jarzeniowka"
+

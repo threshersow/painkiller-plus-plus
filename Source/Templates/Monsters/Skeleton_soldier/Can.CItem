@@ -1,0 +1,17 @@
+o.Mesh = "pCylinderShape1"
+o.Pack = "puszka.dat"
+
+o.Scale = 0.1
+o.Restitution = 0.0 	-- sprezystosc
+o.LinearDamping = 0.4
+o.AngularDamping = 0.0
+o.TimeToLive = 10 * 30
+o._fx = "soldier_gas"
+
+o.Poison = {
+	checkSpeed = 2,	-- ile razy na sekunde ma spradzac, czy jest w zasiegu trucizny
+	Range = 2.5,
+	TimeOut = 100,	-- jak dlugo dziala na gracza
+	Freq = 24,		-- jak czesto trucizna zadaje rany
+	DamageHp = 3,
+}

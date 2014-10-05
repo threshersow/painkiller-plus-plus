@@ -1,0 +1,4 @@
+AxeV2.BaseObj = "Axe.CItem"
+AxeV2["Mesh"] = [[polySurfaceShape918]]
+AxeV2["Pack"] = [[siekierka.dat]]
+AxeV2["Scale"] = 0.08

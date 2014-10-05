@@ -1,0 +1,208 @@
+o.Model = "skull"
+o.Scale = 1.70
+o.Health = 290
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 15
+o.CreatePO = true
+o.throwHeart = "red"
+o.enableGibWhenHPBelow = -66
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 140,
+    InertiaTensorMultiplier = 0.1,
+}
+
+o.s_SubClass = {
+    rotateHead = 3.1415 * 0.3,			-- zakres
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.2,
+    rotateHeadLeft = Vector:New(1.0, 0, -1.0),
+    rotateHeadRight = Vector:New(1.0, 0, -1.0),
+    rotateHeadCoords = Vector:New(3, 1, 2),			-- rotoations by coord: 2 == x, 3 == y, 1 == do not use
+
+    Animations = {
+		idle        = {1.0, false, nil, 0.3},
+		walkcatch   = {1.4, true, {
+    					{0.6,'FootFX','s_l_srodstopie'},
+						{1.2,'FootFX','s_p_srodstopie'},
+						{0.6,'PlaySound',"stepl"},
+						{1.2,'PlaySound',"stepr"},
+					}},
+		shotcatch   = {1.0, false, {
+			            {0.75,'WeaponFire', -0.1, -0.04},
+		                {0.75,'WeaponFire', 0.08, 0.0},
+						{0.40,'PlaySound',"aim" },
+						{0.2,'PlaySound',"grr_aim" },
+						{0.75,'PlaySound',"fire" },
+					}},
+		idlecatch   = {1.2, true,},
+		idle_gun    = {1.4, false, {
+						{0.95,'PlaySound',"idlegun"},
+						{0.7,'PlaySound',"idlegunsw"},
+					}},
+		idle_head   = {1.5, false, {
+						{0.4,'PlaySound',"idle_bones"},
+						{0.0,'PlaySound',"idle_head"},
+					}},
+		run         = {1.1, true, {
+    					{0.4,'FootFX','s_l_srodstopie'},
+						{0.8,'FootFX','s_p_srodstopie'},
+						{0.4,'PlaySound',"stepl"},
+						{0.8,'PlaySound',"stepr"},
+					}},
+		walk        = {1.3, true, {
+    					{0.6,'FootFX','s_l_srodstopie'},
+						{1.2,'FootFX','s_p_srodstopie'},
+						{0.6,'PlaySound',"stepl"},
+						{1.2,'PlaySound',"stepr"},
+					}},
+		catch       = {1.0, false, {
+						{0.6,'PlaySound',"catch"},
+						{0.50,'Catch'},
+					}},
+		atak1       = {1.0, false, {
+                {0.80,'WeaponFire', 0, -0.1, -0.04},
+                {0.80,'WeaponFire', 0,  0.08, 0.0},
+                {0.40,'PlaySound',"aim" },
+                {0.2,'PlaySound',"grr_aim"},
+                {0.80,'PlaySound',"fire" },
+                --{0.85,'PlaySound',{'weapon_shootgun_shell1','weapon_shootgun_shell2','weapon_shootgun_shell3'},40,40 },
+            }, 0.3},
+		atak2       = {1.2, false, {
+                {1.00,'WeaponFire', 0, -0.1, -0.04},
+                {1.00,'WeaponFire', 0,  0.08, 0.0},
+                {0.40,'PlaySound',"aim" },
+                {0.2,'PlaySound',"grr_aim"},
+                {1.00,'PlaySound',"fire"},
+                --{1.20,'PlaySound',{'weapon_shootgun_shell1','weapon_shootgun_shell2','weapon_shootgun_shell3'},40,40 },
+            }},
+		attack_him  = {1.2, false, {
+				{0.2,'PlaySound',"attack_him"},
+			}},
+		hit1 = {1.0, false, {
+				{0.2,'PlaySoundHit',"hit"},
+			}},
+		hit2 = {1.0, false, {
+				{0.2,'PlaySoundHit',"hit"},
+			}},
+	},
+
+	ragdollJoint = "root",
+	RagdollCollisions = {
+		MinStren = 4.5,
+		MinTime = 0.7,
+		Bones = {
+				{"r_p_lokiec", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_l_lokiec", "bodyfalls", true},
+				{"joint3", "weaponlost", false},
+			}
+	},
+	Hits = {"hit1", "hit2"},
+	Ambients = {"idle","idle_gun","idle_head"},
+
+
+	DeathJoints = {
+		's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+		'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+		'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+		'k_miednica','k_ogo','k_zebra','k_ramiona',
+		'k_glowa','naramiennil_left_socket','naramiennil_right_socket',
+		'joint3','k_szyja',
+	},
+	notBleedingJoints = {
+		joint3 = {},
+    },
+	BreakableJoints = {
+		'naramiennil_left_socket','naramiennil_right_socket','joint3',
+	},
+	GibExplosionStrength = 9000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",1},
+				{"r_p_bark","FX_gib_blood",-1},
+				{"k_ramiona","FX_gib_blood",1},
+				{"root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"joint3", "weaponlost", false},
+			},
+	    },
+
+}
+
+o.DeathTimer = 160
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee",}
+
+o.AiParams.viewDistance = 70
+o.AiParams.viewDistance360 = 30
+o.AiParams.viewAngle = 170
+
+o.AiParams.hearing = 1.0
+o.AiParams.perception = 1.0
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {30,60}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = 30
+o.AiParams.attackRange = 3
+o.AiParams.stopAfterWalking = 1.0			-- szansa zatrzymania po przejsciu do kolejnego punktu
+o.AiParams.stopAfterWalkingTime = {30,90}	-- (min, max) czas zatrzymania
+
+o.AiParams.walkStep = 8.0
+o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+
+o.AiParams.changePosAfterFire = 0.96			-- jak czesto ma zmieniac pozycje po ataku
+o.AiParams.delayBetweenAttacks = 45
+
+o.AiParams.moveDisplacement = 5
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 120
+
+o.AiParams.updateSpeed = 0.33
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = true
+o.AiParams.weapon = {
+		bulletsPerShot = 3,			-- uwaga: skull strzela z dwoch luf!
+		maxDist = 22,
+		minDist = 2.0,
+		spreadAngle = 5,
+		damagePerBullet = 5,
+		PO_HitForce = 900,
+		fireParticle = "skullshot",	
+		fireParticleSize = 0.8,
+		maxYaw = 50,				-- maksymalna odchylka broni lewo/prawo w stos. do kata patrzenia
+		maxPitch = 50,				-- maksymalna odchylka broni gora/dol
+	}
+o.AiParams.weaponBindPos = "joint3"
+o.AiParams.weaponBindPosShift = Vector:New(-0.9,-1.1,0.1)
+o.AiParams.doNotRotateWhenShooting = true
+o.AiParams.takeHostages = false
+o.AiParams.minCatchDistance = 2.3
+o.AiParams.AnimOnSawEnemy = "attack_him"
+o.AiParams.dontCareAboutOrientationDuringAttack = true
+o.shadow = 128
+o.AiParams.FarAttacks = {"atak1", "atak2"}
+o.AiParams.soundAmbientDelay = 4.0

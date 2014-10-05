@@ -1,0 +1,241 @@
+o.Model = "giant"
+o.CreatePO = true
+o.Health = 10000
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 4
+o.throwHeart = false
+o.Scale = 52
+o.DeathTimer = 30
+o._DontCheckFloors = true
+o.Animation = "idle1"
+o.doNotUseWP = true
+o.CollisionDetect = 0.3
+o.disableFreeze = true
+o.deathExplosionItem = "giant_pociety.dat"
+o.deathExplosionItemScale = 5
+o.ShotgunCheckAllPellets = true
+o.IsBoss = true
+
+o.s_SubClass = {
+    rotateHead = 3.1415 * 0.15,
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.14,
+    Animations = {  
+        idle1         = {0.6, false,nil,0.4},
+        idle2         = {0.6, false,{
+							{0.0,'PlaySoundHit',{'giant_idle2_1','giant_idle2_2'},160,300,'k_szczeka',},
+        				},0.4},
+        walk          = {0.5, true, {
+	        				{0.8,'Stomp','s_p_kostka'},
+							{1.8,'Stomp','s_l_kostka'},
+							{0.6,'PlaySoundHit',{'giant-krok1-effort1'},160,300,'k_szczeka',},
+							{0.8,'PlaySound',"krok1"},
+							{1.6,'PlaySoundHit',{'giant-krok2-effort1'},160,300,'k_szczeka',},
+							{1.8,'PlaySound',"krok2"},
+							 },0.5},
+
+        atak1         = {0.9, true, {
+							{1.3,'Spawn'},
+							{1.3,'PlaySound',"lapa"},
+							{0.0,'PlaySoundHit',{'giant_atack1'},160,300,'k_szczeka',},
+							{1.3,'FootFX','dlo_prawa_root'},
+							{1.3,'Stomp','dlo_prawa_root',1.5},			-- 1.5 - mnoznik
+							--{1.3,'test'},
+						},0.5},
+
+        atak2         = {0.6, false, {
+							{0.65,'BindSound', 'actor/alastor/alastor-swish',50,160, false,'dlo_lewa_root'},
+							{0.0,'PlaySoundHit',{'giant_atack2'},160,300,'k_szczeka',},
+						},0.5},
+		dmucha         = {1.5, false,{
+							},0.4},
+		dmucha_up         = {1.5, false,{
+							{1.2,'PlaySound',"blow"},
+							},0.4},
+
+		zasysa         = {0.6, true,{
+							{0.0,'PlaySoundHit',{'giant-zasysa'},160,300,'k_szczeka',},
+						},nil,true},
+						
+		zamiera         = {0.4, true,{
+							{0.35,'PlaySound',"krok1"},
+							{0.35,'Stomp','s_p_kostka'},
+							{0.8,'PlaySound',"krok2"},
+							{0.8,'Stomp','s_l_kostka'},
+							{1.6,'PlaySound',"krok1"},
+							{1.6,'Stomp','s_p_kostka'},
+							{3.1,'PlaySound',"krok2"},
+							{3.1,'Stomp','s_l_kostka'},
+
+						},0.4,true},
+		zrywa_lancuch         = {0.8, false,{		-- 0.6
+							{2.7,'Stomp','d_p_3_2'},
+							{3.6,'Stomp','d_p_3_2'},
+							{3.7,'Stomp','d_l_3_3'},
+							
+							{0.0,'PlaySoundHit',{'giant_atack2'},160,300,'k_szczeka',},	-- narazie
+					
+							{4.4,'PlaySound',{'giant_lancuch-zrywa',},160,300},
+							{4.5,'DestroyChain'},
+							{4.1,'PlaySound',{'giant_lancuch-zrywa-voice',},160,300},
+							
+							{2.6,'PlaySound',"lapa"},
+							{3.6,'PlaySound',{'giant_lapa_uderza_w_glebe',},160,300},
+
+							{2.7,'Strike',"d_p_3_2"},
+							{3.7,'Strike',"d_l_3_3"},
+							{3.7,'Strike',"d_p_3_2"},
+
+						},0.5},
+		kolce         = {0.6, false,{
+							{0.0,'PlaySoundHit',{'giant-finger-in'},160,300,'k_szczeka',},
+							{1.6,'PlaySound',{'giant-finger1',},160,300,'dlo_lewa_root'},
+							{2.2,'PlaySound',{'giant-finger2',},160,300,'dlo_lewa_root'},
+							{3.0,'PlaySound',{'giant-finger3',},160,300,'dlo_lewa_root'},
+							{3.8,'PlaySound',{'giant-finger4',},160,300,'dlo_lewa_root'},
+							{4.7,'PlaySound',{'giant-finger5',},160,300,'dlo_lewa_root'},
+							{5.0,'PlaySound',{'giant-finger-out',},160,300,'dlo_lewa_root'},
+							{1.8,'CreateSpike',},
+							{2.4,'CreateSpike',},
+							{3.2,'CreateSpike',},
+							{4.0,'CreateSpike',},
+							{4.9,'CreateSpike',},
+        				},0.4},
+		rot90L   = {1.2,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.05,'PlaySound',"krok2"},
+						{1.05,'Stomp','s_l_kostka'},
+						{2.5,'PlaySound',"krok1"},
+						{2.5,'Stomp','s_p_kostka'},
+					}, 0.4, true},
+        rot90P   = {1.2,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.5,'PlaySound',"krok1"},
+						{1.5,'Stomp','s_p_kostka'},
+						{2.9,'PlaySound',"krok2"},
+						{2.9,'Stomp','s_l_kostka'},
+					}, 0.4, true},
+        rot45P   = {1.2,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.5,'PlaySound',"krok1"},
+						{1.5,'Stomp','s_p_kostka'},
+						{2.9,'PlaySound',"krok2"},
+						{2.9,'Stomp','s_l_kostka'},
+					}, 0.4, true},
+        rot45L   = {1.2,MC.ETransX + MC.ETransZ + MC.ERot,{
+						{1.0,'PlaySound',"krok2"},
+						{1.0,'Stomp','s_l_kostka'},
+						{2.5,'PlaySound',"krok1"},
+						{2.5,'Stomp','s_p_kostka'},
+					}, 0.4, true},
+    },
+    Ambients = {"idle1","idle2"},
+
+
+    BodyScale = -1,
+    BreakableJoints = {},
+    DeathJoints = {
+	},
+
+	zasysa = {"transp_tornado",
+		"transp_tornado1",
+		"polySurfaceShape731",
+		"polySurfaceShape796",
+		"polySurfaceShape795",
+		"polySurfaceShape775",
+		"polySurfaceShape797",
+		"polySurfaceShape800",
+		"polySurfaceShape803",
+		"polySurfaceShape778",
+		"polySurfaceShape801",
+		"polySurfaceShape802",
+		"polySurfaceShape798",
+		"polySurfaceShape776",
+		"polySurfaceShape799",
+		"polySurfaceShape774",
+	},
+   	rotate45L = "rot45L",
+	rotate45R = "rot45P",
+	rotate90L = "rot90L",
+	rotate90R = "rot90P",
+}
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 8000,
+    --Friction = 0.5,
+}
+
+o.AiParams = {}
+o.AiParams.aiGoals = {}
+o.alwaysSee = true
+o.AiParams.seeThruWalls = true
+o.AiParams.viewDistance360 = 150
+
+o.AiParams.walkStep = 20.0
+
+o.AiParams.spawn = "Spawn.CSpawnPoint"
+o.AiParams.spawnDelay = {0,0.5}
+o.AiParams.spawnCount = {3,6}
+
+o.AiParams.actions = {
+    {"walkToPlayerAndStrike", 0.09,},		-- szansa na sec, (gdy jest w idle-u)
+    {"spawn", 0.1,},
+    {"idleAnim", 0.04,},		-- rozgladanie sie
+}
+
+o.AiParams.actionsAB = {
+    {"sucking", 0.2,}, -- 0,38
+    {"spikes", 0.18,}, -- 0.08
+    {"idleAnim", 0.12,}, -- 0.02
+}
+
+
+o.AiParams.updateSpeed = 0.3
+
+o.StompTimeOut = 14				-- eartq params
+o.StompRange = 150
+o.CameraRot = 0.3
+o.CameraMov = 0.3
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.stopAfterWalking = 0.4
+o.AiParams.stopAfterWalkingTime = {50,110}
+
+o.AiParams.delayBeetweenAttack = 3.0
+o.shadow = 0
+o.ABHp = 0.5
+
+o.AiParams.MaxActorsOnLevel = 10
+
+o.disbleRotWhenStartWalk = true
+
+o.AiParams.explosionWhenWalkStreng = 1300.0
+o.AiParams.explosionWhenWalkRange = 9.0
+o.AiParams.explosionWhenWalkDamage = 30
+o.AiParams.damageFist = 50			-- bezp. cios piescia
+
+o.AiParams.strikeForceXZ = 30		-- cios reka
+o.AiParams.strikeForceY = 18		-- cios reka
+o.throwObjs = {"GStone.CItem",}
+o.throwFreq = 0.5
+o.AiParams.handRange = 8.5			-- zasieg atak1
+o.AiParams.damageHandHit = 30			-- "atak2"
+
+o._spikePrecictPlayerVelocity = 0.45
+o.deathExplosionStren = 10000
+o.deathExplosionRadius = 70
+
+o.tornadoDamage = 25
+o.tornadoDamageFreq = 0.06
+
+o.tornadosuckStrength = {3.0, 4.1}
+o.tornadosuckDistance = 30			-- range
+o.spitSpeed = 70
+o.spitParticle = "but"
+
+o.disbleRotWhenStartWalk = true
+
+o.AiParams.touchFeetDamage = 20
+o.AiParams.touchFeetRange = 8

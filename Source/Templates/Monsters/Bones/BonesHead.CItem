@@ -1,0 +1,56 @@
+BonesHead.Mesh = "bones03_polySurfaceShape1869"
+BonesHead.Pack = "boneshead.dat"
+BonesHead.Scale = 0.08
+BonesHead.Mass = 40
+BonesHead.Restitution = 0.1
+BonesHead.Damage = 30
+BonesHead.RotateSpeed = 30
+BonesHead.ThrowSpeed = 20
+BonesHead.LifeTime = 90			-- after 1st collision
+BonesHead.TimeToLive = 150		-- after create
+BonesHead.AngularDamping = 0.2		-- sprawdzic ### 
+--============================================================================
+function BonesHead:OnCollision(x,y,z,nx,ny,nz,e)
+	if e then
+		local obj = EntityToObject[e]
+		if obj and not self.deathTimer then
+			if obj.OnDamage and obj == Player then
+				PlaySound2D("actor/leper_monk/lepperm-stick-hit")
+				obj:OnDamage(self.Damage, self.ObjOwner)
+			end
+			GObjects:ToKill(self)
+		else
+			if not self.deathTimer then
+				self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+				PlaySound3D("actor/leper_monk/lepperm-stick-hits-ground",x,y,z,18,36,nil)
+			end
+		end
+	else
+		if not self.deathTimer then
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+			PlaySound3D("actor/bones/bones_onebone2",x,y,z,18,36,nil)
+		end
+	end
+	if self._snd then
+		ENTITY.Release(self._snd)
+		self._snd = nil
+	end
+end
+--============================================================================
+function BonesHead:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+	self.timer = 6
+	self._snd = self:BindSound("actor/bones/bones_head-onfly-loop",3,10,true)
+		
+end
+--============================================================================
+function BonesHead:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			ENTITY.EnableCollisions(self._Entity, true)
+		end
+	end
+end

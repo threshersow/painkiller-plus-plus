@@ -1,0 +1,10 @@
+Wojna_global.Volume = 60
+Wojna_global.Interval = 0
+Wojna_global.RandomShift = 0
+Wojna_global.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Wojna_global.Sound ="C5L4_Hell/Wojna_01;C5L4_Hell/Wojna_02"
+

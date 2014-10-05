@@ -1,0 +1,10 @@
+Chrzcielnica.Volume = 60
+Chrzcielnica.Interval = 20
+Chrzcielnica.RandomShift = 7
+Chrzcielnica.Falloff =
+{
+  Start = 3,
+  End = 15
+}
+Chrzcielnica.Sound ="C5L3_Monastery/Chrzcielnica_01;C5L3_Monastery/Chrzcielnica_02;C5L3_Monastery/Chrzcielnica_03"
+

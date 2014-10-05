@@ -1,0 +1,6 @@
+o.Model = "checkpoint"
+o.Scale = 0.8
+o.Frozen = false
+o.takeDistance = 2.4
+o.delay = 1.2
+o.SoundTake = { "misc/checkpoint" }

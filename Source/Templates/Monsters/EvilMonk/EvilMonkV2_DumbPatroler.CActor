@@ -1,0 +1,20 @@
+o.BaseObj = "EvilMonkV2.CActor"
+o.Scale = 1.22
+o.WalkSpeed = 1.4
+o.RunSpeed = 0.90
+o.RotateSpeed = 20
+o.NeverWalk = true
+
+o.AiParams.viewDistance = 15
+o.AiParams.viewDistance360 = 15
+o.AiParams.viewAngle = 360
+
+o.AiParams.hearing = 0.6
+
+o.AiParams.perception = 1.0
+
+o.AiParams.GuardStill = false
+o.AiParams.guardRange = 40
+
+o.AiParams.moveDisplacement = 2
+

@@ -1,0 +1,7 @@
+o.Scale = 1
+o.Mass = 1000
+o.Pack = "benzyna_kolek.dat"
+o.Mesh = "polySurfaceShape70631"
+o.Friction = 5
+
+o.SoundHitByBulletMiniGunOnly = true

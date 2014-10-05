@@ -1,0 +1,49 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+
+o.Scale = 0.2
+o.Restitution = 0.8 	-- sprezystosc
+o.LinearDamping = 0.0  -- tlumienie liniowe
+o.TimeToLive = 30 * 5
+
+o.fx = "AlastorKingWall"
+o.fxSize = 1.2
+
+o.Health = 99999
+o.damage = 60
+
+--[[o.Explosion = {
+    stren = 9000,
+    range = 16,
+    damage = 10,
+}--]]
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self.fx)
+end
+
+function o:OnCreateEntity()
+    local pfx = AddPFX(self.fx,self.fxSize)
+    ENTITY.RegisterChild(self._Entity,pfx)
+    ENTITY.EnableDraw(self._Entity,false)
+	self:PO_Create(BodyTypes.Simple,1.0,ECollisionGroups.Noncolliding)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+    ENTITY.PO_SetMovedByExplosions(self._Entity,false)
+    self._lastTimeDamage = -100
+end
+
+
+function o:OnUpdate()
+	if Game.freezeUpdate then return end
+	--WORLD.Explosion2(self.Pos.X,self.Pos.Y,self.Pos.Z, 1000, 10, self.ObjOwner._Entity, AttackTypes.Rocket, 100)
+	local dist = Dist2D(self.Pos.X,self.Pos.Z, PX, PZ)
+	if self._lastTimeDamage + 40 < Game.currentTime then
+		if dist < 5 and Player then
+			self._lastTimeDamage = Game.currentTime
+			Player:OnDamage(self.damage, self.ObjOwner)
+		end
+	end
+end
+
+function o:OnDamage()
+end

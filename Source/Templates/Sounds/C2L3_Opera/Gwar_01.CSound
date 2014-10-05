@@ -1,0 +1,10 @@
+Gwar_01.Volume = 60
+Gwar_01.Interval = 5
+Gwar_01.RandomShift = 3
+Gwar_01.Falloff =
+{
+  Start = 7,
+  End = 25
+}
+Gwar_01.Sound ="C2L3_Opera/Gwar_01"
+

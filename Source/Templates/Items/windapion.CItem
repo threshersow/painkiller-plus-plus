@@ -1,0 +1,7 @@
+o.BaseObj = "CItem"
+o.Model = "windapion"
+o.Scale = 3
+
+o.LoonyOffset = Vector:New(0,0,0)
+o.LoonyJoint = "joint1"
+o.LoonyDontRotate = true

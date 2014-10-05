@@ -1,0 +1,32 @@
+o.BaseObj = "Executioner.CActor"
+o.Model = "executioner_v2"
+o.s_SubClass.SoundDir = "executioner"
+o.s_SubClass.Animations.atak_strzal = {1.25,false,{
+                    {1.0, 'PlaySound',"spike"},
+                    {0.6, 'PlaySound',"spikevoice"},
+					{1.0, 'ThrowImmid',nil,true,'dlo_prawa_root1',-1},
+					{1.0, 'ThrowImmid',nil,true,'dlo_lewa_root',1},
+					{1.05,'SetAnimSpeed',0},
+				}}
+o.s_SubClass.Animations.atak_strzal_powrot = {1.25,false,{
+		            {0.0, 'PlaySound',"backspike"},
+                    {0.0, 'PlaySound',"backspikev"},
+				}}
+
+o.AiParams.attackRange = 3.5
+o.AiParams.flameDamageRange = 4.0
+o.AiParams.throwAnim = "atak_strzal"
+o.AiParams.throwAmmo = 1
+o.AiParams.throwRangeMin = 6
+o.AiParams.throwRangeMax = 28
+o.AiParams.minDelayBetweenThrow = 4.0
+o.AiParams.ThrowableItem = "Executioner_V3_Spike.CItem"
+--o.AiParams.throwItemBindTo = 'dlo_prawa_root'
+o.AiParams.hideMesh = nil
+o.AiParams.throwDistMinus = 0
+o.AiParams.throwVelocity = 40
+o.AiParams.throwDeltaY = 1.5
+o.AiParams.spikesFlyingTime = 3.2		-- w sec.
+o.AiParams.updateSpeed = 0.3
+
+o.AiParams.aiGoals = {"idle","hunt", "hear","flee","attack","sliceCorpse","spikeAttack"}

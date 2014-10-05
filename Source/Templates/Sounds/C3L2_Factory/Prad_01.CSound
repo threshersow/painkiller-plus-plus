@@ -1,0 +1,10 @@
+Prad_01.Volume = 50
+Prad_01.Interval = 4
+Prad_01.RandomShift = 3
+Prad_01.Falloff =
+{
+  Start = 2,
+  End = 30
+}
+Prad_01.Sound ="C3L2_Factory/prad_01"
+

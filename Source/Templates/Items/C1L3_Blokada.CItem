@@ -1,0 +1,11 @@
+o.Mesh = "polySurfaceShape16897"
+o.Pack = "C1L3_blokada.dat"
+o.Scale = 0.29
+o.Mass = 10000
+o.DestroyPack = "C1L3_blokada_zlom.dat"
+o.Health = 1
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 1
+o.Destroy.LifetimeAfterExplosion = 60
+o.Pinned = true
+o.Immortal = true

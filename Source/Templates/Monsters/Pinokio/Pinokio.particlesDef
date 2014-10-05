@@ -1,0 +1,17 @@
+o.s_SubClass.ParticlesDefinitions = {
+	eye1 = {
+        pfx = "pinokio",
+        scale = 0.05,
+        offset = Vector:New(0,0,0),
+        joint = "oko1",
+    },
+	eye2 = {
+        pfx = "pinokio",
+        scale = 0.05,
+        offset = Vector:New(0,0,0),
+        joint = "oko2",
+    },
+
+
+}
+

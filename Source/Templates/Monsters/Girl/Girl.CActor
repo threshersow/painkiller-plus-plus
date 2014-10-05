@@ -1,0 +1,135 @@
+o.Model = "girl"
+o.Scale = 1.0
+o.DisableFreeze = true
+
+o.CreatePO = true
+o.WalkSpeed = 1
+o.RunSpeed = 1
+
+o.RotateSpeed = 15
+o.throwHeart = true
+o.Health = 150
+
+o.DeathTimer = 120
+o.enableGibWhenHPBelow = -45
+
+if Tweak.GlobalData.GermanVersion then
+    o.Model = "girl_german"
+    o.enableGibWhenHPBelow = nil
+end
+
+o.s_SubClass = {
+    rotateHead = 3.1415 * 0.2,			-- zakres
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.2,
+    SoundDir = "girl",
+    Animations = {  
+        idle        = {1.0, false},
+        walk      = {0.7, true,{
+                        {0.0,'FootFX','s_p_srodstopie',0.05},
+                        {0.4,'FootFX','s_l_srodstopie',0.05},
+					}},
+        run      = {1.5, true, {
+                        {0.0,'FootFX','s_p_srodstopie',0.05},
+                        {0.4,'FootFX','s_l_srodstopie',0.05},
+					}},
+		atak    = {1.5, false, {
+						{3.0,"GirlBurn"},
+					}},
+        hit1    = {1.5, false, {
+                    }},
+		hit2   = {1.5, false, {		-- 1.6
+                    }},
+    },
+	DeathJoints = {
+        's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+        'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+        'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+        'k_ogo','k_zebra','k_ramiona',
+        'k_glowa',
+    },
+
+    Hits = {"hit1","hit2"},
+
+	RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 0.6,
+		Bones = {
+					{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+					{"r_p_lokiec", "bodyfalls", true},
+					{"r_l_lokiec", "bodyfalls", true},
+				}
+	},
+
+	--ragdollJoint = "root",
+	
+	GibExplosionStrength = 6000,
+	GibExplosionRange = 6.0,
+	GibExplosionDeltaY = -2.0,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"n_p_biodro","FX_gib_blood",1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"k_szyja","FX_gib_blood",-1},
+				{"root","FX_gib_blood",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"root", "gibSplash", true},
+			},
+	    },
+    NearAttacks = {"idle",},
+}
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 240,
+    InertiaTensorMultiplier = 0.15,
+}
+o.AiParams = {}
+
+o.AiParams.aiGoals = {"idle","GirlBurn", "hunt", "hear"}
+
+o.AiParams.viewDistance = 20
+o.AiParams.viewAngle = 179
+o.AiParams.viewDistance360 = 10
+
+o.AiParams.hearing = 0.5
+o.AiParams.perception = 1.0
+o.AiParams.walkStep = 7.0
+o.AiParams.updateSpeed = 0.25
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 1.5
+o.AiParams.attackRangeAngle = 90
+o.AiParams.delayBetweenAttacks = 30*6
+
+o.AiParams.weaponBindPos = o.AiParams.holdJoint
+
+o.AiParams.changePosAfterFire = 0.2		-- szansa, ze zmieni pozycje po strzale
+
+o.AiParams.moveDisplacement = 3.0
+o.AiParams.chanceOfEscapeAfterFire = 0.01
+o.AiParams.escapeTime = 70
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = 12
+o.AiParams.stopAfterWalking = 0.3
+o.AiParams.stopAfterWalkingTime = {40,90}
+
+
+o.shadow = 128

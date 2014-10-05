@@ -1,0 +1,10 @@
+tlum.Volume = 100
+tlum.Interval = 15
+tlum.RandomShift = 5
+tlum.Falloff =
+{
+  Start = 20,
+  End = 150
+}
+tlum.Sound ="C6L6_Colloseum/tlum_01;C6L6_Colloseum/tlum_02;C6L6_Colloseum/tlum_03;C6L6_Colloseum/tlum_04;C6L6_Colloseum/tlum_05;C6L6_Colloseum/tlum_06;C6L6_Colloseum/tlum_07"
+

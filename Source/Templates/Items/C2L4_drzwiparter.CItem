@@ -1,0 +1,6 @@
+o.BaseObj = "CItem"
+o.Mesh = "drzwi_ciezkiedrzwi1Shape"
+o.Pack = "C2L4drzwiparter.dat" 
+o.Scale = 0.3
+o.Mass = 9000
+

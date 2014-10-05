@@ -1,0 +1,21 @@
+o.Model = "ASG_item"
+o.Scale = 0.3
+o.DisabledInVoosh = true
+o.SlotIndex = 2
+o.RespawnTime = Cfg.WeaponRespawnTime
+o.Ammo = 
+{
+    Shotgun = 10,
+    IceBullets = 0,
+}
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/shotgun",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"take-shootgun"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

@@ -1,0 +1,78 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'bb_krok1',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'bb_krok2',},
+		dist1 = 6,
+		dist2 = 20,
+	},
+	explode = {
+		samples = {"bb-explode",},
+		dist1 = 20,
+		dist2 = 60,
+	},
+	
+
+    walkVoice = {
+        samples = {"bb-walkvoice1","bb-walkvoice2","bb-walkvoice3"},
+		playChance = 0.2,
+   		dist1 = 30,
+		dist2 = 70,
+    },
+    onAttackOnce = {
+        samples = {"bb-halt1","bb-halt2"},
+   		dist1 = 30,
+		dist2 = 70,
+    },
+	hurt = {
+	       samples = {"bb-hit1","bb-hit2"},
+   		dist1 = 30,
+		dist2 = 70,
+	},
+}
+
+if Tweak.GlobalData.GermanVersion then
+	o.s_SubClass.SoundsDefinitions.explode = {
+			samples = {"bb-halt1"},
+			dist1 = 20,
+			dist2 = 60,
+		}
+
+	o.s_SubClass.SoundsDefinitions.walkVoice = {
+			samples = {"bb-walkvoice1"},
+			playChance = 0.2,
+   			dist1 = 30,
+			dist2 = 70,
+		}
+	    
+	o.s_SubClass.SoundsDefinitions.onAttackOnce = {
+			samples = {"bb-halt1"},
+   			dist1 = 30,
+			dist2 = 70,
+		}
+	o.s_SubClass.SoundsDefinitions.hurt = {
+			samples = {"bb-hit2"},
+   			dist1 = 30,
+			dist2 = 70,
+		}
+end
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+    walk   = {
+		{0.0,'PlaySound',"step1"},
+		{0.7,'PlaySound',"step2"},
+		{0.0,'PlaySoundHitIfNotPlayingLast',"walkVoice"},
+
+	},
+    run   = {
+		{0.0,'PlaySoundHitIfNotPlayingLast',"walkVoice"},
+		{0.0,'PlaySound',"step1"},
+		{0.7,'PlaySound',"step2"},
+	},
+    explode   = {
+		{0.0,'PlaySound',"explode"},
+	},
+}

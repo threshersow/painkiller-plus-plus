@@ -1,0 +1,118 @@
+o.Model = "teleport"
+o.Scale = 1.5
+o.Frozen = false
+o.takeDistance = 3
+o.SoundTake = {"item-quad-take"}
+o.bindLight = "Quad_Light.CLight"
+--============================================================================
+function EndOfLevel:OnCreateEntity()
+	self:BindFX("teleport1",0.1,"e1")
+    self:BindFX("teleport1",0.1,"e2")
+    self:BindFX("teleport1",0.1,"e3")
+    self:BindFX("teleport2",0.1,"e4")
+    self:BindFX("teleport2",0.1,"e5")
+end
+--============================================================================
+function EndOfLevel:OnApply(old)
+    ENTITY.EnableDraw(self._Entity,not self.Frozen,true)
+	if not self.Frozen then
+		if self.bindLight and not self._light then
+			self._light = CloneTemplate(self.bindLight)
+			self._light.Pos:Set(0,0,0)
+			self._light:Apply()    
+			ENTITY.RegisterChild(self._Entity,self._light._Entity,true)
+		end
+	end
+end
+--============================================================================
+function EndOfLevel:OnLaunch(monsterstokill)
+    if monsterstokill then
+        self.MonstersToKill = Game.BodyCountTotal + monsterstokill        
+        return
+    end
+
+    if not self.Frozen then return end -- once
+    
+    self.Frozen = false
+    self:OnApply()    
+    SOUND.Play2D("mnich_02",100,true) -- "items/item-quad-take"
+    --[[
+	Game:Print(" >>>>>>>>>>>> killed ")
+	for i,v in Game.all do
+		Game:Print(i.." "..v)
+	end
+	--]]
+
+end
+--============================================================================
+function EndOfLevel:OnUpdate()
+    if self.MonstersToKill then
+        if Game.BodyCountTotal >= self.MonstersToKill then 
+            if not self._LaunchTimer then
+                self._LaunchTimer = 60
+            else
+                self._LaunchTimer = self._LaunchTimer -1
+                if self._LaunchTimer == 0 then
+                    self.MonstersToKill = nil
+                    self:OnLaunch()         
+                end
+            end
+        end        
+    end
+end
+--============================================================================
+function EndOfLevel:OnTake(player)
+    if self.Frozen then return end
+    if not player then return end
+
+    Game:EnableBulletTime(false)
+    Game:EnableDemon(false)
+
+    player._died = true
+    if player:GetCurWeapon() then
+		ENTITY.EnableDraw(player:GetCurWeapon()._Entity,false)
+	end
+    ENTITY.PO_Enable(player._Entity,false)
+    Game.CameraFromPlayer = false
+    
+    GObjects:Add(TempObjName(),CloneTemplate("EndLevel.CProcess"))
+
+    local name = self.SoundTake[math.random(1, table.getn(self.SoundTake))]
+	PlaySound2D("items/"..name)
+
+    --ENTITY.Release(self._Entity,true)
+end
+--============================================================================
+function EndOfLevel:OnShow()
+	self.Frozen = false
+	self:OnApply()
+end
+--============================================================================
+function EndOfLevel:OnHide()
+	self.Frozen = true
+	self:OnApply()
+end
+--============================================================================
+function EndOfLevel:EditTick(delta)
+    -- edit
+    if Editor.SelObj == self then        
+        if INP.Key(Keys.NumPlus) == 2 then        
+            self.Impulse.Strength = self.Impulse.Strength + 400 * delta
+        end
+        if INP.Key(Keys.NumMinus) == 2 then        
+            self.Impulse.Strength = self.Impulse.Strength - 400 * delta
+        end
+        self:Apply(self)
+    else
+        -- picking point 
+        if MOUSE.LB() == 1 then        
+            local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+            if Dist2D(MX,MY,sx,sy) <  15  then
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+            end
+        end    
+    end
+
+end
+--============================================================================

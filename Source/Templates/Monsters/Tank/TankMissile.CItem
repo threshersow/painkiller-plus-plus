@@ -1,0 +1,120 @@
+o["Mesh"] = [[polySurfaceShape234]]
+o["Pack"] = [[granat.dat]]
+o["Scale"] = 0.4
+o["Timeout"] = 90
+o.Restitution = 1.4 -- sprezystosc
+o.Friction = 0.8 -- tarcie
+o.Mass = 40
+o.Softness = 1
+o.ExplosionCamMove = 0.3
+o.ExplosionCamRotate = 0.3
+o.ExplosionCamDistance = 20
+o.TestDeathZone = true
+o.LinearDamping = 0.0
+o.AngularDamping = 0.0
+o.Damage = 110		-- direct hit
+o.ExplosionStrength = 5000
+o.ExplosionRange    = 6
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX("Grenade")
+    Cache:PrecacheParticleFX("barrelarabxplo")
+    Cache:PrecacheSounds("actor/giant/meteor-fall3")
+    Cache:PrecacheSounds("actor/tank/tank-bullet-explode1")
+    Cache:PrecacheSounds("actor/tank/tank-bullet-explode2")
+    Cache:PrecacheItem("Kamyktank.CItem")
+end
+
+-------------------------------------------------------------------------------
+function TankMissile:OnCreateEntity()
+    self:PO_Create(BodyTypes.FromMeshSweep,nil,ECollisionGroups.Noncolliding)
+    
+    --local e = ENTITY.Create(ETypes.Trail,"trail_grenade","trailName")
+    --ENTITY.AttachTrailToBones(self._Entity,e)
+    --WORLD.AddEntity(e)
+    
+    --local smokefx = AddPFX("RocketSmoke",2,self.Pos)
+    --ENTITY.RegisterChild(self._Entity,smokefx)
+    
+    --self:BindSound("weapons/machinegun/rl-flyingnoise-loop",8,40,true)
+    --ENTITY.EnableDraw(self._Entity,false)
+    self.timer = 3
+end
+-------------------------------------------------------------------------------
+function TankMissile:Update()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			self:BindSound("actor/giant/meteor-fall3",8,40,false)
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity,true,0.3,3.5)
+		end
+	end
+    self.Timeout = self.Timeout - 1
+    if self.Timeout <= 0 then self:Explode() end
+end
+-------------------------------------------------------------------------------
+function TankMissile:Explode(nx,ny,nz)    
+    local x,y,z = ENTITY.GetPosition(self._Entity)   
+    ENTITY.EnableCollisions(self._Entity,false) -- disable next callbacks        
+    ENTITY.PO_Enable(self._Entity,false)
+    PlayLogicSound("EXPLOSION",x,y,z,15,30)
+    WORLD.Explosion2(x,y,z,self.ExplosionStrength,self.ExplosionRange,nil,AttackTypes.Grenade,self.Damage)    
+    self:Client_Explosion(self._Entity, nx,ny,nz)    
+    ENTITY.EnableDraw(self._Entity,false)
+    GObjects:ToKill(self)
+end
+-------------------------------------------------------------------------------
+function TankMissile:OnCollision(x,y,z,nx,ny,nz,e)
+    local obj = EntityToObject[e]
+    --if obj and obj._Class == "CActor" then
+    if obj and self.ObjOwner and obj._Class ~= self.ObjOwner._Class then
+        if obj and not obj._ToKill and not obj._died then 
+            Game:Print("*** INSTANT_DAMAGE: "..obj._Name.." ["..self.Damage.."]")
+            obj:OnDamage(self.Damage,Player,AttackTypes.Grenade)
+            obj._GotInstantExplosion = Game.Counter
+        end
+        self:Explode(nx,ny,nz)    
+    else
+        self:Explode(nx,ny,nz)
+    end
+end
+
+-------------------------------------------------------------------------------
+function TankMissile:Client_Explosion(entity,nx,ny,nz)
+    --Game:Print("TankMissile explosion")
+    local x,y,z = ENTITY.GetPosition(entity)
+    ENTITY.PO_Enable(entity,false)
+    
+    -- special FX
+    SOUND.Play3D("actor/tank/tank-bullet-explode"..math.random(1,2),x,y,z,20,100)
+    AddPFX("Grenade",1.0,Vector:New(x,y,z))
+    AddPFX("barrelarabxplo",1.0,Vector:New(x,y,z))
+    
+	--local r = Quaternion:New_FromNormal(nx,ny,nz)
+    --AddObject("FX_rexplode.CActor",1,Vector:New(x,y,z),r,true) 
+    
+    -- physical parts
+    local n = math.random(4,6) -- how many (min,max)
+    local scales = {0.6, 0.8}
+    for i = 1, n do
+        local scale = scales[math.random(1,2)] -- size (min,max)
+        local ke = AddItem("Kamyktank.CItem",scale,Vector:New(x,y+0.5+i/10,z), false, Quaternion:New_FromEuler(FRand(0,3.14), FRand(0,3.14), FRand(0,3.14)))
+        local vx = FRand(-21,21) -- velocity x
+        local vy = FRand(34,44)  -- velocity y
+        local vz = FRand(-21,21) -- velocity z
+        ENTITY.SetVelocity(ke,vx,vy,vz)
+        ENTITY.SetTimeToDie(ke,FRand(1,2)) -- lifetime (min,max)
+    end
+    
+    -- light
+    AddAction({{"Light:a[1],a[2],a[3],200,200,100, 8, 10 , 1, 0.02,0.1,0.02"}},nil,nil,x,y+1.5,z)
+    if Game._EarthQuakeProc then
+        Game._EarthQuakeProc:Add(x,y,z, 12, 18, 0.24, 0.24, false)
+    end
+end
+
+
+
+-- pozniej po pierwszej kolizji ustawiac wiekszy lineardamping

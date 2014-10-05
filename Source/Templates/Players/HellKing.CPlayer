@@ -1,0 +1,71 @@
+o.Model = "mp-model-player6"
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "multiplayer/player",
+    dist1 = 10,
+    dist2 = 50,
+    Death = 
+    {
+        dist1 = 15,
+        dist2 = 75,
+        samples = {"manplayer_death1", "manplayer_death2", "manplayer_death3", "manplayer_death4",
+                   "manplayer_death5", "manplayer_death6", "manplayer_death7"},
+    },            
+    Death_Gib = 
+    {
+        dist1 = 15,
+        dist2 = 75,
+        samples = {"manplayer_telefrag2"},
+    },
+    Death_Telefrag = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_telefrag1","manplayer_telefrag2","manplayer_telefrag3"},
+    },
+    Hurt_Small =
+    {
+        samples = {"manplayer_hurt_small1","manplayer_hurt_small2","manplayer_hurt_small3",
+                   "manplayer_hurt_small4","manplayer_hurt_small5"}
+    },
+    Hurt_Medium =             
+    {   
+        samples = {"manplayer_hurt_medium1","manplayer_hurt_medium2",
+                   "manplayer_hurt_medium3","manplayer_hurt_medium4"}
+    },
+	Hurt_Pent = {
+				samples = {"$/actor/leper_monk/lepper-odrzut"},
+			},
+    Hurt_Big = 
+    {
+        samples = {"manplayer_hurt_big1","manplayer_hurt_big2","manplayer_hurt_big3"}
+    },                
+    Hurt_OnHitGround = 
+    {
+        samples = {"manplayer_jump_end-hurt1","manplayer_jump_end-hurt1"}
+    },
+    Body_Falls = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_bodyfalls"}
+    },
+    Jump = 
+    {   
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_jump_1","manplayer_jump_2"}
+    },
+    Jump_Double = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer_double_1","manplayer_double_2"}
+    },
+    Jump_End  = 
+    {
+        dist1 = 10,
+        dist2 = 30,
+        samples = {"manplayer-jump_end1","manplayer-jump_end2"}
+    },
+}

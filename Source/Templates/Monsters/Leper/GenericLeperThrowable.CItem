@@ -1,0 +1,87 @@
+o.Mesh = "weapon2"
+o.Pack = "LeperChopper.dat"
+o.Scale = 0.12
+o.Mass = 40
+o.Restitution = 0.1
+o.Damage = 30
+o.RotateSpeed = 30
+o.ThrowSpeed = 20
+o.LifeTime = 100		-- after 1st collision
+o.TimeToLive = 150      -- after create
+o.AngularDamping = 0.2		-- sprawdzic ### 
+o.hitGroundParticle = {"torch_hitground", 0.2}
+o.CollisionSound = {"actor/devilmonk/devil-weapon-lost2"}
+o.LoopSound = "actor/leper/throw-loop"
+
+--============================================================================
+function GenericLeperThrowable:OnPrecache()
+    Cache:PrecacheParticleFX(self.hitGroundParticle[1])
+end
+--============================================================================
+function GenericLeperThrowable:OnCollision(x,y,z,nx,ny,nz,e)
+	if self._sndLoop then
+		ENTITY.Release(self._sndLoop)
+		self._sndLoop = nil
+	end
+	local sndCol = self.CollisionSound[math.random(1,table.getn(self.CollisionSound))]
+	local isPlayer = false
+	if e then
+		local obj = EntityToObject[e]
+		if obj and not self.deathTimer then
+			if obj.OnDamage and obj == Player then
+				PlaySound2D("actor/leper_monk/lepperm-stick-hit")
+				obj:OnDamage(self.Damage, self.ObjOwner)
+				isPlayer = true
+			end
+			GObjects:ToKill(self)
+		end
+	end
+	if not isPlayer then
+		if not self.deathTimer then
+			self.deathTimer = math.random(self.LifeTime*0.8, self.LifeTime*1.2)
+		end
+        PlaySound3D(sndCol,x,y,z,18,36,nil)
+	end
+	
+	if self._bindedLight then
+		GObjects:ToKill(self._bindedLight)
+		self._bindedLight = nil
+	end
+	if self._bindedBill then
+		GObjects:ToKill(self._bindedBill)
+		self._bindedBill = nil
+	end
+	if self._fx then
+		x,y,z = ENTITY.GetPosition(self._fx)
+		local q = Quaternion:New_FromNormal(nx,ny,nz)
+		AddPFX(self.hitGroundParticle[1], self.hitGroundParticle[2], Vector:New(x,y,z), q)
+		PARTICLE.Die(self._fx)
+		self._fx = nil
+	end
+end
+--============================================================================
+function GenericLeperThrowable:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+	self.timer = 12
+	local fx = self.bindfx
+	if fx then
+		self._fx = self:BindFX(fx.name,fx.scale, nil, fx.offset.X, fx.offset.Y, fx.offset.Z)
+	end
+	if self.ThrowSound then
+		self:BindSound(self.ThrowSound,10,40,false)
+	end
+end
+--============================================================================
+function GenericLeperThrowable:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			ENTITY.EnableCollisions(self._Entity, true, 0.6, 2.5)
+			if self.LoopSound then
+				self._sndLoop = self:BindSound(self.LoopSound,3,18,true)
+			end
+		end
+	end
+end

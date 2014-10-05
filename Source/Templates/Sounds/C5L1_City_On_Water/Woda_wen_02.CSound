@@ -1,0 +1,10 @@
+Woda_wen_02.Volume = 60
+Woda_wen_02.Interval = 0
+Woda_wen_02.RandomShift = 0
+Woda_wen_02.Falloff =
+{
+  Start = 12,
+  End = 30
+}
+Woda_wen_02.Sound ="C5L1_City_On_Water/Woda_02"
+

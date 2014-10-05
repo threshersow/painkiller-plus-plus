@@ -1,0 +1,69 @@
+--============================================================================
+-- Player Hit
+--============================================================================
+TPlayerHit._TimeOut = 0
+TPlayerHit._Time = 0
+TPlayerHit._Odd = 1
+TPlayerHit._Frame1 = 3
+TPlayerHit._Frame2 = 3
+TPlayerHit._Frame3 = 3
+o.BaseName = "TPlayerHit.CProcess"
+--============================================================================
+function TPlayerHit:Add(timeout, cameraRotAmountX, cameraRotAmountY)
+    self._camRotAmountX = cameraRotAmountX
+    self._camRotAmountY = cameraRotAmountY
+    self._TimeOut = timeout
+    self._Time = 0
+    self._Odd = -1
+    self._Frame1 = 3
+    self._Frame2 = 3
+    self._Frame3 = 3
+end
+--============================================================================
+function TPlayerHit:Tick(delta)
+    if self._Time >= self._TimeOut then return end
+    
+    local t = self._Time/self._TimeOut
+    local alpha = 1-t
+    local frameTarget
+    
+    if self._Odd == 0 then
+        self._Odd = 1
+        self._Frame2 = 2
+        frameTarget = 2
+    elseif self._Odd == 1 then
+        self._Odd = -1
+        self._Frame1 = 1
+        frameTarget = 1
+    else
+        self._Odd = 0
+        self._Frame3 = 3
+        frameTarget = 3
+    end
+
+    WORLD.SetRenderTarget(frameTarget, 3, self._Frame1,alpha/2, self._Frame2,alpha/2, self._Frame3,1-alpha)
+    
+    local d = (1-t)*self._Odd*math.cos(t*math.pi*0.5)
+    
+    local r1=d*self._camRotAmountX
+    local r2=d*self._camRotAmountY
+    local r3=0
+   
+	CAM.SetRotationDisplacement(r1,r2,r3)
+	self._renderTarget = true    
+    self._Time = self._Time + delta
+    
+    if self._Time >= self._TimeOut then 
+		self._renderTarget = false
+        WORLD.SetRenderTarget(0)
+        CAM.SetRotationDisplacement(0,0,0)
+    end    
+end
+
+function TPlayerHit:Delete()
+	if self._renderTarget then
+		WORLD.SetRenderTarget(0)
+		CAM.SetRotationDisplacement(0,0,0)
+		self._renderTarget = false
+	end
+end

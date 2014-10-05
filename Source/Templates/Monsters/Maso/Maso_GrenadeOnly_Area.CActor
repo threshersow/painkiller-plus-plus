@@ -1,0 +1,16 @@
+o.BaseObj = "Maso_GrenadeOnly.CActor"
+
+o.AiParams.aiGoals = {"idle","FarAttack", "hear"}
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,10}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.stopAfterWalking = 0.2
+o.AiParams.stopAfterWalkingTime = {30,80}
+
+
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = true
+o.AiParams.WalkAreaWhenAttack = true
+o.AiParams.FinishMovementBeforeAttack = true

@@ -1,0 +1,16 @@
+o.Pack = "pret.dat"
+o.Mesh = "pretShape"
+o.Scale = 0.5
+o.Mass = 20000
+
+o.Damage = 100
+
+o.timeUp = 1.0
+o.velocityUp = 10
+o.velocityDown = 0.01
+o.timeDown = 0.5
+o.moveDistance = 4.0
+
+--o.effectDeltaY = -2.5		-- kurz
+
+

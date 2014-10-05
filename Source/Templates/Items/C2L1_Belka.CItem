@@ -1,0 +1,6 @@
+o.BaseObj = "CItem"
+o.Mesh = "polySurfaceShape65506"
+o.Pack = "C2L1_Belka.dat" 
+o.Scale = 0.3
+o.Mass = 9000
+

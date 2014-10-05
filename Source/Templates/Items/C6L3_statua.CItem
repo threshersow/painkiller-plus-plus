@@ -1,0 +1,29 @@
+o.Scale = 0.3
+o.BaseObj = "CItem"
+--o.DontTranslateToZero = true
+o.Mesh = "statdest_statuaShape"
+o.Pack = "statuaCala.dat"
+o.DestroyPack = "statuaKawalki.dat"
+--o.Pos = Vector:New(0,0,0)
+--o.Immortal = true
+--o.Pinned = true
+
+o.Destroy.ExplosionStrength = 20
+o.Destroy.ExplosionDamage = 200
+o.Destroy.ExplosionRadius = 2
+o.Destroy.AverageDelay = 0
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 0
+o.Destroy.EffectScale = 2
+o.Destroy.LifetimeAfterExplosion = 6.0
+o.Destroy.PartsNoncollidableWithSelf = false
+o.Destroy.Effect = "explode_dust"
+o.Health = 1
+
+o.s_SubClass.SoundsDefinitions = {
+	DestroySound = {
+		samples = {"impacts/devastation-huge"},
+		dist1 = 40,
+		dist2 = 120,
+	},
+}

@@ -1,0 +1,10 @@
+Lampka_mala.Volume = 60
+Lampka_mala.Interval = 0
+Lampka_mala.RandomShift = 0
+Lampka_mala.Falloff =
+{
+  Start = 2.5,
+  End = 17
+}
+Lampka_mala.Sound ="C4L2_Babel/Lampka_mala"
+

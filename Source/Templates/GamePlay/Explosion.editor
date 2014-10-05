@@ -1,0 +1,28 @@
+--============================================================================
+function Explosion:EditRender(delta)
+    R3D.DrawSphere(self.Explosion.Range,Color:New(155,200,234):Compose(),self.Pos.X,self.Pos.Y,self.Pos.Z)
+    R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,Color:New(255,200,234):Compose())
+end
+--============================================================================
+function Explosion:EditTick(delta)
+    if Editor.SelObj == self then        
+        if INP.Key(Keys.NumPlus) == 2 then        
+            self.Explosion.Range = self.Explosion.Range + 2 * delta
+        end
+        if INP.Key(Keys.NumMinus) == 2 then        
+            self.Explosion.Range = self.Explosion.Range - 2 * delta
+            if self.Explosion.Range < 0.01 then self.Explosion.Range = 0.01 end 
+        end
+    else
+        -- picking point 
+        if MOUSE.LB() == 1 then        
+            local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+            if Dist2D(MX,MY,sx,sy) <  15  then
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+            end
+        end    
+    end
+
+end
+--============================================================================

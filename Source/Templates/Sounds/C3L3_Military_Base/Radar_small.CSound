@@ -1,0 +1,10 @@
+Radar_small.Volume = 60
+Radar_small.Interval = 0
+Radar_small.RandomShift = 0
+Radar_small.Falloff =
+{
+  Start = 3,
+  End = 25
+}
+Radar_small.Sound ="C3L3_Military_Base/Radar_small"
+

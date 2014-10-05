@@ -1,0 +1,10 @@
+Machinka_03.Volume = 100
+Machinka_03.Interval = 10
+Machinka_03.RandomShift = 2
+Machinka_03.Falloff =
+{
+  Start = 4,
+  End = 30
+}
+Machinka_03.Sound ="C3L2_Factory/machinka_03"
+

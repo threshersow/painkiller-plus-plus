@@ -1,0 +1,66 @@
+o.Model = "ASG"
+o.Scale = 0.85 -- skala broni
+o.Pos = Vector:New(0.34, -0.8 ,-0.8) -- pozycja wzgledem kamery
+o.Ang = Vector:New(0.0, -1.47, -0.1)  -- kat wzgledem kamery
+o.s_SubClass = {
+    -- trzesienie kamera przy wystrzale:
+     ShotCamMove = 0.25,
+     ShotCamRotate = 0.25,
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+     FireTimeout    = 20,
+     AltFireTimeout = 1.5*30,
+    -- zasieg, ilosc i obrazenia srutu:
+     FireRange = 55,
+     HowManyPellets = 15,
+     FireRadius = 5,
+     PelletDamage = 8,
+    -- freezer
+     FrozenTime = 5,
+     FrozenFadeInTime = 1.5,
+     FrozenFadeOutTime = 1,
+     IceBulletSpeed = 50,
+    -- odrzucanie od pociskow:
+     -- monsters, players
+     EnemyThrowBack = 200,
+     EnemyThrowUp   = 100,
+     -- other objects
+     PhysicsImpulse = 200,
+    -- szybkosc animacji i czas blendingu:
+     Animations = 
+     {   
+        idle        = {1.0, 0.2},
+        walk        = {1.0, 0.2},
+        shot        = {1  , 0.1},
+        iceshot     = {0.7, 0.1},
+     }
+}
+
+o.s_MPSubClass = {
+    -- trzesienie kamera przy wystrzale:
+     ShotCamMove = 0.25,
+     ShotCamRotate = 0.25,
+    -- odstep czasu miedzy kolejnymi strzalami (1/30 sec):
+     FireTimeout    = 20,
+     AltFireTimeout = 1.5*30,
+    -- zasieg, ilosc i obrazenia srutu:
+     FireRange = 50,
+     HowManyPellets = 24,
+     FireRadius = 4.0,
+     PelletDamage = 4,
+    -- freezer
+     IceBulletSpeed = 50,
+    -- odrzucanie od pociskow:
+     -- monsters, players
+     EnemyThrowBack = 170,
+     EnemyThrowUp   = 0,
+     -- other objects
+     PhysicsImpulse = 200,
+    -- szybkosc animacji i czas blendingu:
+     Animations = 
+     {   
+        idle        = {1.0, 0.2},
+        walk        = {1.0, 0.2},
+        shot        = {1  , 0.1},
+        iceshot     = {0.7, 0.1},
+     }
+}

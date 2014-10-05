@@ -1,0 +1,30 @@
+o.Mesh = "pCylinderShape27"
+o.Pack = "beczka_arabski_cala.dat"
+o.DestroyPack = "beczka_arabski_zlom.dat"
+
+o.Health = 66
+o.FlyHealth = 0.6		-- ile hp musi miec, zeby wyleciec
+o.FlyParticle = {"barrel_arab_fx",0.2}
+o.force = {0,45,0}
+o.LifeTimeAfterFly = 15.0
+o.gasElements = 15
+o.destroyPFX = "explo_barrelarab"
+
+o.Mass = 200
+o.Friction = 1
+o.Scale = 0.7
+o.Destroy.Strength = 150
+o.Destroy.ExplosionStrength = 1000
+o.Destroy.ExplosionDamage = 200
+o.Destroy.ExplosionRadius = 6
+o.Destroy.AverageDelay = 32
+o.Destroy.AverageVariation = 16
+o.Destroy.Effect = "barrelarabxplo"
+o.Destroy.EffectScale = 1.0
+o.Destroy.Treasures = 
+{
+    Coins  = {1, 'g'},
+}
+o.Destroy.Light = true
+o.Destroy.MinSpeedOnCollision = 10
+

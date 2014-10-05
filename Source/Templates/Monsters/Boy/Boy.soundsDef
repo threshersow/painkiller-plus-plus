@@ -1,0 +1,106 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'Boy-krok1'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'Boy-krok2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+    walkVoice = {
+        samples = {"Boy-walkvoice1","Boy-walkvoice2","Boy-walkvoice3"},
+		playChance = 0.15,
+   		dist1 = 15,
+		dist2 = 50,
+    },
+	bodyfalls = {
+		samples = {'Boy-bodyfalls'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	death = {
+		samples = {"Boy-death1","Boy-death2","Boy-death3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	damage = {
+		samples = {"Boy-damage"},
+	},
+	onAttackOnce = {
+		samples = {"Boy-halt1","Boy-halt2"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+  	hit = {
+		samples = {"Boy-hit1","Boy-hit2","Boy-hit3"},
+		dist1 = 16,
+		dist2 = 60,
+	},  
+	atak = {
+		samples = {'Boy-atak','Boy-atak2'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	transform = {
+		samples = {'Boy-transform'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+}
+
+
+if Tweak.GlobalData.GermanVersion then
+	o.s_SubClass.SoundsDefinitions.atak = {
+		samples = {'Boy-atakBB','Boy-atakBB2'},
+		dist1 = 10,
+		dist2 = 30,
+	}
+    o.s_SubClass.SoundsDefinitions.death = {
+		samples = {"Boy-deathBB1","Boy-deathBB2","Boy-deathBB3"},
+		dist1 = 16,
+		dist2 = 60,
+	}
+    o.s_SubClass.SoundsDefinitions.onAttackOnce = {
+		samples = {"BB-halt1","BB-halt2"},
+		dist1 = 30,
+		dist2 = 70,
+	}
+  	o.s_SubClass.SoundsDefinitions.hit = {
+		samples = {"Boy-hitBB1","Boy-hitBB2","Boy-hitBB3"},
+		dist1 = 16,
+		dist2 = 60,
+	}
+    o.s_SubClass.SoundsDefinitions.walkVoice = {
+        samples = {"Boy-walkvoiceBB1","Boy-walkvoiceBB2","Boy-walkvoiceBB3"},
+		playChance = 0.15,
+   		dist1 = 15,
+		dist2 = 50,
+    }
+end
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+            {0.0,'PlaySoundHitIfNotPlayingLast',"walkVoice"},
+            {0.4,'PlaySound',"step1"},
+			{0.0,'PlaySound',"step2"},
+		},
+		run   = {
+            {0.0,'PlaySoundHitIfNotPlayingLast',"walkVoice"},
+            {0.4,'PlaySound',"step1"},
+			{0.0,'PlaySound',"step2"},
+		},
+
+        hit1 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        hit2 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+
+        atak = {
+		{0.0,'StopLastSound'},
+            {0.0,'PlaySound',"atak"},
+        },
+}

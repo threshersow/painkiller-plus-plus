@@ -1,0 +1,28 @@
+o.s_SubClass.SoundsDefinitions = {
+	krok1 = {
+		samples = {'Swamp_krok1',},
+		dist1 = 60,
+		dist2 = 300,
+	},
+	krok2 = {
+		samples = {'Swamp_krok2',},
+		dist1 = 60,
+		dist2 = 300,
+	},
+	ball = {
+		samples = {'Swamp-throwenergyball',},
+		dist1 = 60,
+		dist2 = 300,
+	},
+	ext = {
+		samples = {'Swamp_extinguish'},
+		dist1 = 60,
+		dist2 = 300,
+	},
+    death = {
+		samples = {"Swamp_death",},
+		dist1 = 60,
+		dist2 = 300,
+	},
+
+}

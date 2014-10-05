@@ -1,0 +1,10 @@
+Gwar_04.Volume = 40
+Gwar_04.Interval = 0
+Gwar_04.RandomShift = 0
+Gwar_04.Falloff =
+{
+  Start = 4,
+  End = 20
+}
+Gwar_04.Sound ="C2L3_Opera/Gwar_05"
+

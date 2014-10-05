@@ -1,0 +1,75 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'zombs_krok1',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	step2 = {
+		samples = {'zombs_krok2',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	atak1 = {
+		samples = {'zombs_attack1','zombs_attack2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	swishpr = {
+		samples = {'zombs_swish-prepare',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	swish = {
+		samples = {'zombs_swish'},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	hit = {
+		samples = {'zombs_hit1','zombs_hit2','zombs_hit3'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"zombs_bodyfalls1","zombs_bodyfalls2",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"zombs-weapon-lost1","zombs-weapon-lost2","zombs-weapon-lost3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost2 = {
+		samples = {"$/actor/zombie_soldier/zombie_mstar-weapon-lost1","$/actor/zombie_soldier/zombie_mstar-weapon-lost2","$/actor/zombie_soldier/zombie_mstar-weapon-lost3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	onAttackOnce = {
+		samples = {"zombs_halt1","zombs_halt2","zombs_halt3"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	missed = {
+		samples = {"zombs_sword-missed1","zombs_sword-missed2"},
+		dist1 = 12,
+		dist2 = 40,
+	},
+
+    attackAmbient = {
+		samples = {'zombs_attackscream1','zombs_attackscream2','zombs_attackscream3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+    death = {
+		samples = {"zombs_death1","zombs_death2","zombs_death3","zombs_death4"},
+   		dist1 = 30,
+		dist2 = 70,
+	},
+	damage = {
+		samples = {"zombs_sword_hits_hero"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+
+
+}

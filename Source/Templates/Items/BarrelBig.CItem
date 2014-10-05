@@ -1,0 +1,25 @@
+BarrelBig.Mesh = "BECZKA_DUZAShape"
+BarrelBig.Pack = "cale_przedmioty.dat"
+
+BarrelBig.DestroyPack = "beczka_duza_zlom.dat"
+BarrelBig.Health = 40
+BarrelBig.Mass = 200
+BarrelBig.Friction = 1
+BarrelBig.Scale = 0.5
+
+BarrelBig.Destroy.Strength = 200
+BarrelBig.Destroy.ExplosionStrength = 1000
+BarrelBig.Destroy.ExplosionDamage = 200
+BarrelBig.Destroy.ExplosionRadius = 6
+BarrelBig.Destroy.AverageDelay = 32
+BarrelBig.Destroy.AverageVariation = 16
+BarrelBig.Destroy.Effect = "explo_beczka"
+BarrelBig.Destroy.EffectScale = 0.4
+BarrelBig.Destroy.BurningParts = true
+o.Destroy.Treasures = 
+{
+    Coins  = {1, 'g'},
+}
+BarrelBig.Destroy.Light = true
+BarrelBig.Destroy.MinSpeedOnCollision = 18
+

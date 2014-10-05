@@ -1,0 +1,133 @@
+o.s_SubClass.SoundsDefinitions = {
+	wingsshow = {
+		samples = {'alastor_idle2_wings-show',},
+		dist1 = 40,
+		dist2 = 200,
+	},
+	wingidle = {
+		samples = {'alastor_idle2_wings-hide',},
+		dist1 = 40,
+		dist2 = 200,
+	},
+	krok2 = {
+		samples = {'alastor_krok2',},
+		dist1 = 30,
+		dist2 = 120,
+	},
+	krok1 = {
+		samples = {'alastor_krok1',},
+		dist1 = 30,
+		dist2 = 120,
+	},
+	zieje = {
+		samples = {'alastor_zieje02',},
+		dist1 = 40,
+		joint = "k_szczeka",
+		dist2 = 200,
+	},
+	atak2 = {
+		samples = {'alastor_attack2-attack',},
+		dist1 = 40,
+		joint = "k_szczeka",
+		dist2 = 200,
+	},
+	swish = {
+		samples = {'alastor-swish',},
+		dist1 = 40,
+		dist2 = 200,
+	},
+	prepare = {
+		samples = {'alastor_attack1-prepare',},
+		dist1 = 40,
+		joint = "k_szczeka",
+		dist2 = 200,
+	},
+	naskok = {
+		samples = {'alastor_attacks-naskok',},
+		dist1 = 40,
+		dist2 = 200,
+	},
+	groundhit = {
+		samples = {'alastor_attack3-groundhit',},
+		dist1 = 40,
+		joint = "k_szczeka",
+		dist2 = 200,
+	},
+	breakfloor1 = {
+		samples = {'alastor_breakfloor-beginvoice'},
+		dist1 = 40,
+		dist2 = 200,
+	},
+	breakfloor2 = {
+		samples = {'alastor_breakfloor-middle'},
+		dist1 = 40,
+		dist2 = 200,
+	},
+	breakfloor3 = {
+		samples = {'alastor_breakfloor-end'},
+		dist1 = 40,
+		dist2 = 200,
+	},
+	wing = {
+		samples = {'alastor_wing1','alastor_wing1_2'},
+		dist1 = 50,
+		dist2 = 200,
+	},
+	wing2 = {
+		samples = {'alastor_wing2','alastor_wing2_2'},
+		dist1 = 50,
+		dist2 = 200,
+	},
+
+	hurt = {
+		samples = {"alastor_hit","alastor_hit1","alastor_hit2",},
+		dist1 = 50,
+		dist2 = 200,
+	},
+	death = {
+		samples = {"alastor_death",},
+		dist1 = 50,
+		dist2 = 200,
+	},
+    charge = {
+        samples = {'alastor_charge-voice',},
+        disablePitch = true,
+    },
+    idle1 = {
+        samples = {'alastor_idle1_1',},
+        playChance = 0.2,
+        dist1 = 40,
+        dist2 = 200,
+    },
+    idle2 = {
+        samples = {'alastor_idle2_1',},
+        dist1 = 40,
+        dist2 = 200,
+    },
+    rv = {
+        samples = {'alastor-rotate-voice2','alastor-rotate-voice3'},
+        dist1 = 30,
+        dist2 = 120,
+    },
+    voice1 = {
+        samples = {'alastor-rotate-voice1',},
+        dist1 = 30,
+        dist2 = 120,
+    },
+    av = {
+        samples = {'alastor_attack1-attackvoice',},
+        dist1 = 40,
+        dist2 = 200,
+    },
+    av2 = {
+        samples = {'alastor-rotate-voice2',},
+        dist1 = 40,
+        dist2 = 200,
+    },
+    naskok = {
+        samples = {'alastor_attacks-naskok',},
+        dist1 = 40,
+        dist2 = 200,
+    },
+
+}

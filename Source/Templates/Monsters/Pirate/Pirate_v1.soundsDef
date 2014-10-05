@@ -1,0 +1,79 @@
+o.s_SubClass.SoundsDefinitions = {
+	hit = {
+		samples = {'pirate_hit1','pirate_hit2','pirate_hit3'},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	step = {
+		samples = {'pirate_krok1','pirate_krok2',},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	shoot = {
+		samples = {"pirate_rifle-shoot1","pirate_rifle-shoot2",},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	shootvoice = {
+		samples = {"pirate_rifle-shoot-voice1","pirate_rifle-shoot-voice2",},
+		playChance = 0.33,
+		dist1 = 30,
+		dist2 = 80,
+	},
+	zawleczka = {
+		samples = {'pirate_smoke-zawleczka',},
+		dist1 = 20,
+		dist2 = 80,
+	},
+	swish = {
+		samples = {'pirate_smoke-throw-swish',},
+		dist1 = 20,
+		dist2 = 80,
+	},
+	tvoice = {
+		samples = {'pirate_smoke-throw-voice',},
+		dist1 = 20,
+		dist2 = 80,
+	},
+	bswish = {
+		samples = {"pirate_bayonet-atack-swish",},
+		dist1 = 20,
+		dist2 = 80,
+	},
+	atakvoice = {
+		samples = {"pirate_bayonet-atack-voice1","pirate_bayonet-atack-voice2"},
+		dist1 = 20,
+		dist2 = 80,
+	},
+	onAttackOnce = {
+		samples = {"pirate_halt1","pirate_halt2","pirate_halt3","pirate_halt4",},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	bodyfalls = {
+		samples = {"pirate_bodyfalls"},
+		dist1 = 16,
+		dist2 = 80,
+	},
+	weaponlost = {
+		samples = {"pirate_weapon-lost"},
+		dist1 = 16,
+		dist2 = 80,
+	},
+	
+	death = {
+		samples = {"pirate_death1","pirate_death2","pirate_death3","pirate_death4", },
+	        dist1 = 20,
+		dist2 = 80,
+	},
+    
+	onAttack = {
+		samples = {"pirate_attackscream1","pirate_attackscream2","pirate_attackscream3","pirate_attackscream4","pirate_attackscream5",},
+        dist1 = 16,
+		dist2 = 80,
+	},
+    
+    damage = {
+		samples = {"pirate_bayonet-hit"},
+	},
+}

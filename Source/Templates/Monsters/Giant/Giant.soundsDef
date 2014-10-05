@@ -1,0 +1,30 @@
+o.s_SubClass.SoundsDefinitions = {
+	krok1 = {
+		samples = {'giant-krok1','giant-krok2'},
+		dist1 = 160,
+		dist2 = 300,
+		joint = 's_p_kostka',
+	},
+	krok2 = {
+		samples = {'giant-krok3','giant-krok4'},
+		dist1 = 160,
+		dist2 = 300,
+		joint = 's_l_kostka',
+	},
+	lapa = {
+		samples = {'giant_lapa_uderza_w_glebe',},
+		dist1 = 160,
+		joint = 'dlo_prawa_root',
+		dist2 = 300,
+	},
+	blow = {
+		samples = {'giant-blow_meteors'},
+		dist1 = 160,
+		dist2 = 300,
+		joint = 'k_szczeka',
+	},
+	damage = {
+		samples = {"giant_hand-hit"},
+	},
+
+}

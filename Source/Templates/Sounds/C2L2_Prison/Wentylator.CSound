@@ -1,0 +1,10 @@
+Wentylator.Volume = 60
+Wentylator.Interval = 0
+Wentylator.RandomShift = 0
+Wentylator.Falloff =
+{
+  Start = 1,
+  End = 7
+}
+Wentylator.Sound ="C2L2_Prison/Wentylator"
+

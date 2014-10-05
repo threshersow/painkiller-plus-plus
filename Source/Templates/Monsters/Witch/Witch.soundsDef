@@ -1,0 +1,32 @@
+o.s_SubClass.SoundsDefinitions = {
+	bodyfalls = {
+		samples = {"$/actor/amputee/amp_bodyfalls"},
+		dist1 = 30,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"$/actor/evilmonkv3/evilv3-weapon-lost1","$/actor/evilmonkv3/evilv3-weapon-lost2","$/actor/evilmonkv3/evilv3-weapon-lost3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	ambients = {
+		samples = {"witch_onfly1","witch_onfly2","witch_onfly3","witch_onfly4"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    death = {
+		samples = {"witch_death1","witch_death2"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    fly = {
+        samples = {"witch-fly-loop"},
+        dist1 = 10,
+        dist2 = 40,
+    },
+    scream = {
+        samples = {"witch_onfly1","witch_onfly2","witch_onfly3","witch_onfly4"},
+        dist1 = 30,
+        dist2 = 120,
+    },
+}

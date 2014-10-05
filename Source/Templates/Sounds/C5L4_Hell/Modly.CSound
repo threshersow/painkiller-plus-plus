@@ -1,0 +1,10 @@
+Modly.Volume = 80
+Modly.Interval = 20
+Modly.RandomShift = 4
+Modly.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Modly.Sound ="C5L4_Hell/modly"
+

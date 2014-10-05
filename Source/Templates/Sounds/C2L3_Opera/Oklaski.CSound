@@ -1,0 +1,10 @@
+Oklaski.Volume = 30
+Oklaski.Interval = 15
+Oklaski.RandomShift = 5
+Oklaski.Falloff =
+{
+  Start = 7,
+  End = 30
+}
+Oklaski.Sound ="C2L3_Opera/Oklaski_01;C2L3_Opera/Oklaski_02"
+

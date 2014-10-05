@@ -1,0 +1,35 @@
+EDITOR.AddObjectTemplate("Particles","FX_mlot","FX_mlot.CActor");	
+
+FX_mlot.Model = "mlotfx"
+FX_mlot.Scale = 15
+FX_mlot.NotCountable = true
+
+FX_mlot.s_SubClass = 
+{
+    Animations = {  
+        idle        = {1.5},
+    },
+}
+
+function FX_mlot:OnCreateEntity()
+    self:BindFX("energymlot",1.1,"e0")
+    self:BindFX("flash",1.1,"e1")
+    self:BindFX("flash",1.1,"e2")
+    
+end
+
+function FX_mlot:OnFinishAnim(name)
+    ENTITY.UnregisterAllChildren(self._Entity)
+    GObjects:ToKill(self)
+end
+
+
+
+function FX_mlot:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+o.Immortal = true

@@ -1,0 +1,46 @@
+CBillboard.s_Editor = {
+        Texture   = { "BrowseEdit", {"*.*", "data\\textures\\particles\\", true} },
+        BlendMode = { "ComboBox", {"None|0","Alpha|1","Add|2","Filter|3","Translucent|4"}},
+		Size      = { "SpinEdit"  , {"%.1f", 0, 99, 0.1} },
+		Alpha     = { "SpinEdit" , {"%.2f", 0, 1, 0.01} },
+    }    
+
+
+function CBillboard:EditRender(delta)
+    if not Editor.EditBillboardsAndDecals then return end
+    local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+    if sz<=1 then 
+        if self.Corona.Texture == "" then
+            if (self.Type==1) then
+                R3D.DrawDirLight(self.Color:Compose(),self.Pos.X, self.Pos.Y, self.Pos.Z,self.Direction.X,self.Direction.Y,self.Direction.Z) 
+            else            
+                R3D.DrawSphere(self.Range,self.Color:Compose(),self.Pos.X,self.Pos.Y,self.Pos.Z)
+                R3D.DrawSphere(self.StartFalloff,self.Color:Compose(),self.Pos.X,self.Pos.Y,self.Pos.Z)
+            end
+            R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,self.Color:Compose())
+        else
+            R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,Color:New(255,50,50):Compose())
+        end
+        --Hud:Quad(Editor.matLight,sx,sy,1,true) 
+    end
+end
+--============================================================================
+function CBillboard:EditTick(delta)
+    if not Editor.EditBillboardsAndDecals then return end
+
+    -- edit
+    if Editor.SelObj == self then        
+
+    else
+        -- picking point 
+        if MOUSE.LB() == 1 then        
+            local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+            if Dist2D(MX,MY,sx,sy) <  15  then
+                Editor.ObjEdited = true                
+                if Editor.SelObj ~= self then Editor:SelectObject(self) end
+            end
+        end    
+    end
+
+end
+--============================================================================

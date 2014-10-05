@@ -1,0 +1,10 @@
+Lancuchy.Volume = 50
+Lancuchy.Interval = 16
+Lancuchy.RandomShift = 7
+Lancuchy.Falloff =
+{
+  Start = 4,
+  End = 15
+}
+Lancuchy.Sound ="C2L2_Prison/Lancuchy_01;C2L2_Prison/Lancuchy_02"
+

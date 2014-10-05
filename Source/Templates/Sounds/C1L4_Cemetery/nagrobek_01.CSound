@@ -1,0 +1,10 @@
+nagrobek_01.Volume = 60
+nagrobek_01.Interval = 10
+nagrobek_01.RandomShift = 4
+nagrobek_01.Falloff =
+{
+  Start = 3,
+  End = 13
+}
+nagrobek_01.Sound ="C1L4_Cemetery/nagrobek_01;C1L4_Cemetery/nagrobek_02"
+

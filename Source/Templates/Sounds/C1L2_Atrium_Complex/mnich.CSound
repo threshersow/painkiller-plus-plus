@@ -1,0 +1,10 @@
+mnich.Volume = 70
+mnich.Interval = 20
+mnich.RandomShift = 7
+mnich.Falloff =
+{
+  Start = 3,
+  End = 15
+}
+mnich.Sound ="C1L2_Atrium_Complex/mnich_01;C1L2_Atrium_Complex/mnich_02;C1L2_Atrium_Complex/mnich_03"
+

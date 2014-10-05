@@ -1,0 +1,10 @@
+Podziemie_03.Volume = 70
+Podziemie_03.Interval = 0
+Podziemie_03.RandomShift = 0
+Podziemie_03.Falloff =
+{
+  Start = 2,
+  End = 17
+}
+Podziemie_03.Sound ="C2L4_Asylum/Podziemie_03"
+

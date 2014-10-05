@@ -1,0 +1,1081 @@
+cp1250	# encoding - use cp1250 for Windows Central European
+
+# globals
+1: Ano
+2: Ne
+3: Ok
+4: Vyp.
+5: Zap.
+6: Není
+7: Konec hry
+
+# menu items
+
+8: Zpìt
+9: Pouij
+
+# main menu
+10: Upsat se
+11: Nahrát/Uloit
+12: Hra po síti
+13: Nastavení
+14: Skrıše
+15: Zpìt
+16: Konec
+17: Opravdu?
+
+# difficulty level
+18: Volba obtínosti
+19: Snìní
+20: Nespavost
+21: Noèní mùra
+22: Trauma
+
+# options menu
+23: Ovládání
+24: HUD
+25: Zvuk
+26: Grafika
+27: Další nastavení
+
+# controls config
+
+28: Zbranì
+29: Funkce
+30: Základní
+31: Alternativní
+
+# keys
+32: Vpøed
+33: Vzad
+34: Úkrok vlevo
+35: Úkrok vpravo
+36: Skok
+37: Støelba
+38: Alt. støelba
+39: Další zbraò
+40: Pøedchozí zbraò
+41: Zbraò 1
+42: Zbraò 2
+43: Zbraò 3
+44: Zbraò 4
+45: Zbraò 5
+46: Bullet-time
+47: Pauza
+48: Screenshot
+49: Menu
+50: Statistika
+51: Zpráva všem
+52: Zpráva tımu
+53: Rocket Jump
+54: Rocket Jump vpøed
+55: Prohodit zbranì
+56: Trvalé prohození
+57: Nejlepší vıbušná zbraò
+58: Nejlepší nevıbušná zbraò
+59: Nejlepší zbraò z vıbìru
+60: Pouít nejlepší vıbušnou
+61: Pouít nejlepší nevıbušnou
+62: Pouít nejlepší z vıbìru
+
+# mouse options
+63: Pøevrátit myš
+64: Jemná myš
+65: Citlivost myši
+66: Citlivost koleèka
+
+# weapons config
+67: Sekundární
+68: Pøepnout
+69: Priorita
+70: Vıbušné
+71: Nevıbušné
+72: Automatická zmìna
+73: Vlastní
+74: Nahoru
+75: Dolù
+
+# HUD config
+76: Prùhl. HUD
+77: Velikost HUD
+78: Malı
+79: Normální
+80: Velkı
+81: Zamìøovaè
+82: Prùhlednost
+83: Èervená
+84: Zelená
+85: Modrá
+
+# sound config
+86: Celková hlasitost
+87: Hlasitost hudby
+88: Hlasitost zvukù
+89: Prohodit stereo
+90: Nastavení repro
+91: 3D zvuk 
+92: Dva reproduktory
+93: Sluchátka
+94: Surround
+95: 4 reproduktory
+96: Repro 5.1
+97: Repro 7.1
+
+# video config
+98: Rozlišení
+99: Detaily textur
+100: Celá obrazovka
+101: Gamma
+102: Jas
+103: Kontrast
+104: Nejniší
+105: Nízké 
+106: Støední
+107: Vysoké
+108: Detaily budov
+109: Detaily postav
+110: Detaily oblohy
+
+# advanced video config
+111: Stíny postav
+112: Efekty poèasí
+113: Obloha
+114: Zobrazit zbraò
+115: Lesklé zbranì
+116: Normální zbranì
+117: Filtrování textur
+118: Multisampling
+119: Stálé objekty
+120: Dynamická svìtla
+121: Paprsky
+122: Aury
+123: Objekty
+124: Detailní textury
+125: Bilineární
+126: Trilineární
+127: Anisotropní
+
+# multiplayer menu
+
+128: Heslo
+129: Pøipojit
+130: Vytvoøit hru
+131: Nastavení hráèe
+
+# join game menu
+132: Internet
+133: LAN
+134: Oblíbené
+135: Pøidat do oblíbenıch
+136: Odebrat z oblíbenıch
+137: Obnovit
+138: Stop
+139: Pøipojit
+140: Název serveru
+141: Servery
+142: Hráèi
+143: Mapa
+144: Hra
+145: Ping
+146: Zadej IP
+147: Server nelze najít
+148: Vıbìr kliknutím
+149: Obnovuji seznam serverù
+150: Update hotov
+151: [NENÍ]
+152: [NENÍ MAPA]
+153: Neznámı
+
+# start game menu
+154: Heslo serveru
+155: Port serveru
+156: Mód
+157: Free For All
+158: Team Deathmatch
+159: Voosh
+160: The Light Bearer
+161: People Can Fly
+162: Max. hráèù
+163: Max. divákù
+164: Fraglimit
+165: Timelimit
+166: Veøejnı server
+167: Team damage
+168: Stálé zbranì
+169: Powerups
+170: Upustit powerup
+171: Povolit bunnyhopping
+172: Povolit brightskins
+173: Povolit rocket jump vpøed
+174: Brightskin tım
+175: Brightskin soupeø
+176: Obecné
+177: Pokroèilé
+178: Start
+179: Pøidat
+180: Pøidat vše
+181: Odebrat
+182: Odebrat vše
+
+# player settings menu
+183: Jméno
+184: Jméno tımu
+185: Rychlost pøipojení
+186: CD key
+187: Smazat
+188: Zadat
+
+# menu items' descriptions
+
+189: Návrat k pøedchozí nabídce
+190: Pouít zmìny a návrat k pøedchozí nabídce
+
+# main menu
+191: Nová hra pro jednoho hráèe
+192: Nahrát uloenou hru nebo uloit aktuální hru
+193: Hrát po LAN/Internetu nebo spustit vlastní server
+194: Nastavit ovládání, zvuk, grafiku a další volby
+195: Zkontrolovat poèet nalezenıch skrıší ve høe
+196: Návrat do hry
+197: Ihned opustit hru
+
+# difficulty modes
+198: Velmi snadné - pro zaèáteèníky
+199: Doporuèená bìná obtínost
+200: Vyšší obtínost
+201: Painkillerùv skuteènı pøíbìh
+
+# options menu
+202: Nastavení ovládání hry
+203: Nastavení HUD
+204: Nastavení zvuku a hudby
+205: Nastavení grafiky
+206: Další nastavení pro pokroèilé
+
+# controls config
+
+207: Nabídka nastavení zbraní
+208: Levım tlaè. myši zvolit, klávesou/tlaèítkem zmìnit
+
+# mouse options
+209: Ovládat jako letadlo
+210: Potlaèit zadrhávání myši
+211: Nastavit citlivost myši
+212: Nastavit citlivost koleèka
+
+# HUD config
+213: Nastavit prùhlednost HUD
+214: Nastavit velikost HUD
+215: Zvolit typ zamìøovaèe
+216: Zvolit prùhlednost zamìøovaèe
+217: Zvolit barvu zamìøovaèe
+
+# weapons config
+218: Automaticky mìnit zbraò
+
+# sound config
+219: Hlasitost
+220: Hlasitost hudby
+221: Hlasitost zvukovıch efektù
+222: Obrátit stereo
+223: Zvolit nastavení reproduktorù
+224: Zvolit systém 3D zvuku
+
+# video config
+225: Vyšší rozlišení potøebuje rychlejší PC a 3D kartu
+226: Sníit v pøípadì problémù s vıkonem
+227: Bez oznaèení hra pobìí v oknì
+228: Gamma korekce
+229: Nastavit jas
+230: Nastavit kontrast
+231: Zmìnit kvalitu textur zbraní,
+232: Zmìnit kvalitu textur budov,
+233: Zmìnit kvalitu textur nepøátel,
+234: Zmìnit kvalitu textur nebe,
+
+# advanced video config
+235: Vypnout v pøípadì problémù s vıkonem
+236: Zvolit bilineární v pøípadì problémù s vıkonem
+237: Zvolit úroveò multisamplingu
+238: Nastavit èas, po kterém objekty mizí
+
+# multiplayer menu
+
+239: Zadání hesla serveru
+240: Hledat LAN/Internet servery pro pøipojení
+241: Spustit vlastní multiplayer LAN/Internet server
+242: Nastavení pro síovou hru
+
+# join game menu
+243: Hledat servery na Internetu a pøipojit se do hry
+244: Hledat servery na lokální síti a pøipojit se do hry
+245: Seznam oblíbenıch serverù
+246: Pøidat server do oblíbenıch
+247: Odebrat oznaèenı server z oblíbenıch
+248: Aktualizovat seznam serverù
+249: Zastavit aktualizaci seznamu serverù
+250: Pøipojit se do hry
+251: Zadat IP serveru
+
+# start game menu
+252: Zmìnit jméno vašeho serveru
+253: Nastavit pøístupové heslo serveru
+254: Zmìnit port serveru
+255: Zvolit herní mód
+256: Nastavit maximální poèet hráèù
+257: Nastavit maximální poèet divákù
+258: Poèet fragù nutnı pro ukonèení mapy, 0 = bez limitu
+259: Max. èas mezi zmìnou mapy, 0 = nemìnit mapu
+260: Publikovat server na Internetu
+261: Støelba do vlastních zap./vyp.
+262: Zbranì po sebrání nemizí
+263: Zapnout/vypnout „powerupy“ v mapì
+264: Upustit „powerup“ po zabití 
+265: Povolit ve høe „bunnyhopping“
+266: Povolit ve høe „brightskins“
+267: Povolit ve høe „rocket-jump“ vpøed
+268: Zvolit barvu tımového „brightskinu“
+269: Zvolit barvu „brightskinu“ nepøátel
+270: Obecné nastavení
+271: Pokroèilé nastavení
+272: Spustit server
+
+# list manipulation
+273: Nahoru
+274: Dolù
+275: Pøidat pøedmìt
+276: Pøidat vše
+277: Odebrat oznaèenı pøedmìt
+278: Odebrat vše
+
+# player settings menu
+279: Nick (pøezdívka)
+280: Vıbìr tımu
+281: Rychlost pøipojení
+282: Sériové èíslo (CD KEY)
+
+# map
+
+# levels
+283: Høbitov
+284: Atrium
+285: Katakomby
+286: Katedrála
+287: Enkláva
+288: aláø
+289: Opera
+290: Blázinec
+291: Snìnı most
+292: Mìsto
+293: Moèál
+294: Nádraí
+295: Mrtvá továrna
+296: Vojenská báze
+297: Rozvaliny
+298: Hrad
+299: Palác
+300: Babylon
+301: Prales
+302: Vì
+303: Vodní mìsto
+304: Doky
+305: Starı klášter
+306: Peklo
+
+# stats
+307: Karty
+308: Zlato
+
+# single-player stats
+
+309: SKÓRE
+310: Èas hry
+311: Zabitá monstra
+312: Sebrané duše
+313: Zlato
+314: Svaté pøedmìty
+315: Sebraná munice
+316: Objektù znièeno
+317: Skrıše
+318: Podmínka pro kartu
+319: Status
+320: NESPLNÌNA
+321: SPLNÌNA
+
+# multi-player messages
+
+322: Démon $PLAYER vstoupil do boje.
+323: Démon $PLAYER vymìknul a zmizel z boje.
+324: $KILLER zmasil brokárnou démona $PLAYER.
+325: $KILLER ukonèil mizérii démona $PLAYER.
+326: $KILLER provìtral démona $PLAYER.
+327: $PLAYER randí s granátem démona $KILLER.
+328: $PLAYER testuje rakety démona $KILLER.
+329: $PLAYER ochutnal raketu démona $KILLER.
+330: $KILLER ukøioval démona $PLAYER.
+331: $KILLER rozcupoval démona $PLAYER.
+332: $KILLER zkušenì telefragnul démona $PLAYER.
+333: $PLAYER dal souboj s gravitací a prohrál.
+334: $PLAYER opustil budovu.
+335: $PLAYER lehce podcenil barely.
+336: $PLAYER názornì pøedvedl pomíjivost ivota.
+337: $PLAYER explodoval.
+
+# cards
+338: Rychlost
+339: Hbitost
+340: Vztek
+341: Amok
+342: Zmatení
+343: Odolnost
+344: elezná vùle
+345: Spìch
+346: Chvat
+347: Fofr
+348: Èasovı bonus
+349: Èasovı bonus (2x)
+350: Vysávaè duší
+351: Stráce duší
+352: Vykupitel duší
+353: Temná duše
+354: Poehnání
+355: Vitalita
+356: Naplnìní
+357: Chamtivost
+358: Slitování
+359: Odpuštìní
+360: Knìzova pøímluva
+361: Poslední dech
+
+# cards descriptions
+362: Rychlejší pohyb
+363: Zbranì nabíjí 2x rychleji
+364: 2x vìtší poškození
+365: 4x vìtší poškození
+366: Zmate nepøátele
+367: Zranìní jsou pouze polovièní
+368: Stvùry jsou neškodné
+369: Svìt se pohybuje 2x pomaleji
+370: Svìt se pohybuje 4x pomaleji
+371: Svìt se pohybuje 8x pomaleji
+372: Pùsobení karet +10 sekund
+373: Pùsobení karet +20 sekund
+374: Sání duší na dálku
+375: Duše setrvají déle
+376: Více zdraví z kadé duše
+377: Zmìna v démona za 50 duší
+378: Zdraví zaène na 150
+379: Kapacita zdraví vzroste na 150
+380: Zdvojnásobí munici v boxech
+381: Dvakrát víc zlata
+382: Pouití karty 2x v levlu
+383: Pouití karty 3x v levlu
+384: Pouití karet zdarma
+385: Obnova zdraví pøi umírání
+
+# multi-player stats
+
+386: Hráè
+387: Fragy
+388: Zabití
+389: Úmrtí
+390: Ping
+391: Èas
+392: Ztrátovost
+393: Èas do konce
+
+# messages
+394: Pokraèuj stiskem ,Enter‘.
+395: Pokraèuj stiskem ,Støelba‘.
+
+# black tarot card unlocking conditions
+396: Dokonèit úroveò
+397: Znièit všechny objekty
+398: Zabít všechna monstra
+399: Najít alespoò 500 zlaákù
+400: Zabít Necrogianta v èase 02:00
+401: Dokonèit úroveò pouitím pouze nevıbušnıch zbraní
+402: Získat alespoò 100 duší
+403: Dokonèit úroveò pouze se zbraní Painkiller
+404: Najít všechny skrıše
+405: Dokonèit level jen s kolíkovaèem
+406: Zabít monstrum Swamp Thing v èase 04:00
+407: Nezískat ani jednu duši
+408: Zabít alespoò 30 nepøátel jako Démon 
+409: Zabít všechna monstra
+410: Zabít stráce v èase 01:20
+411: Najít všechny relikvie
+412: Dokonèit úroveò bez brnìní 
+413: Najít všechnu munici 
+414: Dokonèit úroveò bez pouití èernıch tarotù
+415: Zabít Alastora v èase 05:00
+416: Najít všechny skrıše
+417: Zmìnit se v démona alespoò 3x
+418: Udret zdraví trvale nad 50
+419: Zabít Lucifera
+
+# main menu
+420: Pokraèovat ve høe
+421: Zpìt do hry
+
+# difficulty level
+422: Mód uzamèen: Dokonèi obtínost Noèní mùra
+
+# map
+423: Kapitola
+424: Úroveò
+425: Èerné taroty nejsou v demu k dispozici
+426: Èerné taroty nejsou aktivní
+427: Vyber úroveò
+428: Vyber kapitolu
+429: Èerné taroty
+430: Zpìt do hlavního menu
+431: Hrát
+432: Èerné taroty jsou neaktivní bìhem hraní 
+433: Èerné taroty nejsou k dispozici ve Snìní
+
+# black tarot
+434: Cena za umístìní
+435: Odebrání
+436: Zlaáky po odebrání
+437: Klikni na ,Pouít zlaté karty‘ bìhem levlu,\nabys vyuil jejich sílu.\nSadu karet lze pouít [x] krát v úrovni.
+438: Úèinnost všech zde umístìnıch støíbrnıch karet\nje okamitá a trvalá pro celou úroveò.
+439: Málo zlaákù pro umístìní\nkarty.
+440: Tvoje zlaáky
+441: Potøebné zlaáky
+
+# sound options
+442: Ozvuèení EAX
+443: Kontrola dostupnosti efektù EAX
+444: Bojová hudba
+445: Ambient
+446: Hlasitost bojové hudby
+447: Hlasitost ambientní hudby
+
+# video options
+448: Detailnost èástic
+
+# controls
+449: Pouít zlatou kartu
+450: Svítilna
+
+# game over
+451: Stiskni ,Støelbu‘ pro restart nebo ,Esc‘ pro návrat do menu.
+
+# scoreboard
+452: Nalezená brnìní
+453: BEZ ÚSPÌCHU
+454: -
+455: Máš
+456: k dispozici
+457: Èernı tarot!
+
+# weapons
+458: Pain 
+459: Killer 
+460: Brokovnice
+461: Zmrazovaè
+462: Kolíkovaè
+463: Granátomet
+464: Raketomet
+465: Kulomet
+466: Vrhaè hvìzdic
+467: Elektra
+
+# warnings
+468: Snìní je extrémnì snadnı reim pro zaèáteèníky. V tomto módu nejsou k dispozici èerné taroty.\nOpravdu chceš zvolit tento reim?
+469: Urèitì?
+470: Toto varování pøíštì nezobrazovat
+
+471: KVALITA TEXTUR
+
+472: Zpìt na mapu
+
+473: Skrıš objevena!
+
+474: Obtínost
+
+# create server
+475: Dostupné mapy
+476: Serverové mapy
+
+# keys
+477: Neznámá klávesa 
+478: Šipka nahoru 
+479: Šipka dolu 
+480: Šipka vlevo 
+481: Šipka vpravo
+482: Mezerník
+483: Tab
+484: Backspace
+485: Enter
+486: Pause
+487: Shift
+488: Control
+489: Escape
+490: Page Up
+491: Page Down
+492: End
+493: Home
+494: Insert
+495: Delete
+496: Numpad 0
+497: Numpad 1
+498: Numpad 2
+499: Numpad 3
+500: Numpad 4
+501: Numpad 5
+502: Numpad 6
+503: Numpad 7
+504: Numpad 8
+505: Numpad 9
+506: Numpad *
+507: Numpad +
+508: Numpad -
+509: Numpad .
+510: Numpad /
+511: NumLock
+512: ScrollLock
+513: Levı Shift
+514: Pravı Shift
+515: Levı Alt
+516: Pravı Alt
+517: Levé menu
+518: Pravé menu
+519: Pravé menu (2)
+520: Printscreen
+521: Caps Lock
+522: Numpad Enter
+523: Levé tlaèítko myši
+524: Pravé tlaèítko myši
+525: Prostøední tlaèítko myši
+526: Koleèko myši dolù
+527: Koleèko myši nahoru
+528: Levı Ctrl
+529: Pravı Ctrl
+
+# video options
+530: Nízké
+531: Vysoké
+
+# weapons config
+532: Vyber prioritu 
+533: Vlastní vıbìr 1
+534: Vlastní vıbìr 2
+535: Nejlepší zbraò z vıbìru 1
+536: Nejlepší zbraò z vıbìru 2
+537: Pouít zbraò z vıbìru 1
+538: Pouít zbraò z vıbìru 2
+
+# keys
+539: Rychlé naètení 
+540: Rychlé uloení
+
+# messages keys
+541: Hlášky
+542: Nastavit hlášky (MP)
+543: Klávesy
+544: SA
+545: Hlášky
+
+# messages
+546: Získejte Quad!
+547: Máme Quad!
+548: Pøišli jsme o Quad
+549: Protivníci mají Quad!
+550: Protivník s Quadem je mrtvı
+551: Získejte nepøemoitelnost!
+552: Jsme nepøemoitelní!
+553: Protivník je nepøemoitelnı!
+554: [vlastní hláška/vıkøik]
+555: [vlastní hláška/vıkøik]
+556: [vlastní hláška/vıkøik]
+557: [vlastní hláška/vıkøik]
+558: [vlastní hláška/vıkøik]
+559: [vlastní hláška/vıkøik]
+560: [vlastní hláška/vıkøik]
+561: [vlastní hláška/vıkøik]
+562: [vlastní hláška/vıkøik]
+563: [vlastní hláška/vıkøik]
+
+# video options
+564: Nastavení grafiky
+565: Celkové nastavení grafiky
+566: Vlastní
+567: Nejrychlejší 
+568: Rychlé
+569: Normální
+570: Vysoké detaily
+571: Šílené detaily
+
+572: Vyber, které hlášky mají bıt zobrazovány všem
+573: Všichni hráèi 
+574: Jen tımoví hráèi
+
+575: Dohlednost
+576: Nastavit dohlednost
+577: Tajnı mód pro multiplayer je odemèen 
+578: Mùeš neomezenì a zdarma vyuívat zlaté karty
+
+# multiplayer error messages
+579: Odpojeno pro èasovı limit: %d ms
+580: Èasovı limit pro GameSpy!!!\nPopis: %s
+581: NAT pøístup: NN server pøijal poadavek na pøipojení
+582: NAT pøístup: Pøímı pøístup s jinım klientem právì zaèal
+583: NAT pøístup: GameSpy hlásí neznámı stav pøístupu!!! Stav: %d
+584: NAT pøístup kompletní! Pøipojení na %s
+585: Chyba NAT pøístupu: Partner neodpovídá NAT pøístupovému serveru
+586: Chyba NAT pøístupu: Nelze komunikovat s NAT pøístupovım serverem
+587: Chyba NAT pøístupu: NAT pøístupovı server narazil na neznámou chybu
+588: Pøístup na NAT úspìšnı!: Klient pøipojen z %s
+589: NAT pøístup: Pøíjem klientovy cookie: %d  
+590: Net Init Error: WSAStartup() neúspìšnı!!! Vráceno %d
+591: Net Init Error: Implementace Windows Sockets je zastaralá!
+592: Net Init Error: Pokus o rozpoznání zadaného rozhraní selhal!
+593: Net Init Error: gethostname() volání selhalo!!! Nelze najít PC tohoto jména! Vráceno: %d
+594: Net Init Error: Selhalo rozpoznání tvé IP adresy voláním gethostbyname()!!!
+595: Net Init Error: Nelze otevøít zásuvku pro pøíjem: %s
+596: Net Init Error: Nelze zmìnit konfiguraci zásuvky: %s
+597: Net Init Error: Nelze pøipojit zásuvku na port %d
+598: Net Init Error: Volání getsockname selhalo na pøipojené zásuvce!!! Vráceno: %d
+599: GameSpy Init Error: Hledání DNS (pro server) selhalo\nGameSpy neaktivní!
+600: GameSpy Init Error: Z masteru se nevrátila ádná vızva – buï je master server vypnutı, nebo UDP blokuje firewall\nGameSpy neaktivní!
+601: GameSpy Init Error: Neznámé èíslo chyby z GameSpy: %d\nGameSpy neaktivní!
+602: Net Error: Pøipojení zamítnuto serverem (port je nedostupnı)
+603: Net Error: Zadaná adresa neodpovídá
+604: Net Error: Pøipojení ukonèeno druhou stranou (moná je druhá strana momentálnì vypnutá)
+605: Net Info: Pøipojení odmítnuto z '%s': pouita starší vıvojová verze klienta!
+606: Net Info: Pøipojení odmítnuto z '%s': rozdílná verze klienta: %s
+607: Net Info: Pøipojení odmítnuto z '%s': rozdílné skripty
+608: Net Info: Pøipojení odmítnuto z '%s': snaha o odpovìï na nezadanou vızvu
+609: Net Info: Pøipojení odmítnuto z '%s': pøíliš zájemcù o pøipojení
+610: Net Info: Pøipojení odmítnuto z  '%s': špatné heslo
+611: Net Info: Pøipojení odmítnuto z '%s': dosaen maximální poèet klientù
+612: Net Info: Pøipojení odmítnuto z '%s': zadána špatná vızva
+613: Net Info: Pøipojení odmítnuto z '%s': špatná odpovìï na vızvu
+614: Net Info: Pøipojení odmítnuto z '%s': GameSpy hlásí špatnı CD key
+615: Net Info: Pøipojení odmítnuto z  '%s': zkusil jsem to bez  pøedchozího pøipojení
+616: Net Error: Pokus o pøipojení na jinı ne Painkiller server!!!
+617: Net Error: Verze serveru je '%s', my máme '%s'.\nNelze spojit!!! Proveïte update.
+618: Net Error: Rozdílné skripty ne na serveru, ale shodná verze hry.\nUpdatuj nebo pøeinstaluj hru.
+619: Net Error: Zadáno špatné heslo pro server!!!
+620: Net Error: Selhalo ovìøení vızvy!!! Útok hackera?
+621: Network: Vypršela vızva na serveru... opakované pøipojení
+622: Net Error: Server nepøijímá další hráèe
+623: Net Error: Vloenı CD Key je neplatnı, nebo je na síti jinı hráè s tvım sériovım èíslem!\nServer: %s
+624: Net Error: Klient zkusil odpovìdìt na vızvu, která nebyla ze serveru vyslána!\nServer: %s
+625: Net Error: Klient zkusil zadat pøíkaz, ani by se pøipojil!\nServer: %s
+626: Net Error: Pøijata neznámá chybová zpráva!!
+627: Net Error: Zápis: chyba v sendto(): %s
+628: Net Error: Ètení: chyba v recvfrom(): %s
+629: Net Error: Nemohu rozpoznat adresu: %s
+
+# maps stats
+630: NEJLEPŠÍ SKÓRE
+
+631: Pohyb hlavy
+632: Nastavit sledování
+633: Ambientní zvuky
+634: Povolit/zakázat ambientní zvuky
+
+635: Úroveò není dostupná\nna této obtínosti\n
+636: Smazat všechny èerné taroty a prùbìné skóre?
+
+637: Datum a èas 
+638: [NOVİ MEZISTAV]
+639: Uloit
+640: Naèíst
+641: Hra uloena 
+642: Hra naètena
+643: [Rychlı]
+644: [Automatickı]
+645: Opravdu smazat uloenı mezistav?
+646: Opravdu pøepsat uloenı mezistav?
+
+647: CHECKPOINT
+648: Probíhá ukládání
+
+# cheats
+649: Cheaty jsou aktivní pouze pøi vybrané obtínosti Snìní a Nespavost.
+650: Kompletní munice.
+651: Všechny zbranì.
+652: Plné zdraví.
+653: Kompletní munice a zdraví.
+654: God mód zapnut.
+655: God mód vypnut.
+656: Extrémní otøesy zapnuty.
+657: Extrémní otøesy vypnuty.
+658: Mrtvá tìla nikdy nezmizí.
+659: Mrtvá tìla mizí.
+660: Decals nikdy nezmizí.
+661: Decals mizí.
+662: Protivníci mají zdraví 1 HP.
+663: Protivníci mají normální HP.
+664: Zlaáky.
+665: Zrychlení zapnuto.
+666: Zrychlení vypnuto.
+667: Promìna v démona zapnuta.
+668: Promìna v démona vypnuta.
+669: Modifikátor zbraní zapnut.
+670: Modifikátor zbraní vypnut.
+671: Nekoneènì zlatıch karet.
+672: Pøístup do všech úrovní.
+673: Všechny èerné taroty.
+
+# connection speed
+674: Modem
+675: ISDN
+676: Kabel/ADSL
+677: LAN/T1
+
+678: Mezistavy
+679: Automat
+680: [Chckpt]
+
+681: Stisknutí støelby naète poslední uloenı checkpoint.
+682: Stisknutí Alt a støelby naète poslední rychlé uloení.
+683: Stiskni Esc pro návrat do menu.
+684: Checkpointy jsou k dispozici pouze pøi zvolené obtínosti Trauma.
+685: Zdraví bylo zcela obnoveno.
+
+686: Zaène nová hra a všechny úrovnì budou znovu zamèeny. Opravdu chceš ukonèit rozehranou hru a zaèít znovu?
+687: Opravdu opustit tuto úroveò?
+
+688: Doba hraní
+
+#last minute crap
+689: Odemkni 23 èernıch tarotù k aktivaci tohoto módu
+
+#last minute MP crap
+
+690: Model hráèe
+691: Vıbìr vzhledu postavy
+692: Démon
+693: Padlı andìl
+694: Rytíø
+695: Bestie
+696: Painkiller
+
+697: Dvojitı frag!
+698: Trojitı frag!
+699: Pentafrag!
+700: OMG!
+
+701: Prodlouen èas lovu.
+702: Hráè $PLAYER má Svìtlo.
+703: Hráè $PLAYER pøišel o Svìtlo.
+704: Svìtlo je zpìt na svém místì.
+705: AUTOØI
+706: Autoøi hry
+
+707: Bílá
+708: Èervená
+
+709: PAUZA
+
+710: Stiskem ,Støelba‘ zaènìte hru
+711: VİSLEDKY
+
+# electro
+712: $KILLER usmail démona $PLAYER.
+# shuriken
+713: $KILLER pøišpendlil démona $PLAYER.
+
+714: Pøipraven
+715: Pøerušen
+
+716: ,Støelba‘ - potvrdit/zrušit pøipravenost ke høe
+717: ,Alternativní støelba' - zmìòit tım
+
+# lava
+718: $PLAYER si dal horkou lázeò.
+
+# Patch 1
+719: Sledovat
+720: Pøipojit se k serveru jako divák
+721: Odpojit
+722: Odpojit od serveru
+723: DIVÁK
+724: 'Støelba' - zmìnit hráèe
+725: 'Alt. støelba' - volnı pohyb
+726: 'Skok' - pøipojit ke høe
+727: Diváci
+728: Div.
+729: min.
+730: Do zaèátku zápasu zbıva %d s.
+731: Èeká se na ostatní hráèe.
+732: 'Další/Pøedchozí zbraò' - zmìna pohledu
+733: Prediction (beta)
+734: Warning: this option enables experimental prediction code
+735: Warning: You need to reconnect for the changes to take effect. This experimental beta code requires much more processing power of your PC, turn it off if you experience serious slowdowns. Please read README file for patch 1.15 for more info about the prediction code.
+
+736: Zbraò 6
+737: Zbraò 7
+738: Zbraò 8
+739: Zbraò 9
+740: Zbraò 10
+
+741: Interval obnovování zbraní
+742: Nastavit èasovı interval obnovování zbraní 
+743: FPS serveru
+744: Nastavit FPS serveru
+
+745: Prosím vlote CD 3
+
+746: Pøedvídání
+747: Sniuje lag inet hry za cenu vìtší zátìe procesoru, nedoporuèuje se pro LAN hru
+
+748: Musíte se znovu pøipojit k serveru, aby zmìna nastavení projevila
+
+749: Zamknout FPS
+750: Zamknout FPS
+751: Vyp.
+752: Server FPS
+753: 2x Server FPS
+754: 3x Server FPS
+
+755: FPS fyziky
+756: Nastavit FPS fyzikálního modelu
+
+757: Nízká kvalita FX (Multiplayer)
+758: Pouít speciální nízkou kvalitu efektù ve høe více hráèù
+
+759: Capture The Flag
+
+760: Bloom
+761: Enable/disable bloom effect
+
+762: Select game
+763: Painkiller
+764: Battle out of Hell
+
+765: Warp Effects
+766: Enable/disable Warp effects
+
+767: Zoom
+
+# CTF
+
+768: red
+769: blue
+770: $PLAYER has taken the $COLOR flag
+771: $PLAYER scores for the $COLOR team
+772: $COLOR flag returned
+773: $PLAYER has returned the $COLOR flag
+774: $PLAYER dropped the $COLOR flag
+775: $COLOR team wins
+
+# Lighting
+776: Ultra
+
+777: Score
+778: Duel
+779: Last Man Standing
+780: Capture Limit
+781: Number of flag captures required to end the map, 0 = disabled
+
+782: A sniper's dream weapon is in your hands now!\nRemember you can use ZOOM key to safely kill distant enemies...
+
+# BOOH cards
+783: Weapon Modifier
+784: Magic Gun
+785: Summon Golem
+786: Summon Fighter
+787: Summon Warrior
+788: Health Stealer
+789: Health Regeneration
+790: Armor Regeneration
+791: Fear
+792: 666 Ammo
+
+# BOOH cards descriptions
+793: Call Weapon Modifier
+794: Haste doesn’t affect weapons
+795: Slow but strong, all enemies\nfocus on it
+796: Fast but weak, enemies\nignore it
+797: Medium, 50% of the enemies\nignore it
+798: 2.5% of the damage to the\nenemy goes to player’s health
+799: Health starts regeneratating\n10 seconds after the last damage
+800: Armor starts regeneratating\n10 seconds after the last damage
+801: All enemies have 90%\nof initial HP
+802: Get 666 ammo for each weapon\nat the beginning of each level
+
+# Last man standing
+803: LMS Lives
+804: Number of lives each player has in LMS mode
+805: Lives
+
+# BOOH black tarot card unlocking conditions
+806: Kill no more than 88 enemies
+807: Kill all enemies
+808: Finish level with over 200 health
+809: Morph into demon exactly 5 times
+810: Find every secret place
+811: Finish the level in maximum 20 minutes
+812: Never get hurt
+813: Find every Holy Item
+814: Kill Panzer Spider in no more than 04:00
+815: Kill King Alastor in no more than 04:00
+
+# BOOH level names
+816: Orphanage
+817: Loony Park
+818: Lab
+819: Dead City
+820: Leningrad
+821: Colloseum
+822: Pentagon
+823: Underworld
+824: Stone Pit
+825: Shadowland
+
+# BOOH weapons
+826: Weapon 11
+827: Weapon 12
+828: Bolt Gun
+829: Heater
+830: SMG
+831: Flame Thrower
+832: Weapon 13
+833: Weapon 14
+
+# Lab new card unlocking conditions
+834: Dokonèit úroveò pouze se zbraní Bolt Gun
+
+835: Odemkni 9 èernıch tarotù k aktivaci tohoto módu
+
+836: Hi-res Weapon Model
+837: Water FX
+
+# magic gun card description
+838: Never waste any ammo
+
+# booh mp models
+839: HellKing
+840: Commando
+
+# changed booh cards
+841: The Sceptre
+842: Demon Morph
+843: Rebirth
+844: All enemies are weak.
+845: Morph into Demon
+846: Fully regenerate health\nand armor
+
+# multi-player messages
+
+847: $KILLER pimp-slapped $PLAYER with a burst from the SMG.
+848: $KILLER bolt-skewered $PLAYER.
+849: $KILLER spammed $PLAYER with the Heater Bomb.
+
+# black edition
+850: Autoøi
+851: Videos
+852: View videos
+853: Making of
+854: XBox trailer
+855: Mech video
+856: Select video
+
+857: Client Console Lockdown
+858: Disable client's console

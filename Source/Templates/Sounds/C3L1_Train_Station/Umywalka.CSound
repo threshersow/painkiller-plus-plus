@@ -1,0 +1,10 @@
+Umywalka.Volume = 60
+Umywalka.Interval = 5
+Umywalka.RandomShift = 2
+Umywalka.Falloff =
+{
+  Start = 2,
+  End = 15
+}
+Umywalka.Sound ="C3L1_Train_Station/Umywalka"
+

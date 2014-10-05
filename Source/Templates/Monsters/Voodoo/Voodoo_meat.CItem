@@ -1,0 +1,7 @@
+o.Model = "meat"
+o.Scale = 1.0
+
+function o:OnCreateEntity()
+	MDL.EnableRagdoll(self._Entity,true,RagdollNonColliding)
+end
+

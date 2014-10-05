@@ -1,0 +1,7 @@
+o.BaseObj = "Sado_1gun.CActor"
+
+o.NeverWalk = true
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = true
+
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee"}

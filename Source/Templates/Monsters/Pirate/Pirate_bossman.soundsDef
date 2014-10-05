@@ -1,0 +1,59 @@
+o.s_SubClass.SoundsDefinitions = {
+	hit = {
+		samples = {'pirateb_hit1','pirateb_hit2','pirateb_hit3'},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	step = {
+		samples = {'pirate_krok1','pirate_krok2',},
+		dist1 = 6,
+		dist2 = 30,
+	},
+	shoot = {
+		samples = {"pirateb_cannon-shoot1","pirateb_cannon-shoot2",},
+		dist1 = 40,
+		dist2 = 120,
+	},
+	shootvoice = {
+		samples = {"pirateb_cannon-shoot-voice1","pirateb_cannon-shoot-voice2",},
+		playChance = 0.33,
+		dist1 = 30,
+		dist2 = 100,
+	},
+	atakvoice = {
+		samples = {"pirateb_kick-atack-voice1","pirateb_kick-atack-voice2"},
+		dist1 = 30,
+		dist2 = 100,
+	},
+	onAttackOnce = {
+		samples = {"pirateb_halt1","pirateb_halt2","pirateb_halt3",},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	bodyfalls = {
+		samples = {"pirate_bodyfalls"},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	weaponlost = {
+		samples = {"pirateb_weapon-lost"},
+		dist1 = 30,
+		dist2 = 80,
+	},
+	
+	death = {
+		samples = {"pirateb_death1","pirateb_death2","pirateb_death3",},
+        dist1 = 30,
+		dist2 = 100,
+	},
+    
+	onAttack = {
+		samples = {"pirateb_attackscream1","pirateb_attackscream2","pirateb_attackscream3","pirateb_attackscream4",},
+        dist1 = 30,
+		dist2 = 80,
+	},
+    
+    damage = {
+		samples = {"pirate_bayonet-hit"},
+	},
+}

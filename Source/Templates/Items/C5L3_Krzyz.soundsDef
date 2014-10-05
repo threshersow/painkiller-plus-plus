@@ -1,0 +1,15 @@
+o.s_SubClass.SoundsDefinitions = {
+	path = "impacts/",
+	CreakSound = {
+		samples = {"chains-small-impact1","chains-small-impact2","chains-small-impact3"},
+		dist1 = 20,
+		dist2 = 80,
+	},
+
+	collsiondetect = {
+		samples = {"metal"},
+		dist1 = 50,
+		dDist2 = 150,
+	},
+}
+

@@ -1,0 +1,47 @@
+o.Model = "Energy"
+o.Scale = 0.4
+o.CatchMaxSpeed = 0.2
+o._destPos = Vector:New(0,0,0)
+
+--============================================================================
+function o:OnPrecache()
+	Cache:PrecacheParticleFX("energy")
+end
+--============================================================================
+function o:OnCreateEntity()
+    self:BindFX("energy",0.2,"e1")
+    self:BindFX("energy",0.2,"e2")
+    self:BindFX("energy",0.2,"e3")
+    self:BindFX("energy",0.2,"e4")
+    self:BindFX("energy",0.2,"e5")
+    self:BindFX("energy",0.2,"e6")
+    self._velocity = 0
+end
+--============================================================================
+function MonsterSoul:Tick(delta)
+	local PX = self._destPos.X
+	local PY = self._destPos.Y
+	local PZ = self._destPos.Z
+	
+	local dist = self.Pos:Dist(PX,PY+1,PZ)
+	self._velocity = self._velocity + delta
+	if self._velocity > self.CatchMaxSpeed then
+		self._velocity = self.CatchMaxSpeed
+	end
+	local v = Vector:New(PX - self.Pos.X, PY + 1 - self.Pos.Y, PZ - self.Pos.Z)
+	v:Normalize()
+	v:MulByFloat(self._velocity)
+	self.Pos.X = self.Pos.X + v.X
+	self.Pos.Y = self.Pos.Y + v.Y
+	self.Pos.Z = self.Pos.Z + v.Z
+	local dist2 = self.Pos:Dist(PX,PY+1,PZ)
+
+	if dist2 > dist then
+		self.Pos.X = PX
+		self.Pos.Y = PY
+		self.Pos.Z = PZ
+		GObjects:ToKill(self)
+	end
+end
+
+

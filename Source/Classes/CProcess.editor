@@ -1,0 +1,3 @@
+function CProcess:EditRender(delta)
+    if self.ChildProc then self.ChildProc:EditRender(delta) end
+end

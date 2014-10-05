@@ -1,0 +1,10 @@
+o.Corona.Enabled = true
+o.Corona.TraceMargin = 2
+o.Corona.MinSize = 2
+o.Texture = "sflare1b"
+o.Alpha = 0.7
+o.BaseObj = "CBillboard"
+o.Size = 12
+o.Pos = Vector:New(0,0,-4)
+o.Corona.FadeInTime  = 0.1
+o.Corona.FadeOutTime = 0.1

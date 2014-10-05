@@ -1,0 +1,10 @@
+Wiatr_01.Volume = 70
+Wiatr_01.Interval = 0
+Wiatr_01.RandomShift = 0
+Wiatr_01.Falloff =
+{
+  Start = 5,
+  End = 20
+}
+Wiatr_01.Sound ="C2L1_Bridge/wiatr_01"
+

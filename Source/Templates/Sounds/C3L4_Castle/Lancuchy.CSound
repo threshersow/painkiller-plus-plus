@@ -1,0 +1,10 @@
+Lancuchy.Volume = 40
+Lancuchy.Interval = 0
+Lancuchy.RandomShift = 0
+Lancuchy.Falloff =
+{
+  Start = 10,
+  End = 30
+}
+Lancuchy.Sound ="C3L4_Castle/lancuchy"
+

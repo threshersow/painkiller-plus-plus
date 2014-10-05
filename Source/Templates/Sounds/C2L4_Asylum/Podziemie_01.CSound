@@ -1,0 +1,10 @@
+Podziemie_01.Volume = 80
+Podziemie_01.Interval = 10
+Podziemie_01.RandomShift = 3
+Podziemie_01.Falloff =
+{
+  Start = 2.5,
+  End = 15
+}
+Podziemie_01.Sound ="C2L4_Asylum/Podziemie_01"
+

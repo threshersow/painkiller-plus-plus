@@ -1,0 +1,10 @@
+Piskle_02.Volume = 80
+Piskle_02.Interval = 8
+Piskle_02.RandomShift = 3
+Piskle_02.Falloff =
+{
+  Start = 5,
+  End = 30
+}
+Piskle_02.Sound ="C5L1_City_On_Water/Piskle_02;C5L1_City_On_Water/piskle_03"
+

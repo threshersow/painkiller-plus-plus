@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/assault-rifle",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"pickup_ammo_a_rifle"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

@@ -1,0 +1,22 @@
+o.BaseObj = "HellAngel.CActor"
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,10}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.stopAfterWalking = 0.2
+o.AiParams.stopAfterWalkingTime = {30,80}
+o.AiParams.guardRange = -1
+o.AiParams.aiGoals = {"idle","FarAttack", "hear"}
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+
+o.AiParams.walkArea = "Roof1"
+o.AiParams.walkAreaRandom = true
+o.AiParams.WalkAreaWhenAttack = true
+
+o.AiParams.changePosAfterFire = 1.0
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+
+o.AiParams.weaponAmmo = 99999

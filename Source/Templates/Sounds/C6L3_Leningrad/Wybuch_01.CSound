@@ -1,0 +1,9 @@
+Wybuch_01.Volume = 70
+Wybuch_01.Interval = 10
+Wybuch_01.RandomShift = 3
+Wybuch_01.Falloff =
+{
+  Start = 7,
+  End = 70
+}
+Wybuch_01.Sound ="C6L3_Leningrad/Wybuch_01"

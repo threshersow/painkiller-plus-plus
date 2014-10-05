@@ -1,0 +1,26 @@
+o.Mesh = "BECZKA_DUZAShape"
+o.Pack = "cale_przedmioty.dat"
+o.Sounds = {
+    impact = {"bullet-wood","bullet-wood2","bullet-wood3",}
+}
+o.DestroyPack = "beczka_duza_zlom.dat"
+o.Health = 201
+o.Mass = 200
+o.Friction = 1
+o.Scale = 0.5
+o.Destroy.Sound = {"barrel-wood-explode"}
+o.Destroy.SoundRange1 = 40
+o.Destroy.SoundRange2 = 90
+o.Destroy.Strength = 200
+o.Destroy.ExplosionStrength = 1600
+o.Destroy.ExplosionDamage = 300
+o.Destroy.ExplosionRadius = 6
+o.Destroy.AverageDelay = 32
+o.Destroy.AverageVariation = 16
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.EffectScale = 0.4
+o.Destroy.Light = true
+o.Destroy.MinSpeedOnCollision = 18
+o.RespawnTime = 10
+o.Destroy.SoundImpact = {"barrel-wood-fallsdown1","barrel-wood-fallsdown2","barrel-wood-fallsdown3"}
+o.Pinned = true

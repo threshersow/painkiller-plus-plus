@@ -1,0 +1,154 @@
+--============================================================================
+TStomp.hitForce = 1300
+
+o.BaseName = "TStomp.CProcess"
+TStomp.TimeOut = nil
+TStomp.EQtable = {}
+TStomp._camRotAmount = 0
+TStomp._camMoveAmount = 0
+TStomp._counter = 0
+--============================================================================
+function TStomp:Add(x,y,z, timeout, maxdist, cameraMoveAmount, cameraRotAmount, hitforce, fadeOut)
+    
+    if Game.GMode ~= GModes.SingleGame then return end
+    
+	local tab = {}
+    tab.OwnerPosX = x
+    tab.OwnerPosY = y
+    tab.OwnerPosZ = z
+    tab.cameraRotAmount = cameraRotAmount
+	tab.cameraMoveAmount = cameraMoveAmount
+    tab.force = hitforce
+    tab.TimeOut = timeout/30
+	tab.maxdist = maxdist
+
+    if not tab.TimeOut then
+		tab.TimeOut = 5/30
+    end
+    if not tab.maxdist then
+		tab.maxdist = 5
+    end
+    
+    if not tab.cameraMoveAmount then
+		tab.cameraMoveAmount = 0.0
+    end
+    if not tab.cameraRotAmount then
+		tab.cameraRotAmount = 0.0
+    end
+
+    if fadeOut then
+		tab.TimeOutBegin = fadeOut/30
+	else
+		tab.TimeOutBegin = tab.TimeOut		-- wygaszanie od poczatku
+	end
+
+    --MDL.SetAnim(Game._mdlCamAnimations,"shake2")
+
+	--Game:Print(tab.TimeOut.." - "..tab.TimeOutBegin)
+	for i=1,8 do
+		if self.EQtable[i] == nil then
+			self.EQtable[i] = tab
+			return i
+		end
+	end
+    
+	self._noEquake = nil
+	return -1
+end
+--============================================================================
+function TStomp:Tick(delta)
+	local amountR = 0
+	local amountM = 0
+	local hitAmount = 0
+	--local temp = 0
+	for i=1,8 do
+		local v = self.EQtable[i]
+		if v and v.TimeOut then
+			v.TimeOut = v.TimeOut - delta
+			if v.TimeOut <= 0 then
+				self.EQtable[i] = nil
+			else
+				local atten = 1.1 - (v.TimeOutBegin - v.TimeOut)/v.TimeOutBegin
+				local dist = Dist3D(v.OwnerPosX,v.OwnerPosY,v.OwnerPosZ, Player._groundx, Player.Pos.Y, Player._groundz)
+				local distAtten = 1/v.maxdist * (v.maxdist - dist)
+				if dist < v.maxdist then
+					if v.force then
+						local amount = v.force * distAtten
+						if v.hitPlayer and math.random(100) < 35 then
+							hitAmount = hitAmount + amount * v.hitForce
+						end
+					end
+					amountR = amountR + v.cameraRotAmount * atten * distAtten
+					amountM = amountM + v.cameraMoveAmount * atten * distAtten
+				end
+			end
+		end
+	end
+
+
+	if self._noEquake and self._displaced then
+		CAM.SetPositionDisplacement(0, 0, 0)
+		CAM.SetRotationDisplacement(0, 0, 0)
+		self._noEquake = nil
+		self._displaced = nil
+	else
+		if amountR > 0.0001 or amountM > 0.0001 then
+			local r1 = FRand(amountR * 0.8, amountR * 1.1)
+			local r2 = FRand(amountR * 0.8, amountR * 1.1)
+			local r3 = FRand(amountR * 0.8, amountR * 1.1)
+			local r4 = FRand(amountM * 0.8, amountM * 1.1)
+			local r5 = FRand(amountM * 0.8, amountM * 1.1)
+			local r6 = FRand(amountM * 0.8, amountM * 1.1)
+			if math.random(100) < 50 then
+				r1 = -r1
+			end
+			if math.random(100) < 50 then
+				r2 = -r2
+			end
+			if math.random(100) < 50 then
+				r3 = -r3
+			end
+			if math.random(100) < 50 then
+				r4 = -r4
+			end
+			if math.random(100) < 50 then
+				r5 = -r5
+			end
+			if math.random(100) < 50 then
+				r6 = -r6
+			end
+			--if temp > 0 then
+			--end
+                        
+            
+			CAM.SetPositionDisplacement(r1, r2, r3)
+			CAM.SetRotationDisplacement(r4, r5, r6)
+            --[[
+            local j = MDL.GetJointIndex(Game._mdlCamAnimations,"joint2")
+            local x,y,z = MDL.GetJointPos(Game._mdlCamAnimations,j)            
+            local rw,rx,ry,rz = MDL.GetJointRotation(Game._mdlCamAnimations,j)
+            local rot = Quaternion:New(rw,rx,ry,rz)
+            --local ax,ay,az = CAM.GetAngRad()
+            --rot:RotateByAngleAxis(ax,1,0,0)
+            --rot:RotateByAngleAxis(ay,0,1,0)
+            --rot:RotateByAngleAxis(az,0,0,1)
+            local oax,oay,oaz = rot:ToEuler()
+
+			--CAM.SetPositionDisplacement(x, y, z)			
+            CAM.SetAng(0,0,oay/(math.pi/180))
+            ]]--
+            
+			self._displaced = true
+		else
+			--Game:Print(amountR.." LESS "..amountM)
+			self._noEquake = true
+		end
+	end
+
+	if hitAmount > 0 and Player then
+		ENTITY.PO_Hit(Player._Entity, Player._groundx, Player.Pos.Y, Player._groundz, FRand(-hitAmount,hitAmount), 0, FRand(-hitAmount,hitAmount))
+	end
+end
+
+
+

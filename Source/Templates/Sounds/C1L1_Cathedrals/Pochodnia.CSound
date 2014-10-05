@@ -1,0 +1,11 @@
+Pochodnia.Volume = 100
+Pochodnia.Interval = 0
+Pochodnia.RandomShift = 0
+Pochodnia.EnvironmentIntensity = 0.3
+Pochodnia.Falloff =
+{
+  Start = 1,
+  End = 10
+}
+Pochodnia.Sound ="C1L1_Cathedrals/pochodnia"
+

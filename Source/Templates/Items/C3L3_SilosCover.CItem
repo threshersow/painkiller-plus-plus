@@ -1,0 +1,5 @@
+o.BaseObj = "CItem"
+o.Pack = "PokrywaSilosu.dat"
+o.Scale = 0.3
+o.Mesh = "pokrywasilosuShape"
+o.closeSpeed = 2.0

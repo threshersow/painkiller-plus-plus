@@ -1,0 +1,23 @@
+o.BaseObj = "Sado_1gun.CActor"
+
+o.NeverMove = true
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = true
+
+o.AiParams.aiGoals = {"idle","FarAttack","hear"}
+
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 60.0,
+		minDist = 1.0,
+		spreadAngle = 0.5,
+		damagePerBullet = 10,
+		PO_HitForce = 200,
+		maxYaw = 45,				-- maksymalna odchylka broni lewo/prawo w stos. do kata patrzenia
+		maxPitch = 45,				-- maksymalna odchylka broni gora/dol
+		fireParticle = "shot",	
+		fireParticleSize = 0.25,
+   		bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+
+	}

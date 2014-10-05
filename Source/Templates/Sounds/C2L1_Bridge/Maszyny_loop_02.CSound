@@ -1,0 +1,10 @@
+Maszyny_loop_02.Volume = 60
+Maszyny_loop_02.Interval = 0
+Maszyny_loop_02.RandomShift = 0
+Maszyny_loop_02.Falloff =
+{
+  Start = 3,
+  End = 15
+}
+Maszyny_loop_02.Sound ="C2L1_Bridge/Maszyny_loop_02"
+

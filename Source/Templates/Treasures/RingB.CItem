@@ -1,0 +1,18 @@
+o.Mesh = "polySurfaceShape26108"
+o.Pack = "pierscien_niebieski.dat"
+o.Scale = 0.18
+
+o.BonusItemValue = 20
+o.TimeToLive = 20 * 30
+o.takeDistance = 1.4
+
+o.force = {10,30,10}
+o.rotate = {10,80,10}
+o.angularDamping = 0.5
+o.Friction = 2.5
+
+
+o.s_SubClass.bindFX = {
+       {"flarka_kielich", 0.3, nil, {0.11, 0, -0.05}, {0.4, 0.4, 0.4}},
+       {"FLARA_HOSTIE", 1, nil, {0, 0, 0}, {0.9, 0.9, 0.9}},
+}

@@ -1,0 +1,10 @@
+Cykady.Volume = 20
+Cykady.Interval = 0
+Cykady.RandomShift = 0
+Cykady.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Cykady.Sound ="C1L4_Cemetery/cykady_01;C1L4_Cemetery/cykady_02"
+

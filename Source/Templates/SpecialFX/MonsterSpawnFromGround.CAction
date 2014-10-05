@@ -1,0 +1,13 @@
+-- from ground
+o.Sequence = {
+    {"Object:'FX_sground.CActor',false,px,py-1,pz,p.angle"},        
+    {'AI:p,false'},
+    {"PSnd:'misc/spawn_ground',20,30"},
+    --{"Light:px,py,pz, 255,255,0, 7,10, 2, 0.3,0.5,0.3"},    
+    {'EnablePO:p,false'},    
+    {'Anim:p,"enter",false,0'},
+    {'EnableDraw:p,true'},    
+    {"WaitForAnim:p"},
+    {'AI:p,true'},
+    {'EnablePO:p,true'},
+}

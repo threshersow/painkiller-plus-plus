@@ -1,0 +1,43 @@
+o.Model = "bat"
+o.CreatePO = false
+o.Scale = 1
+o.Health = 10
+o.WalkSpeed = 10.0
+o.RotateSpeed = 8
+o._DontCheckFloors = true
+o.NotCountable = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    Mass     = 15,
+    BodyScale = 0.2,
+}
+
+o.smoothFly = 4.0
+
+o.s_SubClass = {
+    Animations = {
+        idle = {1.0, false},
+        fly  = {4.5, false},
+    },
+    Ambients = {"idle"},
+    DeathJoints = {"ogon",},
+    flyWalk = "fly",
+}
+
+o.DeathTimer = 280
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"BatEscape","Bathear",}
+o.AiParams.viewDistance = 16
+o.AiParams.viewDistance360 = 16
+o.AiParams.viewAngle = 360
+
+o.AiParams.hearing = 2.0
+o.AiParams.collisionCheckSpeed = 0.25
+o.AiParams.updateSpeed = 0.15
+o.AiParams.attackRange = 2.0
+o.AiParams.attackRangeAngle = 180
+o.AiParams.weaponDamage = 3
+
+o.AiParams.dieAfterActivationTime = 45.0           -- w sec.

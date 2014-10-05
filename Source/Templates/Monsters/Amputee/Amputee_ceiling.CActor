@@ -1,0 +1,22 @@
+o.BaseObj = "Amputee.CActor"
+o.CreatePO = false
+
+o.s_SubClass.walk = {"walk_obrocony"}
+
+o.AiParams.aiGoals = {"idle"}
+o.AiParams.walkStep = 5.0
+o._DontCheckFloors = true
+
+o.AiParams.GuardStill = false
+o.Animation = "walk_obrocony"
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    Mass     = 60,
+}
+
+o.s_SubClass.rotateHead = nil
+o.s_SubClass.rotateHeadBone = nil
+o.AiParams.aggresive = true
+o.RagdollCollDamage = 25
+o.doNotUseWP = true

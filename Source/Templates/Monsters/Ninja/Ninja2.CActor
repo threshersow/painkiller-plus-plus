@@ -1,0 +1,115 @@
+o.BaseObj = "Ninja1.CActor"
+o.Model = "ninja"
+o.Health = 111
+o.enableGibWhenHPBelow = -30
+
+o.s_SubClass.Animations = {
+	idle   = {1.0,false},			-- speed, movingcurve, events
+	walk   = {1.5,true, {
+				{0.60,'PlaySound',"stepl"},
+				{0.60,'FootFX','s_p_srodstopie'},
+				{0.0,'PlaySound',"stepr"},
+				{0.0,'FootFX','s_l_srodstopie'},
+				}},
+
+	run    = {2.0,true, {
+				{0.60,'PlaySound',"stepl"},
+				{0.60,'FootFX','s_p_srodstopie'},
+				{0.0,'PlaySound',"stepr"},
+				{0.0,'FootFX','s_l_srodstopie'},
+				}},
+	attack  = {1.0,true, {
+				{0.0,'BindTrailSword','trail_sword','szabla','szabla1'},
+				{0.3,'damage'},
+				{0.5,'damage'},
+				{0.2,'PlaySound',"swish"},
+				{0.5,'PlaySound',"swish"},
+				{0.2,'PlaySound',"attack"},
+				{0.78,'EndTrailSword'}
+				}},
+	attack_fik  = {1.5,true, {
+				{1.2,'damage'},
+				{0.0,'PlaySound',"fik"},
+				{0.2,'PlaySound',"roll"},
+				}},
+
+	attack_jump  = {1.0,true, {
+				{0.1,'SetVel'},
+				{0.1,'BindRandomSound',"jumpat"},
+				{0.1,'BindRandomSound',"startswish"},
+				{1.16,'StopFlying'},
+				{1.2,'PlaySound',"jumpat2"},
+				{1.2,'PlaySound',"swish"},
+				{1.3,'damage'},
+				{1.35,'PlaySound',"missed"},
+				}},
+	attack_shuriken  = {1.0,false, {
+				{0.4,'PlaySound',"shuri"},
+				{0.4,'PlaySound',"shuriSw"},
+				{0.45,'Throw'},
+				}},
+	hit1 = {1.0, false, {
+--				{0.0,'PlaySoundHit',{'evil_hit1','evil_hit2','evil_hit3',},12,48, },
+				}},
+	hit2 = {1.0, false, {
+--				{0.0,'PlaySoundHit',{'evil_hit1','evil_hit2','evil_hit3',},12,48, },
+				}},
+}
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee", "JumpUP","ninjaRoll","throw",}
+
+o.s_SubClass.NearAttacks = {"attack"}
+
+	
+o.s_SubClass.RagdollCollisions = {
+	MinStren = 2.0,
+	MinTime = 0.7,
+	Bones = {
+				{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+				{"r_p_lokiec", "bodyfalls", true},
+				{"szabla", "weaponlost", false},
+			}
+}
+
+o.s_SubClass.RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"szabla", "weaponlost", false},
+			},
+	    }
+
+o.AiParams.weapon = nil
+o.AiParams.attackRange = 3.2
+o.AiParams.weaponDamage = 11
+o.AiParams.jumpRangeMin = 12
+o.AiParams.jumpRangeMax = 16
+o.AiParams.jumpAnim = "attack_jump"
+o.AiParams.jumpDamageRange = 0.0
+o.AiParams.doNotRotateWhileJumping = true
+o.AiParams.minDelayBetweenJumps = 2.0
+o.AiParams.jumpAngle = 60.0
+o.AiParams.jumpDistanceMinus = 1.0				-- na jaka odleglosc przed graczem ma skakac
+o.AiParams.jumpAnimLen = 1.27					-- w sec.
+
+o.AiParams.throwAnim = "attack_shuriken"
+o.AiParams.throwAmmo = 99999
+o.AiParams.throwRangeMin = 14
+o.AiParams.throwRangeMax = 30
+o.AiParams.minDelayBetweenThrow = 5.0
+o.AiParams.ThrowableItem = "Shuriken.CItem"
+o.AiParams.throwItemBindTo = 'dlo_lewa_root'
+o.AiParams.holdJointDisplace = Vector:New(0,0,0)
+o.AiParams.hideMesh = nil
+o.AiParams.ThrowSpeed = 30
+
+o.AiParams.rollRangeMin = 6.5
+o.AiParams.rollRangeMax = 7.5
+o.AiParams.rollAnim = "attack_fik"
+o.AiParams.minDelayBetweenRoll = 6.0

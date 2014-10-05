@@ -1,0 +1,17 @@
+Coffin.Mesh = "TRUMNAShape"
+Coffin.Pack = "cale_przedmioty.dat"
+Coffin.DestroyPack = "trumna_zlom.dat"
+Coffin.Health = 5
+Coffin.Scale = 0.5
+
+Coffin.Destroy.ExplosionStrength = 0
+Coffin.Destroy.AverageDelay = 1
+Coffin.Destroy.AverageVariation = 0
+Coffin.Destroy.Strength = 100
+o.Destroy.Treasures = 
+{
+    Coins  = {3, 'g'},
+}
+Coffin.Destroy.MinSpeedOnCollision = 13
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.6

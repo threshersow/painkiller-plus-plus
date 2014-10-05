@@ -1,0 +1,11 @@
+o.s_SubClass.SoundsDefinitions = {
+	bodyfalls = {
+		samples = {"$/actor/devilmonk/devil_bodyfalls"},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	damageByRagdoll = {
+		samples = {"$/actor/hellbiker/hellb-attack-head-hit"},
+	},
+
+}

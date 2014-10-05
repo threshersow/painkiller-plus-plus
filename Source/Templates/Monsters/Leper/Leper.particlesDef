@@ -1,0 +1,16 @@
+o.s_SubClass.Light = {
+    template = "leper_Light.CLight",
+    joint = "d_P_bron",
+}
+o.s_SubClass.BillBoard = {
+	template = "lepper-torch.CBillboard",
+	joint = "d_P_bron",
+}
+o.s_SubClass.ParticlesDefinitions = {
+	torch = {
+		pfx = "pochodnia_flame3",
+		scale = 0.3,
+		offset = Vector:New(1.0,0.15,-0.05),
+		joint = "d_P_bron",
+	},
+}

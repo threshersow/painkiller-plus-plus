@@ -1,0 +1,143 @@
+o.s_SubClass.SoundsDefinitions = {
+	lie = {
+		samples = {'amp_lie1','amp_lie2','amp_lie3'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	lieidle = {
+		samples = {'amp_lie_idle1_1','amp_lie_idle1_2','amp_lie_idle1_3'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	lieidle2 = {
+		samples = {'amp_lie2idle_1','amp_lie2idle_2','amp_lie2idle_3'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	step1 = {
+		samples = {'amp_krok1','amp_krok2'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	step2 = {
+		samples = {'amp_krok2','amp_krok3'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	walk = {
+		samples = {'amp_walk_effort1','amp_walk_effort2','amp_walk_effort3','amp_walk_effort4','amp_walk_effort5'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	effort = {
+		samples = {'amp_walk_knee_effort1','amp_walk_knee_effort2'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	jump = {
+		samples = {'amp_atack_jump1','amp_atack_jump2','amp_atack_jump3'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	throw = {
+		samples = {'amp_prep_to_throw1','amp_prep_to_throw2'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	throwvoice = {
+		samples = {'amp_throw_up_voice1'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	throw_up = {
+		samples = {'amp_throw_up'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	throw2 = {
+		samples = {'amp_atack_throw_up','amp_atack_throw_up2'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	guts = {
+		samples = {'amp_atack_throw_guts'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	onAttackOnce = {
+		samples = {"amp_halt1","amp_halt2","amp_halt3","amp_halt4",},
+		dist1 = 50,
+		dist2 = 70,
+		playChance = 0.3,
+	},
+	bodyfalls = {
+		samples = {"amp_bodyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	round = {
+		samples = {'amp_round'},
+		dist1 = 8,
+		dist2 = 50,
+	},
+	
+	death = {
+		samples = {"amp_death2","amp_death1","amp_death3","amp_death4" },
+		dist1 = 16,
+		dist2 = 60,
+	},
+	hurt = {
+		samples = {"amp_hit1","amp_hit2","amp_hit3"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	
+
+
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+        lezenie_idle    = {			-- lize reke
+                            {0.3,'PlaySound',"lie"},
+                            {1.3,'PlaySound',"lie"},
+                        },
+        lezenie_idle1   = {			-- lize ziemie
+							{0.45,'PlaySound',"lieidle"},
+						},
+		lezenie2idle    = {			-- z lizania na czworaka
+							{0.2,'PlaySound',"lieidle2"},
+						},
+		walk1           =  {				-- na czworaka
+							{0.7,'PlaySound',"step1"},
+							{0.0,'PlaySound',"step2"},
+							{0.5,'PlaySound',"walk"},
+						},
+		walk2           = {				-- na kolanach:
+							{0.6,'PlaySound',"effort"},
+						},
+		walk3           = {
+							{0.6,'PlaySound',"effort"},
+						},
+		walk4           = {
+							{0.6,'PlaySound',"effort"},
+						},
+		walk_atak       = {		-- chodzi kolana atak (2.5)
+							{0.2,'PlaySound',"throw"},
+							{1.1,'PlaySound',"throwvoice"},
+							{1.5,'PlaySound',"throw_up"},
+						},
+		walk_atak1      = {			-- 1.25
+							{0.5,'PlaySound',"throw2"},
+							{0.8,'PlaySound',"guts"},
+						},
+		jump			= {			-- z kolan/czworaka skok do lezenia
+							{0.3, 'PlaySound',"jump"},
+							{0.95,'PlaySound',"round"},
+						},
+		walk_obrocony   = {			-- na czworaka
+							{0.7,'PlaySound',"step1"},
+							{0.0,'PlaySound',"step2"},
+							{0.5,'PlaySound',"effort"},
+						},
+}
+

@@ -1,0 +1,3 @@
+o.s_SubClass.bindFX = {
+	{"clownthrow", 0.1},
+}

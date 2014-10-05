@@ -1,0 +1,24 @@
+o.Mesh = "polySurfaceShape58552"
+o.Pack = "flamer_caly.dat"
+o.Scale = 0.6
+o.DestroyPack = "flamer_zlom.dat"
+o.Health = 60
+o.Mass = 100
+o.SingleBottomHole = false
+o.NotCountable = true
+
+o.RepulsePower = 1500
+o.ExplosionTimer = 5
+
+o.TestDeathZone = true
+o.Destroy.ExplosionStrength = 4200
+o.Destroy.ExplosionDamage = 400
+o.Destroy.ExplosionRadius = 10
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 350
+o.Destroy.MinSpeedOnCollision = 10
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.EffectScale = 0.8
+o.Destroy.LifetimeAfterExplosion = 6
+

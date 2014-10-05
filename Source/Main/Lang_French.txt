@@ -1,0 +1,1085 @@
+iso-8859-1	# encoding - use cp1250 for Windows Central European
+
+# globals
+1: Oui
+2: Non
+3: OK
+4: Activé(e)
+5: Désactivé(e)
+6: Aucun(e)
+7: Fin de partie
+
+# menu items
+
+8: Retour
+9: Appliquer
+
+# main menu
+10: Signer le pacte
+11: Charger/Enreg.
+12: Multijoueur
+13: Options
+14: Secrets
+15: Retour
+16: Quitter
+17: Etes-vous sûr(e) ?
+
+# difficulty level
+18: Sélectionner niveau de difficulté
+19: Rêverie
+20: Insomnie
+21: Cauchemar
+22: Traumatisme
+
+# options menu
+23: Commandes
+24: A.T.H.
+25: Audio
+26: Vidéo
+27: Vidéo (avancé)
+
+# controls config
+
+28: Armes
+29: Action
+30: Principale
+31: Secondaire
+
+# keys
+32: Avancer
+33: Reculer
+34: Pas latéral gauche
+35: Pas latéral droite
+36: Sauter
+37: Tirer
+38: Tir alternatif
+39: Arme suivante
+40: Arme précédente
+41: Arme 1
+42: Arme 2
+43: Arme 3
+44: Arme 4
+45: Arme 5
+46: Bullet Time
+47: Pause
+48: Capture d'écran
+49: Menu
+50: Statistiques
+51: Parler à tous
+52: Parler à l'équipe
+53: Saut de roquette
+54: Saut de roquette avant
+55: Cadence tir
+56: Changer cadence tir
+57: Sélectionner meilleure arme explosive
+58: Sélectionner meilleure arme non explosive
+59: Sélectionner meilleure arme personnalisée
+60: Utiliser meilleure arme explosive
+61: Utiliser meilleure arme non explosive
+62: Utiliser meilleure arme personnalisée
+
+# mouse options
+63: Inverser souris
+64: Amortir souris
+65: Sensib. souris
+66: Sensib. molette
+
+# weapons config
+67: Secondaire
+68: Changer
+69: Matériel
+70: Armes explosives
+71: Armes non explosives
+72: Changer d'arme automatiquement
+73: Personnalisée
+74: Haut
+75: Bas
+
+# HUD config
+76: Opacité ATH
+77: Taille ATH
+78: Petite
+79: Normale
+80: Grande
+81: Réticule
+82: Opacité
+83: Rouge
+84: Vert
+85: Bleu
+
+# sound config
+86: Volume général
+87: Volume musique 
+88: Volume audio
+89: Stéréo inversée
+90: Configuration hauts-parleurs
+91: Carte son 3D
+92: Deux hauts-parleurs
+93: Casque
+94: Surround
+95: Quatre hauts-parleurs
+96: Cinq-un
+97: Sept-un
+
+# video config
+98: Résolution
+99: Qualité texture
+100: Plein écran
+101: Gamma
+102: Luminosité
+103: Contraste
+104: Très bas
+105: Bas
+106: Moyen
+107: Elevé
+108: Architecture
+109: Personnages
+110: Ciel
+
+# advanced video config
+111: Ombres pers.
+112: Effets météo
+113: Ciel
+114: Voir arme
+115: Spécularité armes
+116: Mapping armes
+117: Filtrage texture
+118: Multisampling
+119: Permanence motifs
+120: Lumières dynamiques
+121: Projecteurs
+122: Effets corona
+123: Motifs
+124: Détails texture 
+125: Bilinéaire
+126: Trilinéaire
+127: Anisotropique
+
+# multiplayer menu
+
+128: Mot de passe
+129: Rejoindre partie
+130: Démarrer partie
+131: Réglages joueur
+
+# join game menu
+132: Internet
+133: LAN
+134: Favoris
+135: Ajouter aux Favoris
+136: Retirer des Favoris
+137: Rafraîchir
+138: Arrêter
+139: Rejoindre
+140: Nom du serveur
+141: Serveurs
+142: Joueurs
+143: Carte
+144: Partie
+145: Ping
+146: Saisir IP
+147: Serveur introuvable
+148: Cliquer pour sélectionner
+149: Mise à jour liste serveurs
+150: Mise à jour terminée
+151: [AUCUN(E)]
+152: [PAS DE CARTE]
+153: Inconnu(e)
+
+# start game menu
+154: Mot de passe serveur
+155: Port de serveur
+156: Mode
+157: Free For All
+158: Team Deathmatch
+159: Voosh
+160: The Light Bearer
+161: People Can Fly
+#157: Chacun pour soi
+#158: Match à mort en équipe
+#159: Voosh
+#160: Porteur de lumière
+#161: Avoir des ailes
+162: Nb. joueurs max.
+163: Nb. spectateurs max.
+164: Limite frags
+165: Limite temps
+166: Serveur public
+167: Dégâts équipe
+168: Permanence armes
+169: Bonus
+170: Permanence bonus
+171: Autoriser saut de lapin
+172: Autoriser brillance sur peau
+173: Autoriser "rocket jump" avant
+174: Brillance sur peau équipe
+175: Brillance sur peau ennemis
+176: Général
+177: Avancé
+178: Démarrer
+179: Ajouter
+180: Ajouter tout
+181: Retirer
+182: Retirer tout
+
+# player settings menu
+183: Nom
+184: Équipe
+185: Vitesse connexion
+186: Clé CD
+187: Annuler
+188: Entrer
+
+# menu items' descriptions
+
+189: Revenir à l'écran précédent
+190: Appliquer les paramètres et revenir à l'écran précédent
+
+# main menu
+191: Démarrer une nouvelle partie solo
+192: Charger une partie sauvegardée ou sauvegarder la partie en cours
+193: Jouer sur Internet ou démarrer votre propre serveur multijoueur
+194: Configurer les commandes, les paramètres audio, vidéo et autres du jeu
+195: Vérifier le nombre de secrets découverts
+196: Reprendre la partie
+197: Quitter immédiatement la partie
+
+# difficulty modes
+198: Mode extrêmement facile pour débutants
+199: Niveau de difficulté standard
+200: Mode difficile pour joueurs confirmés
+201: La véritable histoire de Painkiller
+
+# options menu
+202: Configuration des commandes de jeu
+203: Configuration de l'affichage tête haute
+204: Configuration audio et musique
+205: Configuration options graphiques
+206: Configuration avancée pour utilisateurs confirmés
+
+# controls config
+
+207: Aller à l'écran de configuration des armes
+208: Cliquer sur la touche pour changer puis appuyer sur la nouvelle touche
+
+# mouse options
+209: Contrôle de la souris façon simulateur de vol
+210: Supprimer les secousses de la souris
+211: Régler la sensibilité de la souris
+212: Régler la sensibilité de la molette de la souris
+
+# HUD config
+213: Régler l'opacité de l'ATH
+214: Régler la taille de l'ATH
+215: Choisir le réticule
+216: Choisir l'opacité du réticule
+217: Choisir la couleur du réticule
+
+# weapons config
+218: Changer d'arme automatiquement
+
+# sound config
+219: Régler le volume général
+220: Régler le volume de la musique
+221: Régler le volume des effets sonores
+222: Stéréo inversée
+223: Choisir la configuration du haut-parleur
+224: Choisir la carte son 3D
+
+# video config
+225: Une haute résolution nécessite un ordinateur et une carte 3D plus rapides
+226: Régler sur bas en cas de problèmes de performance 
+227: Décocher pour jouer en mode fenêtré
+228: Régler gamma
+229: Régler luminosité
+230: Régler contraste
+231: Changer qualité texture armes,
+232: Changer qualité texture architecture,
+233: Changer qualité texture ennemi,
+234: Changer qualité texture ciel,
+
+# advanced video config
+235: Désactiver en cas de problèmes de performance
+236: Régler sur bilinéaire en cas de problèmes de performance
+237: Régler le niveau de multisampling
+238: Régler le temps au bout duquel les motifs disparaissent
+
+# multiplayer menu
+
+239: Entrer le mot de passe serveur
+240: Rechercher des parties multijoueurs sur le LAN ou sur Internet et les rejoindre
+241: Démarrer votre propre serveur multijoueur en réseau local/sur Internet
+242: Configurer paramètres multijoueurs
+
+# join game menu
+243: Rechercher des parties multijoueurs sur Internet et les rejoindre
+244: Rechercher des parties multijoueurs sur le réseau local et les rejoindre
+245: Liste des serveurs favoris
+246: Ajouter le serveur sélectionné à vos Favoris
+247: Retirer le serveur sélectionné de vos Favoris
+248: Rafraîchir la liste des serveurs
+249: Arrêter le rafraîchissement de la liste des serveurs
+250: Rejoindre le serveur et jouer
+251: Saisir l'IP du serveur
+
+# start game menu
+252: Saisir le nom du serveur
+253: Définir le mot de passe limitant l'accès au serveur
+254: Changer le port de serveur
+255: Sélectionner le mode de jeu
+256: Définir le nombre maximum de joueurs
+257: Définir le nombre maximum de spectateurs
+258: Nombre de frags nécessaires pour finir la carte, 0 = non autorisé
+259: Durée maximum entre deux changements de carte, 0 = non autorisé
+260: Faire connaître votre serveur sur Internet
+261: Activer/désactiver les tirs alliés
+262: Cocher si les armes doivent continuer à apparaître après avoir été ramassées
+263: Activer/désactiver les bonus sur la carte
+264: Cocher si le bonus disparaît lorsque le personnage meurt
+265: Cocher pour autoriser le saut de lapin
+266: Cocher pour autoriser l'effet de brillance sur la peau
+267: Cocher pour autoriser le saut de roquette avant
+268: Sélectionner la couleur de l'effet de brillance sur la peau de l'équipe
+269: Sélectionner la couleur de l'effet de brillance sur la peau des ennemis
+270: Paramètres généraux
+271: Paramètres avancés
+272: Démarrer le serveur
+
+# list manipulation
+273: Monter
+274: Descendre
+275: Ajouter l'élément sélectionné
+276: Ajouter tous les éléments
+277: Retirer l'élément sélectionné
+278: Retirer tous les éléments
+
+# player settings menu
+279: Saisir votre pseudo
+280: Sélectionner votre équipe pour les parties en équipe
+281: Sélectionner votre vitesse de connexion
+282: Saisir votre clé CD
+
+# map
+
+# levels
+283: Cimetière
+284: Atrium
+285: Catacombes
+286: Cathédrale
+287: Enclave
+288: Prison
+289: Opéra
+290: Asile
+291: Pont enneigé
+292: Ville
+293: Marais
+294: Gare
+295: Usine désaff.
+296: Base milit.
+297: Ruines
+298: Château
+299: Le Palais
+300: Babel
+301: Forêt
+302: Tour
+303: Cité lac.
+304: Quais
+305: Monastère
+306: Enfer
+
+# stats
+307: Cartes trouvées
+308: Or trouvé
+
+# single-player stats
+
+309: VOTRE SCORE
+310: Durée de jeu
+311: Monstres tués
+312: Ames collectées
+313: Or trouvé
+314: Objets sacrés trouvés
+315: Munitions trouvées
+316: Objets détruits
+317: Secrets découverts
+318: Statut de déverrouillage de la carte
+319: Statut
+320: VERROUILLE(E)
+321: DEVERROUILLE(E)
+
+# multi-player messages
+
+322: $PLAYER est entré dans l'arène.
+323: $PLAYER s'est dégonflé et a quitté l'arène.
+324: $KILLER a tué $PLAYER avec son arme.
+325: $KILLER a abrégé les souffrances de $PLAYER.
+326: $KILLER a ventilé $PLAYER.
+327: $PLAYER a embrassé la grenade de $KILLER.
+328: $PLAYER a chevauché la roquette de $KILLER.
+329: $PLAYER s'est mangé la roquette de $KILLER.
+330: $KILLER a crucifié $PLAYER.
+331: $KILLER a déchiqueté $PLAYER.
+332: $KILLER a habilement téléfraggé $PLAYER.
+333: $PLAYER a lutté contre la loi de la pesanteur et a perdu.
+334: $PLAYER a quitté le bâtiment.
+335: $PLAYER a oublié comment fonctionnait une arme.
+336: $PLAYER vient de prouver que la vie est courte.
+337: $PLAYER a explosé.
+
+# cards
+338: Vitesse
+339: Dextérité
+340: Fureur
+341: Rage
+342: Confusion
+343: Endurance
+344: Volonté de fer
+345: Hâte
+346: Double hâte
+347: Triple hâte
+348: Bonus de temps
+349: Double bonus de temps
+350: Piégeur d'âme
+351: Gardien d'âme
+352: Pouvoir d'âme
+353: Ame sombre
+354: Soulagement
+355: Vitalité
+356: Reconstitution
+357: Avidité
+358: Pardon
+359: Clémence
+360: Intervention divine
+361: Dernier soupir
+
+# cards descriptions
+362: Se déplacer plus rapidement
+363: Recharger les armes\n2 fois plus vite
+364: Infliger 2 fois plus de dégâts
+365: Infliger 4 fois plus de dégâts
+366: Perturber les ennemis
+367: Ne subir que la\nmoitié des dégâts
+368: Les ennemis ne peuvent\npas vous blesser
+369: Le monde va 2 fois\nplus lentement
+370: Le monde va 4 fois\nplus lentement
+371: Le monde va 8 fois\nplus lentement
+372: Les cartes temporaires\ndurent 10 secondes de plus
+373: Les cartes temporaires\ndurent 20 secondes de plus
+374: Collecter les âmes à distance
+375: Les âmes restent plus\nlongtemps
+376: Les âmes donnent\ndavantage de santé
+377: Se transformer en démon\ntoutes les 50 âmes
+378: Augmenter la santé\ninitiale à 150
+379: Augmenter la capacité\nde santé initiale à 150
+380: Doubler les munitions dans\nla boîte de munitions
+381: Doubler le nombre de\nrichesses cachées
+382: Vous pouvez utiliser les cartes\ntemporaires 2 fois par niveau
+383: Vous pouvez utiliser les cartes\ntemporaires 3 fois par niveau
+384: Toutes les cartes peuvent être\nplacées gratuitement
+385: Régénérer votre santé\nlorsque vous êtes mourant
+
+# multi-player stats
+
+386: Joueur
+387: Frags
+388: Tués
+389: Morts
+390: Ping
+391: Temps
+392:Perte paquets
+393: Temps restant
+
+# messages
+394: Appuyer sur 'Entrer' pour continuer.
+395: Appuyer sur 'Tirer' pour continuer.
+
+# black tarot card unlocking conditions
+396: Terminer le niveau
+397: Détruire tous les objets
+398: Tuer tous les monstres
+399: Trouver au moins 500 pièce(s) d'or
+400: Tuer Necrogiant en moins de 02:00
+401: Terminer le niveau en utilisant seulement des armes non explosives
+402: Collecter au moins 100 âmes
+403: Terminer le niveau en utilisant seulement le painkiller
+404: Trouver tous les lieux secrets
+405: Terminer le niveau en utilisant uniquement des pieux
+406: Tuer la chose des marais en moins de 04:00
+407: Ne pas collecter une seule âme
+408: Tuer au moins 30 ennemis en étant transformé en démon
+409: Tuer tous les monstres
+410: Tuer Guardian en moins de 01:20
+411: Trouver tous les objets sacrés
+412: terminer le niveau sans armure
+413: Trouver toutes les munitions
+414: Terminer le niveau sans utiliser le tarot noir
+415: Tuer Alastor en moins de 05:00
+416: Trouver tous les lieux secrets
+417: Se transformer en démon au moins 3 fois
+418: Conserver plus de 50 PV
+419: Tuer Lucifer
+
+# main menu
+420: Reprendre la partie
+421: Revenir à la carte
+
+# difficulty level
+422: Mode verrouillé : terminer Cauchemar pour déverrouiller
+
+# map
+423: Chapitre
+424: Niveau
+425: Tarot noir non disponible dans la version démo
+426: Tarot noir inactif
+427: Sélectionner niveau
+428: Sélectionner chapitre
+429: Aller au tarot noir
+430: Aller au Menu principal
+431: Lancer le niveau
+432: Tarot noir inactif au cours du niveau
+433: Tarot noir non disponible au niveau Rêverie
+
+# black tarot
+434: Coût du placement
+435: Retour du retrait
+436: Or après retrait
+437: Cliquez sur 'Utiliser cartes dorées' au cours du\nniveau pour libérer le pouvoir de vos cartes dorées.\nVous pouvez les utiliser [x] fois par niveau.
+438: Les effets de toutes les cartes argentées placées ici\nsont immédiats et durent tout le niveau.
+439: Or insuffisant pour placer\nla carte.
+440: Votre or
+441: Or nécessaire
+
+# sound options
+442: EAX Acoustics
+443: Cocher pour activer les effets EAX
+444: Mus. de combat
+445: Mus. ambiance
+446: Régler le volume de la musique de combat
+447: Régler le volume de la musique d'ambiance
+
+# video options
+448: Niv. détails partic. 
+
+# controls
+449: Utiliser cartes dorées
+450: Lampe torche
+
+# game over
+451: Appuyer sur 'Tirer' pour recommencer ou sur 'Echap' pour revenir au menu.
+
+# scoreboard
+452: Armures trouvées
+453: ECHEC
+454: N/A
+455: Vous avez
+456: déverrouillé une nouvelle
+457: carte de tarot noir !
+
+# weapons
+458: Pain
+459: Killer
+460: Fusil à pompe
+461: Congeleur
+462: Lance-pieu
+463: Lance-grenade
+464: Lance-roquette
+465: Mitrailleuse
+466: Shuriken
+467: Electro
+
+# warnings
+468: Le niveau Rêverie est extrêmement facile et s'adresse aux débutants. Dans ce niveau, vous n'avez pas accès au tarot noir.\nVoulez-vous vraiment sélectionner ce niveau ?
+469: Etes-vous sûr ?
+470: Ne plus afficher ce message
+
+471: NIVEAU QUALITE TEXTURE
+
+472: Revenir à la carte
+
+473: Zone secrète découverte !
+
+474: Difficulté
+
+# create server
+475: Cartes disponibles
+476: Cartes serveur
+
+# keys
+477: Touche inconnue
+478: Haut
+479: Bas
+480: Gauche
+481: Droite
+482: Espace
+483: Tab
+484: Ret. Arr.
+485: Entrée
+486: Pause
+487: Maj.
+488: Ctrl
+489: Echap
+490: Page Haut
+491: Page Bas
+492: Fin
+493: Origine
+494: Inser
+495: Suppr
+496: (Pavnum) 0
+497: (Pavnum) 1
+498: (Pavnum) 2
+499: (Pavnum) 3
+500: (Pavnum) 4
+501: (Pavnum) 5
+502: (Pavnum) 6
+503: (Pavnum) 7
+504: (Pavnum) 8
+505: (Pavnum) 9
+506: (Pavnum) *
+507: (Pavnum) +
+508: (Pavnum) -
+509: (Pavnum) .
+510: (Pavnum) /
+511: Verr num
+512: Arrêt défil
+513: Maj.
+514: Maj.-D
+515: Alt
+516: Alt Gr
+517: Menu gauche
+518: Menu droite
+519: Menu tout à droite
+520: Impr écran
+521: Verr. Maj.
+522: (Pavnum) Entr
+523: Bouton gauche souris
+524: Bouton droit souris
+525: Bouton central souris
+526: Molette avant souris
+527: Molette arrière souris
+528: Ctrl
+529: Ctrl-D
+
+# video options
+530: Elevé
+531: Bas
+
+# weapons config
+532: Priorité de ramassage
+533: Personnalisation 1
+534: Personnalisation 2
+535: Sélec. meill. pers. 1
+536: Sélec. meill. pers. 2
+537: Util. meill. pers. 1
+538: Util. meill. pers. 2
+
+# keys
+539: Chargement rapide
+540: Sauvegarde rapide
+
+# messages keys
+541: Messages
+542: Configuration des messages multijoueurs
+543: Touche
+544: PT
+545: Message
+
+# messages
+546: Trouvez Rage !
+547: Notre Rage !
+548: Notre Rage est morte
+549: Rage ennemie !
+550: La Rage ennemie est morte
+551: Trouvez Immunité !
+552: Notre Immunité !
+553: Immunité ennemie !
+554: [custom message/taunt]
+555: [custom message/taunt]
+556: [custom message/taunt]
+557: [custom message/taunt]
+558: [custom message/taunt]
+559: [custom message/taunt]
+560: [custom message/taunt]
+561: [custom message/taunt]
+562: [custom message/taunt]
+563: [custom message/taunt]
+
+# video options
+564: Paramètres graphiques
+565: Régler la qualité des éléments graphiques
+566: Personnalisé
+567: Très rapide
+568: Rapide
+569: Normal
+570: Très basse
+571: Démente
+
+572: Cocher les messages que vous souhaitez dire à tous les joueurs
+573: Tous les joueurs peuvent lire ce message
+574: Seule votre équipe peut lire ce message
+
+575: Rognage plan
+576: Régler le rognage du plan
+577: Modèle multijoueur secret déverrouillé
+578: Vous pouvez utiliser les cartes dorées de façon illimitée et gratuitement
+
+# multiplayer error messages - DO NOT TRANSLATE
+579: Disconnected on timeout: %d ms
+580: GameSpy timeout error!!!\nDescription: %s
+581: NAT Negotiation: NN server acknowledged your connection request
+582: NAT Negotiation: direct negotiation with the other client has started
+583: NAT Negotiation: unknown negotiate state returned by GameSpy!! State: %d
+584: NAT Negotiation complete! Connecting to %s
+585: NAT Negotiation error: Partner did not register with the NAT Negotiation Server
+586: NAT Negotiation error: Unable to communicate with NAT Negotiation Server
+587: NAT Negotiation error: NAT Negotiation server indicated an unknown error condition
+588: NAT Negotiation succesfull!: Client connecting from %s
+589: NAT Negotiation: Received client cookie: %d
+590: Net Init Error: WSAStartup() failed!! Returned %d
+591: Net Init Error: Windows Sockets implementation too old!
+592: Net Init Error: tried to resolve given interface and failed!
+593: Net Init Error: gethostname() call failed!! Can't find this computer's name! Returned: %d
+594: Net Init Error: failed to resolve our IP with gethostbyname()!!
+595: Net Init Error: Couldn't open listening socket: %s
+596: Net Init Error: Couldn't make socket non-blocking: %s
+597: Net Init Error: Failed to bind socket on port %d
+598: Net Init Error: getsockname on bound socket failed!! Returned: %d
+599: GameSpy Init Error: a DNS lookup (for the master server) failed\nGameSpy inactive!
+600: GameSpy Init Error: no challenge was received from the master - either the master is down, or a firewall is blocking UDP\nGameSpy inactive!
+601: GameSpy Init Error: unknown error value given by GameSpy: %d\nGameSpy inactive!
+602: Net Error: Connection refused by server (port unreachable)
+603: Net Error: Given address does not reply
+604: Net Error: Connection closed from other side (probably other side is down right now)
+605: Net Info: Rejected connect from '%s': using early development client version!
+606: Net Info: Rejected connect from '%s': different client version: %s
+607: Net Info: Rejected connect from '%s': different client scripts
+608: Net Info: Rejected connect from '%s': it tried to answer a challenge I didn't issue
+609: Net Info: Rejected connect from '%s': too many clients trying to connect
+610: Net Info: Rejected connect from '%s': bad password given
+611: Net Info: Rejected connect from '%s': maximal number of clients achieved
+612: Net Info: Rejected connect from '%s': invalid challenge given
+613: Net Info: Rejected connect from '%s': invalid challenge response given
+614: Net Info: Rejected connect from '%s': GameSpy says it has a bad CD key
+615: Net Info: Rejected net open from '%s': it tried to do it without a prior connect
+616: Net Error: trying to connect to host that is not a Painkiller server!!
+617: Net Error: the server is version '%s', we are '%s'.\nCan't connect!! Please upgrade the game.
+618: Net Error: we have different scripts than the server, but the same game version.\nPlease upgrade or reinstall the game.
+619: Net Error: we gave bad password to passworded server!!
+620: Net Error: failed challenge authentication!! A hack job, perhaps?
+621: Network: server challenge timeout...reconnecting
+622: Net Error: No more players allowed on this server
+623: Net Error: the CD Key you entered is incorrect, or there's another player with the same CD Key presently on the Net!\nServer said: %s
+624: Net Error: the client tried to answer a challenge that the server didn't provide!\nServer said: %s
+625: Net Error: the client tried to issue a Net Open command without connecting first!\nServer said: %s
+626: Net Error: unknown error report received!!
+627: Net Error: Write: error in sendto(): %s
+628: Net Error: Read: error in recvfrom(): %s
+629: Net Error: Couldn't resolve address: %s
+
+# maps stats
+630: MEILLEURS SCORES
+
+631: Mouvt. tête
+632: Régler mouvement de la tête
+633: Sons d'ambiance
+634: Activer/désactiver les sons d'ambiance
+
+635: Niveau non disponible\ndans ce mode de\ndifficulté
+636: Voulez-vous supprimer toutes vos cartes de tarot et vos scores ?
+
+637: Date et heure
+638: [NOUVELLE SAUVEGARDE]
+639: Enr.
+640: Charg.
+641: Partie sauvegardée
+642: Partie chargée
+643: [Rapide]
+644: [Auto]
+645: Voulez-vous vraiment supprimer cette partie sauvegardée ?
+646: Voulez-vous vraiment écraser cette partie sauvegardée ?
+
+647: POINT DE CONTROLE
+648: Sauvegarde en cours
+
+# cheats
+649: Les cheats ne sont actifs qu'en mode Rêverie et Insomnie.
+650: Maximum de munitions autorisé.
+651: Toutes les armes autorisées.
+652: Maximum de santé autorisé.
+653: Maximum de munitions et de santé autorisé.
+654: God mode activé.
+655: God mode désactivé.
+656: Projections excessives activées.
+657: Projections excessives désactivées.
+658: Les corps ne disparaîtront pas.
+659: Les corps disparaîtront.
+660: Les motifs ne disparaîtront pas.
+661: Les motifs disparaîtront.
+662: Tous les ennemis ont 1 PV.
+663: Tous les ennemis ont des PV normaux.
+664: Pluie d'or autorisée.
+665: "Hâte" activée (le monde va plus lentement).
+666: "Hâte" désactivée.
+667: Mode Démon activé.
+668: Mode Démon désactivé.
+669: Modificateur d'arme activé.
+670: Modificateur d'arme désactivé.
+671: L'utilisation illimitée des cartes dorées est autorisée.
+672: Accès à tous les niveaux autorisé.
+673: Toutes les cartes de tarot sont autorisées.
+
+# connection speed
+674: Modem
+675: ISDN
+676: Câble/ADSL
+677: LAN/T1
+
+678: Sauvegardes
+679: Auto-sauv.
+680: [Pt ctrl]
+
+681: Appuyer sur Tirer pour charger le dernier point de contrôle.
+682: Appuyer sur Tir secondaire pour charger la dernière sauvegarde rapide.
+683: Appuyer sur Echap pour accéder au menu.
+684: En mode Traumatisme, seuls les points de contrôle permettent d'effectuer une auto-sauvegarde.
+685: Santé totalement régénérée.
+
+686: Ceci va démarrer une nouvelle partie : tous les niveaux vont être bloqués à nouveau. Etes-vous sûr de vouloir quitter la partie actuelle et en commencer une nouvelle ?
+687: Etes vous sûr de vouloir quitter le niveau actuel ?
+
+688: Temps de jeu
+
+#last minute crap
+689: Débloquez 23 cartes du Tarot Noir pour activer ce mode
+
+#last minute MP crap <-eh watch your language :)
+
+690: Modèle
+691: Choisissez votre apparence
+692: Démon
+693: Ange déchu
+694: Chevalier
+695: Monstre
+696: Painkiller
+
+697: Double-frag!
+698: Triple-frag!
+699: Pentafrag!
+700: Oh Mon Dieu!
+
+701: Temps de chasse supplémentaire autorisé.
+702: $PLAYER est notre nouveau porteur de lumière.
+703: $PLAYER a perdu la lumière.
+704: La lumière est retournée à son emplacement d'origine.
+705: CREDITS
+706: Voir crédits
+
+707: Blanc
+708: Rouge
+
+709: PAUSE
+
+710: Appuyer sur 'Tirer' pour commencer
+711: RÉSULTAT FINAL
+
+# electro
+712: $KILLER a abrégé les souffrances de $PLAYER.
+# shuriken
+713: $KILLER a abrégé les souffrances de $PLAYER.
+
+714: Ready
+715: Break
+
+716: Appuyer sur 'Tirer' pour ready/unready
+717: 'Tir secondaire' - Sélectionner votre équipe
+
+# lava
+718: $PLAYER vient de prouver que la vie est courte.
+
+# Patch 1
+719: Spectateur
+720: Se connecter en mode spectateur
+721: Se deconnecter
+722: Se deconnecter du serveur
+723: SPECTATEUR
+724: 'TIR' - pour changer de joueur
+725: 'Tir alternatif' - camera libre
+726: 'Sauter' - rejoindre la partie
+727: Spectateurs
+728: Spec
+729: minute(s)
+730: Le match commence dans %d secondes.
+731: En attente d'autres joueurs.
+732: 'Arme suivante/précédente' - changer de vue
+733: Prediction (beta)
+734: Warning: this option enables experimental prediction code
+735: Warning: You need to reconnect for the changes to take effect. This experimental beta code requires much more processing power of your PC, turn it off if you experience serious slowdowns. Please read README file for patch 1.15 for more info about the prediction code.
+
+736: Arme 6
+737: Arme 7
+738: Arme 8
+739: Arme 9
+740: Arme 10
+
+741: Délai de réapparition des armes
+742: Régler le délai de réapparition des armes
+743: FPS du Serveur 
+744: Régler FPS du Serveur 
+
+745: Veuillez insérer Painkiller CD1
+746: Prédiction
+
+747: Réduit le temps de latence Internet, en utilisant plus de ressources système.\nDéconseillé pour les parties en LAN.
+
+748: Vous devez vous reconnecter au serveur pour que ce changement prenne effet
+
+749: Vérouillage du Framerate 
+750: Description du vérouillage du Framerate 
+751: Désactivé
+752: FPS du Serveur
+753: FPS du Serveur x2
+754: FPS du Serveur x3
+
+755: FPS Physique
+756: Réglages FPS Physique
+
+757: Effets spé. multi basse qualité
+758: Utiliser des effets spéciaux de basse qualité en multijoueur
+
+759: Capture du drapeau
+
+760: Effets de halo
+761: Activer/désactiver les effets de halo
+
+762: Sélectionner partie
+763: Painkiller
+764: Battle out of Hell
+
+765: Effet de chaleur
+766: Activer/désactiver les effets de chaleur
+
+767: Zoom
+
+# CTF
+
+768: rouge
+769: bleu(e)
+770: $PLAYER a pris le drapeau $COLOR
+771: $PLAYER marque pour l'équipe $COLOR
+772: Drapeau $COLOR rapporté
+773: $PLAYER a rapporté le drapeau $COLOR
+774: $PLAYER a lâché le drapeau $COLOR
+775: L'équipe $COLOR gagne
+
+# Lighting
+776: Ultra
+
+777: Score
+778: Duel
+779: Survivant
+780: Limite de captures
+781: Nombre de captures nécessaire pour gagner la partie, 0 = désactivé
+
+782: Vous possédez l'arme rêvée de tout sniper !\nN'oubliez pas, la touche ZOOM vous permet de tuer les ennemis sans vous exposer.
+
+# BOOH cards
+783: Modificateur d'arme
+784: Arme magique
+785: Invoquer golem
+786: Invoquer combattant
+787: Invoquer guerrier
+788: Drain de santé
+789: Régénération de santé
+790: Régénération d'armure
+791: Peur
+792: Munitions 666
+
+# BOOH cards descriptions
+793: Active modificateur d'arme
+794: Hâte n'affecte pas les armes
+795: Lent mais robuste, tous les\nennemis se concentrent dessus
+796: Rapide mais faible,\nles ennemis l'ignorent
+797: Equilibré, 50 % des ennemis\nl'ignorent
+798: 2.5 % des dégâts à l'ennemi sont\nconvertis en santé pour le joueur
+799: La santé commence à se régénérer\n10 sec après avoir subi des dégâts
+800: L'armure se régénère peu a peu\n10 sec après avoir subi des dégâts
+801: Tous les ennemis ont 90 %\nde leur santé initiale
+802: Le joueur debute chaque niveau\navec 666 munitions par arme
+# Last man standing
+803: Vies Survivant
+804: Nombre de vies dont dispose chaque joueur en mode Survivant
+805: Vies
+
+# BOOH black tarot card unlocking conditions
+806: Ne pas tuer plus de 88 ennemis
+807: Tuer tous les ennemis
+808: Terminer le niveau avec plus de 200 en santé
+809: Se transformer 5 fois en démon
+810: Trouver tous les lieux secrets
+811: Terminer le niveau en 20 minutes maximum
+812: Ne pas se faire blesser
+813: Trouver tous les objets sacrés
+814: Tuer l'araignée panzer en moins de 04:00
+815: Détruire Alastor en moins de 04:00
+
+# BOOH level names
+816: Orphelinat
+817: Loony Park
+818: Labo
+819: Ville morte
+820: Leningrad
+821: Colisée
+822: Pentagone
+823: Outre-monde
+824: Carrière
+825: Terre des ombres
+
+# BOOH weapons
+826: Arme 11
+827: Arme 12
+828: Lance-clous
+829: Dévastateur
+830: Mitraillette
+831: Lance-flammes
+832: Arme 13
+833: Arme 14
+
+# Lab new card unlocking conditions
+834: Terminer le niveau en utilisant seulement le lance-clous
+
+835: Débloquez 9 cartes du Tarot Noir pour activer ce mode
+
+836: Modèle d'arme hte res.
+837: Effets d'eau
+
+# magic gun card description
+838: Aucune munition n'est gachée
+
+# booh mp models
+839: HellKing
+840: Commando
+
+# changed booh cards
+841: Le Sceptre
+842: Mutation démoniaque
+843: Nouvelle vie
+844: Les ennemis sont affaiblis.
+845: Transformation en démon
+846: L'armure et la santé sontn/entierement régénérées
+
+# multi-player messages
+
+847: $KILLER a chatié $PLAYER d'une bonne rafale de mitraillette.
+848: $KILLER a multi-poutré $PLAYER.
+849: $KILLER a éparpillé $PLAYER façon puzzle au dévastateur.
+
+# black edition
+850: Crédits
+851: Videos
+852: View videos
+853: Making of
+854: XBox trailer
+855: Mech video
+856: Select video
+
+857: Client Console Lockdown
+858: Disable client's console

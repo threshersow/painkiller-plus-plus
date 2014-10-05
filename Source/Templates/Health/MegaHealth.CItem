@@ -1,0 +1,66 @@
+o.Model = "Energy"
+o.Scale = 0.4
+o.takeDistance = 1.5
+o.DisabledInVoosh = false
+o.RespawnTime = 60
+o.HealthAdd = 100
+o.MaxLimit  = 250
+o.s_SubClass ={}
+
+--============================================================================
+function MegaHealth:OnPrecache()
+	Cache:PrecacheParticleFX("energy")
+end
+--============================================================================
+function MegaHealth:OnCreateEntity()
+    ENTITY.SetSynchroString(self._Entity,"MegaHealth.CItem")
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,true)
+    self:Client_OnCreateEntity(self._Entity)
+end
+--============================================================================
+function MegaHealth:Client_OnCreateEntity(entity)
+    BindFX(entity,"energy",0.2,"e1")
+    BindFX(entity,"energy",0.2,"e2")
+    BindFX(entity,"energy",0.2,"e3")
+    BindFX(entity,"energy",0.2,"e4")
+    BindFX(entity,"energy",0.2,"e5")
+    BindFX(entity,"menergy",0.2,"root")
+    -- jezeli jest wziety to musze schowac particle
+    if not ENTITY.IsDrawEnabled(entity) then
+        ENTITY.EnableDraw(entity,false,true)
+    end
+end
+--============================================================================
+function MegaHealth:TakeFX(pe,health)
+    local player = EntityToObject[pe]    
+    if player then
+        player.Health = health
+        player._healthDecCnt = 0
+        if player == Player then player:PickupFX() end
+    end
+    Templates["MegaHealth.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("MegaHealth.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eu")
+--============================================================================
+function MegaHealth:OnTake(player)    
+    if player.Health < self.MaxLimit then
+        local add = self.HealthAdd
+        player.Health = player.Health + add
+        if player.Health > self.MaxLimit then player.Health = self.MaxLimit  end
+        self.TakeFX(player._Entity,player.Health)
+        -- PiTaBOT server mod
+        if(Cfg.PitabotEnabled)then
+		local ps = Game.PlayerStats[player.ClientID]
+	        PBLogEvent(ps.Name, "TakeMega", { player.Health, player.Armor, player.ArmorType })
+        end
+        -- end
+    else
+        return true
+    end
+end
+--============================================================================
+function MegaHealth:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+--============================================================================

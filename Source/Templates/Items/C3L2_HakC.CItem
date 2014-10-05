@@ -1,0 +1,6 @@
+o.BaseObj = "CItem"
+o.Model = "C3L2_HakC"
+o.Scale = 3
+o.Mass = 600
+
+o.SoundHitByBulletMiniGunOnly = true

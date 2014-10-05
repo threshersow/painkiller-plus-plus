@@ -1,0 +1,18 @@
+Apple.Mesh = "kulkaaShape"
+Apple.Pack = "kulka.dat"
+
+Apple.Health = 22
+Apple.Scale = 0.2
+Apple.Restitution = 0.0 	-- sprezystosc
+Apple.LinearDamping = 0.4
+Apple.AngularDamping = 0.9
+Apple.TimeToLive = 120 * 30
+
+Apple.distance = 4.0		-- zasieg aktywacji
+Apple.nailsCount = 20
+Apple.nailsVel = 20
+Apple.moveUpVel = 8.4
+
+Apple.ExplodeItems = "Nail.CItem"
+o._fx = "sado_apple"
+o.Mass = 150

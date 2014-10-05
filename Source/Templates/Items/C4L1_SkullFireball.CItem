@@ -1,0 +1,55 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+o.damage = 20
+o.Scale = 0.4
+o.Restitution = 0.8 	-- sprezystosc
+o.LinearDamping = 0.0  -- tlumienie liniowe
+o.TimeToLive = 30 * 10
+
+o.fx = 'orskul_spell'
+
+function o:OnPrecache()
+    Cache:PrecacheParticleFX(self.fx)    
+end
+
+function C4L1_SkullFireball:OnCreateEntity()
+	self:PO_Create(BodyTypes.Simple,0.8,ECollisionGroups.Noncolliding)
+    local pfx = AddPFX(self.fx,0.15)
+    ENTITY.RegisterChild(self._Entity,pfx)
+    ENTITY.EnableDraw(self._Entity,false)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+	ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+	self.timer = 4
+	self:BindSound("actor/samurai/samurai-fireball",4,28,false)
+end
+
+function C4L1_SkullFireball:OnUpdate()
+	if self.timer then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+		end 
+	end
+end
+
+function C4L1_SkullFireball:OnCollision(x,y,z,nx,ny,nz,e)
+	--Game:Print("fireball col")
+	if e then
+		local obj = EntityToObject[e]
+		if obj then
+			if obj.OnDamage then
+				if obj.Pack ~= "czachy.dat" then
+					obj:OnDamage(self.damage, self, AttackTypes.Fireball)
+				end
+		        PlaySound3D("actor/samurai/samurai-fireball-hit",x,y,z)
+			end
+		else
+			--ENTITY.PO_Enable(self._Entity, false)
+			--WORLD.Explosion2(x,y,z, 0.01, 4, nil, AttackTypes.Fireball, self.damage)
+		end
+	end
+	GObjects:ToKill(self)
+end

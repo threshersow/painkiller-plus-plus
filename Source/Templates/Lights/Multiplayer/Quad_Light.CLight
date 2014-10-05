@@ -1,0 +1,4 @@
+Quad_Light["Color"] = Color:New(217,71,9,0)
+Quad_Light["Range"] = 8
+Quad_Light["Type"] = 2
+Quad_Light["IsDynamic"] = true

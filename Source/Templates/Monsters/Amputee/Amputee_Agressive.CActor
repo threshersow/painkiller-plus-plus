@@ -1,0 +1,2 @@
+o.BaseObj = "Amputee.CActor"
+o.AiParams.aggresive = true

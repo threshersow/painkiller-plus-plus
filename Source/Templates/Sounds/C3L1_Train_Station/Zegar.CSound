@@ -1,0 +1,10 @@
+Zegar.Volume = 70
+Zegar.Interval = 0
+Zegar.RandomShift = 0
+Zegar.Falloff =
+{
+  Start = 8,
+  End = 50
+}
+Zegar.Sound ="C3L1_Train_Station/Zegar"
+

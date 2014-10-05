@@ -1,0 +1,5 @@
+o.BaseObj = "AmmoGrenades.CItem"
+o.Mesh = "polySurfaceShape229"
+o.takeDistance = 1.8
+o.AmmoAdd = 8
+o.Pack = "ammo_rakiety_wieksze.dat"

@@ -1,0 +1,8 @@
+o.Color = Color:New(80,40,20,0)
+o.Pos = Vector:New(13.0,3,2)
+o.Range = 30
+o.Type = 2
+o.LitParent = true
+o.StartFalloff = 5
+o.BaseObj = "CLight"
+o.Intensity = 5

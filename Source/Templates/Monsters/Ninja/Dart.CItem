@@ -1,0 +1,105 @@
+o.Mesh = "polySurfaceShape12"
+o.Pack = "kusza_belt.dat"
+o.Scale = 0.08
+o.Mass = 40
+o.Restitution = 0.1
+o.Damage = 15
+o.ThrowSpeed = 35
+o.LifeTime = 120			-- after 1st collision
+o.TimeToLive = 6 * 60	-- after create
+--o.AngularDamping = 0.2	-- sprawdzic ### 
+--============================================================================
+function Dart:OnCollision(x,y,z,nx,ny,nz,e_other,h_me,h_other)
+	local bind = false
+	if e_other then
+		local obj = EntityToObject[e_other]
+		if obj then
+            if obj.OnDamage then
+                if obj == Player then
+                    PlaySound2D("actor/ninja/ninja_dart_hit")
+                end
+                obj:OnDamage(self.Damage, self.ObjOwner)
+            end
+            if self.ObjOwner and self.ObjOwner._AIBrain then
+                if obj == Player then
+                    --Game:Print("last hit DART")
+                    self.ObjOwner._AIBrain._lastHitTime = self.ObjOwner._AIBrain._currentTime
+                else
+                    --Game:Print("last missed DART")
+                    self.ObjOwner._AIBrain._lastMissedTime = self.ObjOwner._AIBrain._currentTime
+                end
+            end
+		else
+            bind = true
+			if self.ObjOwner and self.ObjOwner._AIBrain then
+				--Game:Print("last missed2 DART")
+				self.ObjOwner._AIBrain._lastMissedTime = self.ObjOwner._AIBrain._currentTime
+			end
+		end
+	else
+		bind = true
+	end
+	ENTITY.EnableCollisions(self._Entity, false)
+	if bind then
+        local q = Quaternion:New_FromNormal(nx,ny,nz)
+        AddPFX("spark_shuriken", 0.2, Vector:New(x,y,z), q)
+		PlaySound3D("actor/hellbiker_v4/hellbv4-nail-hitwall"..math.random(1,3),x,y,z,8,20,nil)
+	end
+    GObjects:ToKill(self)      
+end
+--============================================================================
+function Dart:OnCreateEntity()
+	--self:PO_Create(BodyTypes.Simple,0.2)
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.Noncolliding)
+    ENTITY.PO_EnableGravity(self._Entity,false)
+    
+	local e = ENTITY.Create(ETypes.Trail,"trail_kolek","trailName")
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+    
+    self._timer = 3
+end
+--============================================================================
+function Dart:OnUpdate()
+	if self._timer then
+		self._timer = self._timer - 1
+		if self._timer < 0 then
+			self._timer = nil
+			ENTITY.EnableCollisions(self._Entity, true)
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+		end
+	end
+	if self.deathTimer then
+		self.deathTimer = self.deathTimer - 1
+		if self.deathTimer < 0 then
+			GObjects:ToKill(self)
+			AddPFX("BodyExplosion",0.3,Vector:New(self.Pos.X,self.Pos.Y,self.Pos.Z))
+		end
+	end
+
+	if not self._set then
+		if self.PosDest then
+			local dx = self.PosDest.X - self.Pos.X
+			local dy = self.PosDest.Y - self.Pos.Y
+			local dz = self.PosDest.Z - self.Pos.Z
+			local v = Vector:New(dx, dy, dz)
+			v:Normalize()
+
+            --local speed = self.RotateSpeed * FRand(0.8, 1.2)
+            --local a = ENTITY.GetOrientation(self.ObjOwner._Entity)
+            --local a = self._RotAngle
+            --local vx = math.cos(a)
+            --local vz = -math.sin(a)
+
+			--ENTITY.SetAngularVelocity(self._Entity, vx*speed, 0, vz*speed)
+			local force = self.ThrowSpeed * FRand(0.8, 1.3)
+
+			self._velx = v.X*force
+			self._vely = v.Y*force
+			self._velz = v.Z*force
+			
+			ENTITY.SetVelocity(self._Entity, self._velx, self._vely, self._velz)
+		end
+		self._set = true
+	end
+end

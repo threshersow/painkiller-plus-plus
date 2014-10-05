@@ -1,0 +1,20 @@
+EvilMonk_AdrianDumbPatroler.BaseObj = "EvilMonk.CActor"
+EvilMonk_AdrianDumbPatroler.Scale = 1.3
+EvilMonk_AdrianDumbPatroler.WalkSpeed = 2.2
+EvilMonk_AdrianDumbPatroler.RunSpeed = 1.0
+EvilMonk_AdrianDumbPatroler.RotateSpeed = 20
+
+EvilMonk_AdrianDumbPatroler.AiParams.viewDistance = 10
+EvilMonk_AdrianDumbPatroler.AiParams.viewDistance360 = 10
+EvilMonk_AdrianDumbPatroler.AiParams.viewAngle = 360
+
+EvilMonk_AdrianDumbPatroler.AiParams.weaponDamage = 25
+EvilMonk_AdrianDumbPatroler.AiParams.hearing = 0.6
+
+EvilMonk_AdrianDumbPatroler.AiParams.perception = 1.0
+
+EvilMonk_AdrianDumbPatroler.AiParams.GuardStill = false
+EvilMonk_AdrianDumbPatroler.AiParams.guardRange = 40
+
+EvilMonk_AdrianDumbPatroler.AiParams.moveDisplacement = 2
+

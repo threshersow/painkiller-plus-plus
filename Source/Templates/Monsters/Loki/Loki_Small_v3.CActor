@@ -1,0 +1,28 @@
+o.BaseObj = "Loki_Small.CActor"
+o.Model = "spider_v2"
+o.NeverWalk = nil
+o.NeverRun = true
+
+o.AiParams.aiGoals = {"idle","hunt","runToPlayer"}
+
+o.s_SubClass.Animations.explode   = {1.0,true, {
+				{0.9,'Explode',},
+				{0.0,'PlaySound',{'tick-preparetoexplode',},4,30, },
+				--{0.9,'PlaySound',{'tick_big_explode',},4,30, },
+				}}
+o.s_SubClass.Animations.jump = nil
+
+o.AiParams.actionDistance = 2.2
+o.AiParams.Explosion = {
+    ExplosionRange = 6,
+    Damage = 32,
+}
+
+o.Scale = 3
+o.CreatePO = true
+o.AiParams.ThrowableItem = "meatspider.CItem"
+o.AiParams.throwItemCount = 3
+o.AiParams.meatforce = {8,18,8}
+
+o.TimeToLive = 5 * 30
+o.AiParams.collisionAnim = "explode"

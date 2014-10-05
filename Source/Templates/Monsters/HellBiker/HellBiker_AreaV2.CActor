@@ -1,0 +1,36 @@
+o.BaseObj = "HellBiker.CActor"
+o.NeverWalk = true
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,10}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.stopAfterWalking = 0.2
+o.AiParams.stopAfterWalkingTime = {30,80}
+o.AiParams.guardRange = -1
+o.AiParams.aiGoals = {"idle","FarAttack", "hear"}
+
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = true
+o.AiParams.WalkAreaWhenAttack = true
+o.AiParams.FinishMovementBeforeAttack = false
+
+o.AiParams.changePosAfterFire = 1.0
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 90,
+		minDist = 2.0,
+		spreadAngle = 0.5,
+		damagePerBullet = 10,
+		PO_HitForce = 300,
+		maxYaw = 45,			-- maksymalna odchylka broni lewo/prawo w stos. do kata patrzenia
+		maxPitch = 45,			-- maksymalna odchylka broni gora/dol
+		fireParticle = "monstershot",	
+		fireParticleSize = 0.2,
+		bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+	}

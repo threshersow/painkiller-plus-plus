@@ -1,0 +1,29 @@
+--============================================================================
+-- Demon FX Task
+--============================================================================
+DemonFXWarp.EffectInTime = 0.2
+DemonFXWarp.EffectOutTime = 1
+DemonFXWarp.Waves = 3.5
+DemonFXWarp.MaxWarp = 0.1
+DemonFXWarp.TickCount = 0
+o.BaseName = "DemonFXWarp.CProcess"
+--============================================================================
+function DemonFXWarp:Tick(delta)
+
+    local warp
+    if self.TickCount < self.EffectInTime then 
+        local t = self.TickCount / self.EffectInTime
+        warp = (math.cos(math.pi+math.pi*t)*0.5+0.5)*self.MaxWarp
+    elseif self.TickCount < self.EffectInTime + self.EffectOutTime then 
+        local t = (self.TickCount - self.EffectInTime) / self.EffectOutTime
+        warp = (math.cos(math.pi*t)*0.5+0.5)*self.MaxWarp*math.cos(math.pi*t*self.Waves)
+    else
+        warp = 0
+        GObjects:ToKill(self)
+    end
+
+    self.TickCount = self.TickCount + delta / INP.GetTimeMultiplier()
+    
+    WORLD.DemonFXWarp(warp)
+end    
+--============================================================================

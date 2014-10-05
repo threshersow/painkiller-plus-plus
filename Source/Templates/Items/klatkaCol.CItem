@@ -1,0 +1,29 @@
+o.Scale = 0.3
+o.Mass = 2500
+o.Friction = 3
+o.DestroyPack = "klatkaColDEAD.dat"
+o.Destroy.LifetimeAfterExplosion = 65535
+o.Destroy.MinSpeedOnCollision = 13
+o.Destroy.AverageVariation = 16
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.Strength = 100
+o.Destroy.EffectScale = 0.1
+o.Destroy.ExplosionStrength = 200
+o.Destroy.ExplosionRadius = 3
+o.Destroy.AverageDelay = 32
+o.Destroy.Treasures = 
+{
+    Coins  = {8, 's'},
+}
+o.Destroy.ExplosionDamage = 20
+o.TestDeathZone = true
+o.Rot = Quaternion:New(0.999974,-1.86407e-005,-0.00722159,-6.84467e-005)
+o.Health = 32
+o.Pack = "klatkaCol.dat"
+o.BaseObj = "CItem"
+o.Mesh = "klatkaColShape"
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)
+
+o.SoundHitByBulletMiniGunOnly = true
+o.DetailMap.DefaultDetailTex = false
+

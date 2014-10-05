@@ -1,0 +1,128 @@
+o.Model = "wingeddemon"
+o.Scale = 1.28
+o.Health = 35
+o.FlySpeed = 22.0
+o.WalkSpeed = 2.0
+o.CreatePO = true
+o.RotateSpeed = 34
+o._DontCheckFloors = true
+o.DeathTimer = 120
+o.checkColInFlight = 0.3
+o.enableGibWhenHPBelow = -100
+
+o.s_Physics = {
+    BodyType = BodyTypes.Simple,
+    BodyScale = 0.5,
+    Mass     = 20,
+    --Friction = 0.9,
+}
+
+o.smoothFly = 2.8		-- dobrac
+
+o.s_SubClass = {
+	--rotateHead = 0.2,
+	--rotateHeadBone = "joint5",
+	--rotateHeadMaxSpeed = 0.5,
+	
+    Animations =  {
+        idle   = {1.0, false},
+        atak   = {1.4, false,{
+					{1.0, "damageCustom"},
+					}},
+			atakAcid   = {1.4, false,{
+				{1.0, 'ThrowImmid'},
+			}},
+        fly     =	{1.2, false},
+        hit		=	{1.0, false},
+    },
+
+    flyWalk = "fly",			-- potrzebne?
+    DeathJoints = {
+        'root','joint3','joint9','joint13','joint11',
+    },
+    RagdollCollisions = {
+        MinStren = 2.0,
+        MinTime = 0.7,
+        Bones = {
+				{"root", {"$/impacts/meat-splash5"}, true},		-- joint, {sounds}, blood
+			},
+    },
+    
+    GibExplosionRange = 5.0,
+	GibExplosionDeltaY = -0.5,
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"root","FX_gib_blood",1},
+                {"joint1","FX_gib_blood",1},
+                {"joint6","FX_gib_blood",1},
+                {"joint8","FX_gib_blood",1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"root", "gibSplash", true},
+                {"joint1","gibSplash", true},
+                {"joint6","gibSplash", true},
+                {"joint8","gibSplash", true},
+            },
+	    },
+    
+    Hits = {"hit"},
+}
+
+	
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"DemonIdle","DemonAtak"}
+--o.AiParams.GuardStill = false
+
+o.AiParams.viewDistance = 40
+o.AiParams.viewAngle = 360
+o.AiParams.viewDistance360 = 40
+    
+o.AiParams.attackRange = 2.6
+o.AiParams.attackRangeAcid = 4.0
+o.AiParams.weaponDamage = 5
+--o.AiParams.hearing = 1.0
+--o.AiParams.perception = 1.0
+--o.AiParams.walkStep = 6.0
+
+--o.AiParams.guardRange = 30				-- wyszukuje punkty do ladowania w tym obszarze i generalnie stara sie latac tym w okregu 
+--o.AiParams.walkArea = "Raven00"			-- punkty do ladowania
+--o.AiParams.flyFactor = 0.7				-- im wiekszy, tym mniej chectnie bedzie ladowal
+--o.AiParams.minDistToPoint = 15			-- min. dyst. do punktu branego pod uwage przy ladowaniu
+--o.AiParams.traceSpeed1 = 4				-- co ile 1/30 ma traceowac, gdy lata, przeszkody i miejsca do ladowania
+--o.AiParams.traceSpeed2 = 1				-- co ile 1/30 ma traceowac, czy stoi na ziemi
+--o.AiParams.ambientAnimationFreq = 0.012	-- szansa, gdy stoi, na odpalenie animacji 
+--o.AiParams.distWhenAlwaysEscape = 3.0		-- odleglosc od gracza, przy ktorej zawsze od niego ucieka
+--o.AiParams.distIgnoreSteps = 15			-- nie ucieka po uslyszeniu krokow z odleglosci wiekszej niz ta (tylko sie obraca w tamta strone)
+--o.AiParams.guardRange = -1
+--o.AiParams.guardRangeCalcFloor = false	-- true, to gdy zostanie przekroczony zakres guard, to nowy liczy trace-ujac w dol, przydatne, gdy np. w miedzyczasie cos sie zapadnie nizej
+
+--o.AiParams.flyUp = 0.5
+--o.AiParams.flyDown = 0.65
+--o.AiParams.walkOnTheGroundFreq = 0.015
+o.AiParams.updateSpeed = 0.2
+o.AiParams.soundAmbientDelay = 4.5
+
+o.AiParams.throwAcid = false
+
+o.AiParams.alwaysSee = true
+o.AiParams.moveDelays = {8,14}
+o.AiParams.moveUpRange = 6
+
+o.TimeToLive = 50 * 30
+
+o.AiParams.keepMinHeight = 4.0
+
+
+o.AiParams.throwAngle = 0
+o.AiParams.throwDistMinus = 0.0				-- < 0.0 celuje za gracza, > 0.0 przed gracza
+o.AiParams.throwAngularVelocitySpeed = 4.0
+o.AiParams.ThrowableItem = "Winged_Demon_Acid.CItem"
+o.AiParams.throwItemBindTo = "joint10"
+o.AiParams.throwItemBindToOffset = Vector:New(0,0,0)
+o.AiParams.throwDeltaY = 1.5                -- na taka wysokosc gracza celuje

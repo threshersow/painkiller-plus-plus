@@ -1,0 +1,13 @@
+o.s_SubClass.ParticlesDefinitions = {
+	warp = {
+		pfx = "flamewarp",
+		scale = 0.4,
+		offset = Vector:New(0,0,0),
+	},
+	explode = {
+        pfx = "truckkflame",
+		scale = 0.6,
+        offset = Vector:New(0,0,0),
+	},
+	
+}

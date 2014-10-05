@@ -1,0 +1,20 @@
+DevilMonk_Adrian.BaseObj = "DevilMonk.CActor"
+DevilMonk_Adrian.RunSpeed = 1.32
+DevilMonk_Adrian.NeverRun = false
+
+DevilMonk_Adrian.AiParams.viewDistance = 30
+DevilMonk_Adrian.AiParams.viewAngle = 170
+
+DevilMonk_Adrian.AiParams.weaponDamage = 35
+DevilMonk_Adrian.AiParams.attackRange = 4
+
+DevilMonk_Adrian.AiParams.hearing = 1.5
+
+DevilMonk_Adrian.AiParams.perception = 1.0
+DevilMonk_Adrian.AiParams.moveDisplacement = 0.2
+
+DevilMonk_Adrian.AiParams.guardAngle = {}
+    
+DevilMonk_Adrian.AiParams.alwaysSee = false
+DevilMonk_Adrian.AiParams.huntPlayer = true
+

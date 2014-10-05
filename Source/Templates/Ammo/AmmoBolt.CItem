@@ -1,0 +1,40 @@
+o.Mesh = "polySurfaceShape58652"
+o.Pack = "ammo_bolty.dat"
+o.takeDistance = 1.8
+o.Scale = 0.8
+o.DisabledInVoosh = true
+o.RespawnTime = 15
+o.AmmoAdd = 30
+
+--============================================================================
+function AmmoBolt:OnInitTemplate()
+    self.CubeMap = nil
+    self.DetailMap = nil
+    self.NormalMap = nil
+    self.Destroy = nil
+    self.Impulse = nil
+    self:ReplaceFunction("_Synchronize","Synchronize")
+    self:ReplaceFunction("Synchronize","nil")
+end
+--============================================================================
+function AmmoBolt:OnCreateEntity()
+    ENTITY.EnableNetworkSynchronization(self._Entity)
+end
+--============================================================================
+function AmmoBolt:OnTake(player)    
+    if player.Ammo.Bolt >= CPlayer.s_SubClass.MaxAmmo.Bolt then return true end
+    self.TakeFX(player._Entity, self.AmmoAdd)
+	Game.PlayerAmmoFound =  Game.PlayerAmmoFound + 1
+end
+--============================================================================
+function AmmoBolt:TakeFX(pe,add)
+    local player = EntityToObject[pe]    
+    if player then
+        player.Ammo.Bolt = player.Ammo.Bolt + add * AmmoDifficultyModifier[Game.Difficulty] * Game.AmmoFoundFactor
+        player:CheckMaxAmmo()
+        if player == Player then player:PickupFX() end
+    end
+    Templates["AmmoBolt.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("AmmoBolt.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eu")
+--============================================================================

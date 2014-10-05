@@ -1,0 +1,34 @@
+VampBlood.Mesh = "pSphereShape1"
+VampBlood.Pack = "Kamyk.dat"
+VampBlood.Scale = 0.01
+
+function VampBlood:OnPrecache()
+    Cache:PrecacheParticleFX("Vamp_Blood_FX")
+    if Tweak.GlobalData.GermanVersion then
+        Cache:PrecacheDecal("bloodSmall_German")
+    else
+        Cache:PrecacheDecal("bloodSmall")
+    end
+end
+
+function VampBlood:OnCreateEntity()
+    self:PO_Create(BodyTypes.Simple,1.0,ECollisionGroups.Particles)
+    ENTITY.EnableCollisions(self._Entity,true)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+    ENTITY.EnableDraw(self._Entity,false)
+    local pfx = AddPFX('Vamp_Blood_FX',0.5)
+    ENTITY.RegisterChild(self._Entity,pfx)    
+    self.TimeToLive = 3 * 30 -- na wszelki wypadek gdy nie zadziala kolizja
+    self.OnDamage = nil
+end
+
+function VampBlood:OnCollision(x,y,z,nx,ny,nz,e)
+     if Tweak.GlobalData.GermanVersion then
+        ENTITY.SpawnDecal(e,'bloodSmall_German',x,y,z,nx,ny,nz,size)
+    else
+        ENTITY.SpawnDecal(e,'bloodSmall',x,y,z,nx,ny,nz,size)
+    end
+
+    GObjects:ToKill(self)
+end

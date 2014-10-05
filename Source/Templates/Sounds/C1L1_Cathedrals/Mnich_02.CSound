@@ -1,0 +1,10 @@
+Mnich_02.Volume = 50
+Mnich_02.Interval = 30
+Mnich_02.RandomShift = 14
+Mnich_02.Falloff =
+{
+  Start = 10,
+  End = 30
+}
+Mnich_02.Sound ="C1L1_Cathedrals/Mnich_04;C1L1_Cathedrals/Mnich_02;C1L1_Cathedrals/Mnich_03"
+

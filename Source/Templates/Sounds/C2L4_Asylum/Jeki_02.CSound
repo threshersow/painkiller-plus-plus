@@ -1,0 +1,10 @@
+Jeki_02.Volume = 70
+Jeki_02.Interval = 11
+Jeki_02.RandomShift = 4
+Jeki_02.Falloff =
+{
+  Start = 1.7,
+  End = 15
+}
+Jeki_02.Sound ="C2L4_Asylum/Jeki_02"
+

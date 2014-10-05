@@ -1,0 +1,14 @@
+o.FPS = ""
+
+function EndBench:Tick(delta)
+	if INP.Action(Actions.Fire) then
+		INP.Reset()
+		PMENU.SwitchToMenu()
+	end
+end
+
+function EndBench:PostRender(delta)
+	local w,h = R3D.ScreenSize()
+	HUD.DrawBorder(312,200,400,140)
+	HUD.PrintXY(-1,260*h/768,self.FPS,"timesbd",230,161,97,26)
+end

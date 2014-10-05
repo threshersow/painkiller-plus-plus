@@ -1,0 +1,187 @@
+o.Scale = 1.8
+o.Health = 120
+o.CreatePO = true
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 15
+o.throwHeart = true
+o.Model = "hellbiker_v3"
+o.Animation = "idle02"
+
+o.enableGibWhenHPBelow = -63
+
+o.s_SubClass = {
+	rotateHead = 0.5,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+	Animations = {
+		idle02    = {1.0, false,{
+						{2.4,'PlaySoundHit',{'hellbv3-idle02_1','hellbv3-idle02_2','hellbv3-idle02_3',},8,30},	-- moze tylko gdy nie ma wroga?
+					}},
+		hit01    = {1.0, false,{
+						{0.0,'PlaySoundHit','hit'},
+					}},
+		hit02    = {1.0, false, {
+						{0.0,'PlaySoundHit','hit'},
+					}},
+		atak1    = {1.0, false, {
+						{0.0,'PlaySound','atak1'},
+						{0.6,'StartBreath','breath'},		-- narazie
+						{0.7,'damage'},
+						{1.05,'damage'},
+						{1.4,'damage'},
+						{1.55,'StopBreath'},		-- narazie
+					}},
+		atak2    = {1.4, true, {
+						{0.1,'PlaySound',"atak2"},
+						{1.2,'damage',nil,nil,'hellbv3-bottle-hit'},
+					},nil,true},			-- ###
+		walk    = {1.7, true, {
+    					{1.6,'FootFX','s_l_srodstopie'},
+						{0.8,'FootFX','s_p_srodstopie'},
+						{0.8,'PlaySound',"stepl"},
+						{1.6,'PlaySound',"stepr"},
+					}},
+		run     = {2.56, true, {
+    					{1.6,'FootFX','s_l_srodstopie'},
+						{0.8,'FootFX','s_p_srodstopie'},
+						{0.8,'PlaySound',"stepl"},
+						{0.6,'PlaySound','run'},
+						{1.6,'PlaySound',"stepr"},
+						{1.4,'PlaySound','run'},
+					}},
+		break_bottle    = {1.0, false, {
+						{0.2,'PlaySound',"breakbottle"},
+						{1.0,'breakbottle'},
+					}},
+		drink    = {1.0, false, {
+						{0.0,'PlaySound',"drinkstart"},
+						{3.4,'PlaySound',"drinkend"},
+					}},
+	},
+
+	Ambients = {"idle02"},
+
+	RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 0.6,
+		Bones = {
+					{"k_szyja", "bodyfalls", true},		-- joint, {sound}, blood
+					{"r_p_lokiec", "bodyfalls", true},
+					{"r_l_lokiec", "bodyfalls", true},
+					{"joint21", "weaponlost", false},
+				}
+	},
+
+	Hits = {"hit01", "hit02"},
+	ragdollJoint = "root",
+
+	DeathJoints = {},
+
+    notBleedingJoints = {
+		joint21 = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+
+	DeathJoints = {
+		'k_ogo','k_zebra','k_ramiona',
+		'k_glowa','n_p_kolano','n_l_kolano',
+		'dlo_prawa_root','dlo_lewa_root','s_p_kostka','s_l_kostka',
+		'r_p_lokiec', 'r_l_lokiec',
+	},
+	NearAttacks = {"atak1"},
+    GibExplosionStrength = 8000,
+    GibExplosionStrengthWhenDrink = 35000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+    GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"r_p_bark_root","FX_gib_blood",1},
+				{"r_l_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+    },
+    gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSsplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_ramiona","gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"joint21", "weaponlost", false},
+			},
+	},
+
+}
+
+
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 145,
+    InertiaTensorMultiplier = 0.05,
+}
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack","hear","hunt","ABhellbikerV3","drink","flee",}
+
+o.AiParams.viewDistance = 70			-- zasieg widzenia
+o.AiParams.viewAngle = 150				-- kat widzenia
+o.AiParams.viewDistance360 = 8			-- zasieg widzenia z katem widzenia 360 stopni
+    
+o.AiParams.hearing = 1.0				-- zasieg sluchu
+o.AiParams.perception = 1.0				-- szansa uslyszenia halasu
+o.AiParams.walkStep = 7.0
+
+o.AiParams.GuardStill = false			-- true, nie bedzie sie poruszal w trybie guard
+o.AiParams.guardAngle = {0,10}			-- (min, max) kat o jaki sie nie bedzie sie poruszal w "idle"
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}-- (min, max) dlugosc pauzy pomiedzy obrotami
+o.AiParams.guardRange = -1				-- max. zasieg patrolu
+o.AiParams.useOnlyWaypointsWhenGuard = false	-- wykorzystuje tylko WayPointy przy chodzeniu w trybie guard
+o.AiParams.stopAfterWalking = 0.6			-- szansa zatrzymania po przejsciu do kolejnego punktu
+o.AiParams.stopAfterWalkingTime = {30,90}	-- (min, max) czas zatrzymania
+
+o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.FinishMovementBeforeAttack = false	-- atakuje dopiero gdy dojdzie do wczesniej zaplanowanego punktu
+
+o.AiParams.delayBetweenAttacks = 15
+o.AiParams.moveDisplacement = 4.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03	-- szansa, ze moster ucieknie po strzale
+o.AiParams.escapeTime = 100			-- typowy czas ucieczki
+
+o.AiParams.updateSpeed = 0.25
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+    
+--o.AiParams.doNotRotateWhenShooting = true
+--o.AiParams.weaponBindPos = "joint21"					-- skad wylatuja pociski (i Particle)
+--o.AiParams.weaponBindPosShift = Vector:New(-0.45,0.65,1.05)
+
+o.minimumTimeBetweenHitAnimation = 12
+o.shadow = 128
+
+o.AiParams.ABhp = 0.5
+o.AiParams.NearAttacks = {"atak1"}
+o.AiParams.DrinkFreq = 12.0		-- co ile sekund MUSI sie napic
+
+o.AiParams.weaponDamage = 10			-- do zioniecia
+o.AiParams.attackRangeAngle = 90
+o.AiParams.attackRange = 4.0
+
+o.AiParams.weapon2Damage = 20			-- do tulipana
+o.AiParams.attack2RangeAngle = 120
+o.AiParams.attack2Range = 3.6
+
+o.gibFXwhenDrink = "witch_flame"

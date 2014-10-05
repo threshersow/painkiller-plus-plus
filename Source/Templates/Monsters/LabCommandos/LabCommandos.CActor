@@ -1,0 +1,232 @@
+o.Model = "labcommandos"
+o.CreatePO = true
+o.Scale = 1.4
+o.Health = 135
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 20
+o.throwHeart = true
+o.enableGibWhenHPBelow = -30
+
+o.s_SubClass = {
+    --rotateHead = 0.3,
+    --rotateHeadBone = "k_szyjaa",
+    --rotateHeadMaxSpeed = 0.15,
+
+    --xchgTextures = {
+	--	{"SADOtexture1","SADOv2texture1"},
+	--	{"SADOtexture2","SADOv2texture2"},
+	--},
+    Animations = {  
+        idle          = {1.0, false},
+        walk          = {1.5, true,{
+							{0.1,'PlaySound',"step"},
+							{0.7,'PlaySound',"step"},
+            				{0.1,'FootFX','s_l_srodstopie'},
+							{0.7,'FootFX','s_p_srodstopie'},
+						}},
+        run           = {2.1, true, {
+							{0.1,'PlaySound',"step"},
+							{0.7,'PlaySound',"step"},
+               				{0.1,'FootFX','s_l_srodstopie'},
+							{0.7,'FootFX','s_p_srodstopie'},
+						}},
+        atak2   = {0.8, false, {
+        					{0.5,'PlaySound',"prepare"},
+							{0.3,'TakeToThrow'},
+							{0.4,'PlaySound',"zawleczka"},
+							{0.7,'PlaySound',"tvoice"},
+							{0.8,'PlaySound',"tswish"},
+							{0.85,'ThrowTaken'},
+						}},				
+        atak1    = {1.0, false, {
+        					{0.4,'WeaponFireR',},
+        					{0.8,'WeaponFireR',},
+        					{0.4,'PlaySound',"fire"},
+        					{0.6,'PlaySound',"fire"},
+        					{0.8,'PlaySound',"fire"},
+        					{0.9,'PlaySound',"shell"},
+        					{0.6,'WeaponFireL',},
+        					{1.0,'WeaponFireL',},
+
+						}},
+
+        strafe_left   = {1.4, MC.ETransX + MC.ETransZ, {
+        					{0.4,'WeaponFireR',},
+        					{0.8,'WeaponFireR',},
+
+        					{0.6,'WeaponFireL',},
+        					{1.0,'WeaponFireL',},
+
+        					{0.4,'PlaySound',"fire"},
+        					{0.6,'PlaySound',"fire"},
+        					{0.8,'PlaySound',"fire"},
+        					{0.9,'PlaySound',"shell"},
+							{0.0,'PlaySound',"step"},
+							{0.65,'PlaySound',"step"},
+
+						},nil,true},
+        strafe_right  = {1.4, MC.ETransX + MC.ETransZ, {
+        					{0.4,'WeaponFireR',},
+        					{0.8,'WeaponFireR',},
+        					{0.6,'WeaponFireL',},
+        					{1.0,'WeaponFireL',},
+
+        					{0.4,'PlaySound',"fire"},
+        					{0.6,'PlaySound',"fire"},
+        					{0.8,'PlaySound',"fire"},
+        					{0.9,'PlaySound',"shell"},
+							{0.0,'PlaySound',"step"},
+							{0.65,'PlaySound',"step"},
+
+						},nil,true},
+        hit1  = {1.0, true,{
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+        hit2  = {1.0, true, {
+					{0.0,'PlaySoundHit',"hit"},
+				}},
+    },
+	ragdollJoint = "root",
+    Ambients = {"idle"},
+    Hits = {"hit1","hit2"},
+
+    DeathJoints = {
+			'k_ogo','k_zebra','k_ramiona',
+			'n_p_kolano','n_l_kolano',
+			'dlo_prawa_root','dlo_lewa_root','s_p_kostka','s_l_kostka',
+			'r_p_lokiec', 'r_l_lokiec',
+		},
+    BreakableJoints = {},
+    notBleedingJoints = {
+		joint21 = {},
+		joint22 = {},
+    },
+	RagdollCollisions = {
+		MinStren = 3.0,
+		MinTime = 0.7,
+		Bones = {
+				{"k_szyjaa", "bodyfalls", true},		-- joint, {sounds}, blood
+                {"r_p_bark", "bodyfalls", true},
+				{"joint21", "weaponlost", false},
+                {"joint21", "weaponlost", false},
+			}
+	},
+	gibFX = "gibExplosion",
+	GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"r_p_bark_root","FX_gib_blood",1},
+				{"r_l_bark_root","FX_gib_blood",-1},
+				{"k_szyjaa","FX_gib_blood",-1},
+    },
+	gibShader = "palskinned_bloody",
+    	
+	GibExplosionStrength = 8000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+    RagdollCollisionsGib = {
+        MinStren = 6.0,
+        MinTime = 0.8,
+        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"r_p_bark_root", "gibSplash", true},
+				{"r_l_bark_root", "gibSplash", true},
+				{"k_szyjaa", "gibSplash", true},
+				{"joint21", "weaponlost", false},
+                {"joint22", "weaponlost", false},
+			},
+    },
+}
+
+o.DeathTimer = 110
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 140,
+    InertiaTensorMultiplier = 0.1,
+}
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee","throw",}
+
+o.AiParams.attackRange = 3
+o.AiParams.viewDistance = 60			-- zasieg widzenia
+o.AiParams.viewAngle = 170				-- kat widzenia
+o.AiParams.viewDistance360 = 10			-- zasieg widzenia z katem widzenia 360 stopni
+    
+o.AiParams.hearing = 1.0				-- zasieg sluchu
+o.AiParams.perception = 1.0				-- szansa uslyszenia halasu
+o.AiParams.walkStep = 7.0
+
+o.AiParams.GuardStill = true			-- true, nie bedzie sie poruszal w trybie guard
+o.AiParams.guardAngle = {0,10}			-- (min, max) kat o jaki sie nie bedzie sie poruszal w "idle"
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}-- (min, max) dlugosc pauzy pomiedzy obrotami
+o.AiParams.guardRange = -1				-- max. zasieg patrolu
+o.AiParams.useOnlyWaypointsWhenGuard = false	-- wykorzystuje tylko WayPointy przy chodzeniu w trybie guard
+o.AiParams.stopAfterWalking = 0.5			-- szansa zatrzymania po przejsciu do kolejnego punktu
+o.AiParams.stopAfterWalkingTime = {30,90}	-- (min, max) czas zatrzymania
+
+--o.AiParams.walkArea = ""
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.FinishMovementBeforeAttack = false	-- atakuje dopiero gdy dojdzie do wczesniej zaplanowanego punktu
+
+o.AiParams.changePosAfterFire = 0.66		-- szansa, ze zmieni pozycje po strzale
+o.AiParams.changePosAfterFireDist = 8
+o.AiParams.delayBetweenAttacks = 30
+o.AiParams.moveDisplacement = 3.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03	-- szansa, ze moster ucieknie po strzale
+o.AiParams.escapeTime = 120			-- typowy czas ucieczki
+
+o.AiParams.updateSpeed = 0.33
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+    
+o.AiParams.doNotRotateWhenShooting = false
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 666.0,
+		minDist = 1.0,
+		spreadAngle = 3,
+		damagePerBullet = 1,
+		PO_HitForce = 200,
+		maxYaw = 45,				-- maksymalna odchylka broni lewo/prawo w stos. do kata patrzenia
+		maxPitch = 75,				-- maksymalna odchylka broni gora/dol
+		fireParticle = "shot",	
+		fireParticleSize = 0.25,
+   		bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+	}
+
+o.AiParams.weaponBindPos = "joint21"					-- skad wylatuja pociski (i Particle)
+o.AiParams.secondWeaponBindPos = "joint22"
+o.AiParams.weaponBindPosShift = Vector:New(-0.75,0,0)
+o.AiParams.secondWeaponBindPosShift = Vector:New(0.75,0,0)
+
+o.minimumTimeBetweenHitAnimation = 12
+o.shadow = 128
+
+o.AiParams.FarAttacks = {"atak1"}	-- animacje okreslaja tez z ktorych broni moze strzelac
+
+o.AiParams.throwAnim = "atak2"
+o.AiParams.throwAmmo = 99999
+o.AiParams.throwRangeMin = 10
+o.AiParams.throwRangeMax = 30
+o.AiParams.minDelayBetweenThrow = 3
+o.AiParams.ThrowableItem = "GrenadeComandos.CItem"
+o.AiParams.throwItemBindTo = 'dlo_lewa_root'
+--o.AiParams.hideMesh = "sado_head1|polySurfaceShape3"
+o.AiParams.throwDistMinus = 3
+o.AiParams.throwAngle = 30
+
+o.AiParams.strafe = 0.7									-- szansa na strafe
+o.AiParams.checkVisibilityOnStrafeDestination = true	-- sprawdza, czy z z miejsca, gdzie konczy strafe bedzie widzial Playera
+o.AiParams.strafeDist = 6.0								-- srednia odleglosc na jak bedzie sie poruszal w strafe

@@ -1,0 +1,23 @@
+o.Mesh = "polySurfaceShape26418"
+o.Pack = "butla.dat"
+o.DestroyPack = "butla_zlom.dat"
+o.Health = 300
+o.Mass = 100
+o.Scale = 0.2
+o.SingleBottomHole = false
+
+o.RepulsePower = 1500
+o.ExplosionTimer = 5
+
+o.TestDeathZone = true
+o.Destroy.ExplosionStrength = 3200
+o.Destroy.ExplosionDamage = 300
+o.Destroy.ExplosionRadius = 6
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = 0
+o.Destroy.Strength = 250
+o.Destroy.MinSpeedOnCollision = 10
+o.Destroy.Effect = "explo_beczka"
+o.Destroy.EffectScale = 0.4
+o.Destroy.LifetimeAfterExplosion = 6
+

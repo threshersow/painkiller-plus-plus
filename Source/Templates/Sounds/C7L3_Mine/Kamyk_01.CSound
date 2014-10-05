@@ -1,0 +1,9 @@
+Kamyk_01.Volume = 60
+Kamyk_01.Interval = 10
+Kamyk_01.RandomShift = 2
+Kamyk_01.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Kamyk_01.Sound ="C7L3_Mine/Kamyk_01;C7L3_Mine/Kamyk_02"

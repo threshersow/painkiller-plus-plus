@@ -1,0 +1,10 @@
+Przepasc.Volume = 50
+Przepasc.Interval = 0
+Przepasc.RandomShift = 0
+Przepasc.Falloff =
+{
+  Start =100,
+  End = 800
+}
+Przepasc.Sound ="C1L3_Catacombs/przepasc_01;C1L3_Catacombs/przepasc_02"
+

@@ -1,0 +1,106 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'preacher-krok1',},
+		dist1 = 8,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'preacher-krok2',},
+		dist1 = 8,
+		dist2 = 30,
+	},
+
+	death  = {
+		samples = {"preacher-death1","preacher-death2","preacher-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	atak = {
+		samples = {'preacher-atak1','preacher-atak2'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+	throwAB = {
+		samples = {'preacher-throwAB'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    hit = {
+		samples = {'preacher-hit1','preacher-hit2','preacher-hit3',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    take = {
+		samples = {'preacher-take'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    throw = {
+		samples = {'preacher-throw'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    swish = {
+		samples = {'preacher-swish'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	bodyfalls = {
+		samples = {"preacher-bodyfalls",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	weaponlost = {
+		samples = {"preacher-weaponlost1","preacher-weaponlost2",},
+		dist1 = 20,
+		dist2 = 50,
+	},
+	missed = {
+		samples = {'$/actor/executioner/exe-atack-missed-ground1','$/actor/executioner/exe-atack-missed-ground2'},
+		dist1 = 12,
+		dist2 = 48,
+	},
+
+	damage = {
+		samples = {"preacher-damage",},
+	},
+
+    onAttackOnce = {
+        samples = {"preacher-halt1","preacher-halt2"},
+   		dist1 = 16,
+		dist2 = 60,
+    },
+	hitImmortal = {
+		samples = {"$/actor/leper_monk/lepper-odrzut"},
+   		dist1 = 16,
+		dist2 = 60,
+    },
+}
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+            {0.65,'PlaySound',"step1"},
+			{0.07,'PlaySound',"step2"},
+		},
+		run   = {
+            {0.65,'PlaySound',"step1"},
+			{0.07,'PlaySound',"step2"},
+		},
+        hit = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        atak1 = {
+            {2.0,'PlaySoundHit',"throwAB"},
+            {2.9,'PlaySound',"swish"},
+        },
+        atak2 = {
+            {1.75,'PlaySound',"swish"},
+            {0.0,'PlaySoundHit',"atak"},
+        },
+		atak3 = {
+            {0.2,'PlaySoundHit',"take"},
+            {4.2,'PlaySoundHit',"throw"},
+		},
+
+}

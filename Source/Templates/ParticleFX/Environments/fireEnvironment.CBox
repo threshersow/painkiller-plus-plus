@@ -1,0 +1,3 @@
+o.ParticleFX = "camfire"
+o._IsPE = true
+o.SoundLoop = ""

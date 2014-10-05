@@ -1,0 +1,6 @@
+o.Color = Color:New(253,177,74,0)
+o.Type = 2
+o.IsDynamic = true
+o.Intensity = 1.2
+o.StartFalloff = 3
+o.Range = 5

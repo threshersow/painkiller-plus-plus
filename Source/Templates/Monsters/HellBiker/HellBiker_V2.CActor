@@ -1,0 +1,103 @@
+o.BaseObj = "HellBiker.CActor"
+o.Model = "hellbiker_v2"
+o.NeverRun = true
+o.RotateSpeed = 12
+
+o.Health = 88
+o.enableGibWhenHPBelow = -43
+
+o.s_SubClass.SoundDir = 'hellbiker'
+o.s_SubClass.Animations.atak1 = nil
+o.s_SubClass.Animations.atak2 = nil
+o.s_SubClass.Animations.walk1 = nil
+o.s_SubClass.Animations.run = nil
+o.s_SubClass.Animations.atak_start = {1.0, false, {
+        {0.3,'StartRotor',},
+}}
+o.s_SubClass.Animations.atak = {0.98, false, {		-- len:1.25
+        {0.0,'ShootingSound',true},
+        {0.0,'WeaponFire'},
+        {0.08,'WeaponFire'},
+		{0.16,'WeaponFire'},
+		{0.24,'WeaponFire'},
+		{0.32,'WeaponFire'},
+	    {0.40,'WeaponFire'},
+        {0.48,'WeaponFire'},
+		{0.56,'WeaponFire'},
+		{0.64,'WeaponFire'},
+		{0.72,'WeaponFire'},
+		{0.80,'WeaponFire'},
+		{0.88,'WeaponFire'},
+		{0.96,'WeaponFire'},
+        {1.04,'WeaponFire'},
+        {1.12,'WeaponFire'},
+}}
+
+
+
+o.s_SubClass.walk = {"walk",}
+
+o.AiParams.specialAttackHP = 0.0
+o.AiParams.viewAngle = 179
+
+
+
+
+
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 60,
+		minDist = 2.0,
+		spreadAngle = 0.4,
+		damagePerBullet = 10,
+		PO_HitForce = 300,
+		maxYaw = 45,				-- maksymalna odchylka broni lewo/prawo w stos. do kata patrzenia
+		maxPitch = 45,				-- maksymalna odchylka broni gora/dol
+		fireParticle = "HBv2fire",	
+		fireParticleSize = 0.2,
+                bulletHitWallParticle =	"HB_hitground",
+		bulletHitWallParticleSize = 0.2,
+	}
+
+
+o.s_SubClass.gibShader = "palskinned_bloody"
+o.s_SubClass.gibFX = "gibExplosion"
+o.s_SubClass.GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"r_p_bark_root","FX_gib_blood",1},
+				{"r_l_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+}	
+
+
+o.s_SubClass.RagdollCollisionsGib = {
+        MinStren = 6.0,
+        MinTime = 0.8,
+        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"r_p_bark_root", "gibSplash", true},
+				{"r_l_bark_root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"joint21", "weaponlost", false},
+			}
+}
+
+o.AiParams.doNotRotateWhenShooting = false
+o.AiParams.continousAttack = true
+o.AiParams.animPrepareAttack = "atak_start"
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.changePosAfterFire = 0.0
+
+o.AiParams.weaponBindPos = "joint22"					-- skad wylatuja pociski (i Particle)
+o.AiParams.weaponBindPosShift = Vector:New(0.0,-1.0,0.0)
+
+o.AiParams.FarAttacks = {"atak",}
+
+o.AiParams.moveDisplacement = -1

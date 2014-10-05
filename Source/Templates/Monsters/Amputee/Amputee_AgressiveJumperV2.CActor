@@ -1,0 +1,5 @@
+o.BaseObj = "Amputee_Agressive.CActor"
+o.Model = "amputee_town"
+o.AiParams.jumpRangeMax = 15
+o.AiParams.jumpRangeMin = 3
+o.s_SubClass.SoundDir = "amputee"

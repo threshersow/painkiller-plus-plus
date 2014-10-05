@@ -1,0 +1,10 @@
+Serce.Volume = 80
+Serce.Interval = 1
+Serce.RandomShift = 3
+Serce.Falloff =
+{
+  Start = 4,
+  End = 30
+}
+Serce.Sound ="C1L3_Catacombs/serce"
+

@@ -1,0 +1,74 @@
+GiantStake.Mesh = "polySurfaceShape686"
+GiantStake.Pack = "giant_stake.dat"
+GiantStake.Scale = 1.2
+
+o.MoveUp = 1.5
+o.MoveUpSpeed = 5
+o.initialPosY = -2.0
+o.TimeStay = 2		-- w sec. czas jak dlugo sa wysuniete
+o.Damage = 20
+--============================================================================
+function GiantStake:OnCreateEntity()
+	--self:PO_Create(BodyTypes.Simple,0.2)
+	--self:PO_Create(BodyTypes.FromMesh)
+	--ENTITY.EnableCollisions(self._Entity, true)
+	self.startMoving = self.Pos.Y - self.initialPosY
+	self.currentMoving = self.startMoving
+	self.mode = 0
+	PlaySound3D("actor/giant/kolec-wysuwa_sie",self.Pos.X,self.Pos.Y,self.Pos.Z, 8, 50)		--kolec-chowa_sie
+	self.playerHurt = false
+end
+
+--============================================================================
+function GiantStake:Tick(delta)
+	if self.mode == 0 then
+		if self.currentMoving - self.MoveUp < self.startMoving then
+			self.currentMoving = self.currentMoving + delta * self.MoveUpSpeed
+			self.Pos.Y = self.currentMoving
+			if not self.playerHurt then		-- tylko raz dostaje od kolka
+				local dist = Dist3D(Player._groundx, Player.Pos.Y, Player._groundz, self.Pos.X, self.Pos.Y + self.MoveUp * 0.5 + self.initialPosY , self.Pos.Z)
+				if dist < 1.2 then
+                    --MsgBox("damage")
+					self.playerHurt = true
+                    --ENTITY.PO_SetPlayerFlying(Player._Entity)
+					Player:OnDamage(self.Damage, self.ObjOwner)
+					ENTITY.PO_Hit(Player._Entity, Player._groundx,Player.Pos.Y,Player._groundz, 0, FRand(600, 800), 0)
+				end
+			end
+    
+            --[[for i,v in Actors do
+                if v.Health > 0 and v._AIBrain then
+                    local dist = Dist3D(v._groundx, v._groundy + 0.2, v._groundz, self.Pos.X, self.Pos.Y + self.MoveUp * 0.5 + self.initialPosY , self.Pos.Z)
+                    if dist < 1.0 then
+                        v:OnDamage(50)
+                        if debugMarek then Game:Print(v._Name.." dostal od kolca") end
+                    end
+                end
+            end--]]
+		else
+			self.mode = 1
+		end
+	end
+
+	if debugMarek then	
+		DEB1 = self.Pos.X
+		DEB2 = self.Pos.Y + self.MoveUp * 0.5
+		DEB3 = self.Pos.Z
+	end
+	
+	if self.mode == 1 then
+		self.TimeStay = self.TimeStay - delta
+		if self.TimeStay < 0 then
+			self.mode = 2
+			PlaySound3D("actor/giant/kolec-chowa_sie",self.Pos.X,self.Pos.Y,self.Pos.Z, 8, 50)		--kolec-chowa_sie
+		end
+	end
+	if self.mode == 2 then
+		if self.currentMoving > (self.startMoving - 2) then
+			self.currentMoving = self.currentMoving - delta * self.MoveUpSpeed
+			self.Pos.Y = self.currentMoving
+		else
+			GObjects:ToKill(self)
+		end	
+	end
+end

@@ -1,0 +1,19 @@
+skrzynia_mala.Mesh = "skrzynia_mala_calaShape"
+skrzynia_mala.Pack = "elementy_cale.dat"
+skrzynia_mala.DestroyPack = "skrzynia_mala_zlom.dat"
+skrzynia_mala.Health = 16
+skrzynia_mala.Scale = 0.2
+o.TestDeathZone = true
+skrzynia_mala.Destroy.ExplosionStrength = 1
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+skrzynia_mala.Destroy.AverageDelay = 1
+skrzynia_mala.Destroy.AverageVariation = 0
+skrzynia_mala.Destroy.Strength = 150
+o.Destroy.Treasures = 
+{
+    Coins  = {2, 'g'},
+}
+skrzynia_mala.Destroy.MinSpeedOnCollision = 13
+o.Destroy.LifetimeAfterExplosion = 3
+

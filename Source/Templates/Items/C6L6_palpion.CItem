@@ -1,0 +1,12 @@
+o.BaseObj = "CItem"
+o.Model = "C6L6_palpion"
+o.Scale = 3
+o.speed = 1.0
+
+o.s_SubClass.AnimActions = 
+{
+    idle = {
+        {1.2,"PTSnd:'Rope'"},
+        {3.4,"PTSnd:'Rope'"}
+    }    
+}

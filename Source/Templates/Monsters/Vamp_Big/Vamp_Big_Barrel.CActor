@@ -1,0 +1,48 @@
+o.BaseObj = "Vamp_Big.CActor"
+o.ShotgunCheckAllPellets = true
+o.Model = "vamp_v2"
+o.Scale = 1.4
+o.Health = 30
+o.NeverWalk = true
+o.Animation = "idle"
+
+o.s_SubClass.Animations = {  
+        idle        = {1.0, false},
+        run          = {3.0, true, {
+                        {0.8,'FootFX','s_p_srodstopie'},
+                        {1.6,'FootFX','s_l_srodstopie'},
+                        {1.6,'PlaySound',"step1"},
+                        {1.6,'PlaySound',"run"},
+                        {0.8,'PlaySound',"step2"},
+						}},
+        zgniata      = {2.0, false, {
+						{0.4, "ExplodeBarrel", 1.0},		-- trzeci parametr: dystans od vampa wybuchu
+						}},
+}
+
+o.s_SubClass.Ambients = {"idle",}
+--o.s_SubClass.Sounds.death = nil
+
+
+o.AiParams.aiGoals = {"idle","runToPlayer","hunt"}
+o.AiParams.collisionAnim = "zgniata"
+o.AiParams.actionDistance = 3.0
+o.AiParams.Explosion = {
+	ExplosionStrength = 2000, 
+	ExplosionRange = 6,
+	Damage = 200,
+}
+o.AiParams.huntPlayer = true
+o.AiParams.alwaysSee = true
+
+o.BarrelExplosion = {
+	streng = 100,
+	Radius = 6.28,
+	LifetimeAfterExplosion = 3,
+}
+
+o.AiParams.barrelBone = "dlo_lewa_root"
+
+o.velocityUpOnDeath = 12.0
+o.deathExplosionItem = "beczka_mala_zlom.dat"
+o.deathExplosionItemScale = 1.0

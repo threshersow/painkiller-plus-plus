@@ -1,0 +1,11 @@
+Stuk.Volume = 100
+Stuk.Interval = 5
+Stuk.RandomShift = 3
+
+Stuk.Falloff =
+{
+  Start = 2,
+  End = 20
+}
+Stuk.Sound ="C1L1_Cathedrals/krypta_03_stuk_02"
+

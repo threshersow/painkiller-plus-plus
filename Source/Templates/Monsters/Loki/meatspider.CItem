@@ -1,0 +1,15 @@
+o.Model = "meat"
+o.Scale = 1.0
+o.LinearDamping = 0.5
+o.AngularDamping = 2.0
+o.CollisionDamage = 5
+o.fxbl = "VampBlood.CItem"
+o.TimeToLive = 30 * 4
+
+o.RagdollCollisions = {
+		MinStren = 1,
+		MinTime = 0.6,
+		Bones = {
+					{"root", {""}, true},		-- joint, {sounds}, blood
+				}
+	}

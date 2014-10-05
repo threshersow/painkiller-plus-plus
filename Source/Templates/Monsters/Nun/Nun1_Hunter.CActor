@@ -1,0 +1,11 @@
+o.BaseObj = "Nun1.CActor"
+o.RunSpeed = 1.2
+
+o.AiParams.viewDistance = 60
+o.AiParams.attackRange = 2.8
+o.AiParams.hearing = 60.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.04
+o.AiParams.alwaysSee = true
+o.AiParams.huntPlayer = true
+

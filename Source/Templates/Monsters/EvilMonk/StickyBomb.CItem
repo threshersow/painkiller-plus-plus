@@ -1,0 +1,175 @@
+o.Mesh = "polySurfaceShape934"
+o.Pack = "sticky_bomb.dat"
+o.Health = 5
+o.Scale = 0.25
+o.Mass = 40
+o.TimeToLive = 30 * 60	-- na wszelki
+o.TimeToExplode = 90
+o.Explosion = {
+	ExplosionStrength = 500, 
+	ExplosionRange = 5.5,
+	Damage = 35,
+}
+o.stickToPlayerDistance = 1.8
+
+function StickyBomb:OnDamage(damage)
+	--Game:Print("sb damage")
+	self.Health = self.Health - damage
+	if self.Health < 0 and not self._died then
+		local e = ENTITY.GetPtrByIndex(self._entityIndex)
+        if e then
+			local x,y,z = ENTITY.TransformLocalPointToWorld(self._Entity,0,0,0)
+			self._died = true
+            ENTITY.PO_Enable(self._Entity, false)
+            if self.ObjOwner then
+                WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,self.ObjOwner._Entity,AttackTypes.StickyBomb,self.Explosion.Damage)
+            else
+				WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,nil,AttackTypes.StickyBomb,self.Explosion.Damage)
+            end
+			SOUND.Play3D("weapons/machinegun/rocket_hit",x,y,z,18,100)
+			AddObject("FX_xplode.CActor",1,Vector:New(x,y,z),r,true) 
+            GObjects:ToKill(self)
+        else
+            GObjects:ToKill(self, true)
+        end
+        self:OnRelease()
+	end
+end
+--============================================================================
+function StickyBomb:OnCollision(x,y,z,nx,ny,nz,e_other,h_me,h_other,vx,vy,vz,vl)
+	if self._trail then
+		ENTITY.Release(self._trail)
+		self._trail = nil
+	end
+
+    local obj = EntityToObject[e_other]
+
+	if obj and obj._Class == "CPlayer" then
+		ENTITY.PO_Enable(self._Entity, false)
+		if self.ObjOwner then		
+			WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,self.ObjOwner._Entity,AttackTypes.StickyBomb,self.Explosion.Damage)
+		else
+			WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,nil,AttackTypes.StickyBomb,self.Explosion.Damage)
+		end
+		SOUND.Play3D("weapons/machinegun/rocket_hit",x,y,z,18,100)
+		AddObject("FX_xplode.CActor",1,Vector:New(x,y,z),nil,true) 
+		GObjects:ToKill(self)
+	else
+		ENTITY.PO_SetEntitySteered(self._Entity, true)
+		ENTITY.SetVelocity(0,0,0,0,0,0)
+		ENTITY.PO_EnableGravity(self._Entity,false)
+		ENTITY.EnableCollisions(self._Entity, false)
+		
+		--ENTITY.PO_EnableGravity(self._Entity,false)
+		--ENTITY.SetVelocity(0,0,0,0,0,0)
+		--ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Noncolliding)
+
+		local joint = MDL.GetJointFromHavokBody(e_other,h_other)
+
+		ENTITY.ComputeChildMatrix(self._Entity,e_other,joint)
+		ENTITY.RegisterChild(e_other,self._Entity,true,joint,true)
+
+		self._startTick = self.TimeToExplode
+
+		SOUND.Play3D("actor/evilmonkv3/evil-cluster-bomb-hit",x,y,z,6,30)
+	end
+	
+    self._parent = obj
+    
+	if debugMarek then
+		if obj then
+			Game:Print(" self.Bindto "..obj._Name)
+		else
+			Game:Print(" self.Bindto e")
+		end
+	end
+	
+end
+
+function StickyBomb:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+
+--============================================================================
+function StickyBomb:OnCreateEntity()
+	self:PO_Create(BodyTypes.Simple,0.02,ECollisionGroups.Noncolliding)
+	ENTITY.AddToIntersectionSolver(self._Entity)
+	--self:PO_Create(BodyTypes.FromMesh)
+    --Game:Print("StickyBomb init")
+    self._entityIndex = ENTITY.GetIndex(self._Entity)
+    self.timer = 5
+    self._startTick = nil
+    self._snd = self:BindSound("actor/evilmonkv3/fuse_burning-loop",5,26,true)
+end
+--============================================================================
+function StickyBomb:OnRelease()
+	if self._snd then
+		if debugMarek then
+			Game:Print(" snd sticky bomb release")
+		end
+		ENTITY.Release(self._snd)
+		self._snd = nil
+	end
+end
+
+function StickyBomb:Update()
+	if self.timer and self._enabled then
+		self.timer = self.timer - 1
+		if self.timer < 0 then
+			self.timer = nil
+			--Game:Print("StickyBomb init 2")
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+			self._trail = ENTITY.Create(ETypes.Trail,"trail_kolek","trailName")
+			ENTITY.AttachTrailToBones(self._Entity,self._trail)
+			WORLD.AddEntity(self._trail)
+		end
+		return
+	end
+	
+	if self._startTick then
+		self._startTick = self._startTick - 1
+		if self._startTick < 0 then
+			self._startTick = nil
+			--Game:Print("bomb boom")
+            local e = ENTITY.GetPtrByIndex(self._entityIndex)
+            if e then
+				local x,y,z = ENTITY.TransformLocalPointToWorld(self._Entity,0,0,0)
+				--if self._itsPlayer then
+				--	x,y,z = Player._groundx+FRand(-0.3,0.3), Player.Pos.Y, Player._groundz+FRand(-0.3,0.3)
+				--end
+				ENTITY.PO_Enable(self._Entity, false)
+				if self.ObjOwner then
+					WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,self.ObjOwner._Entity,AttackTypes.StickyBomb,self.Explosion.Damage)
+				else
+					WORLD.Explosion2(x,y,z, self.Explosion.ExplosionStrength,self.Explosion.ExplosionRange,nil,AttackTypes.StickyBomb,self.Explosion.Damage)
+				end
+				SOUND.Play3D("weapons/machinegun/rocket_hit",x,y,z,18,100)
+				AddObject("FX_xplode.CActor",1,Vector:New(x,y,z),r,true) 
+                GObjects:ToKill(self)
+            else
+                GObjects:ToKill(self, true)
+            end
+            self:OnRelease()
+        else
+            if self._parent then
+                if self._parent._died then
+                    self._startTick = -1
+                end
+            end
+		end
+	--[[else
+		local x,y,z = ENTITY.TransformLocalPointToWorld(self._Entity,0,0,0)
+		local distToPlayer = Dist3D(Player._groundx, Player._groundy+1.5, Player._groundz, x,y,z)
+		if distToPlayer < self.stickToPlayerDistance then
+			self._startTick = self.TimeToExplode
+			ENTITY.PO_Enable(self._Entity, false)
+			self._itsPlayer = true
+			--Game:Print("sticky bomb player col")
+			--Player:BindFX("sado_apple", 0.22, -3,-3,-3)
+			SOUND.Play3D("actor/evilmonkv3/evil-cluster-bomb-hit",x,y,z,6,30)
+			ENTITY.EnableDraw(self._Entity,false)
+		end--]]
+	end
+end

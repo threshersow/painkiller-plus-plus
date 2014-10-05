@@ -1,0 +1,9 @@
+Lancuch.Volume = 60
+Lancuch.Interval = 14
+Lancuch.RandomShift = 7
+Lancuch.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+Lancuch.Sound ="C6L2_LoonyPark/Lancuch_01;C6L2_LoonyPark/Lancuch_02"

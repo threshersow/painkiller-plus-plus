@@ -1,0 +1,9 @@
+Czolg.Volume = 80
+Czolg.Interval = 0
+Czolg.RandomShift = 0
+Czolg.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Czolg.Sound ="C6L3_Leningrad/Czolg"

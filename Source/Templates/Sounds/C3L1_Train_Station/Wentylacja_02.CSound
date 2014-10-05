@@ -1,0 +1,10 @@
+Wentylacja_02.Volume = 80
+Wentylacja_02.Interval = 0
+Wentylacja_02.RandomShift = 0
+Wentylacja_02.Falloff =
+{
+  Start =6,
+  End = 40
+}
+Wentylacja_02.Sound ="C3L1_Train_Station/Wentylacja_02"
+

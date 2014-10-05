@@ -1,0 +1,87 @@
+--============================================================================
+PBindJointToJoint._Entity = nil
+PBindJointToJoint.Objactor = nil
+PBindJointToJoint.rotationDisabled = false
+
+o.BaseName = "PBindJointToJoint.CProcess"
+--============================================================================
+function PBindJointToJoint:New(entity,actorCatcher, holdJoint,joint, e)
+    local p = Clone(self)
+    p._EntityCatcher = ENTITY.GetIndex(entity)
+    p.Objactor = actorCatcher
+    local j = holdJoint
+    if type(holdJoint) == "string" then
+		j = MDL.GetJointIndex(entity, holdJoint)
+    end
+    p._holdJoint = j
+    p._joint = joint
+    p._targetEntity = ENTITY.GetIndex(e)
+    p._holdJointDisplace = actorCatcher.AiParams.holdJointDisplace
+    --p:Tick(0, true)
+    return p
+end
+--============================================================================
+function PBindJointToJoint:Tick(delta, firstTime)
+    if self._ToKill then
+		MDL.SetPinnedJoint(te, self._joint, false)
+		return
+	end
+    
+    local e = ENTITY.GetPtrByIndex(self._EntityCatcher)
+    if not e then
+        Game:Print(self.Objactor._Name.." <- ERROR!!! PBindJointToJoint entity catcher false")
+        return
+    end
+    local te = ENTITY.GetPtrByIndex(self._targetEntity)
+    if not te  then
+        Game:Print(self.Objactor._Name.." <- ERROR!!! PBindJointToJoint target entity false")
+        return
+    end
+    
+    local x,y,z
+	if self._holdJointPos then
+		x,y,z = MDL.TransformPointByJoint(e, self._holdJoint, self._holdJointPos.X, self._holdJointPos.Y, self._holdJointPos.Z)
+	else
+		x,y,z = MDL.GetJointPos(e, self._holdJoint)
+	end
+
+	local angle = 0
+	if self.Objactor then
+		angle = self.Objactor.angle
+	end
+	if self._holdJointDisplace then
+		local v = Vector:New(math.sin(angle), 0, math.cos(angle))
+		v:Normalize()
+
+        x = x + v.X * self._holdJointDisplace.X
+        y = y + v.Y * self._holdJointDisplace.Y
+        z = z + v.Z * self._holdJointDisplace.Z
+    end
+
+	if firstTime then			-- za pierwszym razem przesuniecie wszystkicj jointow
+		local x1, y1, z1 = MDL.GetJointPos(te, self._joint)
+		local vd = Vector:New(x1 - x, y1 - y, z1 - z)
+		--local dist = Dist3D(x,y,z,x1,y1,z1)
+		--ENTITY.PO_SetCollisionGroup(te, ECollisionGroups.Noncolliding)
+		--Game:Print("move first time "..vd.X.." "..vd.Y.." "..vd.Z)
+		MDL.MoveAllJoints(te, -vd.X, -vd.Y, -vd.Z)
+		MDL.ApplyVelocitiesToAllJoints(te, 0,0,0, 0,0,0)
+		MDL.SetPinned(te, true)
+		self.once = true
+	else
+		if self.once then
+			MDL.SetPinned(te, false)
+			MDL.SetPinnedJoint(te, self._joint, true)
+		end
+		if self.CopyWholeMatrix then
+			MDL.CopyMatrixFromJointToJoint(e, self._holdJoint, te, self._joint)
+			MDL.ApplyVelocitiesToAllJoints(te, 0,0,0, 0,0,0)
+		else
+			MDL.ApplyPositionToJoint(te, self._joint, x, y, z)
+			if not self.rotationDisabled then
+				MDL.ApplyRotationToJoint(te, self._joint, 0 , angle, 0)
+			end
+		end
+	end
+end
+--============================================================================

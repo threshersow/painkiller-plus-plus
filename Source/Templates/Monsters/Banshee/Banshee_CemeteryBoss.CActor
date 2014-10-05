@@ -1,0 +1,8 @@
+o.BaseObj = "Banshee.CActor"
+
+o.Scale = 2.5
+o.Health = 500
+
+o.AiParams.screamFreq = 0.03
+o.NeverMove = true
+o.AiParams.aiGoals = {"idle","bansheeAttack", "hear"}

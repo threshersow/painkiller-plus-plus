@@ -1,0 +1,407 @@
+11 PEOPLE CAN FLY
+
+32 Studio Lead
+21 Adrian Chmielarz
+
+32 Project Lead
+21 Andrzej Poznanski
+
+32 Lead Character Design and Animation
+21 Michal Kosieradzki
+
+32 Lead Programmer
+21 Bartlomiej Sokolowski
+
+32 3D Engine and Animation System Programming
+21 Klaudiusz Zych
+
+32 3D Engine Programming and VFX
+21 Bart Sekura
+
+32 Game Play and Logic Programming
+21 Marek Galach, Michal Trepka
+
+32 Weapons and Additional Game Play
+21 Bartlomiej Sokolowski
+
+32 AI Programming
+21 Marek Galach
+
+32 Multiplayer Programming
+21 Krystian Galaj, Bartlomiej Sokolowski
+
+32 Physics and Havok Integration
+21 Krystian Galaj
+
+32 Editors and Scripting System Programming
+21 Bartlomiej Sokolowski
+
+32 Sound Programming
+21 Krystian Galaj
+
+32 User Interface and Input Programming
+21 Michal Trepka
+
+32 Pathfinding & Occlusion
+21 Krystian Galaj
+
+32 Game Design
+21 Adrian Chmielarz, Michal Kosieradzki, Michal Nowak,
+21 Andrzej Poznanski, Michal Sadowski
+
+32 Level Design and Modeling
+21 Kamil Bilczynski, Wojciech Madry, Michal Nowak,
+21 Wojciech Pazdur, Michal Sadowski, Tomasz Strzalkowski
+
+32 Additional Character Design
+21 Slawek Latos
+
+32 Character Animation
+21 Krzysztof Falinski, Pawel Ruszkiewicz
+
+32 Weapon Design and Modeling
+21 Pawel Ruszkiewicz
+
+32 Havok Objects
+21 Wojciech Madry, Michal Nowak, Wojciech Pazdur
+
+32 Character Texture Artists
+21 Krzysztof Falinski, Slawek Latos, Wojciech Pazdur,
+21 Pawel Ruszkiewicz
+
+32 Level Texture Artists
+21 Kamil Bilczynski, Wojciech Pazdur, Tomasz Strzalkowski,
+21 Robert Wilinski
+
+32 Lighting
+21 Wojciech Madry, Andrzej Poznanski, Arkadiusz Rekita,
+21 Tomasz Strzalkowski, Sebastian Woldanski
+
+32 HUD and GUI Artist
+21 Robert Wilinski
+
+32 Particles and Special FX Art
+21 Michal Kosieradzki, Pawel Ruszkiewicz
+
+32 Game Environment Technical Director
+21 Wojciech Madry
+
+32 Maya Mel scripting and API programming , Maya TD
+21 Sebastian Woldanski
+
+32 2D Art and Additional Texturing
+21 Maciek Kuciara
+
+32 Sound Design
+21 Adam "Scorpik" Skorupa
+
+32 Music and Acoustic Sets
+21 Adam "Scorpik" Skorupa 
+
+32 Ambient Sound and Music
+21 Marcin "Cedyn" Czartynski
+ 
+32 Battle music
+21 Patryk "Revisq" Gegniewicz, Dominik "LpD" Popinski
+
+32 Music performance
+21 Alexander "Biomech" Grochocki (guitar),
+21 Michal "Xaay" Loranc (guitar)
+
+32 Music Producer
+21 Marcin "Cedyn" Czartynski
+
+32 People Can Fly Business Affairs
+21 Adrian Chmielarz
+
+
+
+
+
+11 DREAMCATCHER
+
+32 Executive and Line Producer
+21 Robert Stevenson
+
+32 VP Marketing
+21 Marshall Zwicker
+
+32 Lead Product Marketing Manager
+21 Brian Gladman
+
+32 Marketing Director (EMEA)
+21 Simon Vivien
+
+32 Marketing Manager Germany 
+21 Christian Streil
+
+32 Product Manager France
+21 Julien Levy
+
+32 Product Manager UK
+21 Melissa Savage (Mindscape Ltd)
+
+32 Product Manager Spain
+21 Jose-Maria Hernandez (VirginPlay SA)
+
+32 Product Manager Italy
+21 Manuel Fontanella (Atari)
+
+32 Marketing Coordinator (EMEA)
+21 Frederique Barkoff
+
+32 Marketing Director (Europe)
+21 Matthieu Saint-Denis
+
+32 Marketing Creative Director
+21 Desmond Oku
+
+32 Illustrations
+21 Greg Banning
+21 Russell Challenger
+
+32 Graphics Management
+21 Jim Meecham
+21 Odile Mousseau (Europe)
+
+32 International Communication Director
+21 Tiphaine Locqueneux
+
+32 PR Coordinator
+21 Tara Reed
+
+32 PR Manager (France)
+21 Nicolas Swiatek
+
+32 PR Assistant (Europe)
+21 Maryline Perrier
+
+32 Script
+21 David Ellis
+
+32 Manual
+21 David Ellis
+
+32 Manual Layout
+21 Edward Hatim
+
+32 Additional Production
+21 Mike Adams
+
+32 Localization Production
+21 Yann Tisseyre
+
+32 Voice Casting and Directing
+21 Ginny McSwain
+
+32 Additional Directing
+21 Robert Stevenson
+
+32 Voice Talent
+21 Cameron Clarke (Daniel)
+21 Jim Cummings (Alastor)
+21 Vanessa Marshall (Eve)
+
+32 Soundelux DMG Producer
+21 Chip Beaman
+
+32 Engineer and Dialogue Editorial
+21 Elliot Anders
+
+32 Assistant Engineer
+21 Joe Moeller
+
+32 Voice Over Asset Manager
+21 Sara Huddleston
+
+32 QA Manager
+21 Mike Adams
+
+32 QA Leads
+21 Adrian Miller
+21 Chris Nesbitt
+
+32 Testers (Functional)
+21 Dan Dawang
+21 Chris Elliot
+21 Anthony Finelli
+21 Ryan Gavel
+21 Vasso Kontoulis
+21 Daniel Torreblanca
+
+32 Testers (Enzyme Compatibility)
+21 Guy Demers
+21 Darren Keenan
+21 Kayven Meager
+21 Fred Plante
+
+32 Additional Testing
+21 Chantal Mauro
+21 Krystal Moon
+21 Mike Deveau
+21 Benjamin Feuerstein
+
+32 Manufacturing Manager (EMEA)
+21 Bastien Lepetit
+	
+32 Website
+21 Jeremy Bell
+21 Barry Lachapelle
+
+32 DreamCatcher, President and CEO
+21 Richard Wah Kan
+
+32 DreamCatcher COO
+21 Olivier Pierre
+
+32 Legal Affairs
+21 François Breuillier (Europe)
+21 Leslie Rosenthal
+
+
+
+
+
+
+11 DIGITAL AMIGOS
+31 (cut-scenes)
+
+
+32 Project Leader/Additional Art
+21 Krzysztof Rudz
+
+32 Lead Artist/Art Director
+21 Adam Torczynski
+
+32 Lead Character Animator
+21 Hubert J. Daniel
+
+32 Lead 3d Modeler/Environment Artist
+21 Bartek Opatowiecki
+
+32 Rigger/Character Animator
+21 Grzegorz Kukus
+
+32 Character Animators
+21 Grzegorz Kukus, Bartek Opatowiecki, Krzysztof Rudz
+
+32 Character Artist/Concept Artist
+21 Wieslaw Malek
+
+32 Texture Art
+21 Marcin Czuprynski, Andrzej Rudz
+
+32 Texture Artist/Matte Painter
+21 Michal Kaleniecki
+
+32 Modeling
+21 Arkadiusz Jurcyn
+
+32 Matte Painting
+21 Artur M. Szatalowicz
+
+32 Storyboards
+21 Rafal "Maslo" Maslyk
+
+32 Sound and Music Composition
+21 Jacek Opielka, Café Ole, Marcin Czartynski
+
+32 Post Production/VFX
+21 Adam Torczynski
+
+32 Technical Support
+21 "GOLEM" Tomek Michalak
+
+32 Motion Capture Performers
+21 Hubert J. Daniel (Daniel, demons)
+21 Karolina Poryzala (Eve)
+
+32 Motion Capture - MOTEK BV (body)
+21 ARTEM DIGITAL (facial)
+
+32 ARTEM DIGITAL staff
+21 Richard Dikstra, Nick Doff, Richard Hince
+21 Mike Humphreys
+
+
+
+
+
+
+32 DreamCatcher Special Thanks:
+
+33 Bobbi Jo Anderson, Sabine Berekoven, Paul Brack, Hervé Daigmorte,
+33 Keith Galocy, Helen Myers, Thomas Neveu, Jay Powell, Mark Smith,
+33 Mark Ward
+
+
+
+
+
+32 People Can Fly Special Thanks:
+
+33 Philipp Gerasimov (nVidia), Rev Lebaredian (nVidia), Guy Grenier
+33 (nVidia), Zehra Bayramli (nVidia), Clint Brewer (nVidia), Vernon
+33 Chiang (ATI), Sim Dietrich (nVidia), Doug Rogers (nVidia), Cyril
+33 Zeller (nVidia)
+
+
+
+
+
+32 DreamCatcher and PCF Very Special Thanks:
+
+33 Virgil "eSrem" Ashruf, Ross "maniax" Barlow, Blowfish,
+33 Jarek 'mess' Bozen, Sebastian "LovingAngel" Elliker, Finn,
+33 Stephan "syzzle" Gabriel, Jesse "sev1" Groenendaal,
+33 Chris "Hutchy" Hutchison, Agustin "cu3rv0" López, Outs,
+33 Michael "Maverick" Pagels, Michel "ReaVer" Rene' Charite',
+33 Saxonbeast, W4rh0g,33 Jaroslaw "yar" Zawislinski, and the
+33 rest of the pkeuro.com community.
+
+
+
+
+
+32 Digital Amigos Special Thanks
+
+33 Andrzej Gora, Jon Hughes, Leokadia Opatowiecka, Wojciech Opatowiecki,
+33 Darek Poryzala, Grazyna Poryzala, Robert Poryzala, Bozena "Slonex"
+33 Torczynska, Max "Gingi" Torczynski, Bartek Zaboklicki, "Greetengs to
+33 Bodo", Ulineq, and Henio "the dog"
+
+
+
+
+
+
+
+11 COPYRIGHTS
+
+
+32 Havok.com(tm) © Copyright 1999-2001 Telekinesis Research Limited.
+
+32 © 1997-2004 Bink and Miles Sound System by RAD Game Tools, Inc. 
+
+32 The Lua language is designed and implemented at Tecgraf,
+32 PUC-Rio in Brazil by the team: Roberto Ierusalimschy,
+32 Waldemar Celes, Luiz Henrique de Figueiredo
+
+32 ZLib: Jean-loup Gailly, Mark Adler
+
+32 Voice Over Recording, Directing and Editorial provided by
+32 Soundelux Design Music Group.
+
+32 FreeType: Portions of this software are copyright © 1996-2002
+32 The FreeType Project (www.freetype.org).  All rights reserved.
+
+
+
+
+
+
+
+
+
+33 Lots of demons were pwnz0red and 0wn3d during
+33 the production of Painkiller BooH.

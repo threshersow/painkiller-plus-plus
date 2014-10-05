@@ -1,0 +1,67 @@
+o.Mesh = "pSphereShape1"
+o.Pack = "kamyk.dat"
+o.Mass = 40
+o.Scale = 0.01
+o.Restitution = 0.33 	-- sprezystosc
+o.TimeToLive = 30 * 20
+o.LifeTime = 60
+o.fx = 'samurajX'
+o.fxSize = 0.07
+o.damage = 3
+o.AngularDamping = 1.0
+----------------------------
+function CrossPiece:OnCreateEntity()
+    local pfx = AddPFX(self.fx,FRand(self.fxSize*0.9, self.fxSize*1.1))
+    ENTITY.RegisterChild(self._Entity,pfx)    
+	self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Noncolliding)
+	ENTITY.PO_EnableGravity(self._Entity,false)
+	--self:BindSound("actor/nun/nun-charm-shoot",4,28,false)
+    ENTITY.EnableDraw(self._Entity,false)
+    self._timer = 10
+end
+
+function CrossPiece:OnUpdate()
+	if not self._enabled then return end
+	if self._timer then
+		self._timer = self._timer - 1
+		if self._timer < 0 then
+			self._timer = nil
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.HCGNormalNCWithSelf)
+			ENTITY.EnableCollisions(self._Entity, true)
+		end
+	end
+end
+
+function CrossPiece:OnCollision(x,y,z,nx,ny,nz,e)
+	--Game:Print("CrossPiece onCollision")
+	ENTITY.EnableCollisions(self._Entity, false)
+	if e then
+		local obj = EntityToObject[e]
+		if obj then
+			--Game:Print("CrossPieceCollision "..obj._Name)
+			if obj.OnDamage then
+                if obj == Player then
+                    if self.ObjOwner and not self.ObjOwner._getDamageFromX then
+                        obj:OnDamage(self.damage)		-- pozniej inaczej, bo wszytkie naraz laduja w gracza
+                        self.ObjOwner._getDamageFromX = true
+                        PlaySound2D("actor/samurai/samurai-fireball-hit")
+                    end
+                else
+                    obj:OnDamage(self.damage, self.ObjOwner)		-- pozniej inaczej, bo wszytkie naraz laduja w gracza
+                end
+            end
+			GObjects:ToKill(self)
+			return
+        else
+            if self.ObjOwner and not self.ObjOwner._getDamageFromX2 then
+                PlaySound3D("actor/nun/nun-charm-shoot",x,y,z,25,70)
+                self.ObjOwner._getDamageFromX2 = true
+            end
+		end
+	end
+	ENTITY.PO_EnableGravity(self._Entity, true)
+	ENTITY.PO_SetLinearDamping(self._Entity,2.2)
+	if self.TimeToLive > self.LifeTime then
+		self.TimeToLive = math.random(self.LifeTime*0.7, self.LifeTime)
+	end
+end

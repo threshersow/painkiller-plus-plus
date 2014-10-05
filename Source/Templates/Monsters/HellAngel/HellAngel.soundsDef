@@ -1,0 +1,75 @@
+o.s_SubClass.SoundsDefinitions = {
+	stepl = {
+		samples = {'hella_krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	stepr = {
+		samples = {'hella_krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	onAttackOnce = {
+		samples = {"hella-halt1", "hella-halt2", "hella-halt3"},
+		playChance = 0.5,
+		dist1 = 30,
+		dist2 = 70,
+	},
+	hit = {
+		samples = {'hella-hit1','hella-hit2','hella-hit3',},
+		dist1 = 30,
+		dist2 = 70, 
+	},
+	bodyfalls = {
+		samples = {"hella-bodyfalls1","hella-bodyfalls2"},
+		dist1 = 12,
+		dist2 = 48, 
+	},
+	weaponlost = {
+		samples = {"hella-weapon-lost1","hella-weapon-lost2","hella-weapon-lost3"},
+		dist1 = 12,
+		dist2 = 48, 
+	},
+	throw = {
+		samples = {'hella-throw1','hella-throw2'},
+		dist1 = 20,
+		dist2 = 55,
+	},
+	molotow = {
+		samples = {'hella-throw-molotov'},
+		dist1 = 20,
+		dist2 = 55,
+	},
+	prepare = {
+		samples = {'hella-at-prepare',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	at = {
+		samples = {'hella-at1','hella-at2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	plank = {
+		samples = {'hella-swish-plank',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	death = {
+        	samples = {"hella-death1","hella-death2","hella-death3" },
+		dist1 = 20,
+		dist2 = 60, 
+	},
+
+	damage = {
+		samples = {"hella-plank-hit"},
+	},
+
+	ambients = {
+		samples = {"hella-idle1", "hella-idle2"},
+		dist1 = 20,
+		dist2 = 60, 
+	},
+
+}
+

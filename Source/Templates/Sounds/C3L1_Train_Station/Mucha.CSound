@@ -1,0 +1,10 @@
+Mucha.Volume = 20
+Mucha.Interval = 5
+Mucha.RandomShift = 2
+Mucha.Falloff =
+{
+  Start = 2,
+  End = 15
+}
+Mucha.Sound ="C3L1_Train_Station/Mucha_01;C3L1_Train_Station/Mucha_02"
+

@@ -1,0 +1,51 @@
+EDITOR.AddObjectTemplate("Particles","FX_samurajshock","FX_samurajshock.CActor");	
+
+FX_samurajshock.Model = "rexplode"
+FX_samurajshock.Scale = 6.0
+FX_samurajshock.NotCountable = true
+
+FX_samurajshock.s_SubClass = 
+{
+    Animations = {  
+        idle        = {0.9},
+    },
+}
+
+function FX_samurajshock:OnPrecache()
+	Cache:PrecacheParticleFX("FX_samurajshock")
+end
+
+function FX_samurajshock:OnCreateEntity()
+    self:BindFX("FX_samurajshock",0.2,"e1")
+    self:BindFX("FX_samurajshock",0.2,"e2")
+    self:BindFX("FX_samurajshock",0.2,"e3")
+    self:BindFX("FX_samurajshock",0.2,"e4")
+    self:BindFX("FX_samurajshock",0.2,"e5")
+    self:BindFX("FX_samurajshock",0.2,"e6")
+    self:BindFX("FX_samurajshock",0.2,"e7")
+    self:BindFX("FX_samurajshock",0.2,"e8")
+    self:BindFX("FX_samurajshock",0.2,"e9")
+    self:BindFX("FX_samurajshock",0.2,"e10")
+    self:BindFX("FX_samurajshock",0.2,"e11")
+    self:BindFX("FX_samurajshock",0.2,"e12")
+    self:BindFX("FX_samurajshock",0.2,"e13")
+    self:BindFX("FX_samurajshock",0.2,"e14")
+    self:BindFX("FX_samurajshock",0.2,"e15")
+    self:BindFX("FX_samurajshock",0.2,"e16")
+
+end
+
+function FX_samurajshock:OnFinishAnim(name)
+    GObjects:ToKill(self)
+end
+
+
+function FX_samurajshock:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+
+o.Immortal = true

@@ -1,0 +1,47 @@
+--============================================================================
+o.Channel = 0
+o.VolumeIn = 0
+o.VolumeOut = 0
+o.FadeTime  = 0
+o.Volume  = 0
+o.ScriptOnFinish  = 0
+o._ft = 0
+o.BaseName = "PMusicFade.CProcess"
+o.NotSaveable = true
+--============================================================================
+function PMusicFade:New(ch,vol_in,vol_out,tm,scriptOnFinish)
+    local p = Clone(self)
+    p.Channel = ch
+    p.FadeTime = tm
+    p.VolumeIn = vol_in
+    if not vol_in then
+        Game:Print(" ERROR: PMusicFade:New vol_in = nil")
+        p.VolumeIn = 0
+    end
+    p.VolumeOut = vol_out
+    if not vol_out then
+        Game:Print(" ERROR: PMusicFade:New vol_out = nil")
+        p.VolumeOut = 100
+    end
+
+    p.ScriptOnFinish = scriptOnFinish
+    return p
+end
+
+--============================================================================
+function PMusicFade:Tick(delta)
+    if self._ToKill then return end
+    
+    self._ft = self._ft +  delta       
+    if self._ft > self.FadeTime then
+        self._ft = self.FadeTime
+        GObjects:ToKill(self)
+        if self.ScriptOnFinish then dostring(self.ScriptOnFinish) end
+    end
+    
+    local a = self._ft / self.FadeTime
+    local vol = self.VolumeIn + (self.VolumeOut - self.VolumeIn) * a
+    
+    SOUND.StreamSetVolume(self.Channel,vol)
+end
+--============================================================================

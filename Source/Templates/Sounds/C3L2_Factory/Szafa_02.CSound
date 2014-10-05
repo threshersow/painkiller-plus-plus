@@ -1,0 +1,10 @@
+Szafa_02.Volume = 60
+Szafa_02.Interval = 0
+Szafa_02.RandomShift = 0
+Szafa_02.Falloff =
+{
+  Start = 1,
+  End = 10
+}
+Szafa_02.Sound ="C3L2_Factory/Szafa_02"
+

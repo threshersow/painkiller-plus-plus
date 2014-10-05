@@ -1,0 +1,10 @@
+Exterior_03.Volume = 50
+Exterior_03.Interval = 0
+Exterior_03.RandomShift = 0
+Exterior_03.Falloff =
+{
+  Start = 2.3,
+  End = 25
+}
+Exterior_03.Sound ="C2L4_Asylum/Exterior_03"
+

@@ -1,0 +1,32 @@
+o.Model = "C3L3_Truck"
+o.Health = 4000
+o.Mass = 20000
+o.Friction = 0
+o.Scale = 3
+
+-- special additions
+
+o.TruckStates =
+{
+    Stopped = 0,
+    Going = 1,
+    GoingHorizontally = 2,
+    GoingFree = 3,
+    Pinned = 4,
+}
+
+o.GoingState = o.TruckStates.Stopped
+o.Go = false
+o.Pos = Vector:New(0.0,0.0,0.0)
+o.PosStart = Vector:New(0.0,0.0,0.0)
+o.DistGoFree = 700
+o.Acceleration = 0.05
+o.MaxSpeed = 30.0
+o.CurSpeed = 0.0
+o.SpeedVector = Vector:New(0.0,0.0,1.0)
+
+o.Scale = 3
+o.DistGoHoriz = 3.5
+o.DistGoFree = 26.0 - 0.5
+o.SpeedVector = Vector:New(0,-0.095,-1)
+o.Acceleration = 0.15

@@ -1,0 +1,40 @@
+o.BaseObj = "Nun1.CActor"
+o.Model = "nun"
+o.Scale = 1.3
+o.Health = 132
+o.CreatePO = true
+o.WalkSpeed = 2.0
+o.RunSpeed = 2.0
+
+
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear","NunSpecialAttack"}
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 3.0
+    
+o.AiParams.attackRangeAngle = 160
+
+o.AiParams.delayBetweenAttacks = 15
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+    
+o.AiParams.chanceOfEscapeAfterFire = 0.08
+o.AiParams.escapeTime = 120
+o.AiParams.moveDisplacement = 2.6
+o.AiParams.updateSpeed = 0.33
+
+o.AiParams.throwHelmetHp = 0.4
+
+o.AiParams.ThrowableItem = "NunSpell.CItem"
+o.AiParams.throwItemBindTo = "d_l_srodek"
+o.AiParams.throwRangeMin = 10
+o.AiParams.throwRangeMax = 30
+o.AiParams.minDelayBetweenThrow = 6.0
+o.AiParams.escapeAfterThrowTime = 0		-- 0 - no escape
+o.AiParams.throwVelocity = 22
+
+o.AiParams.farAttackJammTime = 120

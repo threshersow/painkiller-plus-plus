@@ -1,0 +1,10 @@
+Gong.Volume = 100
+Gong.Interval = 15
+Gong.RandomShift = 5
+Gong.Falloff =
+{
+  Start = 1.7,
+  End = 30
+}
+Gong.Sound ="C2L4_Asylum/Gong"
+

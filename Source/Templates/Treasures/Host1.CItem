@@ -1,0 +1,42 @@
+o.Mesh = "polySurfaceShape57857"
+o.Pack = "krzyz1.dat"
+
+o.Scale = 0.4
+--o.TimeToLive = 20 * 30
+
+o.Value = 100
+o.takeDistance = 1.0
+
+o.isHolyItem = true
+
+o.s_SubClass.bindFX = {
+        {"flarka_kielich", 0.4, nil, {-0.035, 0.25, 0}, {0.4, 0.4, 0.4}},
+        {"FLARA_HOSTIE", 2.4, nil, {0, 0, 0}, {0.9, 0.9, 0.9}},
+}
+--============================================================================
+function Host1:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.InsideItems)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)    
+    --ENTITY.SetOrientation(self._Entity,CAM.GetAngRad()-math.pi)     
+
+    --o.Child = {"BGold.CBillboard", 0.5, nil, {0.8,0.5,0.0}}
+    if self.Child then
+        local bb = Clone(CBillboard)
+        bb.Texture = "flarka_centered"
+        bb.Color = Color:New(255,0,0,0)
+        bb.Size = 0.5
+        local b = self.Child
+		local o,e = AddObject(bb,b[2],Vector:New(b[4][1],b[4][2],b[4][3]))
+        local j = -1
+        if b[3] then
+            local j = MDL.GetJointIndex(self._Entity,b[3])
+        end
+		ENTITY.RegisterChild(self._Entity, e, true, j)
+	end
+end
+--============================================================================
+function Host1:OnTake(player)	
+    self.Client_OnTake(player.ClientID,player._Entity,self._Entity,"Host1")
+end
+--============================================================================

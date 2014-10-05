@@ -1,0 +1,29 @@
+o.BaseObj = "ArmorStrong.CItem"
+o.Model = "armour_copper"
+o.DisabledInVoosh = false
+o.Light1 = "bronze.CLight"
+o.Light2 = "bronze2.CLight"
+o.Ambient = Color:New(43,49,51,0)
+--------------------------
+o.ArmorAdd    = 100
+o.ArmorType   = ArmorTypes.Weak
+o.RescueFactor = 0.33
+o.RespawnTime = 20
+
+--============================================================================
+function o:OnInitTemplate()
+    self.CubeMap = nil
+    self.DetailMap = nil
+    self.NormalMap = nil
+    self.Destroy = nil
+    self.Impulse = nil
+    self:ReplaceFunction("_Synchronize","Synchronize")
+    self:ReplaceFunction("Synchronize","nil")
+end
+--============================================================================
+function ArmorWeak:OnCreateEntity()
+    ENTITY.SetSynchroString(self._Entity,"ArmorWeak.CItem") 
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,true)
+    self._orient = FRand(7.26)
+    self:Client_OnCreateEntity(self._Entity)		
+end

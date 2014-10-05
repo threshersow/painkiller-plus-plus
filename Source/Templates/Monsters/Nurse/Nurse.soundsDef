@@ -1,0 +1,61 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'nurse_krok1',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'nurse_krok2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	swish = {
+		samples = {'nurse_swish'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak = {
+		samples = {'nurse_at1','nurse_at2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	hit = {
+		samples = {'nurse_hit1','nurse_hit2'},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"$/actor/amputee/amp_bodyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"nurse-weapon-lost1","nurse-weapon-lost2",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	attackAmbient = {
+		samples = {'nurse_attackscream1','nurse_attackscream2','nurse_attackscream3',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    death = {
+		samples = {"nurse_death1","nurse_death2",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    damage = {
+		samples = {"nurse_damage"},
+    },
+    onAttackOnce = {
+        samples = {"nurse_halt1","nurse_halt2"},
+   		dist1 = 30,
+		dist2 = 70,
+    },
+    attackAmbient = {
+        samples = {"nurse_attackscream1","nurse_attackscream2","nurse_attackscream3"},
+   		dist1 = 30,
+		dist2 = 70,
+    },
+}

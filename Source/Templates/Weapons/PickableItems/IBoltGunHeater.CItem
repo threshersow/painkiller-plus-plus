@@ -1,0 +1,21 @@
+o.Model = "kk2item"
+o.DisabledInVoosh = true
+o.Scale = 0.2
+o.SlotIndex = 7
+o.RespawnTime = Cfg.WeaponRespawnTime
+o.Ammo = 
+{
+    Bolt        = 20,
+    HeaterBomb  = 0,
+}
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/BoltGunHeater",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"take-boltgunheather"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

@@ -1,0 +1,24 @@
+o.BaseObj = "Ninja2.CActor"
+
+o.AiParams.aiGoals = {"idle", "hear","throw",}
+o.NeverWalk = true 
+--o.AlwaysSee = true
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,10}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.stopAfterWalking = 1
+o.AiParams.stopAfterWalkingTime = {30,80}
+
+
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = true
+o.AiParams.WalkAreaWhenAttack = true
+o.AiParams.FinishMovementBeforeAttack = true
+
+o.doNotUseWP = false
+
+o.AiParams.throwRangeMin = 1
+o.AiParams.throwRangeMax = 50
+o.AiParams.minDelayBetweenThrow = 0.2

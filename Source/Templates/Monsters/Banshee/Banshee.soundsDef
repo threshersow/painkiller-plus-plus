@@ -1,0 +1,93 @@
+o.s_SubClass.SoundsDefinitions = {
+	step = {
+		samples = {'banshee_krok1','banshee_krok2'},
+		dist1 = 3,
+		dist2 = 25,
+	},
+	step1 = {
+		samples = {'banshee_krok1'},
+		dist1 = 3,
+		dist2 = 25,
+	},
+	step2 = {
+		samples = {'banshee_krok2'},
+		dist1 = 3,
+		dist2 = 25,
+	},
+	hit = {
+		samples = {'banshee_hit1','banshee_hit2',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	atak = {
+		samples = {'banshee_at2','banshee_at1'},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	swish = {
+		samples = {'banshee_swish',},
+		dist1 = 4,
+		dist2 = 30,
+	},
+	bodyfalls = {
+		samples = {"$/actor/amputee/amp_bodyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+
+	
+	scream = {
+		samples = {"banshee_scream_03",},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	death = {
+		samples = {"banshee_death1","banshee_death2" },
+		dist1 = 12,
+		dist2 = 48,
+	},
+	OnDisapear = {
+		samples = {"banshee_death-dissapear"},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	OnSpawn = {
+		samples = {'banshee_at1','banshee_at2',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	attackAmbient = {
+		samples = {'banshee_attackscream1','banshee_attackscream2','banshee_attackscream3',},
+		dist1 = 12,
+		dist2 = 48,
+	},
+	damage = {
+		samples = {'banshee_hand-hit'},
+	},
+
+}
+
+o.s_SubClass.SoundsDefinitionsBindings = {
+
+		walk    = {
+                    {0.0,'PlaySound',"step"},
+					{1.3,'PlaySound',"step"},
+                },
+		run     = {
+					{0.0,'PlaySound',"step1"},
+					{1.3,'PlaySound',"step2"},
+                },
+
+		atak2   = {
+					{0.6,'PlaySound',"atak" },
+					{1.0,'PlaySound',"swish" },
+                },
+
+		hit1    = {
+					{0.0,'PlaySoundHit',"hit"},
+                },
+		hit2    = {
+					{0.0,'PlaySoundHit',"hit"},
+				},
+}

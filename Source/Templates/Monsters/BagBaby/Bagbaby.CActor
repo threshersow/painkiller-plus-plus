@@ -1,0 +1,142 @@
+--o.BaseObj = "Leper.CActor"
+o.Model = "bagbaby"
+o.Scale = 0.7
+o.CreatePO = true
+o.Health = 120
+o.WalkSpeed = 1
+o.RunSpeed = 1
+o.RotateSpeed = 10
+o.notBleeding = true
+--o.disableFreeze = true
+o.enableGibWhenHPBelow = 1
+
+if Tweak.GlobalData.GermanVersion then
+    o.Model = "bagbaby_german"
+    o.enableGibWhenHPBelow = nil
+end
+
+o.throwHeart = true
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 100,
+}
+
+o.s_SubClass = {
+	rotateHead = 0.5,
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.14,
+    SoundDir = "bagbaby",
+	Animations = {
+		idle   = {1.0,false},
+
+		run   = {2.5,true,{
+				{0.0,'FootFX','s_l_srodstopie',0.04},
+				{0.7,'FootFX','s_p_srodstopie',0.04},
+			}},
+		walk   = {1.0,true,{
+				{0.0,'FootFX','s_l_srodstopie',0.04},
+				{0.7,'FootFX','s_p_srodstopie',0.04},
+			}},
+
+		explode   = {4.0,false,{
+				}},
+    },
+
+    RagdollCollisions = {
+        MinStren = 2.5,
+        MinTime = 0.7,
+        Bones = {
+				{"k_szyja", "bodyfalls", false},		-- joint, {sounds}, blood
+				{"r_P_lokiec1", "bodyfalls", false},	-- joint, {sounds}, blood
+				{"r_L_lokiec", "bodyfalls", false},		-- joint, {sounds}, blood
+			},
+    },
+
+
+	GibExplosionStrength = 5000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	--gibFX = "gibExplosion",
+	GibEmitters = {
+				{"k_zebra","but",-1},
+				{"k_szyja","but",-1},
+	},
+	gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"k_zebra", "gibSplash", false},
+				{"k_szyja", "gibSplash", false},
+			},
+	    },
+
+
+    --notBleedingJoints = {
+		--joint21 = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    --},
+
+    DeathJoints = {
+        'n_p_kolano','n_l_kolano','k_ogo','k_szyja',
+    },
+
+}
+
+
+o.DeathTimer = 140                  -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","hunt", "hear","runToPlayer",}
+o.AiParams.viewDistance = 90
+o.AiParams.viewDistance360 = 6
+o.AiParams.viewAngle = 100
+
+o.AiParams.weaponDamage = 15
+o.AiParams.attackRange = 2.5
+o.AiParams.attackRangeAngle = 120
+o.AiParams.hearing = 1.5
+o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = -1			-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.45
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+o.AiParams.walkStep = 4.0
+o.randomizeWalks = 0
+--o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 20
+o.AiParams.moveDisplacement = 2.4
+
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.escapeTime = 100
+
+o.AiParams.updateSpeed = 0.2
+
+o.shadow = 128
+
+
+o.AiParams.actionDistance = 2.6
+o.AiParams.collisionAnim = "explode"
+
+--o.AiParams.alwaysSee = true
+
+o.AiParams.Explosion = {
+	ExplosionStrength = 1500,
+	ExplosionRange = 8,
+	Damage = 30,
+}
+
+o.AiParams.stopBeforeExpl = true
+
+o.AiParams.runToPlayerRun = true
+o.AiParams.dontRunWhenHunt = true

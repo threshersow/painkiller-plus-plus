@@ -1,0 +1,31 @@
+hainKamyk.Mesh = "pSphereShape1"
+hainKamyk.Pack = "kamyk.dat"
+hainKamyk.Scale = 0.05
+hainKamyk.Restitution = 0.8 -- sprezystosc
+hainKamyk.LinearDamping = 0.8  -- tlumienie liniowe
+hainKamyk.trail = "trail_kamyk"  -- tlumienie liniowe
+
+function hainKamyk:OnPrecache()
+    Cache:PrecacheParticleFX("HainKamykFX")
+    Cache:PrecacheTrail(self.trail)    
+end
+
+function hainKamyk:OnCreateEntity()
+    
+    self:PO_Create(BodyTypes.Simple,0.2,ECollisionGroups.Particles)
+    ENTITY.RemoveFromIntersectionSolver(self._Entity)
+    ENTITY.PO_SetMovedByExplosions(self._Entity, false)
+
+    --local r = Quaternion:New_FromEntity(self._Entity)    
+    local pfx = AddPFX('HainKamykFX',0.6) --,nil,r) -- 
+    ENTITY.RegisterChild(self._Entity,pfx)
+    
+    local e = ENTITY.Create(ETypes.Trail,self.trail,"trailName")
+    ENTITY.AttachTrailToBones(self._Entity,e)
+    WORLD.AddEntity(e)
+
+end
+
+function hainKamyk:OnInitTemplate()
+    self:ReplaceFunction("Update", nil)
+end

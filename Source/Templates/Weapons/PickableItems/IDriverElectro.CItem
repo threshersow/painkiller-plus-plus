@@ -1,0 +1,21 @@
+o.Model = "ESL_ITEM"
+o.DisabledInVoosh = true
+o.Scale = 0.2
+o.SlotIndex = 5
+o.RespawnTime = Cfg.WeaponRespawnTime
+o.Ammo = 
+{
+    Shurikens    = 10,
+    Electro      = 0,
+}
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/driverelectro",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"take-driverelectro"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

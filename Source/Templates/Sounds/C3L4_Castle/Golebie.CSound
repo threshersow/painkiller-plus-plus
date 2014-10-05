@@ -1,0 +1,10 @@
+Golebie.Volume = 60
+Golebie.Interval = 18
+Golebie.RandomShift = 8
+Golebie.Falloff =
+{
+  Start = 10,
+  End = 20
+}
+Golebie.Sound ="C3L4_Castle/Golebie_01;C3L4_Castle/Golebie_02"
+

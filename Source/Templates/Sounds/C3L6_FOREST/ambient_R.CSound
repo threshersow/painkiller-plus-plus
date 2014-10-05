@@ -1,0 +1,10 @@
+ambient_R.Volume = 50
+ambient_R.Interval = 0
+ambient_R.RandomShift = 0
+ambient_R.Falloff =
+{
+  Start = 20,
+  End = 200
+}
+ambient_R.Sound ="C3L6_FOREST/ambient_R"
+

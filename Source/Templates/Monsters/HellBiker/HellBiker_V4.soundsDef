@@ -1,0 +1,65 @@
+o.s_SubClass.SoundsDefinitions = {
+	hit = {
+		samples = {'hellbv4-hit1','hellbv4-hit2','hellbv4-hit3','hellbv4-hit4',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	stepr = {
+		samples = {'$/actor/hellbiker/hellb-krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	stepl = {
+		samples = {'$/actor/hellbiker/hellb-krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	run = {
+		samples = {'$/actor/hellbiker/hellb-run1_1','$/actor/hellbiker/hellb-run2_2','$/actor/hellbiker/hellb-run1_2','$/actor/hellbiker/hellb-run2_1'},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	onAttackOnce = {
+		samples = {"hellbv4-halt1", "hellbv4-halt2", "hellbv4-halt3"},
+		playChance = 0.75,
+		dist1 = 30,
+		dist2 = 70,
+	},
+	shot = {
+		samples = {'hellbv4-nail-shoot'},
+		dist1 = 16,
+		dist2 = 52,
+	},
+	bodyfalls = {
+		samples = {'$/actor/hellbiker_v3/hellbv3-boddyfalls1','$/actor/hellbiker_v3/hellbv3-boddyfalls2'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	atak1 = {
+		samples = {'hellbv4-atak1_1','hellbv4-atak1_2','hellbv4-atak1_3',},
+		dist1 = 10,
+		dist2 = 30,
+		disablePitch = true,
+	},
+	atak2 = {
+		samples = {'hellbv4-atak2_1','hellbv4-atak2_2'},
+		dist1 = 16,
+		dist2 = 52,
+		playChance = 0.25,
+	},
+	weaponlost = {
+		samples = {"hellbv4-weapon-lost1","hellbv4-weapon-lost1"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	death = {
+		samples = {"hellbv4-death1","hellbv4-death2","hellbv4-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    damage = {
+		samples = {"hellbv4-pipe-hit"},
+	},
+}
+

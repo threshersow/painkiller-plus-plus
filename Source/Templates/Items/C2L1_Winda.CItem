@@ -1,0 +1,4 @@
+o.Mesh = "polySurfaceShape64716"
+o.Pack = "C2L1_Winda.dat"
+o.Scale = 0.5
+o.BaseObj = "C5L2_Winda.CItem"

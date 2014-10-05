@@ -1,0 +1,20 @@
+o.Scale = 0.3
+o.Mass = 500
+o.Friction = 3
+o.DestroyPack = "krzyz2_zlom.dat"
+o.TestDeathZone = true
+o.Rot = Quaternion:New(0.999974,-1.86407e-005,-0.00722159,-6.84467e-005)
+o.ObjOwner = "PlayerTmp206358"
+o.Health = 32
+o.Pack = "krzyz2_caly.dat"
+o.BaseObj = "CItem"
+o.Mesh = "polySurfaceShape2434"
+o.Pos = Vector:New(-30.6782,2.79183,53.4252)
+o.CollisionDetect = {
+	MinTime = 1.0,
+	MinStren = 5.0,
+}
+
+
+
+

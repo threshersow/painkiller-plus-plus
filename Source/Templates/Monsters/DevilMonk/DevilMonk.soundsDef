@@ -1,0 +1,71 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'devil_krokp',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'devil_krokl',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak = {
+		samples = {'devil_at1','devil_at2','devil_at3',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	swish = {
+		samples = {'devil_swish1','devil_swish2',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	atakgas = {
+		samples = {'devil_at4-gas','devil_at2','devil_at3',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	hit = {
+		samples = {'devil_hit1','devil_hit2',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"devil_bodyfalls",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"devil-weapon-lost1","devil-weapon-lost2","devil-weapon-lost3"},
+		dist1 = 10,
+		dist2 = 40,
+	},
+    czar = {
+        samples = {'devil_course-prepare-voice',},
+   		dist1 = 12,
+		dist2 = 48,
+	},
+    fire = {
+        samples = {'devil_course-fire2','devil_course-fire'},
+        dist1 = 16,
+        dist2 = 80,
+    },
+
+    
+	death = {
+        samples = {"devil_death"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    damage = {
+        samples = {"hit"},
+	},
+
+	OnSpawn = {
+        samples = {'devil_at1','devil_at2','devil_at3'},
+   		dist1 = 16,
+		dist2 = 50,
+	},
+
+
+}

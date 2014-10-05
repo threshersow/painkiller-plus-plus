@@ -1,0 +1,10 @@
+Strumyk.Volume = 50
+Strumyk.Interval = 0
+Strumyk.RandomShift = 0
+Strumyk.Falloff =
+{
+  Start = 1.5,
+  End = 20
+}
+Strumyk.Sound ="C3L1_Train_Station/Strumyk"
+

@@ -1,0 +1,22 @@
+o.Model = "kgritem"
+o.Scale = 0.3
+o.DisabledInVoosh = true
+o.SlotIndex = 3
+o.RespawnTime = Cfg.WeaponRespawnTime
+o.Ammo = 
+{
+    Stakes = 15,
+    Grenades = 0
+}
+
+o.s_SubClass.SoundsDefinitions = 
+{
+    path  = "weapons/stake",
+    disablePitch = true,
+    pickup = 
+    {
+        samples = {"take-stake"},
+        dist1 = 15,
+        dist2 = 50,
+    },
+}

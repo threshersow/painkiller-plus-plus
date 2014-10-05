@@ -1,0 +1,10 @@
+Pociag_01.Volume = 50
+Pociag_01.Interval = 0
+Pociag_01.RandomShift = 0
+Pociag_01.Falloff =
+{
+  Start = 4,
+  End = 30
+}
+Pociag_01.Sound ="C5L2_Docks/pociag_01"
+

@@ -1,0 +1,10 @@
+Tlum.Volume = 50
+Tlum.Interval = 18
+Tlum.RandomShift = 7
+Tlum.Falloff =
+{
+  Start = 10,
+  End = 60
+}
+Tlum.Sound ="C5L4_Hell/Tlum_01;C5L4_Hell/Tlum_02"
+

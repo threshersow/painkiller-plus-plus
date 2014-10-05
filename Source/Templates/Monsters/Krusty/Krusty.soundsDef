@@ -1,0 +1,101 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'krusty-krok1',},
+		dist1 = 7,
+		dist2 = 26,
+	},
+	step2 = {
+		samples = {'krusty-krok2',},
+		dist1 = 7,
+		dist2 = 26,
+	},
+
+	death  = {
+		samples = {"krusty-death1","krusty-death2","krusty-death3",},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	atak = {
+		samples = {'krusty-atak1','krusty-atak2'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+
+	atakburn = {
+		samples = {'krusty-atak1','krusty-atak2'},
+		dist1 = 8,
+		dist2 = 30,
+	},
+
+    hit = {
+		samples = {'krusty-hit1','krusty-hit2','krusty-hit3',},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+    throw = {
+		samples = {'krusty-throw'},
+		dist1 = 16,
+		dist2 = 60,
+	},
+    swish = {
+		samples = {'krusty-knife-swish','krusty-knife-swish2'},
+		dist1 = 16,
+		dist2 = 50,
+	},
+
+	bodyfalls = {
+		samples = {"krusty-bodyfalls",},
+		dist1 = 16,
+		dist2 = 50,
+	},
+
+	damage = {
+		samples = {"krusty-damage",},
+	},
+
+    onAttackOnce = {
+        samples = {"krusty-halt1","krusty-halt2","krusty-halt3"},
+   		dist1 = 16,
+		dist2 = 60,
+    },
+    blowfire = {
+        samples = {"$/actor/evilmonkv3/evil_blowfire-start"},
+   		dist1 = 16,
+		dist2 = 60,
+    },
+
+		
+}
+o.s_SubClass.SoundsDefinitionsBindings = {
+		walk   = {
+            {1.2,'PlaySound',"step1"},
+			{0.6,'PlaySound',"step2"},
+		},
+		run   = {
+            {0.65,'PlaySound',"step1"},
+			{0.07,'PlaySound',"step2"},
+		},
+        hit1 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+        hit2 = {
+        	{0.0,'PlaySoundHit',"hit"},
+        },
+
+        atak1 = {
+            {1.0,'PlaySoundHit',"atak"},
+            {0.5,'PlaySound',"swish"},
+            {1.0,'PlaySound',"swish"},
+        },
+        atak2 = {
+            {0.0,'PlaySoundHit',"atakburn"},
+            {0.61,'PlaySound','blowfire'},
+        },
+        atak_fly = {
+            {0.0,'PlaySoundHit',"atakburn"},
+        },
+
+
+}

@@ -1,0 +1,2 @@
+mine_fog["Effect"] = "mine_fog"
+mine_fog.Scale = 1.0

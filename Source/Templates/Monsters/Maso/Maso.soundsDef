@@ -1,0 +1,43 @@
+o.s_SubClass.SoundsDefinitions = {
+	step = {
+		samples = {'maso_krok1','maso_krok2'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	flamevoice = {
+		samples = {'maso_flametrower-start-voice1','maso_flametrower-start-voice2','maso_flametrower-start-voice3',},
+		dist1 = 12,
+		dist2 = 40,
+		playChance = 0.28,
+	},
+	grenadev = {
+		samples = {'maso_grenade-launch-voice1','maso_grenade-launch-voice2'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	shot = {
+		samples = {'maso_grenade-shoot'},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	hit = {
+		samples = {'maso_hit-satisfy1','maso_hit-satisfy2','maso_hit-satisfy3','maso_hit-satisfy4'},
+		dist1 = 20,
+		dist2 = 100,
+	},
+	onAttackOnce = {
+		samples = {"maso_halt1","maso_halt2","maso_halt3","maso_halt4"},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"maso_bodyfalls"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	death = {
+		samples = {"maso_death1","maso_death2","maso_death3","maso_death4"},
+        dist1 = 16,
+		dist2 = 60,
+	},
+}

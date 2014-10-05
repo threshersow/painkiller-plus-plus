@@ -1,0 +1,10 @@
+Ziemia.Volume = 60
+Ziemia.Interval = 13
+Ziemia.RandomShift = 6
+Ziemia.Falloff =
+{
+  Start = 3,
+  End = 15
+}
+Ziemia.Sound ="C5L3_Monastery/ziemia_01;C5L3_Monastery/ziemia_02;C5L3_Monastery/ziemia_03"
+

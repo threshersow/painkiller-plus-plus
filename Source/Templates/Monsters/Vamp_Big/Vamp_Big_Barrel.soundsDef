@@ -1,0 +1,8 @@
+o.s_SubClass.SoundsDefinitions.hurt = {
+		samples = {"mvamp-hit1","mvamp-hit2","mvamp-hit3","mvamp-hit4"},
+		dist1 = 16,
+		dist2 = 60,
+	}
+
+
+

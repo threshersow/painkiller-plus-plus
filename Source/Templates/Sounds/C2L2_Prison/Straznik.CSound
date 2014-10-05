@@ -1,0 +1,10 @@
+Straznik.Volume = 90
+Straznik.Interval = 20
+Straznik.RandomShift = 10
+Straznik.Falloff =
+{
+  Start = 5,
+  End = 25
+}
+Straznik.Sound ="C2L2_Prison/Straznik_01;C2L2_Prison/Straznik_02"
+

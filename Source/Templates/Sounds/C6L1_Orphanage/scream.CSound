@@ -1,0 +1,9 @@
+scream.Volume = 100
+scream.Interval = 24
+scream.RandomShift = 10
+scream.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+scream.Sound ="C6L1_Orphanage/scream_01;C6L1_Orphanage/scream_02;C6L1_Orphanage/scream_03;C6L1_Orphanage/scream_04"

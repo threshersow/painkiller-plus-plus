@@ -1,0 +1,12 @@
+o.s_SubClass.SoundsDefinitions = {
+	shot = {
+		samples = {"gg-shoot1","gg-shoot2",},
+		dist1 = 8,
+		dist2 = 32,
+	},
+	death = {
+		samples = {"gg-explode"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+}

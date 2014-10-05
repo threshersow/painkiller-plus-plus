@@ -1,0 +1,14 @@
+o.Model = "PKW_blades"
+o.Scale = 1.0
+--Stake.Restitution = 0.5
+--Stake.Mass = 0.001
+o.TestDeathZone = true
+o.SoundInWater = "impacts/bulletbig-water"
+
+o.ThrowItemFromBodyHitCount = 3		-- tyle razy trzba kolesia walnac
+o.ThrowItemFromBodyMaxCount = 5		-- tyle max. monetek mozna wydobyc z kolesia
+o.ThrowItemFromBody = 
+{
+    "StoneR", "StoneG", "StoneB",
+}
+o.SmallWaterSplash = true

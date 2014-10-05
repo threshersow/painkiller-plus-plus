@@ -1,0 +1,193 @@
+o.Factor = 0
+o.AccelTime = 0
+o.Pos = Vector:New(0,0,0)
+o.Speed = 0
+o.damage = 2000
+o._CurSpeed = 0
+o._lastCamPos = Vector:New(0,0,0)
+o.BaseName = "PLoonyPark.CProcess"
+--============================================================================
+function PLoonyPark:New(object,speed,accelTime)    
+    local p = Clone(self)
+    p._mdl = object
+    p.Speed = speed    
+    
+    p:Accelerate(speed,accelTime)    
+    
+    p._mdlJoint = MDL.GetJointIndex(p._mdl._Entity, p._mdl.LoonyJoint)
+    --MDL.SetAnim(p._mdl._Entity,"idle",false,0.5)
+    p._mdl._CurAnimIndex = MDL.SetAnim(p._mdl._Entity,"idle",false)
+    MDL.SetAnimTimeScale(p._mdl._Entity, p._mdl._CurAnimIndex, self.Speed)    
+    ENTITY.EnableTick(p._mdl._Entity,false)
+
+    Game.CameraFromPlayer = false
+    ENTITY.PO_SetCollisionGroup(Player._Entity, ECollisionGroups.Noncolliding)
+    ENTITY.PO_EnableGravity(Player._Entity, false)
+    
+    if Lev.loonySoundMoveSlow and Lev.loonySoundMoveSlow ~= "" then
+        p._sndSlow = SOUND2D.Create(Lev.loonySoundMoveSlow)
+        SOUND2D.Play(p._sndSlow)
+        SOUND2D.SetVolume(p._sndSlow,0,0)
+        SOUND2D.SetVolume(p._sndSlow,100,0.5)
+        SOUND2D.SetLoopCount(p._sndSlow,0)
+    end
+    
+    if Lev.loonySoundMoveFast and Lev.loonySoundMoveFast ~= "" then
+        p._sndFast = SOUND2D.Create(Lev.loonySoundMoveFast)
+        SOUND2D.Play(p._sndFast)
+        SOUND2D.SetVolume(p._sndFast,0,0)
+        SOUND2D.SetVolume(p._sndFast,15,0.5)
+        SOUND2D.SetLoopCount(p._sndFast,0)
+    end
+	p._lastTimeSound = Game.currentTime - FRand(0,3*30)
+
+    if Lev.loonySoundStop and Lev.loonySoundStop ~= "" then
+        PlaySound2D(Lev.loonySoundStop)
+    end
+	p._lastPos = Vector:New(PX,PY,PZ)
+    return p
+end
+--============================================================================
+function PLoonyPark:Delete()
+	if not LEVEL_RELEASING then
+        if Lev.loonySoundStop and Lev.loonySoundStop ~= "" then
+            PlaySound2D(Lev.loonySoundStop)
+        end
+	end
+	
+	CAM.SetAdditionalRotation(1,0,0,0)
+    Game.CameraFromPlayer = true
+    ENTITY.SetVelocity(Player._Entity,0,0,0)
+    ENTITY.PO_SetCollisionGroup(Player._Entity, ECollisionGroups.PlayerBody)
+    ENTITY.PO_EnableGravity(Player._Entity, true)
+
+	SOUND2D.Delete(self._sndSlow)
+	SOUND2D.Delete(self._sndFast)
+    Game._loonyProc = nil
+end
+--============================================================================
+function PLoonyPark:Accelerate(speed,tm)    
+    if tm and tm > 0 then
+        self._Step = (speed - self._CurSpeed) / tm
+        self.AccelTime = tm
+    else
+        self._CurSpeed = speed
+    end
+    self.Speed = speed
+end
+--============================================================================
+function PLoonyPark:Tick2(delta)    
+    
+	local s = self._CurSpeed
+    if s > 3.0 then
+		s = 3.0
+    end
+
+	--if debugMarek then Game:Print("s "..s) end
+
+	local sndSlowVol = 0
+	if s < 0.9 then
+		sndSlowVol = 70*(0.9 - s) + 30
+	end
+	
+	--local sndSlowVol = 70*(2.0 - s)/2.0
+    if sndSlowVol < 0 then
+        sndSlowVol = 0
+    end
+	local sndFastVol = 85*(s)/3.0 + 15
+	
+	--Game:Print("self.Speed = "..self._CurSpeed.." "..sndSlowVol.." "..sndFastVol)
+	   
+    if self._sndSlow then
+        SOUND2D.SetVolume(self._sndSlow, sndSlowVol, 0.0)
+    end
+    
+    if self._sndFast then
+        SOUND2D.SetVolume(self._sndFast, sndFastVol, 0.0)
+    end
+
+    --SOUND2D.SetSoundSpeed(self._sndFast, 1.0 + s * 0.12)
+    SOUND2D.SetSoundSpeed(self._sndFast, 0.6 + s * 0.5)
+    if Lev.loonySoundScrape and self._lastTimeSound + 4*30 < Game.currentTime then
+        if Lev.loonySoundScrape and Lev.loonySoundScrape ~= "" then
+            local scrap = PlaySound2D(Lev.loonySoundScrape..math.random(1,3))
+            --if s > 1.5 then
+            --	SOUND2D.SetSoundSpeed(scrap, 1.0 + (s - 1.5) * FRand(0.05,0.1))	
+            --end
+            self._lastTimeSound = Game.currentTime + FRand(0,60)
+        end
+	end
+    
+    
+    ENTITY.Tick(self._mdl._Entity,delta)
+    MDL.ResetFrame(self._mdl._Entity)    
+    
+    local x,y,z = MDL.GetJointPos(self._mdl._Entity, self._mdlJoint)
+    if self._mdl and self._mdl.LoonyOffset then
+        x = x + self._mdl.LoonyOffset.X
+        y = y + self._mdl.LoonyOffset.Y
+        z = z + self._mdl.LoonyOffset.Z
+    end
+    
+    if not Game.CameraFromPlayer and MOUSE.IsLocked() then
+        ENTITY.SetPosition(Player._Entity,x,y,z)
+        ENTITY.SetVelocity(Player._Entity,0,0,0)
+    
+        local vx = x - self._lastPos.X
+        local vy = y - self._lastPos.Y
+        local vz = z - self._lastPos.Z
+        
+        vx = vx / delta
+        vy = vy / delta
+        vz = vz / delta
+        
+        self._lastPos = Vector:New(x,y,z)
+        
+        Player._velocityx,Player._velocityy,Player._velocityz = vx,vy,vz
+        Player._velocity = math.sqrt(vx*vx+vy*vy+vz*vz)
+        
+        Player.Pos.X = x
+        Player.Pos.Y = y
+        Player.Pos.Z = z
+        PX,PY,PZ = x,y,z
+    
+        Game:UpdateViewFromPlayer()    
+        
+        if not self._mdl.LoonyDontRotate then
+            local qw,qx,qy,qz = MDL.GetJointRotation(self._mdl._Entity, self._mdlJoint)
+            CAM.SetAdditionalRotation(qw,qx,qy,qz)    
+        end
+    end
+   
+	if self.damage then
+		local x2,y2,z2 = MDL.TransformPointByJoint(self._mdl._Entity, self._mdlJoint, 3.5,-1,0)		-- przod, dol, LR
+		WORLD.Explosion2(x2,y2,z2, 2000, 2.2, nil, AttackTypes.Rocket, self.damage)
+
+		if debugMarek then
+			DebugSphereX = x2
+			DebugSphereY = y2
+			DebugSphereZ = z2
+			DebugSphereRange = 2
+		end
+	end
+	    
+    if self.AccelTime > 0 then
+        self._CurSpeed = self._CurSpeed + self._Step * delta
+        self.AccelTime = self.AccelTime - delta
+        --Game:Print(self._CurSpeed)
+        --Game:Print(PX..", "..PY..", "..PZ)
+    else    
+        self._CurSpeed = self.Speed
+        if self.Speed == 0 then
+            GObjects:ToKill(self)
+        end
+    end
+    
+    
+    MDL.SetAnimTimeScale(self._mdl._Entity, self._mdl._CurAnimIndex, self._CurSpeed)
+end
+
+--============================================================================
+
+
+

@@ -1,0 +1,43 @@
+FX_splash.Model = "splash"
+FX_splash.Scale = 2
+FX_splash.NotCountable = true
+o.CreatePO = false
+
+FX_splash.s_SubClass = 
+{
+    Animations = {  
+        idle        = {1.2},
+    },
+}
+
+function FX_splash:OnPrecache()
+	Cache:PrecacheParticleFX("FX_splash")
+	Cache:PrecacheParticleFX("FX_splash1")
+end
+
+function FX_splash:OnCreateEntity()
+    local s = 0.15*self.Scale*0.5
+    for i=1,16 do
+        self:BindFX("FX_splash",s,"e"..i)
+    end
+    s = s * 2
+    self:BindFX("FX_splash1",s,"e17")
+    self:BindFX("FX_splash1",s,"e18")
+    self:BindFX("FX_splash1",s,"e19")
+    self:BindFX("FX_splash1",s,"e20")
+end
+
+function FX_splash:OnFinishAnim(name)
+    ENTITY.UnregisterAllChildren(self._Entity)
+    GObjects:ToKill(self)
+end
+
+
+function FX_splash:OnEditTick(delta)
+    if INP.Key(Keys.Space) == 1 then
+        self:OnFinishAnim()
+        self:OnCreateEntity()
+        self:ForceAnim(self.Animation,true,nil,0)
+    end
+end
+o.Immortal = true

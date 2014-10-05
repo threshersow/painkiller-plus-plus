@@ -1,0 +1,10 @@
+Brzeczenie_04.Volume = 60
+Brzeczenie_04.Interval = 0
+Brzeczenie_04.RandomShift = 0
+Brzeczenie_04.Falloff =
+{
+  Start = 1.5,
+  End = 20
+}
+Brzeczenie_04.Sound ="C3L3_Military_Base/Brzeczenie_04"
+

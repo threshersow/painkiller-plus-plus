@@ -1,0 +1,10 @@
+Dym.Volume = 80
+Dym.Interval = 10
+Dym.RandomShift = 3
+Dym.Falloff =
+{
+  Start = 10,
+  End = 40
+}
+Dym.Sound ="C5L4_Hell/Dym_01;C5L4_Hell/Dym_02"
+

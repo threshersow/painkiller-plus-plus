@@ -1,0 +1,6 @@
+o.BaseObj = "SamuraiV2.CActor"
+o.AiParams.aiGoals = {"idle","attack", "hunt", "hear","flee","samuraiV2AB"}
+
+o.AiParams.moveDisplacement = -1
+
+o.AiParams.huntPlayer = true

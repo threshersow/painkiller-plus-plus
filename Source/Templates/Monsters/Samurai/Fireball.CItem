@@ -1,0 +1,11 @@
+Fireball.Mesh = "pSphereShape1"
+Fireball.Pack = "kamyk.dat"
+
+Fireball.Scale = 0.2
+Fireball.Restitution = 0.8 	-- sprezystosc
+Fireball.LinearDamping = 0.0  -- tlumienie liniowe
+Fireball.TimeToLive = 30 * 12
+
+o.fx = 'nun_spell'
+o.damage = 25
+

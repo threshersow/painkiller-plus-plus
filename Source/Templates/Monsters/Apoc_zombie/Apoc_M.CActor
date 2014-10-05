@@ -1,0 +1,16 @@
+o.Pos = Vector:New(84.7282,-16.4772,-0.820279)
+o.BaseObj = "Apoc_zombie.CActor"
+o.angle = -0.709157
+
+o.Health = 200
+
+--o.AiParams.alwaysSee = true
+o.NeverRun = false
+o.NeverWalk = true
+o.AiParams.runChance = 0.95
+o.Scale = 1.6
+
+o.AiParams.delayBetweenAttacks = 25
+o.AiParams.throwRangeMin = 15
+o.AiParams.throwRangeMax = 50
+

@@ -1,0 +1,9 @@
+Stone.Volume = 70
+Stone.Interval = 10
+Stone.RandomShift = 5
+Stone.Falloff =
+{
+  Start = 6,
+  End = 60
+}
+Stone.Sound ="C7L3_Mine/Stone_01;C7L3_Mine/Stone_02"

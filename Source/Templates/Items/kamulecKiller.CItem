@@ -1,0 +1,15 @@
+o.Scale = 1.0
+o.Mass = 4000
+--o.Pack = "kamulec_item.dat"
+--o.Mesh = "kamulecShape"
+
+o.Mesh = "polySurfaceShape89990"
+o.Pack = "kamien.dat"
+
+o.CollisionDetect = {
+	MinTime = 1.5,
+	MinStren = 5.0,
+	enableShuffle = true,
+	myVelocityMustBeGreater = true,
+}
+

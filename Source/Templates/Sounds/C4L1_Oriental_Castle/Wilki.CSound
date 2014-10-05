@@ -1,0 +1,10 @@
+Wilki.Volume = 80
+Wilki.Interval = 14
+Wilki.RandomShift = 4
+Wilki.Falloff =
+{
+  Start = 10,
+  End = 60
+}
+Wilki.Sound ="C4L1_Oriental_Castle/wilki_01;C4L1_Oriental_Castle/wilki_02;C4L1_Oriental_Castle/wilki_03"
+

@@ -1,0 +1,10 @@
+Hydraulika.Volume = 50
+Hydraulika.Interval = 0
+Hydraulika.RandomShift = 0
+Hydraulika.Falloff =
+{
+  Start = 2,
+  End = 20
+}
+Hydraulika.Sound ="C3L2_Factory/hydraulika"
+

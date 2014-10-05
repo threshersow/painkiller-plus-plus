@@ -1,0 +1,13 @@
+o.s_SubClass.SoundsDefinitions = {
+	CreakSound = {
+		path = "doors/",
+		samples = {"whickedbig-metalscrape1","whickedbig-metalscrape2","whickedbig-metalscrape3",},
+		dist1 = 14,
+		dist2 = 42,
+		disablePitch = true,
+	},
+	SoundHitByBullet = {
+		path = "impacts/",
+		samples = {"bullet-metal","bullet-metal2","bullet-metal3","bullet-metal4","bullet-metal5","bullet-metal6",},
+	},
+}

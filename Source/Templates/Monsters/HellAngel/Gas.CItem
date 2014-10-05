@@ -1,0 +1,15 @@
+Gas.Mesh = "pSphereShape1"
+Gas.Pack = "kamyk.dat"
+
+Gas.Scale = 0.02
+Gas.Restitution = 0.8 -- sprezystosc
+Gas.LinearDamping = 0.2  -- tlumienie liniowe
+Gas.slowDown = 0.4
+Gas.TimeToLive = 30 * 5
+Gas.Mass = 40
+Gas.HPDrainDistance = 1
+Gas.HPDrain = 2
+Gas.burninFX = "molotow"
+Gas.FXwhileFlying = "molotow"
+Gas.Decal = "molotov"
+Gas.whileFlyingSize = 0.06

@@ -1,0 +1,10 @@
+Zawor.Volume = 40
+Zawor.Interval = 0
+Zawor.RandomShift = 0
+Zawor.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+Zawor.Sound ="C3L2_Factory/Zawor"
+

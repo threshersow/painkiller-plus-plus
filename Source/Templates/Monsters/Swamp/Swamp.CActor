@@ -1,0 +1,186 @@
+o.Model = "Swamp"
+o.Scale = 20.0
+o.CreatePO = true
+o.Health = 8000
+o.WalkSpeed = 1.0
+o.RotateSpeed = 1.0
+o.disableFreeze = true
+o.IsBoss = true
+
+o.s_SubClass = {
+    Animations = {
+        AB   =  {1.0,false,{
+					{0.05,'PlayRandomSound2D',{'Swamp_throwBubble',}},		-- narazie
+				},0.5},
+        idle1   = {1.0,false,{
+				},0.5},
+        idle2   = {1.0,false, {
+				},0.5},
+        rotate_left   = {1.0,MC.ETransX + MC.ETransZ + MC.ERot,{
+					{0.7,'PlaySound',"krok1"},
+					{1.6,'PlaySound',"krok2"},
+					{1.6,'DisturbWater',},
+					{0.7,'DisturbWater',},
+					{1.6,'FootFX','s_l_srodstopie',0,-5,-4},
+					{0.7,'FootFX','s_p_srodstopie',0,-0.5,4},
+				}, 0.5,true},
+        rotate_right   = {1.0,MC.ETransX + MC.ETransZ + MC.ERot, {
+					{0.7,'PlaySound',"krok1"},
+					{1.6,'PlaySound',"krok2"},
+					{1.6,'DisturbWater',},
+					{0.7,'DisturbWater',},
+					{1.6,'FootFX','s_l_srodstopie',0,-5,-4},
+					{0.7,'FootFX','s_p_srodstopie',0,-0.5,4},
+				}, 0.5,true},
+        rotate_left90   = {1.0,MC.ETransX + MC.ETransZ + MC.ERot,{
+					{0.3,'PlaySound',"krok1"},
+					{0.8,'PlaySound',"krok2"},
+					{0.8,'DisturbWater',},
+					{0.3,'FootFX','s_l_srodstopie',0,-5,-4},
+					{0.8,'FootFX','s_p_srodstopie',0,-0.5,4},
+				}, 0.5,true},
+        rotate_right90   = {1.0,MC.ETransX + MC.ETransZ + MC.ERot, {
+					{0.8,'PlaySound',"krok1"},
+					{0.3,'PlaySound',"krok2"},
+					{0.8,'DisturbWater',},
+					{0.8,'FootFX','s_l_srodstopie',0,-5,-4},
+					{0.3,'FootFX','s_p_srodstopie',0,-0.5,4},
+				}, 0.5,true},
+
+        walk   = {1.0,true,{
+					{1.0,'PlaySound',"krok1"},
+					{0.05,'PlaySound',"krok2"},
+					{1.0,'DisturbWater',},
+					{0.05,'DisturbWater',},
+					{0.8,'FootFX','s_l_srodstopie',0,-5,-4},
+					{0.0,'FootFX','s_p_srodstopie',0,-0.5,4},
+				},0.5},
+        atak1   = {0.4,false, {
+        			{0.05,'PlayRandomSound2D',{'Swamp_throwBubble',}},
+        			{0.45,'FootFX','dlo_prawa_root'},
+					{0.55, 'ThrowBubble'},
+				},0.5},
+        atak2_1hand   = {1.0,false, {
+					{0.0,'PlayRandomSound2D',{'Swamp_handInWater',}},
+					{0.9,'FootFX','r_p_lokiec',0,0,0},
+					{4.8,'FootFX','dlo_prawa_root',0,0,0},
+  					{1.0, 'SetAnimSpeed', 0.2},
+  					{1.1, 'CreateTentacle', 0.0},
+					{2.0, 'SetAnimSpeed', 1.0},
+					{2.5,'PlayRandomSound2D',{'swamp_handfromWater',}},
+				},0.5},
+        atak2_2hand   = {1.0,false, {
+					{0.55,'PlayRandomSound2D',{'Swamp_handInWater',}},
+					{1.3,'FootFX','dlo_prawa_root',0,0,0},
+					{1.28,'FootFX','dlo_lewa_root',0,0,0},
+  					{1.28, 'SetAnimSpeed', 0.2},
+  					{1.25, 'CreateTentacle', 0.0},
+  					{1.3, 'CreateTentacle', 0.7},
+					{2.2, 'SetAnimSpeed', 1.0},
+					{2.6,'PlayRandomSound2D',{'swamp_handfromWater',}},
+				},0.5},
+        atak3   = {1.0,false,{
+					{0.0,'PlayRandomSound2D',{'Swamp-throwenergyball-prepare',}},
+					{0.0,'PlayRandomSound2D',{'Swamp-throwenergyball-prepare-wierdsound',}},
+					{3.2,'PlaySound',"ball"},
+					{3.8, 'Fireball'},
+				},0.5},
+        atak4   = {1.0,true,{
+					{0.6,'PlaySound',"ext"},
+					{0.8,'FootFX','s_l_srodstopie',0,-5,-4},
+					{0.8,'DisturbWater',},
+					{1.0,'Extin',},
+				},0.5},
+    },
+
+	RefractFresnel = {
+        water_swamp = {
+            Refract=1.3,
+            Fresnel=0.2, 
+            ReflTint=Color:New(255,255,255),
+            RefrTint=Color:New(185,175,166)
+        },
+    },
+    RefractFresnelAB = {
+        water_swamp = {
+            Refract=0.0,
+            Fresnel=1.0, 
+            ReflTint=Color:New(195,195,195),
+            RefrTint=Color:New(136,136,136)
+        },
+    },
+    Sounds = {
+		hits = {"Swamp_hit1","Swamp_hit2","Swamp_hit3",},
+		hitsSplash = {"Swamp_hit_splash1",},
+    },
+    Ambients = {"idle1","idle2"},
+	bindFX = {
+		{"swamp_kapie", 1.0, "r_p_lokiec",0,0,0},
+		{"swamp_kapie", 1.0, "r_l_lokiec",0,0,0},
+	},
+	rotate45L = "rotate_left",
+	rotate45R = "rotate_right",
+	rotate90L = "rotate_left90",
+	rotate90R = "rotate_right90",
+}
+
+o.DeathTimer = 99999
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 100000,
+}
+
+o.notBleeding = true
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idleSwamp","waterBall","waterHand","getFlames","AB","extinguishFire"}
+
+o.AiParams.actions = {
+    {"waterBall", 0.06,},		-- szansa na sec, (gdy jest w idle-u)
+	{"waterHand", 0.05,},
+}
+
+o.bulletsFliesThru = true
+
+o.AiParams.actionsAB = {
+    {"waterHand", 0.09,},
+    {"getFlames",0.08},
+}
+
+o.AiParams.updateSpeed = 0.0
+o.AiParams.walkRadiusMin = 54.0
+o.AiParams.walkRadiusMax = 68.0
+o.AiParams.FarAttack = "atak2_1hand"
+o.disbleRotWhenStartWalk = true
+o.CollisionDetect = 0.2
+o.ABHp = 0.75
+o.minTimeBetweenBubble = 3.6
+
+o.waterImpJoint = "root"	-- jesli jest zdefiniowany to shader dziala na aktorze
+o.waterImpAmplitude = 0.4
+o.waterImpPeriod = 1.0		-- okres - dlugosc fal
+o.waterImpRange = 130.0		-- zasieg efektu
+o.waterImpSpeed = 10.0		-- szybkosc fal
+o.disableNoAnimDetection = true
+o.doNotUseWP = true
+
+-- ogniki
+o.flamesSpeed = 100
+o.flamesDamage = 100
+o.disturbFlyingFlames = 0.3
+o.bubbleVelocity = 70
+--
+
+o.waterWALKImpAmplitude = 0.3
+o.waterWALKImpPeriod = 0.5		-- okres - dlugosc fal
+o.waterWALKImpRange = 13.0		-- zasieg efektu
+o.waterWALKImpSpeed = 14.0		-- szybkosc fal
+		-- szybkosc fal
+
+o.splashFX = "FX_splash_swamp.CActor"
+o.AiParams.bubbleThrowAngle = 5
+--o.throwDistMinus = 16
+
+o.timeOutAfterExtinguished = 30 * 8	-- po zgaszeniu ile czasu ma uplynac, aby sie pojawily bable
+o.doNotDampMovementIfLastStepPassesDestination = true
+o._DontCheckFloors = true

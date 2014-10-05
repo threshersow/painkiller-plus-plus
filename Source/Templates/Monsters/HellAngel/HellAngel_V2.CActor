@@ -1,0 +1,57 @@
+o.BaseObj = "HellAngel.CActor"
+o.Model = "hellangel_v2"
+o.s_SubClass.SoundDir = 'hellangel'
+o.enableGibWhenHPBelow = -41
+
+o.s_SubClass.Animations.elektroatak    = {1.0, false, {
+            {0.4,'damage'},
+        }}
+o.s_SubClass.Animations.elektroatak1    = {1.0, false, {
+            {0.4,'damage'},
+        }}
+        
+o.s_SubClass.NearAttacks = {"elektroatak1","elektroatak"}
+o.AiParams.aiGoals = {"idle", "attack", "hunt", "hear","flee"}
+
+
+o.s_SubClass.gibShader = "palskinned_bloody"
+o.s_SubClass.gibFX = "gibExplosion"
+o.s_SubClass.GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"r_p_bark_root","FX_gib_blood",1},
+				{"r_l_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+}	
+
+o.s_SubClass.RagdollCollisionsGib = {
+        MinStren = 6.0,
+        MinTime = 0.8,
+        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"r_p_bark_root", "gibSplash", true},
+				{"r_l_bark_root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+
+			}
+}
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}
+o.AiParams.guardRange = 12
+o.AiParams.stopAfterWalking = 0.5
+o.AiParams.stopAfterWalkingTime = {20,40}
+
+o.AiParams.delayBetweenAttacks = 30
+o.AiParams.weaponAmmo = 0
+o.AiParams.doNotRotateWhenShooting = false
+o.AiParams.FarAttack_Priority = 0.0
+o.AiParams.NearAttack_Priority = 1.0
+
+o.AiParams.moveDisplacement = 3.5

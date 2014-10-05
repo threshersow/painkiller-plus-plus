@@ -1,0 +1,10 @@
+Indu_03.Volume = 70
+Indu_03.Interval = 2
+Indu_03.RandomShift = 1
+Indu_03.Falloff =
+{
+  Start = 4,
+  End = 60
+}
+Indu_03.Sound ="C5L2_Docks/indu_04;C5L2_Docks/indu_05"
+

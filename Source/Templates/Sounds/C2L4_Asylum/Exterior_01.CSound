@@ -1,0 +1,10 @@
+Exterior_01.Volume = 50
+Exterior_01.Interval = 0
+Exterior_01.RandomShift = 0
+Exterior_01.Falloff =
+{
+  Start = 2.5,
+  End = 25
+}
+Exterior_01.Sound ="C2L4_Asylum/Exterior_01"
+

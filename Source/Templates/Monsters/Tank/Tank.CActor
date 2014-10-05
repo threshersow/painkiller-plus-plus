@@ -1,0 +1,132 @@
+o.Model = "tank"
+o.Scale = 2.6
+o.CreatePO = true
+o.Health = 200
+o.WalkSpeed = 6.0
+o.RotateSpeed = 2
+o.NeverRun = false
+o.enableGibWhenHPBelow = 1
+o.ShotgunCheckAllPellets = true
+o.throwHeart = true
+o.notBleeding = true
+
+o.s_Physics = {
+    --BodyType = BodyTypes.FromRagdoll,
+    BodyType = BodyTypes.Simple,
+    Mass     = 15000,
+    --BodyScale = 2.6,
+    RagdollFriction = 1,
+}
+
+o.s_SubClass = {
+    rotateHead = math.pi * 2.0,
+    rotateHeadBone = "k_head",
+    rotateHeadMaxSpeed = 0.06,
+    rotateHeadRight = Vector:New(-1, 0, 0),
+    rotateHeadLeft = Vector:New(-1, 0, 0),
+    rotateHeadCoords = Vector:New(2, 1, 1),
+
+    CollidableRagdoll = true,
+	Animations = {
+		idle   = {1.0,false},			-- speed, movingcurve, events
+    },
+
+    DeathJoints = {
+        'k_head'
+    },
+    walk = {"idle"},
+
+
+    Specular =      {
+                        polySurfaceShape1228 = {0, 0, 0, 0},
+                        polySurfaceShape1014 = {0, 0, 0, 0},
+                        polySurfaceShape1013 = {0, 0, 0, 0},
+                        polySurfaceShape1012 = {0, 0, 0, 0},
+                        gg_polySurfaceShape1014 = {0, 0, 0, 0},
+                        gg_polySurfaceShape1013 = {0, 0, 0, 0},
+                        gg_polySurfaceShape1012 = {0, 0, 0, 0},
+                        pCylinderShape1 = {0, 0, 0, 0},
+                        pCylinderShape2 = {0, 0, 0, 0},
+                        polySurfaceShape1235 = {0, 0, 0, 0},
+                        polySurfaceShape1240 = {0, 0, 0, 0},
+			polySurfaceShape1021 = {0, 0, 0, 0},
+			polySurfaceShape1026 = {0, 0, 0, 0},
+			polySurfaceShape1007 = {0, 0, 0, 0},			
+    },
+    killJoint = "gg_joint38",
+}
+
+o.DeathTimer = 110       -- po ilu 1/30 postac znika po smierci
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"tankIdle","tankFire"}
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 10
+o.AiParams.viewAngle = 360
+
+--o.AiParams.weaponDamage = 2
+--o.AiParams.attackRange = 2.5
+--o.AiParams.attackRangeAngle = 120
+--o.AiParams.hearing = 1.5
+--o.AiParams.perception = 1.0
+    
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = false
+o.AiParams.guardChangePosition = {30,60}	-- {} - wylacza 1/30sec
+o.AiParams.guardRange = -1				-- max. walk distance when idle
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,60}
+
+o.AiParams.walkStep = 6.0
+o.AiParams.walkArea = "TestArea"
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.useOnlyWaypointsWhenGuard = false
+
+o.AiParams.delayBetweenAttacks = 15
+o.AiParams.moveDisplacement = 3.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+
+o.AiParams.updateSpeed = 0.3				-- brain (visibility) update speed, 1.0 - update every frame !!!!
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+
+o.AiParams.specialAttackHP = 0.2
+
+o.AiParams.ThrowableItem = "TankMissile.CItem"
+o.AiParams.throwAnim = ""
+o.AiParams.throwAmmo = 99999
+o.AiParams.throwRangeMin = 15
+o.AiParams.throwRangeMax = 100
+o.AiParams.minDelayBetweenThrow = 2
+o.AiParams.escapeAfterThrowTime = 40		-- 0 - no escape
+--o.AiParams.throwAngle = 10
+o.AiParams.throwVelocity = 50
+o.AiParams.throwDistMinus = 0.0			-- <0 celuje za gracza, 0> przed gracza
+o.AiParams.throwMaxAngleYawDiff = 45.0
+o.AiParams.throwMaxAnglePitchDiff = 45.0
+
+
+--o.AiParams.forceRotateHead = true
+o.disableRotateHeadToZero = true		-- gdy nie widzi wroga nie obraca glowy przed siebie
+o.doNotUseWP = true
+
+o.shadow = 128
+
+o.Explosion = {				-- po smierci
+	ExplosionStrength = 6000,
+	ExplosionRange = 7.0,
+	Damage = 20.0,
+}
+
+o.AiParams.weaponBindPos = 'lufa'
+o.AiParams.weaponBindPosShift = Vector:New(0,0,5.2)
+o.turretExplodeUp = 100
+
+o.maxWalkAcc = 0.08     -- przyspieszanie
+o.WalkDec = 0.8         -- hamowanie
+
+o.forceMonsterCanAttackAnotherMonsterChance = 0.03

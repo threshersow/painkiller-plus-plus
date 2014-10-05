@@ -1,0 +1,10 @@
+Tajemniczy_metal.Volume = 60
+Tajemniczy_metal.Interval = 15
+Tajemniczy_metal.RandomShift = 7
+Tajemniczy_metal.Falloff =
+{
+  Start = 7,
+  End = 25
+}
+Tajemniczy_metal.Sound ="C4L1_Oriental_Castle/Tajemniczy_metal"
+

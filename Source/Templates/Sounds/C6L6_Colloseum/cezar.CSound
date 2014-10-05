@@ -1,0 +1,10 @@
+cezar.Volume = 60
+cezar.Interval = 30
+cezar.RandomShift = 5
+cezar.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+cezar.Sound ="C6L6_Colloseum/cezar_01;C6L6_Colloseum/cezar_02;C6L6_Colloseum/cezar_03;C6L6_Colloseum/cezar_04;C6L6_Colloseum/cezar_05;C6L6_Colloseum/cezar_06;C6L6_Colloseum/cezar_07;C6L6_Colloseum/cezar_08"
+

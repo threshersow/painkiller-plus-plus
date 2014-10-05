@@ -1,0 +1,59 @@
+o.s_SubClass.bindFX = {
+	{"pochodnia_ghost",0.06,'k_szyja',0,0,0},{"glow_ghost",0.1,'pgon4',0,0,0},{"glow_ghost",0.1,'ogon3',0,0,0},
+{"glow_ghost",0.1,'root',0,0,0},{"glow_ghost",0.1,'r_p_lokiec',0,0,0},{"glow_ghost",0.1,'r_l_lokiec',0,0,0},
+
+
+}
+
+o.s_SubClass.bindFXkeepScale = 0.5
+
+o.s_SubClass.Trails = {
+	{
+		name = "trail_ghost",
+		joints = {"psa1","psa2"},
+               
+	        
+         
+	        
+         },
+{
+		name = "trail_ghost",
+		joints = {"psb1","psb2"},
+               
+	        
+         
+	        
+         },
+{
+		name = "trail_ghost",
+		joints = {"r_p_lokiec","dlo_prawa_root"},
+               
+	        
+         
+	        
+         },
+{
+		name = "trail_ghost",
+		joints = {"r_l_lokiec","dlo_lewa_root"},
+               
+	        
+         
+	        
+         },
+{
+		name = "trail_ghost",
+		joints = {"root","s5"},
+               
+	        
+         
+	        
+         },
+
+	
+}
+
+--[[o.s_SubClass.BindLight = {
+    template = "ghost_Light.CLight",
+    joint = "root",
+}
+--]]

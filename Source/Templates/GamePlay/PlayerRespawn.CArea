@@ -1,0 +1,8 @@
+o.Team = 0
+o.s_Editor.Team = { "ComboBox"  , {"Blue|0", "Red|1"} }
+function PlayerRespawn:Tick(delta)
+    if self._busyTime then
+        self._busyTime = self._busyTime -  delta
+        if self._busyTime <=0 then self._busyTime = nil end 
+    end
+end

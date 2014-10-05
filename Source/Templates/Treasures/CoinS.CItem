@@ -1,0 +1,8 @@
+o.BaseObj = "CoinG.CItem"
+o.Mesh = "|m_trans2|m_trans2"
+o.Pack = "moneta_srebrna.dat"
+
+o.Scale = 1.1
+
+o.Value = 1
+

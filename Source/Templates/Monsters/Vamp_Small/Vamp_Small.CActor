@@ -1,0 +1,117 @@
+o.Model = "vamp_small"
+o.Scale = 1.4
+o.CreatePO = true
+o.WalkSpeed = 4.0
+o.RunSpeed = 8.0
+o.RotateSpeed = 15
+o.throwHeart = true
+o.Health = 100
+o.enableTransformHP = -69	-- bedzie sie trasformowal w big_vampa, gdy w chwili smierci ma wiecej hp
+o.transformIntoBigVampFX = "FX_transform"
+o.DeathTimer = 120
+
+o.s_SubClass = {
+    rotateHead = 3.1415 * 0.25,			-- zakres
+    rotateHeadBone = "k_szyja",
+    rotateHeadMaxSpeed = 0.2,
+    Animations = {  
+        idle        = {1.0, false},
+        idle_scream = {0.7, false},
+        walk        = {1.0, false,{
+        					{0.45,'PlaySound',"step1"},
+                            {0.45,'FootFX','s_l_srodstopie'},
+							{0.07,'PlaySound',"step2"},
+                            {0.07,'FootFX','s_p_srodstopie'},
+					}},
+        run         = {1.2, false,{
+        					{0.45,'PlaySound',"step1"},
+                            {0.45,'FootFX','s_l_srodstopie'},
+							{0.07,'PlaySound',"step2"},
+                            {0.07,'FootFX','s_p_srodstopie'},
+					}},
+        atak      = {1.0, false},
+        atak2      = {1.0, false, {
+						{0.0,'PlaySound',"prepare"},
+						{0.2,'PlaySound',"take"},
+                        {0.5,'PlaySound',"atak"},
+        				{0.66,'ThrowImmid',nil,true,"dlo_prawa_root"},
+        				{0.68,'ThrowImmid',nil,true,"dlo_lewa_root"},
+					}},
+		hit1    = {1.0, false, {
+					{0.0,'PlaySoundHit',"hit"},
+					}},
+		hit2    = {1.0, false, {
+					{0.0,'PlaySoundHit',"hit"},
+					}},
+    },
+	Hits = {"hit1", "hit2"},
+    Ambients = {"idle"},
+
+	DeathJoints = {
+        's_p_kostka','n_p_kolano','n_p_biodro','s_l_kostka',
+        'n_l_kolano','n_l_biodro','dlo_lewa_root','r_l_lokiec',
+        'r_l_bark','dlo_prawa_root','r_p_lokiec','r_p_bark',
+        'k_ogo','k_zebra','k_ramiona',
+        'k_glowa',
+    },
+
+	RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 0.6,
+		Bones = {
+					{"k_szyja", "bodyfalls", true},		-- joint, {sounds}, blood
+					{"r_p_lokiec", "bodyfalls", true},
+					{"r_l_lokiec", "bodyfalls", true},
+				}
+	},
+
+	ragdollJoint = "root",
+    BreakableJoints = {},
+}
+
+
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","FarAttack", "hunt", "hear","flee",}
+o.AiParams.vampSmall_targeting = true
+o.AiParams.GuardStill = true
+o.AiParams.attackRange = 1.5
+o.AiParams.viewDistance = 50
+o.AiParams.viewAngle = 180
+o.AiParams.viewDistance360 = 50
+
+o.AiParams.escapeTime = 70
+o.AiParams.moveDisplacement = 1.5
+
+o.AiParams.hearing = 1.9
+o.AiParams.perception = 1.0
+o.AiParams.walkStep = 7.0
+o.AiParams.updateSpeed = 0.25
+
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.1
+o.AiParams.stopAfterWalkingTime = {40,90}
+
+o.AiParams.changePosAfterFire = 0.2
+o.AiParams.chanceOfEscapeAfterFire = 0.0
+o.AiParams.doNotRotateWhenShooting = false
+o.AiParams.delayBetweenAttacks = 25
+o.AiParams.weapon = {
+		name = "3_daggers",
+		maxDist = 35,
+		minDist = 2.2,
+		maxYaw = 45,
+		maxPitch = 45,
+	}
+
+o.shadow = 128
+o.AiParams.FarAttacks = {"atak2",}
+
+o.AiParams.ThrowableItem = "Dagger.CItem"
+o.AiParams.throwItemBindTo = "dlo_prawa_root"
+o.AiParams.weaponBindPos = o.AiParams.throwItemBindTo
+o.AiParams.throwAngularVelocitySpeed = -20
+o.AiParams.throwVelocity = 26

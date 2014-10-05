@@ -1,0 +1,40 @@
+o.Frozen = true
+o.Pos = Vector:New(0,0,0)
+o.Rot = Quaternion:New()
+o.PlayerAim  = false
+o.Item = "Dart.CItem"
+o.Damage = 20
+o.Speed  = 15
+--============================================================================
+function Shooter:Apply()
+end
+--============================================================================
+--============================================================================
+function Shooter:OnLaunch()
+    self.Frozen = false
+end
+--============================================================================
+function Shooter:Shoot()
+    local obj = GObjects:Add(TempObjName(),CloneTemplate(self.Item))
+    obj._set = true
+    obj.Pos:Set(self.Pos.X,self.Pos.Y,self.Pos.Z)    
+    
+    if self.PlayerAim then  
+        local n = Vector:New(PX-self.Pos.X,PY+1.8-self.Pos.Y,PZ-self.Pos.Z    )
+        n:Normalize()
+        obj.Rot:FromNormalZ(n.X,n.Y,n.Z)
+    else
+        obj.Rot = Clone(self.Rot)
+    end
+    --obj.Rot:RotateByAngleAxis(1.57/2,0,1,0)
+    obj:Apply()    
+    
+    local vx,vy,vz = obj.Rot:TransformVector(0,0,1)
+    ENTITY.SetVelocity(obj._Entity,vx*self.Speed,vy*self.Speed,vz*self.Speed)
+    ENTITY.PO_EnableGravity(obj._Entity,false)    
+    obj.Damage = self.Damage
+    
+    self:Snd3D("trap",self.Pos.X,self.Pos.Y,self.Pos.Z)
+    self:Snd3D("shoot",self.Pos.X,self.Pos.Y,self.Pos.Z)
+end
+--============================================================================

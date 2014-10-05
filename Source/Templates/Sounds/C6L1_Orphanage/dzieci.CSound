@@ -1,0 +1,9 @@
+dzieci.Volume = 80
+dzieci.Interval = 30
+dzieci.RandomShift = 10
+dzieci.Falloff =
+{
+  Start = 3,
+  End = 30
+}
+dzieci.Sound ="C6L1_Orphanage/dzieci_01;C6L1_Orphanage/dzieci_02;C6L1_Orphanage/dzieci_03;C6L1_Orphanage/dzieci_04"

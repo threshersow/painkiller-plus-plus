@@ -1,0 +1,10 @@
+Konie_ryceria.Volume = 60
+Konie_ryceria.Interval = 0
+Konie_ryceria.RandomShift = 0
+Konie_ryceria.Falloff =
+{
+  Start = 10,
+  End = 100
+}
+Konie_ryceria.Sound ="C5L4_Hell/Konie_01;C5L4_Hell/Konie_02"
+

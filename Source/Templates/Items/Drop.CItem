@@ -1,0 +1,5 @@
+o.Mesh = "drop_water"
+o.CubeMap.DefaultCubeTex = true
+o.NormalMap.DefaultNormalTex = true
+o.Pack = "drop.dat"
+

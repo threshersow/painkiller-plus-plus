@@ -1,0 +1,17 @@
+o.BaseObj = "Amput_zombie.CActor"
+
+o.AiParams.aiGoals = {"amputeeIdleBarf",}
+
+o.s_SubClass.Animations.idle_kolana = {1.0, false, {			-- na czworaka
+				{0.3, 'BarfDown'},	
+				{0.7, 'BarfDamageCheck'},
+				{1.2, 'BarfDamageCheck'},
+                        }}
+                        
+o.AiParams.barfRange = 4.2
+o.AiParams.barfDamage = 10.0
+o.AiParams.delayBetweetBarfs = 0.0
+o.AiParams.barfRangeY = 8.0
+o.NeverMove = true
+o.updateSpeed = 0
+

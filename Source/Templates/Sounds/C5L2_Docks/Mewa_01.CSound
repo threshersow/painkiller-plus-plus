@@ -1,0 +1,10 @@
+Mewa_01.Volume = 60
+Mewa_01.Interval = 5
+Mewa_01.RandomShift = 2
+Mewa_01.Falloff =
+{
+  Start = 5,
+  End = 60
+}
+Mewa_01.Sound ="C5L2_Docks/mewa_01"
+

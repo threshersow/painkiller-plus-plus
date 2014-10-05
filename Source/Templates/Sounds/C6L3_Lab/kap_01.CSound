@@ -1,0 +1,10 @@
+kap_01.Volume = 50
+kap_01.Interval = 12
+kap_01.RandomShift = 8
+kap_01.Falloff =
+{
+  Start = 5,
+  End = 50
+}
+kap_01.Sound ="C6L3_Lab/kap_01;C6L3_Lab/kap_02"
+

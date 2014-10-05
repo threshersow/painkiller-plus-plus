@@ -1,0 +1,10 @@
+Elektronika_02.Volume = 50
+Elektronika_02.Interval = 0
+Elektronika_02.RandomShift = 0
+Elektronika_02.Falloff =
+{
+  Start = 2,
+  End = 10
+}
+Elektronika_02.Sound ="C5L2_Docks/elektronika_02"
+

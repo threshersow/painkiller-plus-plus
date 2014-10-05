@@ -1,0 +1,10 @@
+Wiatr_05.Volume = 40
+Wiatr_05.Interval = 0
+Wiatr_05.RandomShift = 0
+Wiatr_05.Falloff =
+{
+  Start = 3,
+  End = 40
+}
+Wiatr_05.Sound ="C3L2_Factory/Wiatr_05"
+

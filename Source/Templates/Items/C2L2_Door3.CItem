@@ -1,0 +1,11 @@
+o.BaseObj = "CItem"
+o.Model = "C2L2_Door3"
+o.Scale = 0.8
+o.RagdollCreakSound = {
+	checkSpeed = 0.5,		-- sec.
+	joint = "joint2_getmass",
+	minVel = 1.0,
+	minDelayBetweenSounds = 1.0,
+}
+
+o.SoundHitByBulletMiniGunOnly = true

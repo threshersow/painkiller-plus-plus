@@ -1,0 +1,10 @@
+Knajpa.Volume = 50
+Knajpa.Interval = 0
+Knajpa.RandomShift = 0
+Knajpa.Falloff =
+{
+  Start = 6,
+  End = 15
+}
+Knajpa.Sound ="C3L4_Castle/Knajpa"
+

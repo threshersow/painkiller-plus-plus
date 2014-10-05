@@ -1,0 +1,43 @@
+o.s_SubClass.Trails = {
+	{
+		name = "trail_clown",
+		joints = {'dlo_prawa_root','d_p_srodek'},
+         },
+
+	 {
+		name = "trail_clown",
+		joints = {'dlo_lewa_root','d_l_srodek'},
+         },
+
+
+}
+
+o.s_SubClass.ParticlesDefinitions = {
+	atakl = {
+        pfx = "but",
+        scale = 0.05,
+        offset = Vector:New(0,0,0),
+        joint = "d_l_srodek",
+    },
+	atakp = {
+        pfx = "but",
+        scale = 0.05,
+        offset = Vector:New(0,0,0),
+        joint = "d_p_srodek",
+    },
+
+	burningHandl = {
+        pfx = "clownhand",
+        scale = 0.1,
+        offset = Vector:New(0,0,0),
+        joint = "d_l_srodek",
+    },
+	burningHandr = {
+        pfx = "clownhand",
+        scale = 0.1,
+        offset = Vector:New(0,0,0),
+        joint = "d_p_srodek",
+    },
+
+}
+

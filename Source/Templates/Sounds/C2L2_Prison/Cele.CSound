@@ -1,0 +1,10 @@
+Cele.Volume = 80
+Cele.Interval = 25
+Cele.RandomShift = 10
+Cele.Falloff =
+{
+  Start = 3,
+  End = 20
+}
+Cele.Sound ="C2L2_Prison/cele_01;C2L2_Prison/cele_02"
+

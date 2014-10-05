@@ -1,0 +1,16 @@
+o.Mesh = "ballShape11"
+o.Pack = "ball.dat"
+o.Scale = 0.02
+o.Timeout = 10*30
+o.Restitution = 9 -- sprezystosc
+o.Friction = 0.4 -- tarcie
+o.LinearDamping = 0.5  -- tlumienie liniowe
+--o.AngularDamping = 0.4 -- tlumienie katowe
+o.Mass = 40
+o.Softness = 1
+o.ExplosionCamMove = 0.18
+o.ExplosionCamRotate = 0.18
+o.ExplosionCamDistance = 18
+o.TestDeathZone = true
+o.SoundInWater = "impacts/bulletbig-water"
+o.SmallWaterSplash = true

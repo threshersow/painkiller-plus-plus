@@ -1,0 +1,30 @@
+CParticleFX.s_Editor = {
+        Effect  = { "ComboBox", "CParticleFX.FillEffectsCombo" },
+    }
+--============================================================================
+function CParticleFX:EditRender(delta)
+    --local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+    --Hud:Quad(Editor.matLight,sx,sy,1,true)
+    if Editor.SelObj == self then 
+        R3D.RenderBox(self.Pos.X-0.03,self.Pos.Y-0.03,self.Pos.Z-0.03,self.Pos.X+0.03,self.Pos.Y+0.03,self.Pos.Z+0.03,R3D.RGB(255,255,0))
+    end
+end
+--============================================================================
+function CParticleFX:EditTick(delta)
+    -- picking point 
+    if Editor.SelObj ~= self and MOUSE.LB() == 1 then        
+        local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+        if Dist2D(MX,MY,sx,sy) <  15  then
+            Editor.ObjEdited = true                
+            Editor:SelectObject(self)
+            --if Editor.SelObj ~= self then Editor:SelectObject(self) end
+        end
+    end    
+end
+--============================================================================
+function CParticleFX:FillEffectsCombo()
+    tmp_tab = FS.FindFiles("../Data/Scripts/Effects/*.pfx",1,0)    
+    for i,v in tmp_tab do
+        tmp_tab[i] = string.gsub(v,".pfx","")
+    end
+end

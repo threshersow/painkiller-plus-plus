@@ -1,0 +1,10 @@
+Ryk_02.Volume = 70
+Ryk_02.Interval =6
+Ryk_02.RandomShift = 2
+Ryk_02.Falloff =
+{
+  Start = 3,
+  End = 40
+}
+Ryk_02.Sound ="C1L3_Catacombs/ryk_02;C1L3_Catacombs/ryk_03"
+

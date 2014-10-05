@@ -1,0 +1,75 @@
+o.s_SubClass.SoundsDefinitions = {
+	step1 = {
+		samples = {'evil_krok1',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	step2 = {
+		samples = {'evil_krok2',},
+		dist1 = 10,
+		dist2 = 30,
+	},
+	atak = {
+		samples = {'evil_atack12','evil_atack1',},
+		dist1 = 10,
+		dist2 = 20,
+	},
+	swish = {
+		samples = {'evil_swish1','evil_swish2',},
+		dist1 = 6,
+		dist2 = 12,
+	},
+	prepare = {
+		samples = {'evil_preparetothrow', 'evil_preparetothrow2',},
+		dist1 = 6,
+		dist2 = 15,
+	},
+	throw = {
+		samples = {'evil_throw2', },
+		dist1 = 10,
+		dist2 = 20,
+	},
+	hit = {
+		samples = {'evil_hit1','evil_hit2','evil_hit3',},
+		dist1 = 30,
+		dist2 = 70,
+	},
+	bodyfalls = {
+		samples = {"evil_bodyfalls","evil_bodyfalls1"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+	weaponlost = {
+		samples = {"evil-weapon-lost1","evil-weapon-lost2","evil-weapon-lost3"},
+		dist1 = 10,
+		dist2 = 40,
+	},
+	missed = {
+        	path = "actor/zombie_soldier",
+		samples = {"zombs_sword-missed1","zombs_sword-missed2"},
+		dist1 = 12,
+		dist2 = 40,
+	},
+	gib_splash = {
+		path = "impacts/",
+		samples = {"meat-splash1","meat-splash2","meat-splash3","meat-splash4","meat-splash5"},
+		dist1 = 16,
+		dist2 = 60,
+	},
+
+	death = {
+		samples = {"evil_death1","evil_death2"},
+		dist1 = 12,
+		dist2 = 42,
+	},
+
+	damage = {
+		samples = {"evil_axe-hit"},
+	},
+
+	OnSpawn = {
+		samples = {'evil_swish1','evil_swish2'},
+		dist1 = 12,
+		dist2 = 42,
+	}
+}

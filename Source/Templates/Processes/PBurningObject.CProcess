@@ -1,0 +1,69 @@
+o.r_Object = nil
+o.PFX = "barrel_flame_FX"
+o._dmgTime = 0
+o.Timeout = 10
+
+--============================================================================
+function PBurningObject:New(obj, timeout)
+    local p = Clone(self)
+    p.r_Object = obj
+    if timeout then
+        p.Timeout = timeout
+    end
+    if pfx then p.PFX = pfx end
+    obj._burning = true
+    return p
+end
+--============================================================================
+function PBurningObject:Init()
+    if self.r_Object._Class == "CActor" then
+        local tdj = self.r_Object.s_SubClass.DeathJoints
+		if tdj then
+			for i=1,table.getn(tdj) do
+                self.r_Object:BindFX("RFT_burn", 0.07, tdj[i])
+			end
+		else
+            self.r_Object:BindFX("RFT_burn", 0.2, "root")
+        end
+    else
+        local pfx = AddPFX('barrel_flame_FX',0.3)
+        ENTITY.RegisterChild(self.r_Object._Entity,pfx)      
+    end
+    self._snd = self.r_Object:BindSound("actor/Swamp/Swamp_fire-loop", 10, 50, true)
+        
+    local t = Templates["RifleFlameThrower.CWeapon"]
+    t:SndEnt("flame_startburning",self.r_Object._Entity)
+end
+--============================================================================
+function PBurningObject:Update()
+
+    -- jezeli obiekt zostal w miedzy czasie zniszczony to kasuje proces
+    if self.r_Object._ToKill then GObjects:ToKill(self) end
+
+    if self._dmgTime <=  0 then
+        local dmg = 5
+        if self.r_Object._Class == "CActor" then dmg = 15 end        
+        self.r_Object:OnDamage(dmg, nil, AttackTypes.Fire)
+        self._dmgTime = 15
+    else
+        self._dmgTime = self._dmgTime -1
+    end
+        
+    if self.Timeout then
+        self.Timeout = self.Timeout - 1/30
+        if self.Timeout < 0 then
+            ENTITY.KillAllChildrenByName(pe,"actor/Swamp/Swamp_fire-loop")
+            ENTITY.KillAllChildrenByName(pe,"RFT_burn")
+            GObjects:ToKill(self)
+        end
+    end
+end
+--============================================================================
+
+function PBurningObject:Delete()
+    if not self.r_Object._ToKill then
+        self.r_Object._burning = false
+        ENTITY.Release(self._snd)
+        ENTITY.UnregisterAllChildren(self.r_Object._Entity)
+    end
+end

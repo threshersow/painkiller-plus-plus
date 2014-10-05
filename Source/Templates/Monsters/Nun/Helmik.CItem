@@ -1,0 +1,37 @@
+Helmik.Mesh = "polySurface990|polySurfaceShape990"
+Helmik.Pack = "helmik.dat"
+Helmik.Scale = 0.12
+Helmik.Restitution = 0.1
+Helmik.LinearDamping = 0.2
+Helmik.TimeToLive = 15 * 30
+Helmik.CollsionSounds = {"item-helmet"}
+
+function Helmik:OnCreateEntity()
+	self:PO_Create(BodyTypes.FromMesh,nil,ECollisionGroups.InsideItems)
+	ENTITY.EnableCollisions(self._Entity, true, 2, 0.6)
+end
+
+--[[
+function Helmik:OnUpdate()
+	if self.timer then
+		local x,y,z,mag = ENTITY.GetVelocity(self._Entity)
+		if mag < 0.5 then
+			ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			self.timer = nil
+		end
+	end
+end
+--]]
+
+function Helmik:OnCollision(x,y,z,nx,ny,nz,e)
+	if e then
+		local obj = EntityToObject[e]
+        if not obj then
+			PlaySound3D("impacts/item-helmet",x,y,z, 10, 40)
+			if not self._newColGr then
+				self._newColGr = true
+				ENTITY.PO_SetCollisionGroup(self._Entity, ECollisionGroups.Normal)
+			end
+		end
+	end
+end

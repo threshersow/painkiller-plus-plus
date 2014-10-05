@@ -1,0 +1,19 @@
+Slab.s_Editor["Actions.OnOpen.[new]"]   = { "TextEdit" }
+Slab.s_Editor["Actions.OnClose.[new]"]   = { "TextEdit" }
+Slab.s_Editor["Portals.[new]"] = { "ComboBox", "Templates['Slab.CItem'].FillPortals" }
+Slab.s_Editor["AntiPortals.[new]"] = { "ComboBox", "Templates['Slab.CItem'].FillAntiPortals" }
+Slab.s_Editor.Appearance = { "ComboBox", "Templates['Slab.CItem'].FillAppearance" }
+
+function Slab:FillPortals()
+    tmp_tab = WORLD.EnumeratePortals()
+    table.insert(tmp_tab,1,"-remove-")    
+end
+
+function Slab:FillAntiPortals()
+    tmp_tab = WORLD.EnumerateAntiPortals()
+    table.insert(tmp_tab,1,"-remove-")    
+end
+
+function Slab:FillAppearance()
+    tmp_tab = {"Slab","Fence","Babel_Arab","Asylum_Monast","Chaos","Docks_Base","Factory_Bridge","Catacombs","Opera","Prison","TrainStation","CityOnWater","Leningrad","Wood","Colosseum","Colosseum2","City","CityTunnel","Orphanage","Mine","Roleta"}
+end

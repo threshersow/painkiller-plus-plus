@@ -1,0 +1,108 @@
+CSpawnPoint.s_Editor = {
+        ["SpawnTemplate"]  = { "ComboBox", "CSpawnPoint.FillSpawnTemplateBox" },
+        ["SpawnFX"]  = { "ComboBox", "CSpawnPoint.FillSpawnFXBox" },
+        ["WalkArea"]  = { "ComboBox", "CSpawnPoint.FillWalkAreaBox" },
+        ["Actions.OnLastMonsterDie.[new]"] = { "TextEdit" },
+        ["Actions.OnMonsterSpawn.[new]"] = { "TextEdit" },
+        ["SpawnAngle.Value"] = { "SpinEdit" , {"%.2f", 0, 6.28, 0.05} },
+    }
+--============================================================================
+function CSpawnPoint:EditTick(delta)    
+    
+    if not Editor.EditAreas then return end
+
+    if Editor.SelObj ~= self and MOUSE.LB() == 1 then        
+        -- picking point 
+        local sx,sy,sz = R3D.VectorToScreen(self.Pos:Get())
+        if Dist2D(MX,MY,sx,sy) <  15  then
+            Editor.ObjEdited = true                
+            Editor:SelectObject(self)
+        end    
+    end
+    
+    if Editor.SelObj == self then        
+        if INP.Key(Keys.X) == 2 then
+            self.SpawnAngle.Value = self.SpawnAngle.Value + 0.01
+        end
+        if INP.Key(Keys.Z) == 2 then
+            self.SpawnAngle.Value = self.SpawnAngle.Value - 0.01
+        end
+        if INP.Key(Keys.T) == 1 then
+            local sp = Clone(self)
+            sp:Spawn()
+        end
+        self.SpawnAngle.Value = math.mod(math.pi*2 + math.mod(self.SpawnAngle.Value, math.pi*2), math.pi*2) 
+    end
+end
+--============================================================================
+function CSpawnPoint:EditRender(delta)
+    
+    if not Editor.EditAreas then return end
+    
+    local ztest = true
+    if INP.Key(Keys.LeftCtrl) == 2 then ztest = false end   
+
+    if Editor.SelObj == self  then
+        R3D.DrawSphere(0.8,R3D.RGBA(0,255,255,0),self.Pos.X,self.Pos.Y,self.Pos.Z,ztest)
+    else
+        R3D.DrawSphere(0.8,R3D.RGBA(200,200,200,0),self.Pos.X,self.Pos.Y,self.Pos.Z,ztest)
+    end
+    
+    if self.SpawnAngle.Enabled then
+        local p = self.Pos
+        local px = p.X + math.sin(self.SpawnAngle.Value)
+        local pz = p.Z + math.cos(self.SpawnAngle.Value)
+        R3D.RenderLine(p.X,p.Y,p.Z,px,p.Y,pz,R3D.RGB(200,0,0))
+    end
+    
+    R3D.RenderBox(self.Pos.X-0.15,self.Pos.Y-0.15,self.Pos.Z-0.15,self.Pos.X+0.15,self.Pos.Y+0.15,self.Pos.Z+0.15,R3D.RGBA(255,255,0,0),ztest)
+end
+--============================================================================
+function CSpawnPoint:FillSpawnTemplateBox()
+    tmp_tab = {}
+    for i,v in Templates do 
+        if string.find(i,".CActor",1,true) then
+            table.insert(tmp_tab,i)
+        elseif string.find(i,".CItem",1,true) then
+            if Templates[i].Spawnable then
+                table.insert(tmp_tab,i)
+            end
+        end
+    end
+    for i,v in TemplatesPaths do
+        if string.find(i,".CActor",1,true) then
+            table.insert(tmp_tab,i)
+        elseif string.find(i,".CItem",1,true) then
+            if Templates[i].Spawnable then
+                table.insert(tmp_tab,i)
+            end
+        end
+    end
+    table.sort(tmp_tab,function (a,b) return a<b end)
+end
+--============================================================================
+function CSpawnPoint:FillSpawnFXBox()
+    tmp_tab = {}
+    for i,v in Templates do 
+        if string.find(i,"MonsterSpawn",1,true) and string.find(i,".CAction",1,true) then
+            table.insert(tmp_tab,i)
+        end
+    end
+    for i,v in TemplatesPaths do
+        if string.find(i,"MonsterSpawn",1,true) and string.find(i,".CAction",1,true) then
+            table.insert(tmp_tab,i)
+        end
+    end
+
+    table.sort(tmp_tab,function (a,b) return a<b end)
+end
+--============================================================================
+function CSpawnPoint:FillWalkAreaBox()
+    tmp_tab = {""}
+    local boxes = GObjects:GetAllObjectsByClass("CArea")
+    for i,v in boxes do
+        table.insert(tmp_tab,v._Name)
+    end
+    table.sort(tmp_tab,function (a,b) return a<b end)
+end
+--============================================================================

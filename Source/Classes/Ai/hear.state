@@ -1,0 +1,133 @@
+-- senses: hearing & hit detector & flameDetector
+
+
+AiStates.hear = {
+	name = "hear",
+	lastTimeHEAR = -100,
+	active = nil,
+}
+
+function AiStates.hear:OnInit(brain)
+    local actor = brain._Objactor
+	--Game:Print("HEAR ACTIVE")
+	self.active = 1
+	actor:RotateToVector(self.destx, self.desty, self.destz)
+	self.state = 0
+end
+
+function AiStates.hear:OnUpdate(brain)
+	local actor = brain._Objactor
+
+	if self.state == 0 and not actor._isRotating then
+		if not self.rot then
+			actor:WalkTo(self.destx, self.desty, self.destz, true)
+		end
+		self.state = 1
+	end
+
+	if self.state == 1 and not actor._isWalking and not actor._isRotating then
+		self.active = nil
+	end
+end
+
+function AiStates.hear:OnRelease(brain)
+	self.active = nil
+	self.destx = nil
+	self.desty = nil
+	self.destz = nil
+end
+
+function AiStates.hear:Evaluate(brain)
+	local actor = brain._Objactor
+	local aiParams = actor.AiParams
+    if aiParams.alwaysSee or aiParams.huntPlayer then
+        return 0.0
+    end
+
+    if brain._lastHitByEnemyPos and not actor._isWalking and brain._lastHitByEnemyType == AttackTypes.Fire and not aiParams.WalkAreaWhenAttack then
+		-- ucieczka z ognia
+--		Game:Print("ogien!!!!")
+		actor:WalkForward(math.random(1,4), true,  math.random(-45,45))
+		brain._lastHitByEnemyPos = nil
+	else
+		if not brain.r_closestEnemy and not brain.escape and brain._Objactor._state ~= "ATTACKING" then
+			if brain._lastHitByEnemyPos and math.random(100) < aiParams.perception*200 then
+				self.destx = brain._lastHitByEnemyPos.X
+				self.desty = brain._lastHitByEnemyPos.Y
+				self.destz = brain._lastHitByEnemyPos.Z
+				self.rot = false
+
+				if aiParams.WalkAreaWhenAttack then			-- narazie
+					self.rot = true
+				end
+
+--				if debugMarek then Game:Print("** Hit feel "..brain._lastHitByEnemyTime..", brain._currentTime:"..brain._currentTime) end
+				brain._lastHitByEnemyPos = nil
+				actor:Stop()			
+				return 0.15
+			else
+				if self.lastTimeHEAR + 0.7 < brain._currentTime and math.random(100) < aiParams.perception*100 and table.getn(ActiveSounds) > 0 then
+					local soundOfHiPrio = nil
+					for i,v in ActiveSounds do
+                        if (not v[3] or v[3]._Class == "CPlayer") and v[3] ~= actor then
+                        --if (v[3] == Player or not v[3]) then			-- faster
+							--[[if v[3] then
+								Game:Print("SOUND owner "..v[3]._Name.." "..Game.currentTime.." "..v[9])
+							else
+								Game:Print("not v[3]")
+							end--]]
+
+                            local dist = Dist3D(v[4], v[5], v[6], actor._groundx, actor._groundy, actor._groundz)
+                            dist = dist / aiParams.hearing 
+                            if dist < v[8] then
+                                local inRange = 1
+                                if dist > v[7] then
+                                    local d = dist - v[7]
+                                    d = 100 * d/(v[8] - v[7] + 0.0001)
+                                    if math.random(100) < d then
+                                        inRange = 0
+                                    end
+                                end
+                                if inRange == 1 then
+                                    if soundOfHiPrio then
+                                        if soundOfHiPrio[2] < v[2] then
+                                            soundOfHiPrio = v
+                                        end
+                                    else
+                                        soundOfHiPrio = v
+                                    end
+                                end
+                            end
+                        end
+					end
+					if soundOfHiPrio then
+						self.lastTimeHEAR = brain._currentTime
+						brain._lastTimeHEAR = brain._currentTime
+						--Game:Print("** Sound heard : "..soundOfHiPrio[1].." "..soundOfHiPrio[2])
+						actor:Stop()
+						if soundOfHiPrio[2] == LogicSounds["RICOCHET"] then
+							brain._rotate180AfterEndWalking = true
+						end
+						self.destx = soundOfHiPrio[4]
+						self.desty = soundOfHiPrio[5]
+						self.destz = soundOfHiPrio[6]
+						self.rot = false
+
+						local distToNoise = Dist3D(self.destx, self.desty, self.destz, actor._groundx, actor._groundy, actor._groundz)
+						if distToNoise < 6 or aiParams.WalkAreaWhenAttack then		-- dystans od halasu w ktorym potwor sie tylko obroci, a nie pojdzie to tego miejsca
+							if debugMarek then Game:Print(actor._Name.." tylko ROT") end
+							self.rot = true
+						end
+						self.state = 0
+						return 0.15
+					end
+				end
+			end
+		end
+	end
+	if self.active then
+		return 0.15
+	end
+	return 0.0
+end
+

@@ -1,0 +1,62 @@
+Health.Model = "Energy"
+Health.Scale = 0.4
+o.DisabledInVoosh = false
+Health.takeDistance = 1.5
+Health.RespawnTime = 25
+Health.HealthAdd = 25
+Health.MaxLimit  = 100
+Health.MaxLimit  = 100
+o.s_SubClass ={}
+
+--============================================================================
+function Health:OnPrecache()
+	Cache:PrecacheParticleFX("energyhealth1")
+	Cache:PrecacheParticleFX("energyhealth")
+end
+--============================================================================
+function Health:OnCreateEntity()
+    ENTITY.SetSynchroString(self._Entity,"Health.CItem")
+    ENTITY.EnableNetworkSynchronization(self._Entity,true,true)
+    self:Client_OnCreateEntity(self._Entity)
+end
+--============================================================================
+function Health:Client_OnCreateEntity(entity)
+    BindFX(entity,"energyhealth1",0.2,"root")
+    BindFX(entity,"energyhealth",0.2,"e1")
+    BindFX(entity,"energyhealth",0.2,"e2")
+    BindFX(entity,"energyhealth",0.2,"e3")
+    BindFX(entity,"energyhealth",0.2,"e4")
+    BindFX(entity,"energyhealth",0.2,"e5")
+    BindFX(entity,"energyhealth",0.2,"e6")
+    -- jezeli jest wziety to musze schowac particle
+    if not ENTITY.IsDrawEnabled(entity) then
+        ENTITY.EnableDraw(entity,false,true)
+    end
+end
+--============================================================================
+function Health:OnTake(player)    
+    if player.Health < Game.HealthCapacity then
+        player.Health = player.Health + self.HealthAdd
+        if player.Health > Game.HealthCapacity then player.Health = Game.HealthCapacity  end
+        self.TakeFX(player._Entity,player.Health)
+    else
+        return true
+    end
+end
+--============================================================================
+function Health:TakeFX(pe,health)
+    local player = EntityToObject[pe]    
+    if player then
+        player.Health = health
+        player._healthDecCnt = 0
+        if player == Player then player:PickupFX() end
+    end    
+    Templates["Health.CItem"]:SndEnt("pickup",pe)
+end
+Network:RegisterMethod("Health.TakeFX", NCallOn.ServerAndAllClients, NMode.Reliable, "eu")
+--============================================================================
+function Health:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+--============================================================================

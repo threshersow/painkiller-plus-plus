@@ -1,0 +1,10 @@
+Skrzyp_01.Volume = 80
+Skrzyp_01.Interval = 6
+Skrzyp_01.RandomShift = 3
+Skrzyp_01.Falloff =
+{
+  Start = 5,
+  End = 40
+}
+Skrzyp_01.Sound ="C3L1_Train_Station/Skrzyp_01"
+

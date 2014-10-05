@@ -1,0 +1,23 @@
+EvilMonk_AdrianWalkOnly.BaseObj = "EvilMonk.CActor"
+EvilMonk_AdrianWalkOnly.Model = "evilmonk"
+EvilMonk_AdrianWalkOnly.CreatePO = true
+EvilMonk_AdrianWalkOnly.Scale = 1.2
+EvilMonk_AdrianWalkOnly.WalkSpeed = 1.3
+EvilMonk_AdrianWalkOnly.RunSpeed = 1.1
+EvilMonk_AdrianWalkOnly.RotateSpeed = 20
+EvilMonk_AdrianWalkOnly.NeverRun = true
+EvilMonk_AdrianWalkOnly.rotateHead = 3.1415*0.3
+EvilMonk_AdrianWalkOnly.rotateHeadBone = "k_szyja"
+EvilMonk_AdrianWalkOnly.rotateHeadMaxSpeed = 0.2
+
+EvilMonk_AdrianWalkOnly.AiParams.aiGoals = {"idle","attack","hunt","hear","flee"}
+EvilMonk_AdrianWalkOnly.AiParams.viewDistance = 120
+EvilMonk_AdrianWalkOnly.AiParams.viewDistance360 = 120
+EvilMonk_AdrianWalkOnly.AiParams.viewAngle = 360
+
+EvilMonk_AdrianWalkOnly.AiParams.weaponDamage = 25
+
+EvilMonk_AdrianWalkOnly.AiParams.guardAngle = {0,10}
+
+o.AiParams.moveDisplacement = -1
+o.AiParams.huntPlayer = true

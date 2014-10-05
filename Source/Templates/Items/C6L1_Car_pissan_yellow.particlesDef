@@ -1,0 +1,8 @@
+o.s_SubClass.ParticlesDefinitions = {
+	burnin = {
+		pfx = "tankflame",
+		scale = 1.0,
+		offset = Vector:New(0.0,0.0,0.0),
+		joint = "joint1_getmass",
+	},
+}

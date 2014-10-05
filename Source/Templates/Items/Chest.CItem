@@ -1,0 +1,20 @@
+o.Mesh = "chestShape3"
+o.Pack = "chest1.dat"
+o.DestroyPack = "chest1_zlom.dat"
+o.Scale = 0.25
+o.Health = 10
+
+o.Destroy.ExplosionStrength = 0
+o.Destroy.AverageDelay = 1
+o.Destroy.AverageVariation = nil
+o.Destroy.Strength = 200
+o.Destroy.Effect = "explode_dust"
+o.Destroy.EffectScale = 0.25
+o.Destroy.Treasures = 
+{
+    Coins  = {7, 'g'},
+}
+o.Destroy.MinSpeedOnCollision = 12
+o.Destroy.ExplosionDamage = 0
+o.Destroy.ExplosionRadius = 0
+o.Destroy.LifetimeAfterExplosion = 1

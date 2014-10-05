@@ -1,0 +1,4 @@
+-- with jump
+o.Sequence = {
+    {'EnableDraw:p,true'},    
+}

@@ -1,0 +1,41 @@
+o.BaseObj = "CItem"
+o.Model = "chaingib"
+o.Scale = 52
+o.TimeToLive = 90
+--============================================================================
+function o:OnInitTemplate()
+    self._Synchronize = self.Synchronize
+    self.Synchronize = nil
+end
+
+function GiantChain:OnCreateEntity()
+    --MDL.SetRagdollLinearDamping(self._Entity,0.5)
+    --MDL.SetRagdollAngularDamping(self._Entity,1.0)
+    MDL.EnableRagdoll(self._Entity,true,ECollisionGroups.RagdollNonColliding)
+    self:AddTimer("RagdollSelfExpl", 0.0)
+
+	ENTITY.PO_SetMass(self._Entity, 100)
+	ENTITY.PO_ScaleInertiaTensor(self._Entity, 0.001)
+end
+
+
+function GiantChain:RagdollSelfExpl()
+	--Game:Print(self.Pos.X.." "..self.Pos.Y.." "..self.Pos.Z)
+	MDL.SetRagdollMovedByExplosions(self._Entity, true)
+	--MDL.RagdollSelfExplosion(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z,100000000,1000)
+	
+	
+	local j1 = MDL.GetJointIndex(self._Entity,"ol1")
+	local j2 = MDL.GetJointIndex(self._Entity,"op1")
+	local x1,y1,z1 = MDL.GetJointPos(self._Entity,j1)
+	local x2,y2,z2 = MDL.GetJointPos(self._Entity,j2)
+	local x = x2 - (x2 - x1)*0.5
+	local y = y2 - (y2 - y1)*0.5
+	local z = z2 - (z2 - z1)*0.5
+	
+	--MDL.RagdollSelfExplosion(self._Entity,self.Pos.X,self.Pos.Y,self.Pos.Z,7000,500)
+	MDL.RagdollSelfExplosion(self._Entity,x,y,z,7000,500)
+
+	self:ReleaseTimers()
+end
+

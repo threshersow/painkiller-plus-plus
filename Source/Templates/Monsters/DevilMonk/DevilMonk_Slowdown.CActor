@@ -1,0 +1,54 @@
+o.BaseObj = "DevilMonk.CActor"
+o.Model = "DevilMonk"
+o.Scale = 1.4
+o.Health = 120
+o.WalkSpeed = 1.5
+o.RunSpeed = 1.2
+o.RotateSpeed = 15		-- degrees per 1/30 sec
+o.FX = 'DevilKosaKula'
+
+o.Poison = {
+	checkSpeed = 2,
+	Range = 2.5,
+	TimeOut = 60,
+	Freq = 9999,
+	SlowDown = 0.2,
+}
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 150,
+}
+
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","attack", "hunt", "flee", "hear"}
+    
+o.AiParams.viewDistance = 100
+o.AiParams.viewDistance360 = 100
+o.AiParams.viewAngle = 360
+
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRange = 3.4
+o.AiParams.attackRangeAngle = 120
+o.AiParams.delayBetweenAttacks = 10
+
+o.AiParams.perception = 1.0
+o.AiParams.walkStep = 10.0
+o.AiParams.hearing = 1.0
+
+o.AiParams.GuardStill = false
+o.AiParams.guardAngle = {0,0}
+o.AiParams.guardAngleRandom = true			-- wtedy guardAngle nie jest uwzgledniany
+o.AiParams.guardChangePosition = {}
+o.AiParams.guardRange = -1
+o.AiParams.stopAfterWalking = 0.0
+o.AiParams.stopAfterWalkingTime = {30,90}
+
+    
+o.AiParams.chanceOfEscapeAfterFire = 0.03
+o.AiParams.escapeTime = 120
+o.AiParams.moveDisplacement = 2.2
+o.AiParams.updateSpeed = 0.33				-- brain (visibility) update speed, 1.0 - update every frame !!!!
+
+o.shadow = 128

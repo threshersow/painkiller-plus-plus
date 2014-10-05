@@ -1,0 +1,7 @@
+o.s_SubClass.ParticlesDefinitions = {
+	explode = {
+		pfx = "dzialkoexplode",
+		scale = 0.3,
+		joint = "joint2",
+	},
+}

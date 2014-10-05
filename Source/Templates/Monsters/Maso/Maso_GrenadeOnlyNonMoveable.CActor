@@ -1,0 +1,17 @@
+o.BaseObj = "Maso_GrenadeOnly.CActor"
+
+o.AiParams.aiGoals = {"idle","FarAttack", "hear"}
+o.NeverMove = true
+o.AiParams.alwaysSee = true
+
+o.AiParams.weapon = {
+		name = "granade",
+		bulletsPerShot = 1,
+		maxDist = 80.0,							-- zasiegi granatu (*0.6..0.8) - balagan do poprawienia
+		minDist = 1.0,
+		fireParticle = "RifleHitWall",	
+		fireParticleSize = 0.25,
+	}
+
+o.AiParams.throwAngle = 25
+--o.AiParams.throwDistMinus = 0.0			-- <0 celuje za gracza, 0> przed gracza

@@ -1,0 +1,10 @@
+o.s_SubClass.ParticlesDefinitions = {
+	barf = {
+		pfx = "ampu_womit",
+		scale = 0.3,
+		offset = Vector:New(0,0,0),
+		joint = "jezor02",
+		rotateWithJoint = true,
+	},
+
+}

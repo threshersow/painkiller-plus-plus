@@ -1,0 +1,10 @@
+Nietoperze_01.Volume = 20
+Nietoperze_01.Interval = 0
+Nietoperze_01.RandomShift = 0
+Nietoperze_01.Falloff =
+{
+  Start = 2,
+  End = 80
+}
+Nietoperze_01.Sound ="C1L3_Catacombs/nietoperze_01"
+

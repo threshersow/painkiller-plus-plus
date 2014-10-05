@@ -1,0 +1,196 @@
+o.Scale = 1.8
+o.Health = 120
+o.CreatePO = true
+o.WalkSpeed = 1.0
+o.RunSpeed = 1.0
+o.RotateSpeed = 15
+o.throwHeart = true
+o.Model = "hellbiker_v4"
+
+o.enableGibWhenHPBelow = -63
+
+o.s_SubClass = {
+	rotateHead = 0.6,			-- zakres
+	rotateHeadBone = "k_szyja",
+	rotateHeadMaxSpeed = 0.2,
+
+	Animations = {
+		idle    = {1.0, false},
+		atak1    = {1.0, false, {
+						{0.0,'BindTrailSword','trail_sword','joint21','lom_trail',},
+						{0.55,'PlaySound',"atak1"},
+						{1.4,'damage'},
+						{1.5,'PlaySoundIfMissed',{'hellbv4-pipe-onground1','hellbv4-pipe-onground2',},5,30},
+						{2.45,'EndTrailSword'},
+					}},
+		atak2    = {1.0, false, {
+						{0.0,'PlaySoundHit',"atak2"},
+						{0.2,'PlaySound',"shot"},
+						{0.4,'PlaySound',"shot"},
+						{0.6,'PlaySound',"shot"},
+						{0.8,'PlaySound',"shot"},
+						{0.2,'ThrowImmid',nil,true},
+						{0.4,'ThrowImmid',nil,true},
+						{0.6,'ThrowImmid',nil,true},
+						{0.8,'ThrowImmid',nil,true},
+					}},
+		hit1    = {1.0, false, {
+						{0.0,'PlaySoundHit',"hit"},
+					}},
+		hit2    = {1.0, false, {
+						{0.0,'PlaySoundHit',"hit"},
+					}},
+
+		walk    = {1.7, true, {
+    					{1.6,'FootFX','s_l_srodstopie'},
+						{0.8,'FootFX','s_p_srodstopie'},
+						{0.8,'PlaySound',"stepr"},
+						{1.6,'PlaySound',"stepl"},
+					}},
+		run     = {2.56, true, {
+    					{1.6,'FootFX','s_l_srodstopie'},
+						{0.8,'FootFX','s_p_srodstopie'},
+						{0.8,'PlaySound',"stepr"},
+						{0.6,'PlaySound',"run"},
+						{1.6,'PlaySound',"stepl"},
+						{1.4,'PlaySound',"run"},
+					}},
+	},
+
+
+	Ambients = {"idle",},
+
+	RagdollCollisions = {
+		MinStren = 4.0,
+		MinTime = 0.6,
+		Bones = {
+					{"k_szyja", "bodyfalls", true},		-- joint, {sound}, blood
+					{"r_p_lokiec", "bodyfalls", true},
+					{"r_l_lokiec", "bodyfalls", true},
+					{"joint21", "weaponlost", false},
+				}
+	},
+
+	Hits = {"hit1", "hit2"},
+	ragdollJoint = "root",
+
+	DeathJoints = {},
+	BreakableJoints = {},
+    notBleedingJoints = {
+		joint21 = {},           -- narazie wnetrze tablicy nie wykorzystane (hit w konkretna kosc)
+    },
+
+	NearAttacks = {"atak1",},
+	DeathJoints = {
+		'k_ogo','k_zebra','k_ramiona',
+		'k_glowa','n_p_kolano','n_l_kolano',
+		'dlo_prawa_root','dlo_lewa_root','s_p_kostka','s_l_kostka',
+		'r_p_lokiec', 'r_l_lokiec',
+	},
+	GibExplosionStrength = 8000,
+    GibExplosionStrengthWhenDrink = 35000,
+	GibExplosionRange = 2.0,
+	GibExplosionDeltaY = -1.0,
+	gibFX = "gibExplosion",
+    GibEmitters = {
+				{"n_p_biodro","FX_gib_blood",-1},
+				{"n_l_biodro","FX_gib_blood",-1},
+				{"r_l_bark","FX_gib_blood",-1},
+				{"r_p_bark","FX_gib_blood",1},
+				{"r_p_bark_root","FX_gib_blood",1},
+				{"r_l_bark_root","FX_gib_blood",-1},
+				{"k_szyja","FX_gib_blood",-1},
+    },
+    gibShader = "palskinned_bloody",
+    
+	RagdollCollisionsGib = {
+        	MinStren = 6.0,
+	        MinTime = 0.8,
+	        Bones = {
+				{"n_l_biodro", "gibSplash", true},
+				{"n_p_biodro", "gibSplash", true},
+				{"r_l_bark", "gibSplash", true},
+				{"r_p_bark", "gibSplash", true},
+				{"k_ramiona","gibSplash", true},
+				{"root", "gibSplash", true},
+				{"k_szyja", "gibSplash", true},
+				{"joint21", "weaponlost", false},
+			},
+	},
+}
+
+
+
+o.s_Physics = {
+    BodyType = BodyTypes.Fatter,
+    Mass     = 110,
+    InertiaTensorMultiplier = 0.05,
+}
+
+o.AiParams = {}
+o.AiParams.aiGoals = {"idle","FarAttack","hear","hunt","flee","closeAttack"}
+
+o.AiParams.attackRange = 3.3			-- zasieg bliskiego ataku
+o.AiParams.weaponDamage = 20
+o.AiParams.attackRangeAngle = 100
+    
+o.AiParams.viewDistance = 70			-- zasieg widzenia
+o.AiParams.viewAngle = 150				-- kat widzenia
+o.AiParams.viewDistance360 = 8			-- zasieg widzenia z katem widzenia 360 stopni
+    
+o.AiParams.hearing = 1.0				-- zasieg sluchu
+o.AiParams.perception = 1.0				-- szansa uslyszenia halasu
+o.AiParams.walkStep = 7.0
+
+o.AiParams.GuardStill = true			-- true, nie bedzie sie poruszal w trybie guard
+o.AiParams.guardAngle = {0,10}			-- (min, max) kat o jaki sie nie bedzie sie poruszal w "idle"
+o.AiParams.guardAngleRandom = true
+o.AiParams.guardChangePosition = {30,60}-- (min, max) dlugosc pauzy pomiedzy obrotami
+o.AiParams.guardRange = -1				-- max. zasieg patrolu
+o.AiParams.useOnlyWaypointsWhenGuard = false	-- wykorzystuje tylko WayPointy przy chodzeniu w trybie guard
+o.AiParams.stopAfterWalking = 0.5			-- szansa zatrzymania po przejsciu do kolejnego punktu
+o.AiParams.stopAfterWalkingTime = {30,90}	-- (min, max) czas zatrzymania
+
+o.AiParams.walkAreaRandom = false
+o.AiParams.WalkAreaWhenAttack = false
+o.AiParams.FinishMovementBeforeAttack = false	-- atakuje dopiero gdy dojdzie do wczesniej zaplanowanego punktu
+
+o.AiParams.changePosAfterFire = 0.25		-- szansa, ze zmieni pozycje po strzale
+o.AiParams.delayBetweenAttacks = 30
+o.AiParams.moveDisplacement = 4.0
+
+o.AiParams.chanceOfEscapeAfterFire = 0.03	-- szansa, ze moster ucieknie po strzale
+o.AiParams.escapeTime = 90					-- typowy czas ucieczki
+
+o.AiParams.updateSpeed = 0.30
+o.AiParams.alwaysSee = false
+o.AiParams.huntPlayer = false
+    
+o.AiParams.doNotRotateWhenShooting = true
+o.AiParams.weapon = {
+		bulletsPerShot = 1,
+		maxDist = 60,
+		minDist = 3.3,
+		spreadAngle = 0.8,
+		damagePerBullet = 10,
+		PO_HitForce = 300,
+		maxYaw = 45,				-- maksymalna odchylka broni lewo/prawo w stos. do kata patrzenia
+		maxPitch = 45,				-- maksymalna odchylka broni gora/dol
+		fireParticle = "RifleHitWall",	
+		fireParticleSize = 0.2,
+	}
+o.AiParams.weaponBindPos = "joint22"					-- skad wylatuja pociski (i Particle)
+o.AiParams.weaponBindPosShift = Vector:New(0.6,0.1,0.3)
+o.AiParams.disableEscapeWhenTooClose = true
+o.AiParams.holdJointDisplace = Vector:New(0.6,0.1,0.3)
+
+
+o.AiParams.ThrowableItem = "HellBiker_V4_Nail.CItem"
+o.AiParams.throwItemBindTo = "joint22"
+o.AiParams.throwItemBindToOffset = Vector:New(0.6,0.1,0.3)
+o.AiParams.throwVelocity = 50
+o.AiParams.throwDeltaY = 1.6
+
+o.minimumTimeBetweenHitAnimation = 12
+o.shadow = 128
+o.AiParams.FarAttacks = {"atak2",}
