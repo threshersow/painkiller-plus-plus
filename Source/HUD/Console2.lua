@@ -683,7 +683,7 @@ end
 function Console:Cmd_EXEC(enable)    
 	if(enable~=nil)then 
 	local temp = CfgFile 
-	CfgFile = enable..".ini" 
+	if( enable ~= "autoexec" ) then CfgFile = enable..".ini" end -- autoexec fix [ THRESHER ]
 	Cfg:Load() 
 	CfgFile = temp 
 	CONSOLE_AddMessage("Bin\\"..enable..".ini executed.") 
@@ -1522,4 +1522,17 @@ function Console:Cmd_SPECTALK(clientID, txt)
         end
     end
 
+end
+
+function Console:Cmd_CHECKSOCKET()
+
+
+	local f = io.open( "MDL.ini","w")
+	
+		for key,value in pairs(MDL) do
+			f:write( "MDL.  ".. key .."\n" )
+		end
+	
+		io.close(f)
+	
 end

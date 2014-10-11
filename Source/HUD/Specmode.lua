@@ -45,6 +45,7 @@ end
 function PSpectatorControler:SetPlayerVisibility(e,enable,state)
      
     ENTITY.EnableDraw(e,enable,true)    
+	
     
     --[[
     MDL.SetMeshVisibility(e,"-all-",true)
@@ -94,16 +95,16 @@ function PSpectatorControler:SetPlayerVisibility(e,enable,state)
 end
 --============================================================================
 function PSpectatorControler:Init()
-    Hud.Enabled = false
-    MOUSE.Lock(true)
-    self._entCam =  ENTITY.Create(ETypes.Mesh,"../Data/Items/granat.dat","polySurfaceShape234",1)   
-    ENTITY.PO_Create(self._entCam,BodyTypes.Sphere,0.3,ECollisionGroups.InsideItems)
-    ENTITY.PO_EnableGravity(self._entCam,false)
-    ENTITY.PO_SetMovedByExplosions(self._entCam, false) 
-    ENTITY.PO_HideFromPrediction(self._entCam)
-    ENTITY.SetPosition(self._entCam,Lev.Pos.X,Lev.Pos.Y,Lev.Pos.Z)
-    self._lastCamPos:Set(Lev.Pos)
-    ENTITY.PO_SetMissile( self._entCam, MPProjectileTypes.Spectator )
+		Hud.Enabled = false
+		MOUSE.Lock(true)
+		self._entCam =  ENTITY.Create(ETypes.Mesh,"../Data/Items/granat.dat","polySurfaceShape234",1)   
+		ENTITY.PO_Create(self._entCam,BodyTypes.Sphere,0.3,ECollisionGroups.InsideItems)
+		ENTITY.PO_EnableGravity(self._entCam,false)
+		ENTITY.PO_SetMovedByExplosions(self._entCam, false) 
+		ENTITY.PO_HideFromPrediction(self._entCam)
+		ENTITY.SetPosition(self._entCam,Lev.Pos.X,Lev.Pos.Y,Lev.Pos.Z)
+		self._lastCamPos:Set(Lev.Pos)
+		ENTITY.PO_SetMissile( self._entCam, MPProjectileTypes.Spectator )
     Mapview:Load(Lev.Map)  
     self._matMapView            = MATERIAL.Create("../PKPlusData/Textures/Electro.tga", TextureFlags.NoLOD + TextureFlags.NoMipMaps)  
     local filename = string.gsub (Lev.Map,"(%a+).mpk", "%1")
@@ -505,6 +506,14 @@ function PSpectatorControler:Tick3(delta)
 end
 --============================================================================
 function PSpectatorControler:CameraModeSwitch()
+
+	if( MPCfg.GameMode == "Race") then 
+		--for i,o in Game.PlayerStats do    			HIDES OTHER PLAYERS
+			--self:SetPlayerVisibility(o._Entity,false)
+		--end
+		return 
+	end -- Race Additions [ THRESHER ]
+     
     if INP.Action(Actions.Fire) then
         if not self._fire then
             Game:Print(self.player)
@@ -605,7 +614,7 @@ function PSpectatorControler:SpectatorHUD()
 	
 if Cfg.Simplehud == true then
 
-	-- THRESHER
+	-- [ THRESHER ]
 	-- BEGIN ITEM TIMERS
 	--local armorsWeak    = GObjects:GetElementsWithFieldValue( "_Name", "ArmorWeak*" )
 	--local armorsMedium = GObjects:GetElementsWithFieldValue( "_Name", "ArmorMedium*" )

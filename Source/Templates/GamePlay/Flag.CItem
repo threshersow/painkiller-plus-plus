@@ -33,11 +33,16 @@ function Flag:Client_OnCreateEntity(entity)
 end
 --============================================================================
 function Flag:OnTake(player)
-    
+	
     if player.Team ~= self.Team and not player.HasFlag then
         self.TakeFX(player._Entity,1,self.Team)
-        self._blockedBy = player
-        self._captured = true
+			if( MPCfg.GameMode ~= "Race" ) then
+				self._blockedBy = player
+				self._captured = true
+			else
+				self._blockedBy = player
+				self._captured = true
+			end
         self._ReturnTime = nil
         return false
     end
@@ -54,6 +59,7 @@ function Flag:OnTake(player)
 end
 --============================================================================
 function Flag:UnbindItem(delivered)
+	
     if self._blockedBy then
         local owner = self._blockedBy
         self._blockedBy = nil
@@ -110,37 +116,45 @@ function Flag:TakeFX(pe,sound)
     local t = Templates["Flag.CItem"]
     local bindlight = true
     
-    if player then
-        if player == Player then                             
-            bindlight = false
-            player:PickupFX() 
-         end
-        player.HasFlag = true
-    end
+		if player then
+			if player == Player then                             
+				bindlight = false
+				player:PickupFX() 
+			 end
+			player.HasFlag = true
+		end
 
-    Templates["Flag.CItem"]:SndEnt("get",pe) 
-        
-    BindSoundToEntity(pe,"multiplayer/ctf/flag-loop-mono",20,45,true,-1,nil,nil,nil,nil,0)
-    if bindlight then
-        --local obj = CloneTemplate("Pent_Light.CLight")
-        --obj.Pos:Set(0,2,0)
-        --obj:Apply()    
-        --ENTITY.RegisterChild(pe,obj._Entity,true)
-        
-        obj = CloneTemplate("Flag.CItem")
-        local ps = Game:FindPlayerStatsByEntity(pe)
-        if ps then
-            if ps.Team ==1 then obj.Team = 0 else obj.Team = 1 end
-        end
-        obj.Pos:Set(0,1.8,-0.18)
-        obj:Apply()
-        ENTITY.EnableNetworkSynchronization(obj._Entity,false)
-        ENTITY.RegisterChild(pe,obj._Entity,true)
-    end
+		Templates["Flag.CItem"]:SndEnt("get",pe) 
+		
+			BindSoundToEntity(pe,"multiplayer/ctf/flag-loop-mono",20,45,true,-1,nil,nil,nil,nil,0)
+			if bindlight then
+				--local obj = CloneTemplate("Pent_Light.CLight")
+				--obj.Pos:Set(0,2,0)
+				--obj:Apply()    
+				--ENTITY.RegisterChild(pe,obj._Entity,true)
+				
+				obj = CloneTemplate("Flag.CItem")
+				local ps = Game:FindPlayerStatsByEntity(pe)
+				if ps then
+					if ps.Team ==1 then obj.Team = 0 else obj.Team = 1 end
+				end
+				obj.Pos:Set(0,1.8,-0.18)
+				obj:Apply()
+				ENTITY.EnableNetworkSynchronization(obj._Entity,false)
+				ENTITY.RegisterChild(pe,obj._Entity,true)
+			end
     
     local ps = Game:FindPlayerStatsByEntity(pe)
     if ps then 
-        local txt = string.gsub(Languages.Texts[770],"$PLAYER",ps.Name)
+        -- local txt = string.gsub(Languages.Texts[770],"$PLAYER",ps.Name)
+		-- Race Additions [ THRESHER ]
+		local txt = string.gsub("$PLAYER starts race","$PLAYER",ps.Name)
+		if( MPCfg.GameMode == "Race" ) then
+			if( not ps._isRacing ) then
+				ps._isRacing = true
+				ps._raceStartTime = INP.GetTime()
+			end
+		end
         local color = Languages.Texts[769]
         if ps.Team == 0 then color = Languages.Texts[768] end        
         txt = string.gsub(txt,"$COLOR",color)
@@ -184,6 +198,74 @@ function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
             end            
             Templates["Flag.CItem"]:Snd3D("appear",fx,fy,fz)
             txt = string.gsub(Languages.Texts[771],"$PLAYER",ps.Name) --$PLAYER scores for the $COLOR team (delivered)
+			
+			-- Race Additions [ THRESHER ]
+		    if( MPCfg.GameMode == "Race" ) then
+				ps._raceFinishTime = INP.GetTime() - ps._raceStartTime
+					ps._raceFinishTime = tonumber( ps._raceFinishTime )
+					
+			--local _personalBestString
+					--if( ps._raceBestTime ~= 0 or ps._raceBestTime ~= nil ) then _personalBestString = RaceTimeString( ps._raceBestTime ) end
+					
+			--local _currentTimeString = RaceTimeString( ps._raceFinishTime )
+				-- trying to make the following be in Utils.lua
+				local capM, capS, capMS
+						
+					capS = math.floor( ps._raceFinishTime ) -- get a nice round number
+						if( capS > 59 ) then -- makes sure we never display more than 59 seconds on timer
+							local _tempCap = capS 
+								repeat 
+									_tempCap = _tempCap - 60
+								until _tempCap < 60
+							
+							capS = _tempCap
+						
+						end 
+						
+					capMS = ps._raceFinishTime - math.floor( ps._raceFinishTime )
+						capMS = tostring( capMS )
+						capMS = f2( capMS ) -- trims the string down to the last two decimal places utils.lua
+						capMS = string.gsub( capMS, "%p", "")
+						capMS = tonumber( capMS )
+					capM = math.floor( math.floor( ps._raceFinishTime ) / 60 )
+					
+					if( capM < 10 or capM == nil ) then 
+						if( capM < 1 or capM == nil ) then
+							capM = "00"
+						else
+							capM = "0"..tostring(capM)
+						end
+					end
+					
+					if( capS < 10 or capS == nil or capS == 0) then 
+						if( capS < 1 or capS == nil ) then
+							capS= "00"
+						else
+							capS = "0"..tostring(capS)
+						end
+					end
+					if( capMS < 10 or capMS == nil ) then 
+						if( capMS < 1 or capMS == nil ) then
+							capMS= "00"
+						else
+							capMS = "0"..tostring(capMS)
+						end
+					end
+					if( capMS == 100 ) then capMS = "10" end -- obscure bugfix
+					
+				txt = string.gsub("$PLAYER finishes race in " .. tostring(capM) .. ":" .. tostring(capS) .. ":" .. tostring(capMS),"$PLAYER",ps.Name)
+					if( ps._raceBestTime == 0 or ps._raceBestTime == nil or ps._raceBestTime > ps._raceFinishTime) then -- if no record/finish or set a new record
+							txt = txt .. " #4[Personal #4Best]"
+							ps._raceBestTime = ps._raceFinishTime
+					else
+						txt = txt .. " [Best: " .. ps._raceBestTime.."]" -- if no personal record set
+					end
+					
+					-- respawn the player after capture, only called on server, otherwise player's client crashes :( 
+					if( player and Game:IsServer() ) then player:OnDamage(999999,nil,AttackTypes.ConsoleKill) end
+					
+			end
+			
         end
         if mode == 2 then 
             Templates["Flag.CItem"]:SndEnt("returned",pe)
@@ -203,7 +285,8 @@ function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
     if txt then 
         local color = Languages.Texts[769]
         if fteam == 1 then color = Languages.Texts[768] end        
-        txt = string.gsub(txt,"$COLOR",color)        
+        txt = string.gsub(txt,"$COLOR",color)  
+		ps._isRacing = false -- No longer racing
         CONSOLE_AddMessage(txt) 
     end
 end

@@ -569,12 +569,14 @@ function SaveFullObj(filename,obj)
     local f = FS.File_Open(filename)
     if not f then 
         Game:Print("- Cannot save file: "..filename.." - read only?")
+		CONSOLE_AddMessage("- Cannot save file: "..filename.." - read only?")
         return 
     end
     
     SaveFullTable(f,obj,"o")  
     if obj._Name then
         Game:Print("+ Object :'"..obj._Name.."' saved as: '"..filename.."'")    
+		CONSOLE_AddMessage("+ Object :'"..obj._Name.."' saved as: '"..filename.."'")    
     end
     FS.File_Close(f)
 end
@@ -882,10 +884,10 @@ end
 --============================================================================
 function Explosion(x,y,z,explosionStrength,explosionRange,clientID,attackType,damage,factorY)
     PlayLogicSound("EXPLOSION",x,y,z,15,30)
-    if Game.GMode == GModes.SingleGame then 
-        WORLD.Explosion2(x,y,z,explosionStrength,explosionRange,clientID,attackType,damage)    
-    else        
-        WORLD.MultiplayerExplosion(x,y,z,explosionStrength,explosionRange,clientID,attackType,damage,factorY)
+    if Game.GMode == GModes.SingleGame then
+        WORLD.Explosion2(x,y,z,explosionStrength,explosionRange,clientID,attackType,damage)
+    else
+		WORLD.MultiplayerExplosion(x,y,z,explosionStrength,explosionRange,clientID,attackType,damage,factorY)
     	--ENTITY.GetVelocity(Game.PlayerStats[666]._Entity
     	--local x,y,z = ENTITY.GetPosition(Game.PlayerStats[666]._Entity)
     	--ENTITY.SetPosition(Game.PlayerStats[666]._Entity,x,y+0.1,z)
@@ -929,3 +931,41 @@ function IsBooH()
     return __IsBooH
 end
 --============================================================================
+function RaceTimeString( playerTime )
+
+	local capM, capS, capMS
+						
+		capS = math.floor( playerTime ) -- get a nice round number
+		capMS = playerTime - math.floor( playerTime )
+			capMS = tostring( capMS )
+			capMS = f2( capMS ) -- trims the string down to the last two decimal places utils.lua
+			capMS = string.gsub( capMS, "%p", "")
+			capMS = tonumber( capMS )
+		capM = math.floor( math.floor( capS ) / 60 )
+		
+		if( capM < 10 or capM == nil ) then 
+			if( capM < 1 or capM == nil ) then
+				capM = "00"
+			else
+				capM = "0"..tostring(capM)
+			end
+		end
+		
+		if( capS < 10 or capS == nil or capS == 0) then 
+			if( capS < 1 or capS == nil ) then
+				capS= "00"
+			else
+				capS = "0"..tostring(capS)
+			end
+		end
+		if( capMS < 10 or capMS == nil ) then 
+			if( capMS < 1 or capMS == nil ) then
+				capMS= "00"
+			else
+				capMS = "0"..tostring(capMS)
+			end
+		end
+		if( capMS == 100 ) then capMS = "10" end -- obscure bugfix
+		
+	return tostring(capM) .. ":" .. tostring(capS) .. ":" .. tostring(capMS)
+end

@@ -9,7 +9,7 @@ GameStates =
 
 MPCfg = 
 {
-    GameMode         = "Free For All", -- "Free For All", "Team Deathmatch", "People Can Fly", "Voosh", "The Light Bearer", "Capture The Flag", "Last Man Standing", "Duel", "Clan Arena"
+    GameMode         = "Free For All", -- "Free For All", "Team Deathmatch", "People Can Fly", "Voosh", "The Light Bearer", "Capture The Flag", "Last Man Standing", "Duel", "Clan Arena", "Race"
     GameState        = GameStates.Finished, -- "Counting", "Playing", "Finished"
     TeamDamage       = true,
     AllowBrightskins = true,
@@ -77,7 +77,13 @@ MPGameRules =
         StartState = GameStates.WarmUp,
         AutoRespawnAfterCountdown = false,
         Teams = true,
-    }, 
+    },
+	["Race"] =
+	{
+		StartState = GameStates.WarmUp,
+		AutoRespawnAfterCountdown = false,
+		Teams = true, -- need to change this [ THRESHER ]
+	},
 }
 
 MPCfgBackup = {}
@@ -856,7 +862,7 @@ function Game:NewPlayerRequest(clientID,name,model,team,state,spectator)
       
     Game.PlayerStats[clientID].Model = MPModels[model] -- pamietam na serwerze jakim modelem bedzie gral  
     
-    local txt = "Please install PK++ www.pkeuro.com"
+    local txt = "Please install PK++ www.pkzone.org"
     SendNetMethod(Game.ConsoleClientMessage, clientID, true, true, ServerID, txt, 0)
     if(MPCfg.ProPlus) then Game:Server2ClientCommand(0,"enableproplusall") else Game:Server2ClientCommand(0,"disenableproplusall") end
     Game:SendRocketFix()
@@ -1172,6 +1178,7 @@ function Game:PlayerRespawnRequest(clientID)
         ENTITY.SetSynchroString(player._Entity,"CPlayer") -- for ENTITY_CREATE callback
         ENTITY.EnableDeathZoneTest(player._Entity,true) 
         ENTITY.PO_SetMovedByExplosions(player._Entity,true)
+		if( MPCfg.GameMode == "Race") then ENTITY.PO_SetCollisionGroup(player._Entity, ECollisionGroups.InsideItems) end -- Race Additions [ THRESHER ]
         ENTITY.EnableNetworkSynchronization(player._Entity,true,false,0,clientID,3)
         
         player:Respawn(x,y,z,a)
@@ -1648,7 +1655,7 @@ function Game:BrightSkin(entity, enable, team)
         WORLD.AddEntity(ei)        
         ENTITY.RegisterChild(entity,ei)
     end
-    
+	
     if Cfg.BrightSkins then
     
     if enable and MPCfg.AllowBrightskins then

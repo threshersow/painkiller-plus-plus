@@ -61,6 +61,9 @@ CItem =
         --MonsterDamageModifier = 1.0,
         PartsNoncollidableWithSelf = false,
     },    
+	
+	_raceStartTime = nil, -- Race Additions [ THRESHER ]
+	_raceEndTime = nil,
 
 	s_SubClass = {
 	},

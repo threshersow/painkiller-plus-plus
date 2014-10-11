@@ -8,6 +8,10 @@ if IsFinalBuild() or XBOX then
 	EditorFiles = nil
 end
 
+--LUA_INIT = "@..Data/Lscripts/Main/compat-5.1.lua"
+--LUA_PATH = "../Data/LScripts/Main/?.lua"
+--LUA_CPATH = "../Data/LScripts/Main/?.dll"
+
 --================================================================
 -- CHEAT STUFF
 --================================================================
@@ -37,6 +41,8 @@ if test2 then
     end
 end   
 path = "../Data/LScripts/"
+
+
 if test3 then  
 -- CHECK FILE SIZE?  
 	checkfiles = {}
@@ -253,7 +259,6 @@ DoFile(path.."Editor/Editor.lua")
 if loadfile(path.."local.lua") then
 	dofile(path.."local.lua")
 end
-
 
 --collectgarbage(0)
 --Log("END LOADER.LUA : "..GetGCCount())

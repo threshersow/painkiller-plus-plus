@@ -5,7 +5,7 @@
 CActor = 
 {
 	_notIsWalkingTimerAmount = 3,	-- czas po ktorym wylacza animacje chodzenia, gdy _isWalking jest flase
-	CollisionDetect = 0.4,		-- jesli o tyle spadnie predkosc potwora to wykrywa kolizje
+	CollisionDetect = 0.4,		-- jesli o tyle spadnie predkosc potwora to wykrywa kolizje GOOGLE TRANSLATE: if so much speed monster drops it detects collisions
     Model = "raven",
 	
     Scale = 1,

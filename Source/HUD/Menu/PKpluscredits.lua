@@ -41,7 +41,7 @@ PKpluscredits =
 		Contact1 =
 		{
 			type = MenuItemTypes.StaticText,
-			text = "MODS@Pkeuro.com",
+			text = "#painkiller on Quakenet IRC",
 			x	 = 150,
 			y	 = 240,
 			action = "",
@@ -99,7 +99,7 @@ PKpluscredits =
 		Test10 =
 		{
 			type = MenuItemTypes.StaticText,
-			text = "www.pkeuro.com",
+			text = "www.pkzone.org",
 			x	 = 150,
 			y	 = 520,
 			action = "",
@@ -113,7 +113,7 @@ PKpluscredits =
 		Test11 =
 		{
 			type = MenuItemTypes.StaticText,
-			text = "www.thecpl.com",
+			text = "Painkiller Community",
 			x	 = 150,
 			y	 = 560,
 			action = "",
@@ -126,7 +126,7 @@ PKpluscredits =
 		Test12 =
 		{
 			type = MenuItemTypes.StaticText,
-			text = "www.cplworldtour.com",
+			text = "YOU, for figuring out how to install PK++!",
 			x	 = 150,
 			y	 = 600,
 			action = "",

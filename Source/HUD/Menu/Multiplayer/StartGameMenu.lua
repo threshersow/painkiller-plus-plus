@@ -69,5 +69,14 @@ StartGameMenu =
 			y	 = 530,
 			action = "PainMenu:ActivateScreen(CreateServerMenu)",
 		},
+		
+		Race =
+		{
+			text = "Race",
+			desc = "Be the fastest demon of them all",
+			x	= -1,
+			y  = 530,
+			action = "PainMenu:ActivateScreen(CreateServerMenu)",
+		},
 	}
 }

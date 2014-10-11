@@ -47,9 +47,12 @@ o.s_MPSubClass = {
     -- zadawane obrazenia:
     AltFireDamage   = 8, -- pociski, w MULTIPLAYER powinno byc = 20
     RocketDamage = 100, -- rakiety
+	--RocketDamage = 0, -- THRESHER
     -- odrzucanie od pociskow:
     EnemyThrowBack = 500,
     EnemyThrowUp   = 0,
+	--EnemyThrowBack = 0,
+    --EnemyThrowUp   = 0,
     -- predkosc i sila wybuchu rakiety:
     RocketSpeed = 40,
     RocketExplosionStrength = 3400,

@@ -54,6 +54,12 @@ CPlayer =
     _yaw = 0,
     _healthDecCnt = 0,
     _Class = "CPlayer",
+
+-- for Race [ THRESHER ]	
+	_raceStartTime = 0,
+	_raceFinishTime = 0,
+	_raceBestTime = 0,
+	_isRacing = false,
     
 -- for logic
 	_slowDown = nil,
@@ -585,7 +591,6 @@ end
 -- [ SERVER ]
 function CPlayer:ServerTick(delta)
 
-   
 
     if self._sendRagdollImpulse then
         local a = self._sendRagdollImpulse
@@ -633,7 +638,7 @@ function CPlayer:ServerTick(delta)
         self.Ammo.HeaterBomb   = 999        
     end
 	
-	--[[THRESHER]]--
+	--[[ THRESHER ]]--
 	-- BUGFIX: spawn nade spam fix
 	if MPCfg.GameState == GameStates.Counting then 
 		self.Ammo.Shotgun      = 0
@@ -688,7 +693,7 @@ function CPlayer:ServerTick(delta)
         self:InterpretAction(delta)
 
 
-    --Game:Print("SetMPByte: "..self.State)
+    --CONSOLE_AddMessage("SetMPByte: "..self.State)
     PLAYER.SetMPByte(self._Entity,self.State)    
 end
 --============================================================================
@@ -1143,6 +1148,7 @@ function CPlayer:OnDamage(damage,killer,attack_type,x,y,z,nx,ny,nz)
     if((MPCfg.ProPlus or not Cfg.FallingDamage) and MPCfg.GameState == GameStates.Playing and attack_type == AttackTypes.HitGround) then return end  
     if not Cfg.WarmupDamage and MPCfg.GameState ~= GameStates.Playing and attack_type ~= AttackTypes.ConsoleKill then return end
     if MPCfg.GameState == GameStates.WarmUp and MPCfg.GameMode == "Clan Arena" and attack_type ~= AttackTypes.ConsoleKill then return end
+	if MPCfg.GameMode == "Race" and attack_type ~= AttackTypes.ConsoleKill then return end -- Race Additions [ THRESHER ]
     if(killer~=nil)then if(self.ClientID~=killer.ClientID)then Game:AddToStats(killer.ClientID, attack_type, 1, 0, damage) end end
 
     local kID = 250 -- not exist
@@ -1381,6 +1387,11 @@ function CPlayer:FindFreeRespawnPoint(last,always)
         end
         areas = na
     end
+	
+	-- Race Additions [ THRESHER ]
+	if MPCfg.GameMode == "Race" then
+		-- respawn code
+	end
     
     if cnt == 1 then last = nil end
     if cnt > 0 then

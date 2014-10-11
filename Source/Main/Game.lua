@@ -1,5 +1,5 @@
---ShowWorkInProgress = true
-debug = nil
+ShowWorkInProgress = true
+debug = false
 --============================================================================
 -- Main Game class
 --============================================================================
@@ -844,7 +844,8 @@ function Game:LoadObjectsDirectory(path)
             end
             
             if o and Game.GMode == GModes.MultiplayerClient then
-                if o.BaseObj ~= "Teleport.CBox" and o.BaseObj ~= "JumpPad.CItem" and o._Class ~= "CArea" and (not fx and not o.VisibleOnMPClient) then 
+				-- if o.BaseObj ~= "Teleport.CBox" and o.BaseObj ~= "JumpPad.CItem" and o._Class ~= "CArea" and (not fx and not o.VisibleOnMPClient) then 
+                if o.BaseObj ~= "Teleport.CBox" and o.BaseObj ~= "JumpPad.CItem" and o.BaseObj ~= "Slab.CItem" and o._Class ~= "CArea" and (not fx and not o.VisibleOnMPClient) then -- Race Additions [ THRESHER ] added "Slab.Citem"
                     o._DeleteAfterCache = true 
                 end
             end

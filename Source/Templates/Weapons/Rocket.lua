@@ -1,12 +1,13 @@
 -------------------------------------------------------------------------------
 function Rocket:OnCreateEntity()
-    ENTITY.EnableNetworkSynchronization(self._Entity,true,false,2)
-    ENTITY.SetSynchroString(self._Entity,"Rocket.CItem")
+	ENTITY.EnableNetworkSynchronization(self._Entity,true,false,2)
+	ENTITY.SetSynchroString(self._Entity,"Rocket.CItem")
     --if Game.GMode == GModes.SingleGame then 
     --    self:PO_Create(BodyTypes.SphereSweep,0.001,ECollisionGroups.Missile)    
     --else
         self:PO_Create(BodyTypes.Sphere,0.001,ECollisionGroups.Particles)    
-    --end    
+	--end    
+	
     ENTITY.EnableCollisions(self._Entity,true,0,0)
     ENTITY.PO_SetMovedByExplosions(self._Entity, false)
     ENTITY.RemoveFromIntersectionSolver(self._Entity) 
@@ -14,7 +15,8 @@ function Rocket:OnCreateEntity()
     self._time = 0
     self._lPos = Vector:New(self.Pos)
     self._StartPos = Vector:New(self.Pos)
-    ENTITY.PO_SetMissile(self._Entity)
+    --ENTITY.PO_SetMissile(self._Entity) -- THRESHER
+	ENTITY.PO_SetMissile(self._Entity)
     self:Client_OnCreateEntity(self._Entity)
 end
 --============================================================================
@@ -126,17 +128,26 @@ function Rocket:OnCollision(x,y,z,nx,ny,nz,e,h_me,h_other,vx,vy,vz,vl)
     local obj = EntityToObject[e]
     if obj and not obj._ToKill --[[and not obj._died--]] and obj.OnDamage then 
         --Game:Print("*** INSTANT_DAMAGE: "..obj._Name.." ["..self.Damage.."]")
-        obj:OnDamage(self.Damage,self.ObjOwner,AttackTypes.Rocket,x,y,z)                                    
+		
+		-- Race Additions [ THRESHER ]
+		if( MPCfg.GameMode == "Race" and obj._Class == "CPlayer") then
+			obj.bulletsFliesThru = true 
+		else
+			obj:OnDamage(self.Damage,self.ObjOwner,AttackTypes.Rocket,x,y,z)    
+		end
+		
         if obj.bulletsFliesThru then
 			--Game:Print("fly through")
             return
         end
+		
         obj._GotInstantExplosion = Game.Counter
     end
 
     ENTITY.EnableCollisions(self._Entity,false) -- disable next callbacks    
     ENTITY.RemoveFromIntersectionSolver(self._Entity)
     ENTITY.PO_Enable(self._Entity, false)
+	
 
     if(Cfg.RocketFix or MPCfg.RocketFix)then --MPCfg.ProPlus or 
     	local resultfactor = 1 + ((math.abs(vy) / 40) * 0.23 ) --Cfg.RocketFactor
@@ -152,15 +163,15 @@ function Rocket:OnCollision(x,y,z,nx,ny,nz,e,h_me,h_other,vx,vy,vz,vl)
 	        self.ExplosionStrength = 3150 * 0.5 --Cfg.RocketExplosionStrength
 	        Explosion(x,y,z,self.ExplosionStrength/resultfactor,self.ExplosionRange,self.ObjOwner.ClientID,AttackTypes.Rocket,self.Damage,resultfactor*5)
         else
-    		Explosion(x,y,z,self.ExplosionStrength/resultfactor,self.ExplosionRange,self.ObjOwner.ClientID,AttackTypes.Rocket,self.Damage,resultfactor)
-   	end
+				Explosion(x,y,z,self.ExplosionStrength/resultfactor,self.ExplosionRange,self.ObjOwner.ClientID,AttackTypes.Rocket,self.Damage,resultfactor)
+		end
     else
     	if MPCfg.GameMode == "People Can Fly" then
 		self.ExplosionRange = 4.5
 	        self.ExplosionStrength = self.ExplosionStrength * 0.5
 	        factorY = 5
         end
-    	Explosion(x,y,z,self.ExplosionStrength,self.ExplosionRange,self.ObjOwner.ClientID,AttackTypes.Rocket,self.Damage,factorY)
+			Explosion(x,y,z,self.ExplosionStrength,self.ExplosionRange,self.ObjOwner.ClientID,AttackTypes.Rocket,self.Damage,factorY)
     end
     
     self.ExplosionFX(self._Entity,x,y,z,nx,ny,nz)

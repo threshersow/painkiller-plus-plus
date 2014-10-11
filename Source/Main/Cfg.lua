@@ -1,4 +1,5 @@
 CfgFile = "config.ini"
+CfgAuto = "autoexec.ini"
 --============================================================================
 -- Configuration
 --============================================================================
@@ -306,6 +307,7 @@ Cfg =
 	ServerMapsDUE = {"DM_Mine","DM_Illuminati","DM_Cursed","DM_Sacred","DM_Psycho","DM_Fragenstein","DM_Factory","DM_Trainstation","DM_Fallen1","DM_Fallen2"},
 	ServerMapsLMS = {"DM_Mine","DM_Illuminati","DM_Cursed","DM_Sacred","DM_Psycho","DM_Fragenstein","DM_Factory","DM_Trainstation","DM_Fallen1","DM_Fallen2"},
 	ServerMapsCLA = {"DM_Mine","DM_Illuminati","DM_Cursed","DM_Sacred","DM_Psycho","DM_Fragenstein","DM_Factory","DM_Trainstation","DM_Fallen1","DM_Fallen2"},
+	ServerMapsRAC = {"CTF_Forbidden","CTF_Chaos","CTF_Trainstation"},
 	ServerName = "Painkiller++",
 	ServerPassword = "",
 	ServerPort = 3455,
@@ -421,8 +423,16 @@ function Cfg:Save()
 	local sorted = {}
 	for i,o in self do  table.insert(sorted,{i,o}) end
 	table.sort(sorted,function (a,b) return a[1] < b[1] end)
-
-
+	
+	-- Autoexec FIX [ THRESHER ]
+	if( CfgFile == "config.ini" ) then 
+		f:write( "------------------------------------------------\n" )
+		f:write( "--***********DO NOT EDIT************--\n" )
+		f:write( "--  Make All Changes in Autoexec.ini  --\n" )
+		f:write( "------------------------------------------------\n" )
+	end
+	
+	
 	for i,v in sorted do
 		if string.sub(v[1],1,1) ~= '_' and (type(v[2]) == "string" or type(v[2]) == "number" or type(v[2]) == "boolean") then
 			local val = v[2]
@@ -462,7 +472,11 @@ function Cfg:Load()
 	Cfg:CheckLimitations()
 	DoFile(CfgFile,false)
 	Cfg:Check()
-	Cfg:Save()
+	if( CfgFile == "config.ini" ) then Cfg:Save() end -- if it's not config.ini, then don't save over it [ THRESHER ]
+	-- Autoexec.ini [ THRESHER ]
+	DoFile(CfgAuto,false)
+	Cfg:Check()
+	
 end
 --============================================================================
 function Cfg:CheckLimitations()
@@ -517,7 +531,7 @@ function Cfg:Check()
 	Cfg.MaxSpectators = Cfg:CheckVar(Cfg.MaxSpectators,"n",0,32)
 	Cfg.FragLimit = Cfg:CheckVar(Cfg.FragLimit,"n",0,999)
 	Cfg.PlayerModel = Cfg:CheckVar(Cfg.PlayerModel,"n",1,7)
-	Cfg.MaxFpsMP = Cfg:CheckVar(Cfg.MaxFpsMP,"n",30,120)
+	Cfg.MaxFpsMP = Cfg:CheckVar(Cfg.MaxFpsMP,"n",30,125)
 	Cfg.MouseSensitivity = Cfg:CheckVar(Cfg.MouseSensitivity,"n",0,999)
 	Cfg.RenderSky = Cfg:CheckVar(Cfg.RenderSky,"n",0,2)
 	Cfg.GraphicsQuality = Cfg:CheckVar(Cfg.GraphicsQuality,"n",0,6)

@@ -16,7 +16,7 @@ function TeamBase:Tick()
                 end                
                 o.HasFlag = false
                 for ii,oo in GObjects.UpdateListItems do
-                    if oo.BaseObj == "Flag.CItem" and oo._blockedBy == o then
+					if oo.BaseObj == "Flag.CItem" and oo._blockedBy == o then
                         oo:UnbindItem(true)
                     end
                 end

@@ -546,6 +546,7 @@ function Console:Cmd_SETMAXFPS(val)
 	end
 	val = tonumber(val)
 	if val then
+		if( val > 125 ) then val = 125 end	-- enforce max FPS
 		WORLD.SetMaxFPS(val)
 		if Game.GMode == GModes.MultiplayerClient then
 			Cfg.MaxFpsMP = val
@@ -758,8 +759,14 @@ function Console:Cmd_GAMEMODE(mode)
 		Cfg.GameMode = "Last Man Standing"
 		newMap = "DM_Factory"
 		mapsTable = Cfg.ServerMapsLMS
+		
+	elseif mode == "race" then
+	    if Cfg.GameMode == "Race" then return end
+		Cfg.GameMode = "Race"
+		newMap = "CTF_Chaos"
+		mapsTable = Cfg.ServerMapsCTF
 	else
-		CONSOLE_AddMessage("Available modes: ffa, tdm, voosh, tlb, pcf, ctf, duel, lms")
+		CONSOLE_AddMessage("Available modes: ffa, tdm, voosh, tlb, pcf, ctf, duel, lms, race")
 		return
 	end
 	Cfg.ServerMaps = {}
@@ -784,7 +791,7 @@ end
 function Console:CheckVotingParams(cmd,params)
 	if cmd == "map" then
 		name = string.lower(params)
-		if string.sub(name,1,2) ~= "dm" and string.sub(name,1,3) ~= "ctf" then
+		if string.sub(name,1,2) ~= "dm" and string.sub(name,1,3) ~= "ctf" and string.sub(name,1,4) ~= "race" then -- Race Additions [ THRESHER ]
 			CONSOLE_AddMessage( "Bad map name '"..name.."'" )
 			return false
 		end
