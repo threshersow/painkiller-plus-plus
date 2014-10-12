@@ -261,6 +261,8 @@ function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
 						txt = txt .. " [Best: " .. ps._raceBestTime.."]" -- if no personal record set
 					end
 					
+					ps._isRacing = false -- No longer racing
+					
 					-- respawn the player after capture, only called on server, otherwise player's client crashes :( 
 					if( player and Game:IsServer() ) then player:OnDamage(999999,nil,AttackTypes.ConsoleKill) end
 					
@@ -286,7 +288,6 @@ function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
         local color = Languages.Texts[769]
         if fteam == 1 then color = Languages.Texts[768] end        
         txt = string.gsub(txt,"$COLOR",color)  
-		ps._isRacing = false -- No longer racing
         CONSOLE_AddMessage(txt) 
     end
 end
