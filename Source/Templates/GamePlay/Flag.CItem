@@ -287,6 +287,8 @@ function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
     if txt then 
         local color = Languages.Texts[769]
         if fteam == 1 then color = Languages.Texts[768] end        
+		
+		if( ps ) then ps._isRacing = false end -- No longer racing
         txt = string.gsub(txt,"$COLOR",color)  
         CONSOLE_AddMessage(txt) 
     end
