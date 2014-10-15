@@ -374,3 +374,28 @@ function Hud:DrawBotInfo()
 		end
 	end 
 end
+
+function Hud:DrawRaceTimer() -- Race Addition [ THRESHER ]
+	if Game and MPCfg.GameMode == "Race" then
+		local w,h = R3D.ScreenSize()
+		local tw = 0
+		local myRaceTimer = 0
+		
+			if( Cfg.RaceTimeX == nil ) then Cfg.RaceTimeX = 0.3 end
+			if( Cfg.RaceTimeY == nil ) then Cfg.RaceTimeY = 0.4 end
+			if( Cfg.RaceTimeSize == nil ) then Cfg.RaceTimeSize = 1 end
+			
+		for i,ps in Game.PlayerStats do
+			if( Game.GetMyID()==ps.ClientID ) then
+				if( ps._raceStartTime ~= nil and ps._isRacing ) then myRaceTimer = INP.GetTime() - ps._raceStartTime end
+				myRaceTimer = RaceTimeString( myRaceTimer )
+				
+				HUD.SetFont("Impact", Cfg.RaceTimeSize)
+				tw = HUD.GetTextWidth( "99:99:00" )
+			end
+			HUD.PrintXY(Cfg.RaceTimeX-tw+1,Cfg.RaceTimeY+1,myRaceTimer,"Impact",0,0,0,Cfg.RaceTimeSize)
+			HUD.PrintXY(Cfg.RaceTimeX-tw,Cfg.RaceTimeY,myRaceTimer,"Impact",255,255,255,Cfg.RaceTimeSize)
+		end
+ 
+	end
+end

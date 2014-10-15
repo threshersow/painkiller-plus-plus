@@ -1,4 +1,4 @@
-ShowWorkInProgress = true
+ShowWorkInProgress = false
 debug = false
 --============================================================================
 -- Main Game class

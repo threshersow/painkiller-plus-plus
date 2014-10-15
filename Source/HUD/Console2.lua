@@ -1526,7 +1526,7 @@ end
 
 function Console:Cmd_CHECKSOCKET()
 
-
+	--[[
 	local f = io.open( "MDL.ini","w")
 	
 		for key,value in pairs(MDL) do
@@ -1534,5 +1534,9 @@ function Console:Cmd_CHECKSOCKET()
 		end
 	
 		io.close(f)
+	]]--
+	
+	 --CONSOLE_AddMessage( "DEV: ".. tostring(LUA_DEV) .. "\nPATH: " .. tostring(LUA_PATH) )
+	--return
 	
 end

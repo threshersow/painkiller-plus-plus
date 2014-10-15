@@ -2552,6 +2552,9 @@ function PainMenu:UpdateMapTable(name,mode)
 	elseif self.lastMPMode == "Last Man Standing" then
 		self.mapsOnServerLMS = {}
 		Cfg.ServerMapsLMS = {}
+	elseif self.lastMPMode == "Race" then
+		self.mapsOnServerRAC = {}
+		Cfg.ServerMapsRAC = {}
 	end
 
 	local tmp_tab = PMENU.GetMapsOnServer()
@@ -2584,6 +2587,9 @@ function PainMenu:UpdateMapTable(name,mode)
 		elseif self.lastMPMode == "Last Man Standing" then
 			self.mapsOnServerLMS[i] = val
 			Cfg.ServerMapsLMS[i] = val
+		elseif self.lastMPMode == "Race" then
+			self.mapsOnServerRAC[i] = val
+			Cfg.ServerMapsRAC[i] = val
 		end
     end
 

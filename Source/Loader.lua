@@ -8,9 +8,9 @@ if IsFinalBuild() or XBOX then
 	EditorFiles = nil
 end
 
---LUA_INIT = "@..Data/Lscripts/Main/compat-5.1.lua"
---LUA_PATH = "../Data/LScripts/Main/?.lua"
---LUA_CPATH = "../Data/LScripts/Main/?.dll"
+--LUA_INIT = "@../Bin/compat-5.1.lua"
+--LUA_PATH = "../libs/?.lua;?.lua"
+--LUA_CPATH = "../libs/c/?.dll;?.dll"
 
 --================================================================
 -- CHEAT STUFF
@@ -42,6 +42,9 @@ if test2 then
 end   
 path = "../Data/LScripts/"
 
+--DoFile("../libs/compat-5.1.lua")
+
+--myLIB = require "socket"
 
 if test3 then  
 -- CHECK FILE SIZE?  

@@ -130,6 +130,10 @@ Cfg =
 	ShowTimerFontSize = 45,
 	CameraInterpolatePosition = false,
 	CameraInterpolateAngle = false,
+	
+	RaceTimeX = 400,
+	RaceTimeY = 255,
+	RaceTimeSize = 25,
 
 	Newhitsound = false,
 	Simplehud = false,

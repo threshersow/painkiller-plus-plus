@@ -207,8 +207,9 @@ function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
 			--local _personalBestString
 					--if( ps._raceBestTime ~= 0 or ps._raceBestTime ~= nil ) then _personalBestString = RaceTimeString( ps._raceBestTime ) end
 					
-			--local _currentTimeString = RaceTimeString( ps._raceFinishTime )
+			local _currentTimeString = RaceTimeString( ps._raceFinishTime )
 				-- trying to make the following be in Utils.lua
+				--[[
 				local capM, capS, capMS
 						
 					capS = math.floor( ps._raceFinishTime ) -- get a nice round number
@@ -252,13 +253,15 @@ function Flag:OnFinishFX(pe,mode,fteam,fx,fy,fz)
 						end
 					end
 					if( capMS == 100 ) then capMS = "10" end -- obscure bugfix
+					]]--
 					
-				txt = string.gsub("$PLAYER finishes race in " .. tostring(capM) .. ":" .. tostring(capS) .. ":" .. tostring(capMS),"$PLAYER",ps.Name)
+				--txt = string.gsub("$PLAYER finishes race in " .. tostring(capM) .. ":" .. tostring(capS) .. ":" .. tostring(capMS),"$PLAYER",ps.Name)
+				txt = string.gsub("$PLAYER finishes race in " .. _currentTimeString ,"$PLAYER",ps.Name)
 					if( ps._raceBestTime == 0 or ps._raceBestTime == nil or ps._raceBestTime > ps._raceFinishTime) then -- if no record/finish or set a new record
 							txt = txt .. " #4[Personal #4Best]"
 							ps._raceBestTime = ps._raceFinishTime
 					else
-						txt = txt .. " [Best: " .. ps._raceBestTime.."]" -- if no personal record set
+						txt = txt .. " #2[Personal #2Best:#2" .. RaceTimeString( ps._raceBestTime ) .."]" -- if no personal record set
 					end
 					
 					ps._isRacing = false -- No longer racing

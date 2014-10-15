@@ -265,6 +265,7 @@ function Hud:Render(delta)
 	
 	Hud:DrawTimer()
 	Hud:DrawFPS()
+	Hud:DrawRaceTimer()
 
 	if Game and MPCfg.GameState == GameStates.Counting and Game._countTimer and Game._countTimer > 0.99 then
 		HUD.SetFont("Impact",26)
@@ -477,6 +478,7 @@ end
 		local mw,mh = MATERIAL.Size(self._matPacketLoss)
 		HUD.DrawQuad(self._matPacketLoss,w-(mw+8)*w/1024,8*h/768,mw*w/1024,mh*h/768)
     end
+	
 end
 --============================================================================
 function Hud:DrawForDemo()

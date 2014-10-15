@@ -1,0 +1,9 @@
+o.Model = "checkpoint"
+o.Scale = 0.8
+o.Frozen = false
+o.takeDistance = 2.4
+o.delay = 1.2
+o.isFinish = 0
+o.SoundTake = { "multiplayer/ctf/flag-get-stereo" }
+o.VisibleOnMPClient = true
+o.s_Editor.isFinish = { "ComboBox"  , {"Start|0", "Finish|1"} }
