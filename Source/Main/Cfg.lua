@@ -134,6 +134,7 @@ Cfg =
 	RaceTimeX = 400,
 	RaceTimeY = 255,
 	RaceTimeSize = 25,
+	HUDShowItemTimers = false,
 
 	Newhitsound = false,
 	Simplehud = false,
@@ -311,7 +312,7 @@ Cfg =
 	ServerMapsDUE = {"DM_Mine","DM_Illuminati","DM_Cursed","DM_Sacred","DM_Psycho","DM_Fragenstein","DM_Factory","DM_Trainstation","DM_Fallen1","DM_Fallen2"},
 	ServerMapsLMS = {"DM_Mine","DM_Illuminati","DM_Cursed","DM_Sacred","DM_Psycho","DM_Fragenstein","DM_Factory","DM_Trainstation","DM_Fallen1","DM_Fallen2"},
 	ServerMapsCLA = {"DM_Mine","DM_Illuminati","DM_Cursed","DM_Sacred","DM_Psycho","DM_Fragenstein","DM_Factory","DM_Trainstation","DM_Fallen1","DM_Fallen2"},
-	ServerMapsRAC = {"CTF_Forbidden","CTF_Chaos","CTF_Trainstation"},
+	ServerMapsRAC = {"RACE_Psycho",},
 	ServerName = "Painkiller++",
 	ServerPassword = "",
 	ServerPort = 3455,

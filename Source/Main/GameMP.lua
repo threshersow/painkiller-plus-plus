@@ -82,7 +82,7 @@ MPGameRules =
 	{
 		StartState = GameStates.WarmUp,
 		AutoRespawnAfterCountdown = false,
-		Teams = true, -- need to change this [ THRESHER ]
+		Teams = false, -- changed from TRUE in last version, any bugs? :) [ THRESHER ]
 	},
 }
 

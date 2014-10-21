@@ -2619,7 +2619,7 @@ function PainMenu:UpdateMapTable(name,mode)
 	elseif mode == "Clan Arena" then
 		tmp_tab = self.mapsOnServerCLA
 	elseif mode == "Race" then
-	    tmp_table = self.mapsOnServerRAC
+	    tmp_tab = self.mapsOnServerRAC
 	end
 
 	self.mapsOnServer = {}
@@ -2665,13 +2665,18 @@ function PainMenu_MultiplayerErrorCallback( mtype, desc )
 		-- Fixes confusion about player not having map
 		if( string.find( string.lower( desc ), "net error: the map we are trying to load" ) ) then
 		    desc = "You most likely don't have the required map that is on the server, by clicking OK, you will be directed to the map repository."
-		end 
+			PainMenu:AskYesNo( desc, "PainMenu:BackToLastScreen() PMENU.LaunchURL( ".._url.." )" , "PainMenu:BackToLastScreen()" )
+			Game:NewLevel('NoName','','',0.3); WORLD.Release()
+			Game.LevelStarted = false
+			PMENU.ShowMenu()
+		else
 		Game:NewLevel('NoName','','',0.3); WORLD.Release()
 		Game.LevelStarted = false
 		PMENU.ShowMenu()
-		--PainMenu:ShowInfo( desc, "PainMenu:BackToLastScreen()" )
+		PainMenu:ShowInfo( desc, "PainMenu:BackToLastScreen()" )
 		-- [ THRESHER ] 
-		PainMenu:AskYesNo( desc, "PainMenu:BackToLastScreen() PMENU.LaunchURL( ".._url.." )" , "PainMenu:BackToLastScreen()" )
+		--PainMenu:AskYesNo( desc, "PainMenu:BackToLastScreen() PMENU.LaunchURL( ".._url.." )" , "PainMenu:BackToLastScreen()" )
+		end
 	elseif mtype == MultiplayerErrorTypes.BadCDKey then
 		Game:NewLevel('NoName','','',0.3); WORLD.Release()
 		Game.LevelStarted = false

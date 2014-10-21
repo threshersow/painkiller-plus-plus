@@ -268,7 +268,7 @@ function Console:Cmd_MAPLIST() -- 04.10.2004 [Blowfish]
 	local files = FS.FindFiles(path.."*",0,1)
 	CONSOLE_AddMessage("Available maps:")
 	for i=1,table.getn(files) do
-		CONSOLE_AddMessage("   "..files[i])
+		CONSOLE_AddMessage("  |  "..files[i])
 	end
 end
 --=======================================================================
@@ -763,8 +763,8 @@ function Console:Cmd_GAMEMODE(mode)
 	elseif mode == "race" then
 	    if Cfg.GameMode == "Race" then return end
 		Cfg.GameMode = "Race"
-		newMap = "CTF_Chaos"
-		mapsTable = Cfg.ServerMapsCTF
+		newMap = "RACE_Psycho"
+		mapsTable = Cfg.ServerMapsRAC
 	else
 		CONSOLE_AddMessage("Available modes: ffa, tdm, voosh, tlb, pcf, ctf, duel, lms, race")
 		return
