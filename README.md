@@ -12,6 +12,25 @@ Thanks for the support!
 
 Updates
 -------------
+**October 22nd 2014**
+
+ - FIXED Race Timer on HUD, now displays seconds properly
+	 - This fix took place in RaceTimeString function in Utils.lua
+	 - Timer now has it's own function 
+ - Experimenting with Race Start/Finish line particle FX
+	 - Need model for starting/finish line
+ - ADDED Race Start/Finish line to RACE_JumpMap_01 ( DM_JumpMap_01, by shadow )
+	 - A great map for Race mode, check it out!! :)
+ - ADDED Players best race time to scoreboard
+ - ADDED Spectator Item Timers
+	 - Item timers for Armor(s) and Mega Health on the map for SPECTATORS ONLY
+	 - Thinking I should maybe add Megapack (ammo) as well, thoughts? It's an important item for a few maps.
+	 - I want to add more customization for this, right now it's fixed to the upper left beneath chat
+	 - Great tool for casters to keep track of item times o/
+ - CHANGED Race to be a "non-team" mode, this change is reflected on the scoreboard 
+	 - I'm not sure if this created other bugs, please let me know
+ - FIXED the "map does not match servers" to say what it should say, that the player doesn't have the map, gives them the option to visit PKZone.org map repository
+ 
 
 **October 14th 2014**
 
