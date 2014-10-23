@@ -180,8 +180,14 @@ function Hud:DrawScoreboard()
 			if Game.PlayerStats[ID].Spectator == 0 then
 				if(Player and Player.ClientID == ID)then
 					HUD.DrawQuadRGBA(Hud._matBluePix,w*ffateampanel.x,h*ffateampanel.y+ffascoredelta,w*ffateampanel.w,mediumfont,255,255,255,960)
-				end	
-				HUD.PrintXY(	w*ffateampanel.x+w*panelfraction.score*ffateampanel.w,	h*ffateampanel.y+ffascoredelta+vspace,	Game.PlayerStats[ID].Score,font,255,255,255,mediumactualfont)
+				end
+				if( MPCfg.GameMode=="Race" ) then -- Race Additions [ THRESHER ]
+					local _rT = Game.PlayerStats[ID]._raceBestTime
+						if( _rT == nil ) then _rT = 0 end -- just in case
+					HUD.PrintXY(	w*ffateampanel.x+w*panelfraction.score*ffateampanel.w,	h*ffateampanel.y+ffascoredelta+vspace,	RaceTimeString( _rT ),font,255,255,255,mediumactualfont)
+				else
+					HUD.PrintXY(	w*ffateampanel.x+w*panelfraction.score*ffateampanel.w,	h*ffateampanel.y+ffascoredelta+vspace,	Game.PlayerStats[ID].Score,font,255,255,255,mediumactualfont)
+				end
 				HUD.PrintXY(	w*ffateampanel.x+w*panelfraction.net*ffateampanel.w,	h*ffateampanel.y+ffascoredelta+vspace,	Game.PlayerStats[ID].Score-Game.PlayerStats[ID].Deaths,	font,255,255,255,mediumactualfont)
 				if(Cfg.ScoreboardShowPacketLoss)then HUD.PrintXY(	w*ffateampanel.x+w*panelfraction.ping*ffateampanel.w,	h*ffateampanel.y+ffascoredelta+vspace,	Game.PlayerStats[ID].Ping.." ("..Game.PlayerStats[ID].PacketLoss..")",font,255,255,255,mediumactualfont) else HUD.PrintXY(	w*ffateampanel.x+w*panelfraction.ping*ffateampanel.w,	h*ffateampanel.y+ffascoredelta+vspace,	Game.PlayerStats[ID].Ping,font,255,255,255,mediumactualfont) end
 				HUD.PrintXY(	w*ffateampanel.x+w*panelfraction.time*ffateampanel.w,	h*ffateampanel.y+ffascoredelta+vspace,	string.format("%02d",(INP.GetTime()-MPSTATS.GetPlayerTime(ID))/60),	font,255,255,255,mediumactualfont) --tostring(MPSTATS.GetPlayerGameTime(ID))
