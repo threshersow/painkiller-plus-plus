@@ -14,11 +14,16 @@ function RaceCheck:OnPrecache()
 end
 --============================================================================
 function RaceCheck:OnCreateEntity()
-	self:BindFX("checkpoint_fx2",0.1,"root")
-	self:BindFX("checkpoint_fx1",0.1,"e1")
-	self:BindFX("checkpoint_fx1",0.1,"e2")
-	self:BindFX("checkpoint_fx1",0.1,"e3")
-	MDL.SetAnim(self._Entity,"idle",true,2.0)
+	if( self.isFinish == 1 ) then
+		self:BindFX("checkpoint_fx2",0.1,"root")
+		self:BindFX("checkpoint_fx1",0.1,"e1")
+		self:BindFX("checkpoint_fx1",0.1,"e2")
+		self:BindFX("checkpoint_fx1",0.1,"e3")
+		MDL.SetAnim(self._Entity,"idle",true,9.0)
+	else 
+		self:BindFX("FX_icebullet",0.5,"root")
+		MDL.SetAnim(self._Entity,"idle",true,2.0)
+	end
 end
 --============================================================================
 function RaceCheck:OnApply(old)

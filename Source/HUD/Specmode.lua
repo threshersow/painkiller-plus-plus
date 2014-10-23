@@ -992,22 +992,30 @@ function PSpectatorControler:DrawItemTimers()
 		-- search for armor and mega health items and store them into tables
 
 		local fntStyle = "Impact"
+		local w,h = R3D.ScreenSize()
+		local armPos = 0
 		
 		local armorInfos = nil
 			--table.insert( armorInfos, GObjects:GetElementsWithFieldValue( "_Name", "Armor*" ) )
-			armorInfos = GObjects:GetElementsWithFieldValue( "_Name", "ArmorStrong*" )
+			armorInfos = GObjects:GetElementsWithFieldValue( "_Name", "Armor*" )
 			--armorInfos = GObjects:GetElementsWithFieldValue( "_Name", "ArmorMedium*" )
 			--armorInfos = GObjects:GetElementsWithFieldValue( "_Name", "ArmorWeak*" )
-			
+		local armorTimerSize = table.getn( armorInfos )	
+		
+		-- BUBBLE SORT THAT SHIT
+		for a in armorInfos do 
+			for b in armorInfos do 
+				if(armorInfos[a].RescueFactor > armorInfos[b].RescueFactor)then
+					local temp = armorInfos[a]
+					armorInfos[a] = armorInfos[b]
+					armorInfos[b] = temp
+				end
+			end
+		end
+		
 		local megaInfos = nil
 			megaInfos = GObjects:GetElementsWithFieldValue( "_Name", "MegaHealth*" )
-		
-		local armorTimerSize = table.getn( armorInfos )
-		
-		local armPos = 0
-			
-		local w,h = R3D.ScreenSize()
-		
+				
 		if armorTimerSize > 0 and armorTimerSize ~= nil then
 			
 			for i = 1, armorTimerSize, 1 do

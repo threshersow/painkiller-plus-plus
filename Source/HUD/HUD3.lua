@@ -391,7 +391,7 @@ function Hud:DrawRaceTimer() -- Race Addition [ THRESHER ]
 				myRaceTimer = RaceTimeString( myRaceTimer )
 				
 				HUD.SetFont("Impact", Cfg.RaceTimeSize)
-				tw = HUD.GetTextWidth( "99:99:00" )
+				tw = HUD.GetTextWidth( "11:11:11" )
 			end
 			HUD.PrintXY(Cfg.RaceTimeX-tw+1,Cfg.RaceTimeY+1,myRaceTimer,"Impact",0,0,0,Cfg.RaceTimeSize)
 			HUD.PrintXY(Cfg.RaceTimeX-tw,Cfg.RaceTimeY,myRaceTimer,"Impact",255,255,255,Cfg.RaceTimeSize)
